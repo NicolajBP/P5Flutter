@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:p5/home_page.dart';
+import 'package:p5/profile_page.dart';
+import 'package:p5/trends.dart';
 
 // I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
 // Widgets kan have argumenter som tager endnu en widget som input
@@ -33,21 +35,26 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   int currentPage = 0;
+  List <Widget> pages = const [
+    HomePage(),
+    Trends(),
+    ProfilePage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // Scaffold indeholder app bar, body og navigation bar
       appBar: AppBar(
-        title: const Text('Se min app'), // Tilføjer tekst til vores AppBar
+        title: const Text('P5 CGM app'), // Tilføjer tekst til vores AppBar
       ), // App bar er den øverste menu vi kan se i appen
-      body: const HomePage(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          debugPrint("Floating Action Button");
-        },
-        child: const Icon(Icons.add), // Laver knappen i nederste højre hjørne
-      ), // onPressed fortæller appen hvad der skal ske når man trykker på
+      body: pages[currentPage],
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     debugPrint("Floating Action Button");
+      //   },
+      //   child: const Icon(Icons.add), // Laver knappen i nederste højre hjørne
+      // ), // onPressed fortæller appen hvad der skal ske når man trykker på
       bottomNavigationBar: NavigationBar(
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: "Home"),

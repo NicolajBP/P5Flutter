@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ReportNutrientIntakePage extends StatefulWidget {
-  const ReportNutrientIntakePage({super.key});
+class ReportExercise extends StatefulWidget {
+  const ReportExercise({super.key});
 
   @override
-  State<ReportNutrientIntakePage> createState() =>
-      _ReportNutrientIntakePageState();
+  State<ReportExercise> createState() => _ReportExerciseState();
 }
 
-class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
+class _ReportExerciseState extends State<ReportExercise> {
   bool isSwitched =
       false; // Husk at deklarering af variable skal ske inden vores override og build
   bool? isBoxChecked = false; // bool? betyder nullable bool
@@ -53,7 +52,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                   child: TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: 'Type of food',
+                      hintText: 'Minutes trained',
                     ),
                   ),
                 ),
@@ -61,7 +60,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                   child: TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: 'Weight (g)',
+                      hintText: 'RPE',
                     ),
                   ),
                 ),
@@ -69,7 +68,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                   child: TextField(
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      hintText: 'Carbohydrates (g)',
+                      hintText: 'Type of exercise',
                     ),
                   ),
                 ),
