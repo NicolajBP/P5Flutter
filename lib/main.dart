@@ -1,14 +1,21 @@
-
 import 'package:flutter/material.dart';
 import 'package:p5/home_page.dart';
+import 'package:p5/login_page.dart';
 import 'package:p5/profile_page.dart';
 import 'package:p5/trends.dart';
 
 // I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
 // Widgets kan have argumenter som tager endnu en widget som input
 
+Key password = const Key("password");
+
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: LoginPage(key: UniqueKey()), // Provide a unique key
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -35,10 +42,11 @@ class RootPage extends StatefulWidget {
 
 class _RootPageState extends State<RootPage> {
   int currentPage = 0;
-  List <Widget> pages = const [
-    HomePage(),
-    Trends(),
-    ProfilePage(),
+  List<Widget> pages = [
+    // LoginPage(key: password),
+    const HomePage(),
+    const Trends(),
+    const ProfilePage(),
   ];
 
   @override
