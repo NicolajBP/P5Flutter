@@ -1,6 +1,6 @@
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:p5/home_page.dart';
 
 // I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
 // Widgets kan have argumenter som tager endnu en widget som input
@@ -41,6 +41,7 @@ class _RootPageState extends State<RootPage> {
       appBar: AppBar(
         title: const Text('Se min app'), // Tilføjer tekst til vores AppBar
       ), // App bar er den øverste menu vi kan se i appen
+      body: const HomePage(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           debugPrint("Floating Action Button");
