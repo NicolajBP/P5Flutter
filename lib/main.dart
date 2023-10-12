@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 // I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
@@ -12,18 +14,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp( 
-      debugShowCheckedModeBanner: false, // Tilføjer eller fjerner en "debug" ribbon i højre hjørne
-      theme: ThemeData(
-        primarySwatch: Colors.green
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner:
+          false, // Tilføjer eller fjerner en "debug" ribbon i højre hjørne
+      theme: ThemeData(primarySwatch: Colors.green),
       home: const RootPage(),
-  
-    ); 
+    );
   }
 }
 
-class RootPage extends StatefulWidget { // Stateful widget gør at UI kan opdateres når brugeren interagerer med skærmen
+class RootPage extends StatefulWidget {
+  // Stateful widget gør at UI kan opdateres når brugeren interagerer med skærmen
   const RootPage({super.key});
 
   @override
@@ -31,11 +32,34 @@ class RootPage extends StatefulWidget { // Stateful widget gør at UI kan opdate
 }
 
 class _RootPageState extends State<RootPage> {
+  int currentPage = 0;
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold( // Scaffold indeholder app bar, body og navigation bar
-    appBar: AppBar(), // App bar er den øverste menu vi kan se i appen
-
-    ); 
+    return Scaffold(
+      // Scaffold indeholder app bar, body og navigation bar
+      appBar: AppBar(
+        title: const Text('Se min app'), // Tilføjer tekst til vores AppBar
+      ), // App bar er den øverste menu vi kan se i appen
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          debugPrint("Floating Action Button");
+        },
+        child: const Icon(Icons.add), // Laver knappen i nederste højre hjørne
+      ), // onPressed fortæller appen hvad der skal ske når man trykker på
+      bottomNavigationBar: NavigationBar(
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+          NavigationDestination(icon: Icon(Icons.line_axis), label: "Trends"),
+          NavigationDestination(icon: Icon(Icons.person), label: "Profile")
+        ],
+        onDestinationSelected: (int index) {
+          setState(() {
+            currentPage = index;
+          });
+        },
+        selectedIndex: currentPage,
+      ),
+    );
   }
 }
