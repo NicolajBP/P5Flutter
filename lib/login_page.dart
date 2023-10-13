@@ -2,16 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:p5/MyTextField.dart';
 import 'package:p5/main.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({required Key key}) : super(key: key);
-
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +25,6 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-
-              // welcome back, user
               const Text(
                 'Welcome back',
                 style: TextStyle(
@@ -43,14 +33,14 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               MyTextField(
-                hint: "Email",
-                controller: emailController,
+                hint: "Username or E-mail",
+                controller: TextEditingController(),
                 inputType: TextInputType.emailAddress,
                 isPassword: false,
               ),
               MyTextField(
                 hint: "Password",
-                controller: passwordController,
+                controller: TextEditingController(),
                 inputType: TextInputType.text,
                 isPassword: true,
               ),
@@ -59,8 +49,15 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.green[700],
+                    backgroundColor: Colors.green[700],
                   ),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (BuildContext context) {
+                        return const MyApp();
+                      }),
+                    );
+                  },
                   child: const Text(
                     "Login",
                     style: TextStyle(
@@ -68,16 +65,8 @@ class _LoginPageState extends State<LoginPage> {
                       fontSize: 18,
                     ),
                   ),
-                    onPressed: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      // Bruges som "router" --> vi føres fra denne side til en anden side (i det her tilfælde vores ReportNutrientIntakePage)
-                      return const MyApp();
-                    }));
-                  },
                 ),
               ),
-
               const SizedBox(
                 height: 80,
               ),
