@@ -77,7 +77,7 @@ class _ReportExerciseState extends State<ReportExercise> {
                       debugPrint(
                           "Elevated Button"); //debugPrint fortæller hvad der skal vises i terminalen når vi trykker på knappen
                     },
-                    child: const Text("Input new training session")),
+                    child: const Text("Add")),
               ],
             ),
           ],
