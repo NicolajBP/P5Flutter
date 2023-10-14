@@ -1,9 +1,34 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/MyTextField.dart';
 import 'package:p5/main.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({Key? key}) : super(key: key);
+  LoginPage ({super.key});
+  
+// text editing controllers
+final usernamecontroller = TextEditingController();
+final passwordcontroller = TextEditingController();
+
+
+//new
+Future<void> signUserIn(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: usernamecontroller.text,
+        password: passwordcontroller.text,
+      );
+      // Navigate to the home page when authentication is successful.
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (BuildContext context) {
+          return const MyApp();
+        }),
+      );
+    } catch (e) {
+      // Handle authentication errors here (e.g., display an error message).
+      print("Authentication failed: $e");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,18 +58,18 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               MyTextField(
+                controller: usernamecontroller, 
                 hint: "Username or E-mail",
-                controller: TextEditingController(),
                 inputType: TextInputType.emailAddress,
                 isPassword: false,
               ),
               MyTextField(
-                hint: "Password",
-                controller: TextEditingController(),
+                controller: passwordcontroller, 
+                hint: "Password",              
                 inputType: TextInputType.text,
                 isPassword: true,
               ),
-              SizedBox(
+                SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
@@ -52,11 +77,7 @@ class LoginPage extends StatelessWidget {
                     backgroundColor: Colors.green[700],
                   ),
                   onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (BuildContext context) {
-                        return const MyApp();
-                      }),
-                    );
+                    signUserIn(context); // Call the sign-in method
                   },
                   child: const Text(
                     "Login",

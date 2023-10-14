@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:p5/auth.page.dart';
 import 'package:p5/home_page.dart';
-import 'package:p5/login_page.dart';
 import 'package:p5/profile_page.dart';
 import 'package:p5/trends.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,7 +20,7 @@ Future<void> main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(key: UniqueKey()), // Provide a unique key
+      home: AuthPage(key: UniqueKey()), // Provide a unique key
     ),
   );
 }
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner:
           false, // Tilføjer eller fjerner en "debug" ribbon i højre hjørne
       theme: ThemeData(primarySwatch: Colors.green),
-      home: const RootPage(),
+      home: const AuthPage(),
     );
   }
 }
