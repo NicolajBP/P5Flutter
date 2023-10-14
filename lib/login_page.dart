@@ -3,17 +3,33 @@ import 'package:flutter/material.dart';
 import 'package:p5/MyTextField.dart';
 import 'package:p5/main.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage ({super.key});
-  
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
 // text editing controllers
 final usernamecontroller = TextEditingController();
 final passwordcontroller = TextEditingController();
 
-
 //new
 Future<void> signUserIn(BuildContext context) async {
     try {
+// show loading circle 
+showDialog(
+  context: context,
+  builder: (context) {
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  },
+);
+
+
+
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: usernamecontroller.text,
         password: passwordcontroller.text,
@@ -44,7 +60,7 @@ Future<void> signUserIn(BuildContext context) async {
                 child: Text(
                   "My Diabuddy",
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
@@ -53,7 +69,7 @@ Future<void> signUserIn(BuildContext context) async {
               const Text(
                 'Welcome back',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 48, 1, 141),
+                  color: Color.fromARGB(255, 10, 172, 10),
                   fontSize: 16,
                 ),
               ),

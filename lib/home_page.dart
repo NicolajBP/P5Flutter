@@ -5,17 +5,18 @@ import 'package:p5/report_nutrient_intake.dart';
 import 'package:p5/test_page.dart'; // Vi skal altid have den her import (giver adgang til alle widgets)
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+   HomePage({super.key});
 //sign user out 
 void signUserOut(){
   FirebaseAuth.instance.signOut();
 }
-
+final user =FirebaseAuth.instance.currentUser!;
 
  @override
 Widget build(BuildContext context) {
   return Scaffold(
     appBar: AppBar(
+      title: Text("Logged in as " + user.email!),
       actions: [
         IconButton(
           onPressed: signUserOut,

@@ -43,6 +43,13 @@ class RootPage extends StatefulWidget {
   // Stateful widget gør at UI kan opdateres når brugeren interagerer med skærmen
   const RootPage({super.key});
 
+
+
+
+ 
+
+
+
   @override
   State<RootPage> createState() => _RootPageState();
 }
@@ -51,7 +58,7 @@ class _RootPageState extends State<RootPage> {
   int currentPage = 0;
   List<Widget> pages = [
     // LoginPage(key: password),
-    const HomePage(),
+     HomePage(),
     const Trends(),
     const ProfilePage(),
   ];

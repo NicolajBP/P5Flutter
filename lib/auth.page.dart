@@ -13,7 +13,7 @@ Widget build(BuildContext context) {
       builder: (context, snapshot) {
         // When the user is logged in
         if (snapshot.hasData) {
-          return const HomePage();
+          return  HomePage();
         } 
         else {
           // When the user is not logged in, return the LoginPage
@@ -24,3 +24,4 @@ Widget build(BuildContext context) {
   );
 }
 }
+
