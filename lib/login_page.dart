@@ -4,35 +4,34 @@ import 'package:p5/MyTextField.dart';
 import 'package:p5/main.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage ({super.key});
+  LoginPage({Key? key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
-// text editing controllers
-final usernamecontroller = TextEditingController();
-final passwordcontroller = TextEditingController();
+  // Text editing controllers
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
 
-//new
-Future<void> signUserIn(BuildContext context) async {
-    try {
-// show loading circle 
-showDialog(
-  context: context,
-  builder: (context) {
-    return Center(
-      child: CircularProgressIndicator(),
+  String errorMessage = ''; // Store the error message
+
+  Future<void> signUserIn(BuildContext context) async {
+    // Show the loading circle
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
-  },
-);
 
-
-
+    try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: usernamecontroller.text,
-        password: passwordcontroller.text,
+        email: usernameController.text,
+        password: passwordController.text,
       );
       // Navigate to the home page when authentication is successful.
       Navigator.of(context).push(
@@ -40,9 +39,23 @@ showDialog(
           return const MyApp();
         }),
       );
-    } catch (e) {
-      // Handle authentication errors here (e.g., display an error message).
-      print("Authentication failed: $e");
+    } on FirebaseAuthException catch (e) {
+      // Handle authentication errors here
+      if (e.code == 'user-not-found') {
+        setState(() {
+          errorMessage = 'Invalid username or password';
+        });
+      } else if (e.code == 'wrong-password') {
+        setState(() {
+          errorMessage = 'Invalid username or password';
+        });
+      } else {
+        setState(() {
+          errorMessage = 'Unknown error: ${e.code}';
+        });
+      }
+      // Dismiss the loading circle when the authentication fails
+      Navigator.of(context).pop();
     }
   }
 
@@ -74,18 +87,25 @@ showDialog(
                 ),
               ),
               MyTextField(
-                controller: usernamecontroller, 
+                controller: usernameController, 
                 hint: "Username or E-mail",
                 inputType: TextInputType.emailAddress,
                 isPassword: false,
               ),
               MyTextField(
-                controller: passwordcontroller, 
+                controller: passwordController, 
                 hint: "Password",              
                 inputType: TextInputType.text,
                 isPassword: true,
               ),
-                SizedBox(
+              if (errorMessage.isNotEmpty) // Display error message if not empty
+                Text(
+                  errorMessage,
+                  style: TextStyle(
+                    color: Colors.red, // You can choose the color
+                  ),
+                ),
+              SizedBox(
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
