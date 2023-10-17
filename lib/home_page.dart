@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
     return Column(children: [
       Container(
               color: Colors.lightBlue,
-              margin: const EdgeInsets.fromLTRB(100, 20, 100, 20),
+              margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
               padding: const EdgeInsets.all(50),
               height: 250,
               width: double.infinity,
