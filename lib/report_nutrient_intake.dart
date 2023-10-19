@@ -42,7 +42,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
               // children tillader os at tilføje mere end én widget
     const SizedBox(height: 10),
    Container(
-  width: 250, // Set the desired width
+  width: 280, // Set the desired width
   height: 110, // Set the desired height 
 child:TextField(
   decoration: InputDecoration(
@@ -57,7 +57,7 @@ child:TextField(
             
             
           
-            const SizedBox(height: 1),
+            const SizedBox(height: 250),
             
             
             Row(
@@ -66,33 +66,38 @@ child:TextField(
             //centerer vores knapper
 
             children: [
+
+
+
             ElevatedButton(
             onPressed: () {
             debugPrint("Button 1 Clicked"); //viser at den bliver trukket i debug console
             },
-            child: const Text("Button 1"),//tekst indenfor knappen
+            child: const Text("Small"),//tekst indenfor knappen
             ),
-            const SizedBox(width: 12), // afstand mellem knapper
+            const SizedBox(width: 5), // afstand mellem knapper
     
+
+
             ElevatedButton(
             onPressed: () {
            debugPrint("Button 2 Clicked"); //viser at den bliver trukket i debug console
             },
-            child: const Text("Button 2"),//tekst indenfor knappen
+            child: const Text("Medium"),//tekst indenfor knappen
             ),
     
-            const SizedBox(width: 12), // afstand mellem knapper 
+            const SizedBox(width: 1), // afstand mellem knapper 
             
             
             ElevatedButton(
             onPressed: () {
             debugPrint("Button 3 Clicked"); //viser at den bliver trukket i debug console
             },
-            child: const Text("Button 3"),//tekst indenfor knappen
+            child: const Text("Large"),//tekst indenfor knappen
               ),
               ],
             ),
-const SizedBox(height: 10),
+,
 
       ElevatedButton(
         onPressed: () {
