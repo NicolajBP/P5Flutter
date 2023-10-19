@@ -9,12 +9,13 @@ class ReportNutrientIntakePage extends StatefulWidget {
 }
 
 class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
-  bool isSwitched = false;
-  bool? isBoxChecked = false;
-  
-  TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
+  bool isSwitched =
+      false; // Husk at deklarering af variable skal ske inden vores override og build
+  bool? isBoxChecked = false; // bool? betyder nullable bool
 
-  void _selectTime() async { //Funktion der bruger showTimePicker
+   TimeOfDay _time = const TimeOfDay(hour: 8, minute: 15);
+
+    void _selectTime() async {
     final TimeOfDay? newTime = await showTimePicker(
       context: context,
       initialTime: _time,
@@ -26,12 +27,13 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {    //"kroppen" af siden
+@override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("P5 CGM app"),
-        automaticallyImplyLeading: true,    //tilbageknap i appbar
+        automaticallyImplyLeading:
+            true, // Fjerner automatisk genereret tilbageknap
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
@@ -40,8 +42,8 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
         ),
        
         actions: [
-          IconButton(                   //informationsknap i appbar
-            onPressed: () {
+            IconButton(
+              onPressed: () {
               showDialog(
                 context: context,
                 builder: (BuildContext context) => _buildPopupDialog(context),
@@ -51,123 +53,148 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
           ),
         ],
       ),
-    
-      body: SingleChildScrollView(
+
+     
+     
+         
+        body: SingleChildScrollView(
+
+        
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 100),
-            SizedBox(
-              width: 310,
-              height: 110,
-              child: TextField(               //Notes kassen
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: const Color.fromARGB(255, 156, 180, 168),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                  ),
-                  hintText: 'Type of food',
-                ),
-                maxLines: 5,
-              ),
-            ),
-        
+            IconButton(
+              onPressed: _selectTime,
+              //child: const Text('SELECT TIME'),           
+           icon: const Icon(Icons.access_time)),
+            const SizedBox(height: 8),
+            Text(
+              'Selected time: ${_time.format(context)}',
 
-        const SizedBox(height: 200), //Laver mellemrum i kolonnen
-        
-  OutlinedButton.icon(              //Sætter ring om "tids knappen"
-    onPressed: _selectTime,
-  icon: const Icon(Icons.access_time),
-  label: const Text("Select Time"),
-),
+            ),
             
-            const SizedBox(height:8),
-            
-            const Text(             //Overskrift til de tre meal sizes
-              "Choose your meal size",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                letterSpacing: 0.5,
-                fontFamily: 'Roboto',
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(                             //Small button
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2196F3),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  ),
-                  onPressed: () {
-                    debugPrint("Button 1 Clicked");
-                  },
-                  child: const Text("Small"),
-                ),
-                const SizedBox(width: 30),
-                ElevatedButton(                                 //Medium botton
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2196F3),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  ),
-                  onPressed: () {
-                    debugPrint("Button 2 Clicked");
-                  },
-                  child: const Text("Medium"),
-                ),
-                const SizedBox(width: 30),
-                ElevatedButton(                                   //Large button
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2196F3),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  ),
-                  onPressed: () {
-                    debugPrint("Button 3 Clicked");
-                  },
-                  child: const Text("Large"),
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            ConstrainedBox(                                           //Save button
-              constraints: const BoxConstraints.tightFor(width: 280, height: 42),
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  ),
-                ),
-                onPressed: () {
-                  debugPrint("Save Button Clicked");
-                },
-                child: const Text("Save"),
-              ),
-            ),
-          ],
+ConstrainedBox(
+  constraints: const BoxConstraints.tightFor(width: 280, height: 42), // Adjust the width and height as needed
+  child: ElevatedButton(
+    style: ButtonStyle(
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
         ),
       ),
+    ),
+    onPressed: () {
+      debugPrint("Save Button Clicked");
+    },
+    child: const Text("Save"),
+  ),
+),
+  
+    const SizedBox(height:100),
+   SizedBox(
+  width: 310, // Set the desired width
+  height: 110, // Set the desired height 
+child:TextField(
+  decoration: InputDecoration(
+    filled: true,
+    fillColor: const Color.fromARGB(255, 156, 180, 168),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25.0), // Adjust the radius as needed
+    ),
+    hintText: 'Type of food',
+  ),
+  maxLines: 5,
+),
+   ),
+            
+            
+          
+            const SizedBox(height: 250),
+const Row(
+  children: [
+    Text(
+      "          Choose your meal size",
+      style: TextStyle(
+        fontSize: 16, // Increase font size for better visibility
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+        letterSpacing: 0.5, // Adjust letter spacing as needed
+        fontFamily: 'Roboto', // Use a specific font family if desired
+      ),
+    ),
+  ],
+),
+
+const SizedBox(height: 20),
+
+            Row(
+            //skaber en rækker af widgets
+            mainAxisAlignment: MainAxisAlignment.center,
+
+              
+            //centerer vores knapper
+
+            children: [
+
+
+
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF2196F3), // Custom color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                ),
+            onPressed: () {
+            debugPrint("Button 1 Clicked"); //viser at den bliver trukket i debug console
+            },
+            child: const Text("Small"),//tekst indenfor knappen
+            ),
+            const SizedBox(width: 30), // afstand mellem knapper
+    
+
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF2196F3), // Custom color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                ),
+            onPressed: () {
+           debugPrint("Button 2 Clicked"); //viser at den bliver trukket i debug console
+            },
+            child: const Text("Medium"),//tekst indenfor knappen
+            ),
+    
+            const SizedBox(width: 30), // afstand mellem knapper 
+            
+            
+             ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF2196F3), // Custom color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                ),
+            onPressed: () {
+            debugPrint("Button 3 Clicked"); //viser at den bliver trukket i debug console
+            },
+            child: const Text("Large"),//tekst indenfor knappen
+              ),
+              ]),
+        ]
+)
+        )
     );
+    
   }
+
 }
 
-Widget _buildPopupDialog(BuildContext context) {    //Widget til popup informations knap
+  Widget _buildPopupDialog(BuildContext context) {
   return AlertDialog(
     title: const Text(
       'Information about portion size',
