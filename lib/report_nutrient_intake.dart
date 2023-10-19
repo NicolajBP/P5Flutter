@@ -7,7 +7,6 @@ class ReportNutrientIntakePage extends StatefulWidget {
   State<ReportNutrientIntakePage> createState() =>
       _ReportNutrientIntakePageState();
 }
-
 class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   bool isSwitched =
       false; // Husk at deklarering af variable skal ske inden vores override og build
@@ -25,8 +24,13 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
             Navigator.of(context)
                 .pop(); // Tager os tilbage til den forrige side --> pop() betyder at vi fjerner den nuværende side
           },
+
+
+
           icon: const Icon(Icons.arrow_back_ios),
         ),
+        
+        
         actions: [
           IconButton(
               onPressed: () {
@@ -35,55 +39,137 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
               icon: const Icon(Icons.info_outline))
         ],
       ),
-      body: SingleChildScrollView(
+
+     
+     
+         
+        body: SingleChildScrollView(
+
         child: Column(
           // Tilføjer sådan set bare en søjle af widgets
-          children: [
-            // children tillader os at tilføje mere end én widget
-            // Image.asset("images/Google_screenshot.png"), // Indsætter et billede
-            const SizedBox(height: 10),
+            children: [
+              // children tillader os at tilføje mere end én widget
+    const SizedBox(height:100),
+   SizedBox(
+  width: 310, // Set the desired width
+  height: 110, // Set the desired height 
+child:TextField(
+  decoration: InputDecoration(
+    filled: true,
+    fillColor: const Color.fromARGB(255, 156, 180, 168),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25.0), // Adjust the radius as needed
+    ),
+    hintText: 'Type of food',
+  ),
+  maxLines: 5,
+),
+   ),
+            
+            
+          
+            const SizedBox(height: 250),
+const Row(
+  children: [
+    Text(
+      "          Choose your meal size",
+      style: TextStyle(
+        fontSize: 16, // Increase font size for better visibility
+        fontWeight: FontWeight.bold,
+        color: Colors.black,
+        letterSpacing: 0.5, // Adjust letter spacing as needed
+        fontFamily: 'Roboto', // Use a specific font family if desired
+      ),
+    ),
+  ],
+),
+
+const SizedBox(height: 20),
 
             Row(
-              // Tilføjer en række af widgets
-              mainAxisAlignment: MainAxisAlignment
-                  .center, // Centrerer vores widgets i vores row
-              children: [
-                const SizedBox(height: 125),
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Type of food',
-                    ),
+            //skaber en rækker af widgets
+            mainAxisAlignment: MainAxisAlignment.center,
+            //centerer vores knapper
+
+            children: [
+
+
+
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF2196F3), // Custom color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
                   ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 ),
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Weight (g)',
-                    ),
+            onPressed: () {
+            debugPrint("Button 1 Clicked"); //viser at den bliver trukket i debug console
+            },
+            child: const Text("Small"),//tekst indenfor knappen
+            ),
+            const SizedBox(width: 30), // afstand mellem knapper
+    
+
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF2196F3), // Custom color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
                   ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 ),
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Carbohydrates (g)',
-                    ),
+            onPressed: () {
+           debugPrint("Button 2 Clicked"); //viser at den bliver trukket i debug console
+            },
+            child: const Text("Medium"),//tekst indenfor knappen
+            ),
+    
+            const SizedBox(width: 30), // afstand mellem knapper 
+            
+            
+             ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF2196F3), // Custom color
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20.0),
                   ),
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 ),
-                ElevatedButton(
-                    onPressed: () {
-                      debugPrint(
-                          "Elevated Button"); //debugPrint fortæller hvad der skal vises i terminalen når vi trykker på knappen
-                    },
-                    child: const Text("Add")),
+            onPressed: () {
+            debugPrint("Button 3 Clicked"); //viser at den bliver trukket i debug console
+            },
+            child: const Text("Large"),//tekst indenfor knappen
+              ),
               ],
             ),
-          ],
+ConstrainedBox(
+  constraints: const BoxConstraints.tightFor(width: 280, height: 42), // Adjust the width and height as needed
+  child: ElevatedButton(
+    style: ButtonStyle(
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20.0),
         ),
       ),
+    ),
+    onPressed: () {
+      debugPrint("Save Button Clicked");
+    },
+    child: const Text("Save"),
+  ),
+)
+
+
+
+     
+      
+          ],
+          
+        ),
+        
+
+      )
     );
   }
 }
