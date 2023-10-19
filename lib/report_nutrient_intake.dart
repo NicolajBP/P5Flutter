@@ -13,7 +13,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       false; // Husk at deklarering af variable skal ske inden vores override og build
   bool? isBoxChecked = false; // bool? betyder nullable bool
 
-   TimeOfDay _time = const TimeOfDay(hour: 7, minute: 15);
+   TimeOfDay _time = const TimeOfDay(hour: 8, minute: 15);
 
     void _selectTime() async {
     final TimeOfDay? newTime = await showTimePicker(
@@ -57,10 +57,10 @@ body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            ElevatedButton(
+            IconButton(
               onPressed: _selectTime,
-              child: const Text('SELECT TIME'),
-            ),
+              //child: const Text('SELECT TIME'),           
+           icon: const Icon(Icons.access_time)),
             const SizedBox(height: 8),
             Text(
               'Selected time: ${_time.format(context)}',
