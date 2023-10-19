@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p5/MyTextField.dart';
-import 'package:p5/main.dart';
+import 'package:p5/main_original.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({required Key key}) : super(key: key);
