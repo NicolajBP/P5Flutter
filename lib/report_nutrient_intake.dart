@@ -28,62 +28,46 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
           icon: const Icon(Icons.arrow_back_ios),
         ),
         actions: [
-          IconButton(
+            IconButton(
               onPressed: () {
-                debugPrint("Actions");
+              showDialog(
+              context: context,
+              builder: (BuildContext context) => _buildPopupDialog(context),
+              );
               },
-              icon: const Icon(Icons.info_outline))
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          // Tilføjer sådan set bare en søjle af widgets
-          children: [
-            // children tillader os at tilføje mere end én widget
-            // Image.asset("images/Google_screenshot.png"), // Indsætter et billede
-            const SizedBox(height: 10),
+              icon: const Icon(Icons.info_outline)),
+        ]
+),
 
-            Row(
-              // Tilføjer en række af widgets
-              mainAxisAlignment: MainAxisAlignment
-                  .center, // Centrerer vores widgets i vores row
-              children: [
-                const SizedBox(height: 125),
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Type of food',
-                    ),
-                  ),
-                ),
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Weight (g)',
-                    ),
-                  ),
-                ),
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Carbohydrates (g)',
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      debugPrint(
-                          "Elevated Button"); //debugPrint fortæller hvad der skal vises i terminalen når vi trykker på knappen
-                    },
-                    child: const Text("Add")),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
+   );
+
+   
   }
+
+  Widget _buildPopupDialog(BuildContext context) {
+  return AlertDialog(
+    title: const Text('Information about portion size',
+    style: TextStyle(fontWeight: FontWeight.bold),
+    ),
+    content: const Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("A Small portion is everything below or around 100g \nMedium is around 300g \nLarge is around or over 500g \n\n A small portion could be a apple, a medium could be two pieces of bread with topping and a large portion could be a whole pizza "),
+      ],
+    ),
+    actions: <Widget>[
+      TextButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        child: const Text('Close'),
+      ),
+    ],
+  );
 }
+}
+
+
+
+
