@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:core';
 import 'dart:io';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
@@ -25,4 +27,8 @@ class AppDb extends _$AppDb {
 
   @override
   int get schemaVersion => 2; 
+}
+// Få listen af brugere
+Future<List<BrugerData>> getBrugers() async {
+  return await select(Bruger).get(); //Returner liste af brugere
 }
