@@ -1,18 +1,26 @@
+import 'dart:io';
 import 'package:drift/drift.dart';
 import 'package:drift/native.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 
-LazyDatabase _openConnection(){
+part 'app_db.g.dart'; //Lader os generere en fil
+
+LazyDatabase _openConnection(){ //Open connection da den skal kunne finde stien for os
   return LazyDatabase(() async {
 
-    final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(path.join(dbFolder.path, 'bruger.sqlite'));
-    return NativeDatabase(file);
+    final dbFolder = await getApplicationDocumentsDirectory(); //Vælger lokalisationen hvor vi installerer databasefilen
+    final file = File(path.join(dbFolder.path, 'bruger.sqlite')); //Laver filen, finder stien og tilføjer sql filen
+    
+    return NativeDatabase(file); //Return for at skabe databasen
   })
 }
 
 
-class AppDb {
+@DriftDatabase(tables: [Bruger]) //Forbindes til bruger tabellen
+class AppDb extends _$AppDb {
+  AppDb() : super(_openConnection());
 
+  @override
+  int get schemaVersion => 1; 
 }
