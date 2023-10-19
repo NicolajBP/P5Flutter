@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart' as path;
 
 
-part '../../app_db.g.dart'; //Lader os generere en fil
+part 'app_db.g.dart'; //Lader os generere en fil
 
 LazyDatabase _openConnection(){ //Open connection da den skal kunne finde stien for os
   return LazyDatabase(() async {
@@ -24,5 +24,5 @@ class AppDb extends _$AppDb {
   AppDb() : super(_openConnection());
 
   @override
-  int get schemaVersion => 1; 
+  int get schemaVersion => 2; 
 }
