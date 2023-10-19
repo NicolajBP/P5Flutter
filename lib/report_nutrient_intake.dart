@@ -17,7 +17,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("P5 CGM app"),
+        title: const Text("P5"),
         automaticallyImplyLeading:
             true, // Fjerner automatisk genereret tilbageknap
         leading: IconButton(
