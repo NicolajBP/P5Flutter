@@ -14,7 +14,7 @@ class Trends extends StatelessWidget {
           children: [
             Container(
               color: Colors.lightBlue,
-              margin: const EdgeInsets.fromLTRB(300, 20, 300, 20),
+              margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
               padding: const EdgeInsets.all(20),
               height: 200,
               width: double.infinity,
@@ -22,7 +22,7 @@ class Trends extends StatelessWidget {
             ),
             Container(
               color: Colors.lightBlue,
-              margin: const EdgeInsets.fromLTRB(300, 20, 300, 20),
+              margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
               padding: const EdgeInsets.all(20),
               height: 200,
               width: double.infinity,
