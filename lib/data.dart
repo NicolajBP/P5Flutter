@@ -19,6 +19,10 @@ abstract class ProductsView extends View {
   Products get products;
   Details get details;
 
+  Expression<String> get data =>
+    products.title + const Constant("(") + details.name + const Constant(")"); // Vi joiner title fra products og name fra details --> de hænger nu sammen
+
+
   @override // Vi laver en query for at få titlen fra en instans af vores table
   Query as() => select([
     products.title, details.name
