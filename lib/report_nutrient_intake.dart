@@ -38,49 +38,68 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       body: SingleChildScrollView(
         child: Column(
           // Tilføjer sådan set bare en søjle af widgets
-          children: [
-            // children tillader os at tilføje mere end én widget
-            // Image.asset("images/Google_screenshot.png"), // Indsætter et billede
-            const SizedBox(height: 10),
-
+            children: [
+              // children tillader os at tilføje mere end én widget
+    const SizedBox(height: 10),
+   Container(
+  width: 250, // Set the desired width
+  height: 110, // Set the desired height 
+child:TextField(
+  decoration: InputDecoration(
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(15.0), // Adjust the radius as needed
+    ),
+    hintText: 'Type of food',
+  ),
+  maxLines: 4,
+),
+   ),
+            
+            
+          
+            const SizedBox(height: 1),
+            
+            
             Row(
-              // Tilføjer en række af widgets
-              mainAxisAlignment: MainAxisAlignment
-                  .center, // Centrerer vores widgets i vores row
-              children: [
-                const SizedBox(height: 125),
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Type of food',
-                    ),
-                  ),
-                ),
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Weight (g)',
-                    ),
-                  ),
-                ),
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Carbohydrates (g)',
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      debugPrint(
-                          "Elevated Button"); //debugPrint fortæller hvad der skal vises i terminalen når vi trykker på knappen
-                    },
-                    child: const Text("Add")),
+            //skaber en rækker af widgets
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //centerer vores knapper
+
+            children: [
+            ElevatedButton(
+            onPressed: () {
+            debugPrint("Button 1 Clicked"); //viser at den bliver trukket i debug console
+            },
+            child: const Text("Button 1"),//tekst indenfor knappen
+            ),
+            const SizedBox(width: 12), // afstand mellem knapper
+    
+            ElevatedButton(
+            onPressed: () {
+           debugPrint("Button 2 Clicked"); //viser at den bliver trukket i debug console
+            },
+            child: const Text("Button 2"),//tekst indenfor knappen
+            ),
+    
+            const SizedBox(width: 12), // afstand mellem knapper 
+            
+            
+            ElevatedButton(
+            onPressed: () {
+            debugPrint("Button 3 Clicked"); //viser at den bliver trukket i debug console
+            },
+            child: const Text("Button 3"),//tekst indenfor knappen
+              ),
               ],
             ),
+const SizedBox(height: 10),
+
+      ElevatedButton(
+        onPressed: () {
+          debugPrint("Save Button Clicked");
+        },
+        child: const Text("Save"),
+      )
           ],
         ),
       ),
