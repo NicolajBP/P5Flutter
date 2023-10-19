@@ -1,6 +1,6 @@
 import "package:drift/drift.dart";
 
-part "data.g.dart"; // Navnet på den fil vi genererer til databasen
+part "data.g.dart"; // Navnet på den fil vi genererer til databasen. Filen gør at vi kan tilgå databasen
 
 class Products extends Table { // Vi laver en tabel
   IntColumn get id => integer().autoIncrement()(); // Laver et ID som automatisk inkrementeres
