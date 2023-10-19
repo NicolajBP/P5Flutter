@@ -4,6 +4,7 @@ import 'package:p5/login_page.dart';
 import 'package:p5/profile_page.dart';
 import 'package:p5/trends.dart';
 
+
 // I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
 // Widgets kan have argumenter som tager endnu en widget som input
 

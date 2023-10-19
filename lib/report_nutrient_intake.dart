@@ -13,7 +13,21 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       false; // Husk at deklarering af variable skal ske inden vores override og build
   bool? isBoxChecked = false; // bool? betyder nullable bool
 
-  @override
+   TimeOfDay _time = const TimeOfDay(hour: 7, minute: 15);
+
+    void _selectTime() async {
+    final TimeOfDay? newTime = await showTimePicker(
+      context: context,
+      initialTime: _time,
+    );
+    if (newTime != null) {
+      setState(() {
+        _time = newTime;
+      });
+    }
+  }
+
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -39,10 +53,26 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
         ]
 ),
 
+body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: _selectTime,
+              child: const Text('SELECT TIME'),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Selected time: ${_time.format(context)}',
+            ),
+          ],
+        ),
+      ),
    );
 
-   
   }
+
+}
 
   Widget _buildPopupDialog(BuildContext context) {
   return AlertDialog(
@@ -66,8 +96,4 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     ],
   );
 }
-}
-
-
-
 
