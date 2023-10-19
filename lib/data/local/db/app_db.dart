@@ -27,8 +27,25 @@ class AppDb extends _$AppDb {
 
   @override
   int get schemaVersion => 2; 
-}
+
 // Få listen af brugere
-Future<List<BrugerData>> getBrugers() async {
-  return await select(Bruger).get(); //Returner liste af brugere
+  Future<List<BrugerData>> getBrugers() async {
+    return await select(bruger).get(); //Returner liste af brugere
+  }
+//Finder bestemt bruger ID og returnerer det
+  Future<BrugerData>getBruger(int id) async {
+    return await (select(bruger)..where((tbl) => tbl.id.equals(id))).getSingle(); //Vi returner en enkelt værdi (Enkelt bruger)
+  }
+
+  Future<bool> updateBruger(BrugerCompanion entity) async {
+  return await update(bruger).replace(entity); //Updater brugerlisten
 }
+  Future<int> insertBruger(BrugerCompanion entity) async {
+    return await into(bruger).insert(entity); //indsætter entity som vi passer
+  }
+
+  Future<int> deleteBruger(int id) async {
+    return await (delete(bruger)..where((tbl) => tbl.id.equals(id))).go(); //Finder brugerens id og sletter det. 
+  }
+
+}    
