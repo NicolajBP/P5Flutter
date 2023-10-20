@@ -4,7 +4,8 @@ import 'package:p5/MyTextField.dart';
 import 'package:p5/main.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key});
+  final VoidCallback showRegisterPage;
+  LoginPage({Key? key,required this.showRegisterPage});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -40,16 +41,19 @@ class _LoginPageState extends State<LoginPage> {
         }),
       );
     } on FirebaseAuthException catch (e) {
-      // Handle authentication errors here
-      if (e.code == 'user-not-found') {
+      // Handle authentication errors here¨
+      //Forkert brugernavn
+      if (e.code == 'user-not-found') { 
         setState(() {
           errorMessage = 'Invalid username or password';
         });
+        //Forkert password
       } else if (e.code == 'wrong-password') {
         setState(() {
           errorMessage = 'Invalid username or password';
         });
       } else {
+        //Andre errors xD
         setState(() {
           errorMessage = 'Unknown error: ${e.code}';
         });
@@ -126,6 +130,28 @@ class _LoginPageState extends State<LoginPage> {
               ),
               const SizedBox(
                 height: 80,
+              ),
+              //Registrer ny bruger
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(       //Vi vælger typen af tekst.
+                    'New user? ',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  GestureDetector(   //Ny tekst, da dette laves til widget som kan trykkes på
+                    onTap: widget.showRegisterPage,
+                    child: Text(
+                      'Register now.',          
+                      style: TextStyle(
+                        color: Colors.lightGreen,
+                        fontWeight: FontWeight.bold
+                      ),
+                    ),
+                  ),
+                ],  
               ),
             ],
           ),
