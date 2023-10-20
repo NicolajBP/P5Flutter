@@ -74,10 +74,10 @@ void resetButtonStates() {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top:100.0,bottom: 180),
+              padding: const EdgeInsets.only(top:100.0,bottom: 120),
               child: SizedBox(
                 width: 310,
-                height: 110,
+                height: 160,
                 child: TextField(               //Notes kassen
                   decoration: InputDecoration(
                     filled: true,
