@@ -54,7 +54,7 @@ void resetButtonStates() {
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
-       
+
         actions: [
           IconButton(                   //informationsknap i appbar
             onPressed: () {
@@ -72,42 +72,45 @@ void resetButtonStates() {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const SizedBox(height: 100),
-            SizedBox(
-              width: 310,
-              height: 110,
-              child: TextField(               //Notes kassen
-                decoration: InputDecoration(
-                  filled: true,
-                  fillColor: const Color.fromARGB(255, 156, 180, 168),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
+            Padding(
+              padding: const EdgeInsets.only(top:100.0,bottom: 180),
+              child: SizedBox(
+                width: 310,
+                height: 110,
+                child: TextField(               //Notes kassen
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: const Color.fromARGB(255, 156, 180, 168),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    hintText: 'Type of food',
                   ),
-                  hintText: 'Type of food',
+                  maxLines: 5,
                 ),
-                maxLines: 5,
               ),
             ),
         
-
-        const SizedBox(height: 200), //Laver mellemrum i kolonnen
         
-  OutlinedButton.icon(              //Sætter ring om "tids knappen"
-    onPressed: _selectTime,
-  icon: const Icon(Icons.access_time),
-  label: const Text("Select Time"),
-),
+  Padding(
+    padding: const EdgeInsets.only(top:20.0, bottom: 20.0),
+    child: OutlinedButton.icon(              //Sætter ring om "tids knappen"
+      onPressed: _selectTime,
+    icon: const Icon(Icons.access_time),
+    label:  Text(_time.format(context))),
+  ),
             
-            const SizedBox(height:8),
-            
-            const Text(             //Overskrift til de tre meal sizes
-              "Choose your meal size",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-                letterSpacing: 0.5,
-                fontFamily: 'Roboto',
+            const Padding(
+              padding: EdgeInsets.only(top:0.0, bottom: 20),
+              child: Text(             //Overskrift til de tre meal sizes
+                "Choose your meal size",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  letterSpacing: 0.5,
+                  fontFamily: 'Roboto',
+                ),
               ),
             ),
             Row(
