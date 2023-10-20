@@ -12,17 +12,17 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   // Text editing controllers
-  final usernameController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
   String errorMessage = ''; // Store the error message
 
   Future<void> signUserIn(BuildContext context) async {
     // Show the loading circle
-    showDialog(
+    showDialog( // Viser en loading cirkel når brugeren logger ind, så man kan se at der sker noget
       context: context,
       builder: (context) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },
@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: usernameController.text,
+        email: emailController.text,
         password: passwordController.text,
       );
       // Navigate to the home page when authentication is successful.
@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
           return const MyApp();
         }),
       );
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) { // Tjekker om der er fejl ved login
       // Handle authentication errors here
       if (e.code == 'user-not-found') {
         setState(() {
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
         });
       }
       // Dismiss the loading circle when the authentication fails
-      Navigator.of(context).pop();
+      Navigator.of(context).pop(); // Fjerner den loadende cirkel igen når brugeren er logget
     }
   }
 
@@ -87,8 +87,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               MyTextField(
-                controller: usernameController, 
-                hint: "Username or E-mail",
+                controller: emailController, 
+                hint: "E-mail",
                 inputType: TextInputType.emailAddress,
                 isPassword: false,
               ),

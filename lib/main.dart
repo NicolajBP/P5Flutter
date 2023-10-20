@@ -36,7 +36,6 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner:
           false, // Tilføjer eller fjerner en "debug" ribbon i højre hjørne
       theme: ThemeData(primarySwatch: Colors.green),
-      
       home: const AuthPage(),
     );
   }
@@ -45,11 +44,6 @@ class MyApp extends StatelessWidget {
 class RootPage extends StatefulWidget {
   // Stateful widget gør at UI kan opdateres når brugeren interagerer med skærmen
   const RootPage({super.key});
-
-
-
-
- 
 
 
 

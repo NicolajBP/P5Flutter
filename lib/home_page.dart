@@ -10,9 +10,7 @@ class HomePage extends StatelessWidget {
   
 //sign user out 
 void signUserOut(){
-  FirebaseAuth.instance.signOut();
-
-
+  FirebaseAuth.instance.signOut(); // Laver en metode til at logge ud
 
   @override
   Widget build(BuildContext context) {
@@ -66,9 +64,10 @@ void signUserOut(){
       ),
     ]);
   }
-// ef3320a880efa9714fbb239e3d60a7007d0bbe20
 }
-final user =FirebaseAuth.instance.currentUser!;
+// ef3320a880efa9714fbb239e3d60a7007d0bbe20
+
+final user =FirebaseAuth.instance.currentUser!; // Her siger vi bare at brugeren er den nuværende bruger som er logget ind
 
  @override
 Widget build(BuildContext context) {
@@ -76,8 +75,8 @@ Widget build(BuildContext context) {
     appBar: AppBar(
       title: Text("Logged in as " + user.email!),
       actions: [
-        IconButton(
-          onPressed: signUserOut,
+        IconButton( // Log ud knap --> når der trykkes, logges brugeren ud
+          onPressed: signUserOut, 
           icon: Icon(Icons.logout),
         ),
       ],
