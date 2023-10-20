@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:p5/auth.page.dart';
-import 'package:p5/home_page.dart';
-import 'package:p5/profile_page.dart';
+import 'package:p5/auth/auth.page.dart';
+import 'package:p5/pages/home_page.dart';
+import 'package:p5/pages/profile_page.dart';
 import 'package:p5/trends.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
