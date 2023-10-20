@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ReportNutrientIntakePage extends StatefulWidget {
-  const ReportNutrientIntakePage({Key? key});
+   // ignore: use_key_in_widget_constructors
+   const ReportNutrientIntakePage({Key? key});
 
   @override
   State<ReportNutrientIntakePage> createState() =>
@@ -25,6 +26,21 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       });
     }
   }
+
+  bool isPressed1 = false;
+  bool isPressed2 = false;
+  bool isPressed3 = false;
+  //bools til når knappen er trukket
+void resetButtonStates() {
+  setState(() {
+     isPressed1 = false;
+     isPressed2 = false;
+     isPressed3 = false;
+  });
+}
+//reset til når andre knapper er trukket ned
+
+
 
   @override
   Widget build(BuildContext context) {    //"kroppen" af siden
@@ -101,50 +117,72 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(                             //Small button
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2196F3),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  ),
-                  onPressed: () {
-                    debugPrint("Button 1 Clicked");
-                  },
-                  child: const Text("Small"),
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
+                ElevatedButton(                             // Small button
+                 style: ElevatedButton.styleFrom(
+                backgroundColor: isPressed1 ? const Color.fromARGB(255, 13, 0, 252) : Colors.blue,
+                shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                 ),
+                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                     ),
+                     onPressed: () {
+                      debugPrint("Button 1 Clicked");
+                      resetButtonStates();  // Reset all button states
+                      setState(() {
+                      isPressed1 = true;  // Set the clicked button state
+                      });
+                      },
+                child: const Text("Small"),
                 ),
+
+
+
+
                 const SizedBox(width: 30),
-                ElevatedButton(                                 //Medium botton
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2196F3),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  ),
-                  onPressed: () {
-                    debugPrint("Button 2 Clicked");
-                  },
-                  child: const Text("Medium"),
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+                 ElevatedButton(                             // Medium button
+                style: ElevatedButton.styleFrom(
+                backgroundColor: isPressed2 ? const Color.fromARGB(255, 13, 0, 252) : Colors.blue,
+                shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                 ),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 ),
-                const SizedBox(width: 30),
-                ElevatedButton(                                   //Large button
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF2196F3),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  ),
-                  onPressed: () {
-                    debugPrint("Button 3 Clicked");
-                  },
-                  child: const Text("Large"),
-                ),
+                 onPressed: () {
+    debugPrint("Mid button Clicked");
+    resetButtonStates();  // Reset all button states
+    setState(() {
+      isPressed2 = true;  // Set the clicked button state
+    });
+  },
+  child: const Text("Medium"),
+),
+
+const SizedBox(width: 30),
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ElevatedButton(                             // Large button
+                style: ElevatedButton.styleFrom(
+                 backgroundColor: isPressed3 ? const Color.fromARGB(255, 13, 0, 252) : Colors.blue,
+                shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                 ),
+                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                 ),
+               onPressed: () {
+                  debugPrint("Large button Clicked");
+    resetButtonStates();  // Reset all button states
+    setState(() {
+      isPressed3 = true;  // Set the clicked button state
+    });
+  },
+  child: const Text("Large"),
+),
+
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
               ],
             ),
             const SizedBox(height: 20),
