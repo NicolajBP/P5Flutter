@@ -24,4 +24,21 @@ Widget build(BuildContext context) {
   );
 }
 }
+class Authpage extends StatefulWidget {
+  const Authpage({super.key});
 
+  @override
+  State<Authpage> createState() => _AuthpageState();
+}
+
+class _AuthpageState extends State<Authpage> {
+  //iNTIALLY SHOW LOGIN PAGE 
+  bool showLoginPage = true;
+
+  @override
+  Widget build(BuildContext context) {
+    return LoginPage(showRegisterPage: showRegisterPage);
+  } else {
+    return RegisterPage();
+  }
+}
