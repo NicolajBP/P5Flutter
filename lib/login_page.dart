@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.green[700],
+                    backgroundColor: Colors.green[700],
                   ),
                   child: const Text(
                     "Login",
