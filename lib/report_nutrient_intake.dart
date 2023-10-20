@@ -79,9 +79,12 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   OutlinedButton.icon(              //Sætter ring om "tids knappen"
     onPressed: _selectTime,
   icon: const Icon(Icons.access_time),
-  label: const Text("Select Time"),
-),
-            
+  label: const Text('Select time')),
+  const SizedBox(height: 8),
+  Text(
+    'Selected Time: ${_time.format(context)}' //Printer den valgte tid
+    ),
+
             const SizedBox(height:8),
             
             const Text(             //Overskrift til de tre meal sizes
