@@ -54,6 +54,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     
       body: SingleChildScrollView(
         child: Column(
+
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
