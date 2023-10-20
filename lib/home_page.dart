@@ -79,6 +79,8 @@ Widget build(BuildContext context) {
         IconButton(
           onPressed: signUserOut,
           icon: Icon(Icons.logout),
+          color: Colors.red,
+          splashRadius: 100.0,
         ),
       ],
     ),
