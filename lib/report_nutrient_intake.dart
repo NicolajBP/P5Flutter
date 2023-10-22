@@ -76,8 +76,8 @@ void resetButtonStates() {
             Padding(
               padding: const EdgeInsets.only(top:100.0,bottom: 120),
               child: SizedBox(
-                width: 310,
-                height: 160,
+                width: 400,
+                height: 100,
                 child: TextField(               //Notes kassen
                   decoration: InputDecoration(
                     filled: true,
@@ -92,37 +92,46 @@ void resetButtonStates() {
               ),
             ),
         
-        
+
   Padding(
     padding: const EdgeInsets.only(top:20.0, bottom: 20.0),
-    child: OutlinedButton.icon(              //Sætter ring om "tids knappen"
-      onPressed: _selectTime,
-    icon: const Icon(Icons.access_time),
-    label:  Text(_time.format(context))),
+      child: OutlinedButton.icon(              //Sætter ring om "tids knappen"
+        onPressed: _selectTime,
+        icon: const Icon(Icons.access_time, size: 50.0,),
+        label:  Text(_time.format(context), 
+        style: const TextStyle(height: 1, fontSize: 36)),
+    ),
   ),
             
             const Padding(
               padding: EdgeInsets.only(top:0.0, bottom: 20),
-              child: Text(             //Overskrift til de tre meal sizes
-                "Choose your meal size",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  letterSpacing: 0.5,
-                  fontFamily: 'Roboto',
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(             //Overskrift til de tre meal sizes
+                    "   Choose your meal size:",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      letterSpacing: 0.5,
+                      fontFamily: 'Roboto',
+                    ),
+                  ),
+                ],
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
+          
                 ElevatedButton(                             // Small button
                  style: ElevatedButton.styleFrom(
+                minimumSize: const Size(60, 80),
                 backgroundColor: isPressed1 ? const Color.fromARGB(255, 13, 0, 252) : Colors.blue,
                 shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
+                borderRadius: BorderRadius.circular(20.0),        
                  ),
                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                      ),
@@ -133,9 +142,9 @@ void resetButtonStates() {
                       isPressed1 = true;  // Set the clicked button state
                       });
                       },
-                child: const Text("Small"),
+                child: const Text("Small",
+                style: TextStyle(height: 1, fontSize: 30)),
                 ),
-
 
 
 
@@ -145,6 +154,7 @@ void resetButtonStates() {
 /////////////////////////////////////////////////////////////////////////////////////////////////////
                  ElevatedButton(                             // Medium button
                 style: ElevatedButton.styleFrom(
+                minimumSize: const Size(60, 80),
                 backgroundColor: isPressed2 ? const Color.fromARGB(255, 13, 0, 252) : Colors.blue,
                 shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
@@ -152,13 +162,14 @@ void resetButtonStates() {
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 ),
                  onPressed: () {
-    debugPrint("Mid button Clicked");
-    resetButtonStates();  // Reset all button states
-    setState(() {
-      isPressed2 = true;  // Set the clicked button state
+                  debugPrint("Mid button Clicked");
+                  resetButtonStates();  // Reset all button states
+                setState(() {
+                  isPressed2 = true;  // Set the clicked button state
     });
   },
-  child: const Text("Medium"),
+  child: const Text("Medium",
+  style: TextStyle(height: 1, fontSize: 30)),
 ),
 
 const SizedBox(width: 30),
@@ -166,6 +177,7 @@ const SizedBox(width: 30),
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 ElevatedButton(                             // Large button
                 style: ElevatedButton.styleFrom(
+                minimumSize: const Size(60, 80),
                  backgroundColor: isPressed3 ? const Color.fromARGB(255, 13, 0, 252) : Colors.blue,
                 shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
@@ -179,15 +191,17 @@ const SizedBox(width: 30),
       isPressed3 = true;  // Set the clicked button state
     });
   },
-  child: const Text("Large"),
+  child: const Text("Large",
+  style: TextStyle(height: 1, fontSize: 30)),
 ),
 
-                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-              ],
-            ),
+    ],
+  ),
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             const SizedBox(height: 20),
             ConstrainedBox(                                           //Save button
-              constraints: const BoxConstraints.tightFor(width: 280, height: 42),
+              constraints: const BoxConstraints.tightFor(width: 420, height: 50),
               child: ElevatedButton(
                 style: ButtonStyle(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -199,7 +213,8 @@ const SizedBox(width: 30),
                 onPressed: () {
                   debugPrint("Save Button Clicked");
                 },
-                child: const Text("Save"),
+                child: const Text("Save",
+                style: TextStyle(height: 1, fontSize: 30)),
               ),
             ),
           ],
