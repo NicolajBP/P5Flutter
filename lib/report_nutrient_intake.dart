@@ -81,11 +81,11 @@ void resetButtonStates() {
                 child: TextField(               //Notes kassen
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: const Color.fromARGB(255, 156, 180, 168),
+                    fillColor: Theme.of(context).colorScheme.onSecondary,
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),
-                    hintText: 'Type of food',
+                    hintText: 'Type of food..',
                   ),
                   maxLines: 5,
                 ),
@@ -115,7 +115,7 @@ void resetButtonStates() {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                       letterSpacing: 0.5,
-                      fontFamily: 'Roboto',
+                    //  fontFamily: 'Roboto',
                     ),
                   ),
                 ],
@@ -126,12 +126,12 @@ void resetButtonStates() {
               children: [
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
           
-                ElevatedButton(                             // Small button
-                 style: ElevatedButton.styleFrom(
+            ElevatedButton(                             // Small button 
+              style: ElevatedButton.styleFrom(
                 minimumSize: const Size(60, 80),
-                backgroundColor: isPressed1 ? const Color.fromARGB(255, 13, 0, 252) : Colors.blue,
+                backgroundColor: isPressed1 ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onPrimary,
                 shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),        
+                borderRadius: BorderRadius.circular(20.0),      
                  ),
                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                      ),
@@ -142,8 +142,10 @@ void resetButtonStates() {
                       isPressed1 = true;  // Set the clicked button state
                       });
                       },
-                child: const Text("Small",
-                style: TextStyle(height: 1, fontSize: 30)),
+                child: Text("Small",
+                style: TextStyle(height: 1, fontSize: 30,
+                color: isPressed1 ? Theme.of(context).colorScheme.onPrimary: Theme.of(context).colorScheme.primary)
+                ),
                 ),
 
 
@@ -155,7 +157,7 @@ void resetButtonStates() {
                  ElevatedButton(                             // Medium button
                 style: ElevatedButton.styleFrom(
                 minimumSize: const Size(60, 80),
-                backgroundColor: isPressed2 ? const Color.fromARGB(255, 13, 0, 252) : Colors.blue,
+                backgroundColor: isPressed2 ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onPrimary,
                 shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
                  ),
@@ -168,8 +170,10 @@ void resetButtonStates() {
                   isPressed2 = true;  // Set the clicked button state
     });
   },
-  child: const Text("Medium",
-  style: TextStyle(height: 1, fontSize: 30)),
+  child: Text("Medium",
+  style: TextStyle(height: 1, fontSize: 30,
+  color: isPressed2 ? Theme.of(context).colorScheme.onPrimary: Theme.of(context).colorScheme.primary)
+  ),
 ),
 
 const SizedBox(width: 30),
@@ -178,7 +182,7 @@ const SizedBox(width: 30),
                 ElevatedButton(                             // Large button
                 style: ElevatedButton.styleFrom(
                 minimumSize: const Size(60, 80),
-                 backgroundColor: isPressed3 ? const Color.fromARGB(255, 13, 0, 252) : Colors.blue,
+                 backgroundColor: isPressed3 ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onPrimary,
                 shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(20.0),
                  ),
@@ -191,8 +195,10 @@ const SizedBox(width: 30),
       isPressed3 = true;  // Set the clicked button state
     });
   },
-  child: const Text("Large",
-  style: TextStyle(height: 1, fontSize: 30)),
+  child: Text("Large",
+  style: TextStyle(height: 1, fontSize: 30,
+  color: isPressed3 ? Theme.of(context).colorScheme.onPrimary: Theme.of(context).colorScheme.primary),
+  ),
 ),
 
     ],
@@ -213,8 +219,9 @@ const SizedBox(width: 30),
                 onPressed: () {
                   debugPrint("Save Button Clicked");
                 },
-                child: const Text("Save",
-                style: TextStyle(height: 1, fontSize: 30)),
+                child: Text("Save",
+                style: TextStyle(height: 1, fontSize: 30,
+                color: Theme.of(context).colorScheme.onPrimary)),
               ),
             ),
           ],
