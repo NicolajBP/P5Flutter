@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:p5/auth.page.dart';
 import 'package:p5/home_page.dart';
-import 'package:p5/login_page.dart';
 import 'package:p5/profile_page.dart';
 import 'package:p5/trends.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
 
 // I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
 // Widgets kan have argumenter som tager endnu en widget som input
 
 Key password = const Key("password");
 
-void main() {
+Future<void> main() async {
+
+WidgetsFlutterBinding.ensureInitialized();
+  
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(key: UniqueKey()), // Provide a unique key
+      home: AuthPage(key: UniqueKey()), // Provide a unique key
     ),
   );
 }
@@ -26,7 +35,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner:
           false, // Tilføjer eller fjerner en "debug" ribbon i højre hjørne
-      theme: ThemeData(primarySwatch: Colors.red),
+      theme: ThemeData(primarySwatch: Colors.green),
       home: const RootPage(),
     );
   }
@@ -36,6 +45,13 @@ class RootPage extends StatefulWidget {
   // Stateful widget gør at UI kan opdateres når brugeren interagerer med skærmen
   const RootPage({super.key});
 
+
+
+
+ 
+
+
+
   @override
   State<RootPage> createState() => _RootPageState();
 }
@@ -44,7 +60,7 @@ class _RootPageState extends State<RootPage> {
   int currentPage = 0;
   List<Widget> pages = [
     // LoginPage(key: password),
-    const HomePage(),
+     HomePage(),
     const Trends(),
     const ProfilePage(),
   ];
