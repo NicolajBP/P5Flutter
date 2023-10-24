@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p5/home_page.dart';
+import 'package:p5/screens/home/home_page.dart';
 import 'package:p5/login_page.dart';
 import 'package:p5/profile_page.dart';
 import 'package:p5/trends.dart';
