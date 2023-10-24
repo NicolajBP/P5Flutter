@@ -68,11 +68,7 @@ void _saveDataToFirestore() async {
     // tilføj "Note" til listen over manglende felter
     manglendeFelter.add("Note");
   }
-  if (time.isEmpty) {
-    // Hvis tidsfeltet er tomt
-    // tilføj tiden til listen over manglende felter
-    manglendeFelter.add("Time");
-  }
+
 
   if (manglendeFelter.isNotEmpty) {
     // Vis en fejlmeddelelse med de manglende felter som en Snackbar
@@ -106,7 +102,7 @@ void _saveDataToFirestore() async {
        setState(() {
       selectedButtonIndex = -1;
       note = ""; // Clear the note text field
-      time = "";
+      time = ""; 
     });
   } catch (e) {
     debugPrint("Error saving to Firestoe $e");
