@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart'; 
 
 class ReportNutrientIntakePage extends StatefulWidget {
    // ignore: use_key_in_widget_constructors
@@ -7,26 +8,35 @@ class ReportNutrientIntakePage extends StatefulWidget {
   @override
   State<ReportNutrientIntakePage> createState() =>
       _ReportNutrientIntakePageState();
+      
 }
 
 class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
+  
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  
   bool isSwitched = false;
   bool? isBoxChecked = false;
   
+  String mealSize = "";
+  String note = "";
+  String time = "";
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
 
 
-  void _selectTime() async { //Funktion der bruger showTimePicker
-    final TimeOfDay? newTime = await showTimePicker(
-      context: context,
-      initialTime: _time,
-    );
-    if (newTime != null) {
-      setState(() {
-        _time = newTime;
-      });
-    }
+
+void _selectTime() async {
+  final TimeOfDay? newTime = await showTimePicker(
+    context: context,
+    initialTime: _time,
+  );
+  if (newTime != null) {
+    setState(() {
+      _time = newTime;
+      time = _time.format(context); // definere det tid vi har som tidsvarieble til at gemme 
+    });
   }
+}
 
   bool isPressed1 = false;
   bool isPressed2 = false;
@@ -41,14 +51,43 @@ void resetButtonStates() {
 }
   int selectedButtonIndex = -1;
 //en value til kanppen når den er ikke trukket
+ 
+ 
+void _saveDataToFirestore() async {
+  // Define the meal size based on the selected button index
+  if (selectedButtonIndex == 0) {
+    mealSize = "Small";
+  } else if (selectedButtonIndex == 1) {
+    mealSize = "Medium";
+  } else if (selectedButtonIndex == 2) {
+    mealSize = "Large";
+  }
 
-//reset til når andre knapper er trukket ned
- //Gør-UI-pænere
+  if (mealSize.isNotEmpty && note.isNotEmpty && time.isNotEmpty) {
+    try {
+      await firestore.collection('nutrition_entries').add({
+        'meal_size': mealSize,
+        'note': note,
+        'time': time,
+      });
+      debugPrint("Data saved to Firestore.");
+      // Reset the form after saving.
+      setState(() {
+        mealSize = "";
+        note = "";
+        time = "";
+      });
+    } catch (e) {
+      debugPrint("Error saving data to Firestore: $e");
+    }
+  }
+}
 
 
 
   @override
   Widget build(BuildContext context) {    //"kroppen" af siden
+    final isSaveButtonEnabled = mealSize.isNotEmpty && note.isNotEmpty && time.isNotEmpty;
     return Scaffold(
       appBar: AppBar(
         title: const Text("P5 CGM app"),
@@ -83,17 +122,29 @@ void resetButtonStates() {
               child: SizedBox(
                 width: 310,
                 height: 160,
-                child: TextField(               //Notes kassen
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: const Color.fromARGB(255, 156, 180, 168),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                    hintText: 'Type of food',
-                  ),
-                  maxLines: 5,
-                ),
+
+
+
+                
+                child: 
+                
+                      TextField(
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: const Color.fromARGB(255, 156, 180, 168),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(25.0),
+                          ),
+                          hintText: 'Type of food',
+                        ),
+                        maxLines: 5,
+                        onChanged: (value) {
+                          setState(() {
+                            note = value;
+                          });
+                        },
+                      ),
+
               ),
             ),
         
@@ -248,27 +299,30 @@ ElevatedButton( // Large button
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             const SizedBox(height: 20),
-            ConstrainedBox(                                           //Save button
-              constraints: const BoxConstraints.tightFor(width: 420, height: 50),
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  ),
-                ),
-                onPressed: () {
-                  debugPrint("Save Button Clicked");
-                },
-                child: Text("Save",
-                style: TextStyle(height: 1, fontSize: 30,
-                color: Theme.of(context).colorScheme.onPrimary)),
+      ConstrainedBox(
+        constraints: const BoxConstraints.tightFor(width: 420, height: 50),
+        child: ElevatedButton(
+          style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+              RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
               ),
             ),
+            backgroundColor: isSaveButtonEnabled
+                ? MaterialStateProperty.all<Color>(Colors.blue)
+                : MaterialStateProperty.all<Color>(Colors.grey), // Change button color
+          ),
+          onPressed: isSaveButtonEnabled ? _saveDataToFirestore : null,
+          child: const Text("Save",
+            style: TextStyle(height: 1, fontSize: 30, color: Colors.white),
+          ),
+        ),
+      )
           ],
         ),
       ),
+
+
     );
   }
 }
