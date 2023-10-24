@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:p5/auth.page.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:p5/home_page.dart';
 import 'package:p5/profile_page.dart';
 import 'package:p5/trends.dart';
@@ -35,7 +35,29 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner:
           false, // Tilføjer eller fjerner en "debug" ribbon i højre hjørne
-      theme: ThemeData(primarySwatch: Colors.green),
+      theme: ThemeData(
+       useMaterial3: true,
+      colorScheme: ColorScheme.fromSeed(
+      seedColor: Colors.teal,
+      brightness: Brightness.light,
+    ),
+
+    // Define the default `TextTheme`. Use this to specify the default
+    // text styling for headlines, titles, bodies of text, and more.
+    textTheme: TextTheme(
+      displayLarge: const TextStyle(
+        fontSize: 72,
+        fontWeight: FontWeight.bold,
+      ),
+      // ···
+      titleLarge: GoogleFonts.oswald(
+        fontSize: 30,
+        fontStyle: FontStyle.italic,
+      ),
+      bodyMedium: GoogleFonts.merriweather(),
+      displaySmall: GoogleFonts.pacifico(),
+    ),
+  ),
       home: const RootPage(),
     );
   }

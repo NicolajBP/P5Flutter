@@ -6,6 +6,7 @@ class MyTextField extends StatelessWidget {
   bool isPassword;
   TextInputType inputType;
 
+  // ignore: use_key_in_widget_constructors
   MyTextField({
     required this.hint,
     required this.controller,
