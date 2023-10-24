@@ -131,34 +131,40 @@ void resetButtonStates() {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
-          
-            ElevatedButton(                             // Small button 
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(60, 80),
-                backgroundColor: isPressed1 ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onPrimary,
-                shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),      
-                 ),
-                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                     ),
-                     onPressed: () {
-                if (selectedButtonIndex == 0) {
-                // Reset if the button is already selected
-                setState(() {
-                  selectedButtonIndex = -1;
-                });
-              } else {
-                // Select the button
-                setState(() {
-                  selectedButtonIndex = 0;
-                });
-              }
-                      },
-                child: Text("Small",
-                style: TextStyle(height: 1, fontSize: 30,
-                color: isPressed1 ? Theme.of(context).colorScheme.onPrimary: Theme.of(context).colorScheme.primary)
-                ),
-                ),
+        
+ElevatedButton( // Small button
+  style: ElevatedButton.styleFrom(
+    minimumSize: const Size(60, 80),
+    backgroundColor: selectedButtonIndex == 0
+        ? Theme.of(context).colorScheme.primary
+        : Theme.of(context).colorScheme.onPrimary,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20.0),
+    ),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+  ),
+  onPressed: () {
+    debugPrint("Button 1 Clicked");
+    if (selectedButtonIndex == 0) {
+      // Reset if the button is already selected
+      setState(() {
+        selectedButtonIndex = -1;
+      });
+    } else {
+      // Set the clicked button state
+      setState(() {
+        selectedButtonIndex = 0;
+      });
+    }
+  },
+  child: Text("Small",
+    style: TextStyle(height: 1, fontSize: 30,
+    color: selectedButtonIndex == 0
+        ? Theme.of(context).colorScheme.onPrimary
+        : Theme.of(context).colorScheme.primary),
+  ),
+),
+
 
 
 
@@ -166,65 +172,76 @@ void resetButtonStates() {
 
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
-                 ElevatedButton(                             // Medium button
-                style: ElevatedButton.styleFrom(
-                minimumSize: const Size(60, 80),
-                backgroundColor: isPressed2 ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onPrimary,
-                shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-                 ),
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                ),
-                 onPressed: () {
-                  debugPrint("Mid button Clicked");
-                if (selectedButtonIndex == 1) {
-                // Reset if the button is already selected
-                setState(() {
-                  selectedButtonIndex = -1;
-                });
-              } else {
-                // Select the button
-                setState(() {
-                  selectedButtonIndex = 1;
-                });
-              }
+ElevatedButton( // Medium button
+  style: ElevatedButton.styleFrom(
+    minimumSize: const Size(60, 80),
+    backgroundColor: selectedButtonIndex == 1
+        ? Theme.of(context).colorScheme.primary
+        : Theme.of(context).colorScheme.onPrimary,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20.0),
+    ),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+  ),
+  onPressed: () {
+    debugPrint("Medium button Clicked");
+    if (selectedButtonIndex == 1) {
+      // Reset if the button is already selected
+      setState(() {
+        selectedButtonIndex = -1;
+      });
+    } else {
+      // Set the clicked button state
+      setState(() {
+        selectedButtonIndex = 1;
+      });
+    }
   },
   child: Text("Medium",
-  style: TextStyle(height: 1, fontSize: 30,
-  color: isPressed2 ? Theme.of(context).colorScheme.onPrimary: Theme.of(context).colorScheme.primary)
+    style: TextStyle(height: 1, fontSize: 30,
+    color: selectedButtonIndex == 1
+        ? Theme.of(context).colorScheme.onPrimary
+        : Theme.of(context).colorScheme.primary),
   ),
 ),
+
 
 const SizedBox(width: 30),
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                ElevatedButton(                             // Large button
-                style: ElevatedButton.styleFrom(
-                minimumSize: const Size(60, 80),
-                 backgroundColor: isPressed3 ? Theme.of(context).colorScheme.primary : Theme.of(context).colorScheme.onPrimary,
-                shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-                 ),
-                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                 ),
-               onPressed: () {
-              if (selectedButtonIndex == 0) {
-                // Reset if the button is already selected
-                setState(() {
-                  selectedButtonIndex = -1;
-                });
-              } else {
-                // Select the button
-                setState(() {
-                  selectedButtonIndex = 0;
-                });
-              }
+ElevatedButton( // Large button
+  style: ElevatedButton.styleFrom(
+    minimumSize: const Size(60, 80),
+    backgroundColor: selectedButtonIndex == 2
+        ? Theme.of(context).colorScheme.primary
+        : Theme.of(context).colorScheme.onPrimary,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20.0),
+    ),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+  ),
+  onPressed: () {
+    debugPrint("Large button Clicked");
+    if (selectedButtonIndex == 2) {
+      // Reset if the button is already selected
+      setState(() {
+        selectedButtonIndex = -1;
+      });
+    } else {
+      // Set the clicked button state
+      setState(() {
+        selectedButtonIndex = 2;
+      });
+    }
   },
   child: Text("Large",
-  style: TextStyle(height: 1, fontSize: 30,
-  color: isPressed3 ? Theme.of(context).colorScheme.onPrimary: Theme.of(context).colorScheme.primary),
+    style: TextStyle(height: 1, fontSize: 30,
+    color: selectedButtonIndex == 2
+        ? Theme.of(context).colorScheme.onPrimary
+        : Theme.of(context).colorScheme.primary),
   ),
 ),
+
 
     ],
   ),

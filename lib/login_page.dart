@@ -4,7 +4,8 @@ import 'package:p5/MyTextField.dart';
 import 'package:p5/main.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key? key});
+  // ignore: use_key_in_widget_constructors
+  const LoginPage({Key? key});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
