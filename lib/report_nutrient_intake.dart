@@ -8,13 +8,13 @@ class ReportNutrientIntakePage extends StatefulWidget {
   State<ReportNutrientIntakePage> createState() =>
       _ReportNutrientIntakePageState();
 }
+
 class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   bool isSwitched = false;
   bool? isBoxChecked = false;
   
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
 
-  int selectedButtonIndex = -1;
 
   void _selectTime() async { //Funktion der bruger showTimePicker
     final TimeOfDay? newTime = await showTimePicker(
@@ -39,7 +39,8 @@ void resetButtonStates() {
      isPressed3 = false;
   });
 }
-//reset til når andre knapper er trukket ned
+  int selectedButtonIndex = -1;
+//en value til kanppen når den er ikke trukket
 
 
 
@@ -53,11 +54,9 @@ void resetButtonStates() {
           onPressed: () {
             Navigator.of(context).pop();
           },
-
-
-
           icon: const Icon(Icons.arrow_back_ios),
         ),
+
         actions: [
           IconButton(                   //informationsknap i appbar
             onPressed: () {
@@ -70,51 +69,170 @@ void resetButtonStates() {
           ),
         ],
       ),
+    
       body: SingleChildScrollView(
         child: Column(
-          // Tilføjer sådan set bare en søjle af widgets
-          children: [
-            // children tillader os at tilføje mere end én widget
-            // Image.asset("images/Google_screenshot.png"), // Indsætter et billede
-            const SizedBox(height: 10),
 
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top:100.0,bottom: 120),
+              child: SizedBox(
+                width: 310,
+                height: 160,
+                child: TextField(               //Notes kassen
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: const Color.fromARGB(255, 156, 180, 168),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(25.0),
+                    ),
+                    hintText: 'Type of food',
+                  ),
+                  maxLines: 5,
+                ),
+              ),
+            ),
+        
+        
+  Padding(
+    padding: const EdgeInsets.only(top:20.0, bottom: 20.0),
+    child: OutlinedButton.icon(              //Sætter ring om "tids knappen"
+      onPressed: _selectTime,
+    icon: const Icon(Icons.access_time),
+    label:  Text(_time.format(context))),
+  ),
+            
+            const Padding(
+              padding: EdgeInsets.only(top:0.0, bottom: 20),
+              child: Text(             //Overskrift til de tre meal sizes
+                "Choose your meal size",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  letterSpacing: 0.5,
+                  fontFamily: 'Roboto',
+                ),
+              ),
+            ),
             Row(
-              // Tilføjer en række af widgets
-              mainAxisAlignment: MainAxisAlignment
-                  .center, // Centrerer vores widgets i vores row
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const SizedBox(height: 125),
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Type of food',
-                    ),
-                  ),
-                ),
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Weight (g)',
-                    ),
-                  ),
-                ),
-                const Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Carbohydrates (g)',
-                    ),
-                  ),
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      debugPrint(
-                          "Elevated Button"); //debugPrint fortæller hvad der skal vises i terminalen når vi trykker på knappen
-                    },
-                    child: const Text("Add")),
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////                
+            
+                         
+            ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: selectedButtonIndex == 0
+                  ? const Color.fromARGB(255, 13, 0, 252)
+                  : Colors.blue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            ),
+            onPressed: () {
+              debugPrint("Button 1 Clicked");
+              if (selectedButtonIndex == 0) {
+                // Reset if the button is already selected
+                setState(() {
+                  selectedButtonIndex = -1;
+                });
+              } else {
+                // Select the button
+                setState(() {
+                  selectedButtonIndex = 0;
+                });
+              }
+            },
+            child: const Text("Small"),
+          ),
+
+
+
+
+                const SizedBox(width: 30),
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+                 ElevatedButton(                             // Medium button
+                style: ElevatedButton.styleFrom(
+                backgroundColor: selectedButtonIndex == 1
+                  ? const Color.fromARGB(255, 13, 0, 252)
+                  : Colors.blue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            ),
+            onPressed: () {
+              debugPrint("Medium Clicked");
+              if (selectedButtonIndex == 1) {
+                // Reset if the button is already selected
+                setState(() {
+                  selectedButtonIndex = -1;
+                });
+              } else {
+                // Select the button
+                setState(() {
+                  selectedButtonIndex = 1;
+                });
+              }
+            },
+                 
+            child: const Text("Medium"),
+                 ),
+
+const SizedBox(width: 30),
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: selectedButtonIndex == 2
+                  ? const Color.fromARGB(255, 13, 0, 252)
+                  : Colors.blue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+            ),
+            onPressed: () {
+              debugPrint("Large button Clicked");
+              if (selectedButtonIndex == 2) {
+                // Reset if the button is already selected
+                setState(() {
+                  selectedButtonIndex = -1;
+                });
+              } else {
+                // Select the button
+                setState(() {
+                  selectedButtonIndex = 2;
+                });
+              }
+            },
+            child: const Text("Large"),
+          ),
+
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
               ],
+            ),
+            const SizedBox(height: 20),
+            ConstrainedBox(                                           //Save button
+              constraints: const BoxConstraints.tightFor(width: 280, height: 42),
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0),
+                    ),
+                  ),
+                ),
+                onPressed: () {
+                  debugPrint("Save Button Clicked");
+                },
+                child: const Text("Save"),
+              ),
             ),
           ],
         ),
