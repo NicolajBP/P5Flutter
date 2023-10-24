@@ -23,6 +23,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   String time = "";
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
 
+final TextEditingController noteController = TextEditingController();
 
 
 void _selectTime() async {
@@ -50,33 +51,39 @@ void resetButtonStates() {
   });
 }
   int selectedButtonIndex = -1;
-//en value til kanppen når den er ikke trukket
+//en værdi til kanppen når den er ikke trukket
  
  
 void _saveDataToFirestore() async {
-  // Create a list to store the names of missing fields
-  List<String> missingFields = [];
+  // Opret en liste til at gemme navnene på de manglende felter
+  List<String> manglendeFelter = [];
 
   if (selectedButtonIndex == -1) {
-    missingFields.add("Meal Size");
+    // Hvis intet knap til valg af portionsstørrelse er valgt
+    // tilføj "Meal Size" til listen over manglende felter
+    manglendeFelter.add("Meal Size");
   }
   if (note.isEmpty) {
-    missingFields.add("Note");
+    // Hvis feltet til notater er tomt
+    // tilføj "Note" til listen over manglende felter
+    manglendeFelter.add("Note");
   }
   if (time.isEmpty) {
-    missingFields.add("Time");
+    // Hvis tidsfeltet er tomt
+    // tilføj tiden til listen over manglende felter
+    manglendeFelter.add("Time");
   }
 
-  if (missingFields.isNotEmpty) {
-    // Show an error snackbar with the missing fields
+  if (manglendeFelter.isNotEmpty) {
+    // Vis en fejlmeddelelse med de manglende felter som en Snackbar
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text('Please fill in the following fields: ${missingFields.join(", ")}.'),
-      duration: Duration(seconds: 3), // Adjust the duration as needed
+      content: Text('Udfyld venligst følgende felter: ${manglendeFelter.join(", ")}.'),
+      duration: const Duration(seconds: 3), // Justér varigheden efter behov
     ));
-    return; // Exit the function without saving
+    return; // retunere uden at gemme data
   }
 
-  // Define the meal size based on the selected button index
+  // Definer portionsstørelsen baseret på den valgt knaps indeks
   String mealSize = "";
   if (selectedButtonIndex == 0) {
     mealSize = "Small";
@@ -87,29 +94,43 @@ void _saveDataToFirestore() async {
   }
 
   try {
+    // Gem data i Firestore-databasen
     await firestore.collection('nutrition_entries').add({
       'meal_size': mealSize,
       'note': note,
       'time': time,
+      
     });
-    debugPrint("Data saved to Firestore.");
-    // Reset the form after saving.
-    setState(() {
-      selectedButtonIndex = -1; // Reset the selected button index
-      note = "";
+    debugPrint("The data is saved  to Firestore.");
+    // Nulstil formularen efter at dataen er blevet gemt
+       setState(() {
+      selectedButtonIndex = -1;
+      note = ""; // Clear the note text field
       time = "";
     });
   } catch (e) {
-    debugPrint("Error saving data to Firestore: $e");
+    debugPrint("Error saving to Firestoe $e");
   }
 }
 
 
+@override
+void initState() {
+  super.initState();
+  noteController.text = note; // Initialize the controller with the current value of 'note'
+}
+
 
 
   @override
+  void dispose() {
+  //sletter alt det bliver skrevet i note boks når data er gemt. 
+  noteController.dispose();
+  super.dispose();
+}
+
+  @override
   Widget build(BuildContext context) {    //"kroppen" af siden
-   // final isSaveButtonEnabled = mealSize.isNotEmpty && note.isNotEmpty && time.isNotEmpty;
     return Scaffold(
       appBar: AppBar(
         title: const Text("P5 CGM app"),
@@ -149,24 +170,25 @@ void _saveDataToFirestore() async {
 
                 
                 child: 
-                
-                      TextField(
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: const Color.fromARGB(255, 156, 180, 168),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(25.0),
-                          ),
-                          hintText: 'Type of food',
-                        ),
-                        maxLines: 5,
-                        onChanged: (value) {
-                          setState(() {
-                            note = value;
-                          });
-                        },
-                      ),
-
+ ////////////////TextBox/////////////////////               
+        TextField(
+        controller: noteController, // Use the controller to manage the text field
+        decoration: InputDecoration(
+          filled: true,
+          fillColor: const Color.fromARGB(255, 156, 180, 168),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(25.0),
+          ),
+          hintText: 'Type of food',
+        ),
+        maxLines: 5,
+        onChanged: (value) {
+          setState(() {
+            note = value;
+          });
+        },
+      ),
+////////////////////////
               ),
             ),
         
@@ -324,20 +346,24 @@ ElevatedButton( // Large button
       ConstrainedBox(
         constraints: const BoxConstraints.tightFor(width: 420, height: 50),
         child: ElevatedButton(
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20.0),
-              ),
-            ),
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.blue)
-                // Change button color
-          ),
-          onPressed:  _saveDataToFirestore,
-          child: const Text("Save",
-            style: TextStyle(height: 1, fontSize: 30, color: Colors.white),
-          ),
-        ),
+  style: ElevatedButton.styleFrom(
+    minimumSize: const Size(60, 80),
+    backgroundColor: Colors.blue, // Change button color
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20.0),
+    ),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+  ),
+  onPressed: () {
+    _saveDataToFirestore();
+    noteController.clear(); // Clear the note text field
+
+  },
+  child: const Text(
+    "Save",
+    style: TextStyle(height: 1, fontSize: 30, color: Colors.white),
+  ),
+),
       )
           ],
         ),
