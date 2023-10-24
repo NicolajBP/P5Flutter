@@ -10,29 +10,42 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-              color: Colors.lightBlue,
+              color: Theme.of(context).colorScheme.primary,
               margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
               padding: const EdgeInsets.all(50),
               height: 250,
               width: double.infinity,
               child: const Text("Her kommer der en graf"),
             ),
-      const SizedBox(height: 5),
-      Center(
-        child: ElevatedButton(
+      const SizedBox(height: 150),
+    
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+        ElevatedButton(
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (BuildContext context) {
               // Bruges som "router" --> vi føres fra denne side til en anden side (i det her tilfælde vores ReportNutrientIntakePage)
               return const ReportNutrientIntakePage();
             }));
-          },
-          child: const Text("Report nutrient intake"),
-        ),
-      ),
-      const SizedBox(height: 5),
-      Center(
-        child: ElevatedButton(
+          }, 
+          style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0))),
+            child: const Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Icon(Icons.directions_run_outlined, size: 70.0,),
+                Text('Register exercise',
+                style: TextStyle(height: 1, fontSize: 14)),
+              ],)
+            ),
+    
+  
+      const SizedBox(width: 30),
+
+        ElevatedButton(
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (BuildContext context) {
@@ -40,22 +53,17 @@ class HomePage extends StatelessWidget {
               return const ReportExercise();
             }));
           },
-          child: const Text("Report exercise"),
-        ),
-      ),
-      const SizedBox(height: 5),
-      Center(
-        child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (BuildContext context) {
-              // Bruges som "router" --> vi føres fra denne side til en anden side (i det her tilfælde vores ReportNutrientIntakePage)
-              return const TestPage();
-            }));
-          },
-          child: const Text("Test Page"),
-        ),
-      ),
-    ]);
+          style: ElevatedButton.styleFrom(
+          shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.0))),
+          child: const Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+            Icon(Icons.restaurant, size: 70.0,),
+            Text("Register nutrient intake"),
+        ],)
+        )
+    ],)
+    ],);
   }
 }
