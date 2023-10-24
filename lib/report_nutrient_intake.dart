@@ -54,7 +54,30 @@ void resetButtonStates() {
  
  
 void _saveDataToFirestore() async {
+  // Create a list to store the names of missing fields
+  List<String> missingFields = [];
+
+  if (selectedButtonIndex == -1) {
+    missingFields.add("Meal Size");
+  }
+  if (note.isEmpty) {
+    missingFields.add("Note");
+  }
+  if (time.isEmpty) {
+    missingFields.add("Time");
+  }
+
+  if (missingFields.isNotEmpty) {
+    // Show an error snackbar with the missing fields
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text('Please fill in the following fields: ${missingFields.join(", ")}.'),
+      duration: Duration(seconds: 3), // Adjust the duration as needed
+    ));
+    return; // Exit the function without saving
+  }
+
   // Define the meal size based on the selected button index
+  String mealSize = "";
   if (selectedButtonIndex == 0) {
     mealSize = "Small";
   } else if (selectedButtonIndex == 1) {
@@ -63,31 +86,30 @@ void _saveDataToFirestore() async {
     mealSize = "Large";
   }
 
-  if (mealSize.isNotEmpty && note.isNotEmpty && time.isNotEmpty) {
-    try {
-      await firestore.collection('nutrition_entries').add({
-        'meal_size': mealSize,
-        'note': note,
-        'time': time,
-      });
-      debugPrint("Data saved to Firestore.");
-      // Reset the form after saving.
-      setState(() {
-        mealSize = "";
-        note = "";
-        time = "";
-      });
-    } catch (e) {
-      debugPrint("Error saving data to Firestore: $e");
-    }
+  try {
+    await firestore.collection('nutrition_entries').add({
+      'meal_size': mealSize,
+      'note': note,
+      'time': time,
+    });
+    debugPrint("Data saved to Firestore.");
+    // Reset the form after saving.
+    setState(() {
+      selectedButtonIndex = -1; // Reset the selected button index
+      note = "";
+      time = "";
+    });
+  } catch (e) {
+    debugPrint("Error saving data to Firestore: $e");
   }
 }
 
 
 
+
   @override
   Widget build(BuildContext context) {    //"kroppen" af siden
-    final isSaveButtonEnabled = mealSize.isNotEmpty && note.isNotEmpty && time.isNotEmpty;
+   // final isSaveButtonEnabled = mealSize.isNotEmpty && note.isNotEmpty && time.isNotEmpty;
     return Scaffold(
       appBar: AppBar(
         title: const Text("P5 CGM app"),
@@ -308,11 +330,10 @@ ElevatedButton( // Large button
                 borderRadius: BorderRadius.circular(20.0),
               ),
             ),
-            backgroundColor: isSaveButtonEnabled
-                ? MaterialStateProperty.all<Color>(Colors.blue)
-                : MaterialStateProperty.all<Color>(Colors.grey), // Change button color
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.blue)
+                // Change button color
           ),
-          onPressed: isSaveButtonEnabled ? _saveDataToFirestore : null,
+          onPressed:  _saveDataToFirestore,
           child: const Text("Save",
             style: TextStyle(height: 1, fontSize: 30, color: Colors.white),
           ),
