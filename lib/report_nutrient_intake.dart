@@ -142,11 +142,17 @@ void resetButtonStates() {
                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                      ),
                      onPressed: () {
-                      debugPrint("Button 1 Clicked");
-                      resetButtonStates();  // Reset all button states
-                      setState(() {
-                      isPressed1 = true;  // Set the clicked button state
-                      });
+                if (selectedButtonIndex == 0) {
+                // Reset if the button is already selected
+                setState(() {
+                  selectedButtonIndex = -1;
+                });
+              } else {
+                // Select the button
+                setState(() {
+                  selectedButtonIndex = 0;
+                });
+              }
                       },
                 child: Text("Small",
                 style: TextStyle(height: 1, fontSize: 30,
@@ -171,10 +177,17 @@ void resetButtonStates() {
                 ),
                  onPressed: () {
                   debugPrint("Mid button Clicked");
-                  resetButtonStates();  // Reset all button states
+                if (selectedButtonIndex == 1) {
+                // Reset if the button is already selected
                 setState(() {
-                  isPressed2 = true;  // Set the clicked button state
-    });
+                  selectedButtonIndex = -1;
+                });
+              } else {
+                // Select the button
+                setState(() {
+                  selectedButtonIndex = 1;
+                });
+              }
   },
   child: Text("Medium",
   style: TextStyle(height: 1, fontSize: 30,
@@ -195,11 +208,17 @@ const SizedBox(width: 30),
                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                  ),
                onPressed: () {
-                  debugPrint("Large button Clicked");
-    resetButtonStates();  // Reset all button states
-    setState(() {
-      isPressed3 = true;  // Set the clicked button state
-    });
+              if (selectedButtonIndex == 0) {
+                // Reset if the button is already selected
+                setState(() {
+                  selectedButtonIndex = -1;
+                });
+              } else {
+                // Select the button
+                setState(() {
+                  selectedButtonIndex = 0;
+                });
+              }
   },
   child: Text("Large",
   style: TextStyle(height: 1, fontSize: 30,
