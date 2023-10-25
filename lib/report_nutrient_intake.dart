@@ -73,7 +73,7 @@ void _saveDataToFirestore() async {
   if (manglendeFelter.isNotEmpty) {
     // Vis en fejlmeddelelse med de manglende felter som en Snackbar
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text('Udfyld venligst følgende felter: ${manglendeFelter.join(", ")}.'),
+      content: Text('Please fill out the missing fields: ${manglendeFelter.join(", ")}.'),
       duration: const Duration(seconds: 3), // Justér varigheden efter behov
     ));
     return; // retunere uden at gemme data
@@ -98,6 +98,15 @@ void _saveDataToFirestore() async {
       
     });
     debugPrint("The data is saved  to Firestore.");
+    
+  // ignore: use_build_context_synchronously
+  ScaffoldMessenger.of(context).showSnackBar(
+  const SnackBar(
+    content: Text('Data is saved successfully.'),
+    duration: Duration(seconds: 3), // Ændre længden af display
+  ),
+);
+
     // Nulstil formularen efter at dataen er blevet gemt
        setState(() {
       selectedButtonIndex = -1;
