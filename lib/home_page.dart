@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:p5/myEntries.dart';
 import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
 import 'package:p5/test_page.dart'; // Vi skal altid have den her import (giver adgang til alle widgets)
@@ -129,6 +130,19 @@ Widget build(BuildContext context) {
               );
             },
             child: const Text("Test Page"),
+          ),
+        ),
+        const SizedBox(height: 5),
+         Center(
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (BuildContext context) {
+                  return myEntries();
+                }),
+              );
+            },
+            child: const Text("MyEntries"),
           ),
         ),
       ],
