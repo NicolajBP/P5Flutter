@@ -26,22 +26,22 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
 List<LiveData> getChartData(){
   return <LiveData>[
     LiveData(0,42),
-    LiveData(1,42),
+    LiveData(1,109),
     LiveData(2,42),
-    LiveData(3,42),
-    LiveData(4,42),
+    LiveData(3,2),
+    LiveData(4,29),
     LiveData(5,42),
     LiveData(6,42),
-    LiveData(7,42),
+    LiveData(7,50),
     LiveData(8,42),
-    LiveData(9,42),
+    LiveData(9,20),
     LiveData(10,42),
   ];
 }
 
  int time =11;
 updateDataSource(Timer timer){
-  chartData.add(LiveData(time++, (math.Random().nextInt(60))));
+  chartData.add(LiveData(time++, (math.Random().nextInt(120))));
   chartData.remove(0);
   _chartSeriesController.updateDataSource(
     addedDataIndex: chartData.length-1, removedDataIndex: 0

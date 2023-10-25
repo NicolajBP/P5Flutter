@@ -18,14 +18,7 @@ void signUserOut(){
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Container(
-              color: Colors.lightBlue,
-              margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
-              padding: const EdgeInsets.all(50),
-              height: 250,
-              width: double.infinity,
-              child: const Text("Her kommer der en "),
-            ),
+      LiveChartWidget(),
       const SizedBox(height: 5),
       Center(
         child: ElevatedButton(
@@ -86,14 +79,12 @@ Widget build(BuildContext context) {
     body: Column(
       children: [
         Container(
-          color: Colors.lightBlue,
-          margin: const EdgeInsets.fromLTRB(100, 20, 100, 20),
-          padding: const EdgeInsets.all(50),
-          height: 250,
-          width: double.infinity,
-          child: LiveChartWidget(), //Det her er vores livechart
+          height:300 ,
+          width: 300,
+          child: LiveChartWidget(),
         ),
-        const SizedBox(height: 5),
+    
+         SizedBox(height: 5),
         Center(
           child: ElevatedButton(
             onPressed: () {
