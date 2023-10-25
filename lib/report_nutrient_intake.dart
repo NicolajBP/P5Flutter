@@ -70,14 +70,7 @@ void _saveDataToFirestore() async {
   }
 
 
-  if (manglendeFelter.isNotEmpty) {
-    // Vis en fejlmeddelelse med de manglende felter som en Snackbar
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text('Please fill out the missing fields: ${manglendeFelter.join(", ")}.'),
-      duration: const Duration(seconds: 3), // Justér varigheden efter behov
-    ));
-    return; // retunere uden at gemme data
-  }
+
 
   // Definer portionsstørelsen baseret på den valgt knaps indeks
   String mealSize = "";
@@ -97,9 +90,7 @@ void _saveDataToFirestore() async {
       'time': time,
       
     });
-    debugPrint("The data is saved  to Firestore.");
-    
-  // ignore: use_build_context_synchronously
+      // ignore: use_build_context_synchronously
   ScaffoldMessenger.of(context).showSnackBar(
   const SnackBar(
     content: Text('Data is saved successfully.'),
@@ -107,6 +98,16 @@ void _saveDataToFirestore() async {
   ),
 );
 
+    debugPrint("The data is saved  to Firestore.");
+ 
+ 
+  // ignore: use_build_context_synchronously
+  ScaffoldMessenger.of(context).showSnackBar(
+  const SnackBar(
+    content: Text('Data is saved successfully.'),
+    duration: Duration(seconds: 3), // Ændre længden af display
+  ),
+);
     // Nulstil formularen efter at dataen er blevet gemt
        setState(() {
       selectedButtonIndex = -1;
@@ -351,24 +352,28 @@ ElevatedButton( // Large button
       ConstrainedBox(
         constraints: const BoxConstraints.tightFor(width: 420, height: 50),
         child: ElevatedButton(
-  style: ElevatedButton.styleFrom(
-    minimumSize: const Size(60, 80),
-    backgroundColor: Colors.blue, // Change button color
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(20.0),
-    ),
-    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-  ),
-  onPressed: () {
-    _saveDataToFirestore();
-    noteController.clear(); // Clear the note text field
+        style: ElevatedButton.styleFrom(
+          minimumSize: const Size(60, 80),
+          backgroundColor: note.isNotEmpty && selectedButtonIndex != -1
+              ? Theme.of(context).colorScheme.primary
+              : Colors.grey, // Change button color to gray if data is incomplete
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20.0),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        ),
+        onPressed: () {
+          if (note.isNotEmpty && selectedButtonIndex != -1) {
+            _saveDataToFirestore();
+            noteController.clear();
+          }
+        },
+        child: const Text(
+          "Save",
+          style: TextStyle(height: 1, fontSize: 30, color: Colors.white),
+        ),
+      )
 
-  },
-  child: const Text(
-    "Save",
-    style: TextStyle(height: 1, fontSize: 30, color: Colors.white),
-  ),
-),
       )
           ],
         ),
