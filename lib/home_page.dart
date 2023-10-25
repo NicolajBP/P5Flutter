@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:p5/graph.dart';
 import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
 import 'package:p5/test_page.dart'; // Vi skal altid have den her import (giver adgang til alle widgets)
@@ -23,7 +24,7 @@ void signUserOut(){
               padding: const EdgeInsets.all(50),
               height: 250,
               width: double.infinity,
-              child: const Text("Her kommer der en graf"),
+              child: const Text("Her kommer der en "),
             ),
       const SizedBox(height: 5),
       Center(
@@ -90,7 +91,7 @@ Widget build(BuildContext context) {
           padding: const EdgeInsets.all(50),
           height: 250,
           width: double.infinity,
-          child: const Text("Her kommer der en graf"),
+          child: LiveChartWidget(), //Det her er vores livechart
         ),
         const SizedBox(height: 5),
         Center(
