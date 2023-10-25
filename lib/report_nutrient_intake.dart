@@ -14,6 +14,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   bool? isBoxChecked = false;
   
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
+  
 
   void _selectTime() async { //Funktion der bruger showTimePicker
     final TimeOfDay? newTime = await showTimePicker(

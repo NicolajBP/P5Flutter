@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
 import 'package:p5/test_page.dart'; // Vi skal altid have den her import (giver adgang til alle widgets)
-import 'package:intl/intl_browser.dart';
+import 'package:intl/intl.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key});
@@ -15,8 +16,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-final day = DateTime.now().weekday;
 
+
+    var date = DateFormat('E\nd/M/y').format(DateTime.now());
 
 
   @override
@@ -40,7 +42,7 @@ final day = DateTime.now().weekday;
 
   const SizedBox(width: 10),
 
-              const Text('25.10'),
+               Text(date),
 
 
    const SizedBox(width: 10),
