@@ -104,7 +104,7 @@ void _saveDataToFirestore() async {
   // ignore: use_build_context_synchronously
   ScaffoldMessenger.of(context).showSnackBar(
   const SnackBar(
-    content: Text('Data is saved successfully.'),
+    content: Text('Entry is saved successfully.'),
     duration: Duration(seconds: 3), // Ændre længden af display
   ),
 );
@@ -116,6 +116,12 @@ void _saveDataToFirestore() async {
     });
   } catch (e) {
     debugPrint("Error saving to Firestoe $e");
+     ScaffoldMessenger.of(context).showSnackBar(
+  const SnackBar(
+    content: Text('Error saving the entry, try again.'),
+    duration: Duration(seconds: 3), // Ændre længden af display
+  ),
+);
   }
 }
 
