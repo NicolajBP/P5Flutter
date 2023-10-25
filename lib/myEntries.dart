@@ -7,10 +7,23 @@ class myEntries extends StatefulWidget {
   @override
   State<myEntries> createState() => _myEntriesState();
 }
-
 class _myEntriesState extends State<myEntries> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("P5 CGM app"),
+        automaticallyImplyLeading: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: Icon(Icons.arrow_back_ios),
+        ),
+      ),
+      body: Center(
+        child: Text("der kommer noget her"),
+      ),
+    );
   }
 }
