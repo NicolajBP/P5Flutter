@@ -17,12 +17,37 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+var currentDate = DateFormat.yMMMd().format(DateTime.now());  
+var today = DateTime.now();  
+String finalDate = '';
+bool isPressed1 = false;
+var yesterday = '';
 
-    var date = DateFormat('E\nd/M/y').format(DateTime.now());
 
+void resetButtonStates() {
+  setState(() {
+     isPressed1 = false;
+  });
+}
 
   @override
   Widget build(BuildContext context) {
+ 
+ //var yesterday = today.subtract(const Duration(days: 1)); //.toString();
+      getTheDayBefore(){
+        var today = DateTime.now();
+        yesterday = today.subtract(const Duration(days: 1)).toString();
+        //var dateParse = DateTime.parse(yesterday);
+        //var formattedDate = "${dateParse.day}/${dateParse.month}/${dateParse.year}";
+
+        //setState(() {
+
+          //  yesterday = today.toString();
+            //finalDate = formattedDate.toString() ;
+
+       // });
+      }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -33,16 +58,17 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   IconButton(
-                    onPressed: () {
-                        //debugPrint(day.toString());
+                    onPressed: () {  
+                      getTheDayBefore();
+                      yesterday = today.toString();
+                      debugPrint(yesterday);
                     }, 
                     icon: const Icon(Icons.arrow_back),
                     ),
 
 
   const SizedBox(width: 10),
-
-               Text(date),
+            isPressed1 ? Text(yesterday) : Text(yesterday),
 
 
    const SizedBox(width: 10),
