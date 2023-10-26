@@ -4,6 +4,7 @@ import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
 import 'package:p5/test_page.dart'; // Vi skal altid have den her import (giver adgang til alle widgets)
 import 'package:intl/intl.dart';
+import 'package:date_picker_timeline/date_picker_timeline.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -17,68 +18,65 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
-var currentDate = DateFormat.yMMMd().format(DateTime.now());  
-var today = DateTime.now();  
-String finalDate = '';
-bool isPressed1 = false;
-var yesterday = '';
+// var currentDate = DateFormat.yMMMd().format(DateTime.now());  
+// var today = DateTime.now();  
+// String finalDate = '';
+// bool isPressed1 = false;
+// var yesterday = DateTime.now().subtract(const Duration(days: 1)).toString();
 
+// void resetButtonStates() {
+//   setState(() {
+//      isPressed1 = false;
+//   });
 
-void resetButtonStates() {
-  setState(() {
-     isPressed1 = false;
-  });
-}
 
   @override
   Widget build(BuildContext context) {
- 
- //var yesterday = today.subtract(const Duration(days: 1)); //.toString();
-      getTheDayBefore(){
-        var today = DateTime.now();
-        yesterday = today.subtract(const Duration(days: 1)).toString();
-        //var dateParse = DateTime.parse(yesterday);
-        //var formattedDate = "${dateParse.day}/${dateParse.month}/${dateParse.year}";
-
-        //setState(() {
-
-          //  yesterday = today.toString();
-            //finalDate = formattedDate.toString() ;
-
-       // });
-      }
-
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: () {  
-                      getTheDayBefore();
-                      yesterday = today.toString();
-                      debugPrint(yesterday);
-                    }, 
-                    icon: const Icon(Icons.arrow_back),
-                    ),
-
-
-  const SizedBox(width: 10),
-            isPressed1 ? Text(yesterday) : Text(yesterday),
-
-
-   const SizedBox(width: 10),
-
-              IconButton(onPressed: (){
-
-              }, 
-              icon: const Icon(Icons.arrow_forward)),
-              ]), 
+      body: Column(
+        children: [
+          
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: DatePicker(
+                DateTime.now(),
+                height: 100,
+                width: 70,
+                initialSelectedDate: DateTime.now(),
+                selectionColor: Theme.of(context).colorScheme.primary,
+                selectedTextColor: Theme.of(context).colorScheme.onPrimary,
+                dateTextStyle: const TextStyle(
+                  fontSize: 16,
+                  fontWeight:FontWeight.w500,
+                  color: Colors.grey
+                 ),
+                      ),
             ),
+          
+  //           SizedBox(
+  //             height: 100,
+  //             child: Row(
+  //               mainAxisAlignment: MainAxisAlignment.center,
+  //               children: [
+  //                 IconButton(
+  //                   onPressed: () {  
+
+  //                   }, 
+  //                   icon: const Icon(Icons.arrow_back),
+  //                   ),
+
+
+  // const SizedBox(width: 10),
+  //           Text('hei'),
+
+  //  const SizedBox(width: 10),
+
+  //             IconButton(onPressed: (){
+
+  //             }, 
+  //             icon: const Icon(Icons.arrow_forward)),
+  //             ]), 
+  //           ),
 
    // const SizedBox(height: 10),
       Container(
@@ -137,7 +135,6 @@ void resetButtonStates() {
         )
     ],)
     ],)
-      )
-    );
+      );
   }
 }
