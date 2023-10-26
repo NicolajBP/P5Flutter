@@ -1,8 +1,40 @@
+// import 'dart:ffi';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/components/MyTextField.dart';
 import 'package:p5/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+
+class UserInfo {
+  final String email;
+  final String userType;
+
+  UserInfo(
+      {required this.email,
+      required this.userType,
+});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'email': email,
+      'userType': userType,
+    };
+  }
+}
+
+// class CGMData {
+//   final int measurements;
+
+//   CGMData(
+//       {required this.measurements,  
+//     });
+    
+// }
+
+
+
 
 
 class RegisterPage extends StatefulWidget {
@@ -13,6 +45,8 @@ class RegisterPage extends StatefulWidget {
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
+
+
 
 class _RegisterPageState extends State<RegisterPage> {
   // Text editing controllers
@@ -38,6 +72,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
     // try creating the user
     try {
+      UserInfo userToAdd = UserInfo(email: usernameController.text, userType: "personell");
+      // CGMData cgmData = CGMData(measurements: "2")
+  
       // check if password is confirmed
       if (passwordController.text == confirmPasswordController.text) {
         final UserCredential currentUser = await FirebaseAuth.instance.createUserWithEmailAndPassword(
@@ -49,22 +86,23 @@ class _RegisterPageState extends State<RegisterPage> {
         collection
         .doc(currentUser.user!.uid)
         .set({
-          "email": usernameController.text,
-          "userType": "patient",
-        })
+          "userInfo": userToAdd.toMap(),
+          "cgmData": userToAdd.toMap(),
+        },
+        )
         .then((_) => print("Added"))
         .catchError((error) => print("Add failed: $error"));
 
-        collection
-        .doc(currentUser.user!.uid)
-        .collection("userInfo") // Laver en ny collection "userInfo"
-        .doc() // Laver autoID
-        .set({ // Tilføjer attributter
-          "test": "test",
-          "userType": "patient",
-        })
-        .then((_) => print("Added"))
-        .catchError((error) => print("Add failed: $error"));
+        // collection
+        // .doc(currentUser.user!.uid)
+        // .collection("userInfo") // Laver en ny collection "userInfo"
+        // .doc() // Laver autoID
+        // .set({ // Tilføjer attributter
+        //   "test": "test",
+        //   "userType": "patient",
+        // })
+        // .then((_) => print("Added"))
+        // .catchError((error) => print("Add failed: $error"));
       } else {
         // show error message "passwords dont match"
         setState(() {
