@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:p5/MyTextField.dart';
+import 'package:p5/components/MyTextField.dart';
 import 'package:p5/main.dart';
 
 class LoginPage extends StatefulWidget {

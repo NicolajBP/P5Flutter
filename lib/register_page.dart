@@ -16,6 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   // Text editing controllers
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   String errorMessage = ''; // Store the error message
 
@@ -32,10 +33,18 @@ class _RegisterPageState extends State<RegisterPage> {
 
     // try creating the user
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      // check if password is confirmed
+      if (passwordController.text == confirmPasswordController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: usernameController.text,
         password: passwordController.text,
       );
+      } else {
+        // show error message "passwords dont match"
+        setState(() {
+          errorMessage = 'Invalid username or password';
+        });
+      }
       // Navigate to the home page when authentication is successful.
       Navigator.of(context).push(
         MaterialPageRoute(builder: (BuildContext context) {
@@ -108,7 +117,7 @@ class _RegisterPageState extends State<RegisterPage> {
               
               // Confirm password field
               MyTextField(
-                controller: passwordController,
+                controller: confirmPasswordController,
                 hint: "Confirm password",
                 inputType: TextInputType.text,
                 isPassword: true,
