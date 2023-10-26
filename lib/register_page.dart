@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/components/MyTextField.dart';
 import 'package:p5/main.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class RegisterPage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
@@ -17,28 +19,52 @@ class _RegisterPageState extends State<RegisterPage> {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+
 
   String errorMessage = ''; // Store the error message
 
   Future<void> signUserUp(BuildContext context) async {
     // Show the loading circle
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    );
+    // showDialog(
+    //   context: context,
+    //   builder: (context) {
+    //     return Center(
+    //       child: CircularProgressIndicator(),
+    //     );
+    //   },
+    // );
 
     // try creating the user
     try {
       // check if password is confirmed
       if (passwordController.text == confirmPasswordController.text) {
-        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        final UserCredential currentUser = await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: usernameController.text,
         password: passwordController.text,
-      );
+        );
+        // Map<String, dynamic> ?data = {"email": usernameController.text};
+        var collection = FirebaseFirestore.instance.collection("users");
+        collection
+        .doc(currentUser.user!.uid)
+        .set({
+          "email": usernameController.text,
+          "userType": "patient",
+        })
+        .then((_) => print("Added"))
+        .catchError((error) => print("Add failed: $error"));
+
+        collection
+        .doc(currentUser.user!.uid)
+        .collection("userInfo") // Laver en ny collection "userInfo"
+        .doc() // Laver autoID
+        .set({ // Tilføjer attributter
+          "test": "test",
+          "userType": "patient",
+        })
+        .then((_) => print("Added"))
+        .catchError((error) => print("Add failed: $error"));
       } else {
         // show error message "passwords dont match"
         setState(() {
