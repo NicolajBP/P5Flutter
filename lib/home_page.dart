@@ -17,18 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-// var currentDate = DateFormat.yMMMd().format(DateTime.now());  
-// var today = DateTime.now();  
-// String finalDate = '';
-// bool isPressed1 = false;
-// var yesterday = DateTime.now().subtract(const Duration(days: 1)).toString();
-
-// void resetButtonStates() {
-//   setState(() {
-//      isPressed1 = false;
-//   });
-
+DateTime _selectedDate = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -39,46 +28,23 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: DatePicker(
-                DateTime.now(),
-                height: 100,
+                DateTime.now().subtract(const Duration(days:2)),
+                height: 80,
                 width: 70,
                 initialSelectedDate: DateTime.now(),
                 selectionColor: Theme.of(context).colorScheme.primary,
                 selectedTextColor: Theme.of(context).colorScheme.onPrimary,
-                dateTextStyle: const TextStyle(
+                dateTextStyle: const TextStyle( //vi kan ogåså ændre på skriften af de andre
                   fontSize: 16,
                   fontWeight:FontWeight.w500,
                   color: Colors.grey
                  ),
+                 onDateChange: (date) {
+                    _selectedDate = date;  //variabel der kender hvilken dag det er
+                 },
                       ),
             ),
-          
-  //           SizedBox(
-  //             height: 100,
-  //             child: Row(
-  //               mainAxisAlignment: MainAxisAlignment.center,
-  //               children: [
-  //                 IconButton(
-  //                   onPressed: () {  
-
-  //                   }, 
-  //                   icon: const Icon(Icons.arrow_back),
-  //                   ),
-
-
-  // const SizedBox(width: 10),
-  //           Text('hei'),
-
-  //  const SizedBox(width: 10),
-
-  //             IconButton(onPressed: (){
-
-  //             }, 
-  //             icon: const Icon(Icons.arrow_forward)),
-  //             ]), 
-  //           ),
-
-   // const SizedBox(height: 10),
+       //Text(initialSelectedDate.toString())   
       Container(
               color: Theme.of(context).colorScheme.primary,
               margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
