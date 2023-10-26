@@ -5,7 +5,8 @@ import 'package:p5/main.dart';
 
 class LoginPage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
-  const LoginPage({Key? key});
+  final Function()? onTap;
+  const LoginPage({Key? key, required this.onTap});
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -15,6 +16,8 @@ class _LoginPageState extends State<LoginPage> {
   // Text editing controllers
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+
+  
 
   String errorMessage = ''; // Store the error message
 
@@ -128,6 +131,17 @@ class _LoginPageState extends State<LoginPage> {
               const SizedBox(
                 height: 80,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Don't have an account?"),
+                  GestureDetector(
+                    onTap: widget.onTap,
+                    child: const Text(" Register here",
+                    style: TextStyle(fontWeight: FontWeight.bold),),
+                  ),
+                ],
+              )
             ],
           ),
         ),

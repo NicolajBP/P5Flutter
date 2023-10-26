@@ -5,7 +5,8 @@ import 'package:p5/main.dart';
 
 class RegisterPage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
-  const RegisterPage({Key? key});
+  final Function()? onTap;
+  const RegisterPage({Key? key, required this.onTap});
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -15,12 +16,10 @@ class _RegisterPageState extends State<RegisterPage> {
   // Text editing controllers
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-  final emailController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
 
   String errorMessage = ''; // Store the error message
 
-  Future<void> registerUser(BuildContext context) async {
+  Future<void> signUserUp(BuildContext context) async {
     // Show the loading circle
     showDialog(
       context: context,
@@ -31,6 +30,7 @@ class _RegisterPageState extends State<RegisterPage> {
       },
     );
 
+    // try creating the user
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: usernameController.text,
@@ -89,27 +89,27 @@ class _RegisterPageState extends State<RegisterPage> {
                   fontSize: 16,
                 ),
               ),
+
+              // Username field
               MyTextField(
-                controller: usernameController, 
+                controller: usernameController,
                 hint: "Username or E-mail",
                 inputType: TextInputType.emailAddress,
                 isPassword: false,
               ),
+
+              //Password field
               MyTextField(
-                controller: passwordController, 
-                hint: "Password",              
+                controller: passwordController,
+                hint: "Password",
                 inputType: TextInputType.text,
                 isPassword: true,
               ),
-                            MyTextField(
-                controller: passwordController, 
-                hint: "Password",              
-                inputType: TextInputType.text,
-                isPassword: true,
-              ),
-                            MyTextField(
-                controller: passwordController, 
-                hint: "Password",              
+              
+              // Confirm password field
+              MyTextField(
+                controller: passwordController,
+                hint: "Confirm password",
                 inputType: TextInputType.text,
                 isPassword: true,
               ),
@@ -128,7 +128,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     backgroundColor: Colors.green[700],
                   ),
                   onPressed: () {
-                    registerUser(context); // Call the sign-in method
+                    signUserUp(context); // Call the sign-in method
                   },
                   child: const Text(
                     "Login",
@@ -142,6 +142,19 @@ class _RegisterPageState extends State<RegisterPage> {
               const SizedBox(
                 height: 80,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Already have an account?"),
+                  GestureDetector(
+                    onTap: widget.onTap,
+                    child: const Text(
+                      " Login here",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         ),
