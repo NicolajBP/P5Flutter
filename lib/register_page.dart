@@ -3,25 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:p5/components/MyTextField.dart';
 import 'package:p5/main.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
   final Function()? onTap;
-  const LoginPage({Key? key, required this.onTap});
+  const RegisterPage({Key? key, required this.onTap});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   // Text editing controllers
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
-
-  
+  final confirmPasswordController = TextEditingController();
 
   String errorMessage = ''; // Store the error message
 
-  Future<void> signUserIn(BuildContext context) async {
+  Future<void> signUserUp(BuildContext context) async {
     // Show the loading circle
     showDialog(
       context: context,
@@ -32,11 +31,20 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
+    // try creating the user
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
+      // check if password is confirmed
+      if (passwordController.text == confirmPasswordController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: usernameController.text,
         password: passwordController.text,
       );
+      } else {
+        // show error message "passwords dont match"
+        setState(() {
+          errorMessage = 'Invalid username or password';
+        });
+      }
       // Navigate to the home page when authentication is successful.
       Navigator.of(context).push(
         MaterialPageRoute(builder: (BuildContext context) {
@@ -84,21 +92,33 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               const Text(
-                'Welcome back',
+                'Register your account here',
                 style: TextStyle(
                   color: Color.fromARGB(255, 10, 172, 10),
                   fontSize: 16,
                 ),
               ),
+
+              // Username field
               MyTextField(
-                controller: usernameController, 
+                controller: usernameController,
                 hint: "Username or E-mail",
                 inputType: TextInputType.emailAddress,
                 isPassword: false,
               ),
+
+              //Password field
               MyTextField(
-                controller: passwordController, 
-                hint: "Password",              
+                controller: passwordController,
+                hint: "Password",
+                inputType: TextInputType.text,
+                isPassword: true,
+              ),
+              
+              // Confirm password field
+              MyTextField(
+                controller: confirmPasswordController,
+                hint: "Confirm password",
                 inputType: TextInputType.text,
                 isPassword: true,
               ),
@@ -117,10 +137,10 @@ class _LoginPageState extends State<LoginPage> {
                     backgroundColor: Colors.green[700],
                   ),
                   onPressed: () {
-                    signUserIn(context); // Call the sign-in method
+                    signUserUp(context); // Call the sign-in method
                   },
                   child: const Text(
-                    "Login",
+                    "Sign up",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -134,11 +154,13 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Don't have an account?"),
+                  const Text("Already have an account?"),
                   GestureDetector(
                     onTap: widget.onTap,
-                    child: const Text(" Register here",
-                    style: TextStyle(fontWeight: FontWeight.bold),),
+                    child: const Text(
+                      " Login here",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               )

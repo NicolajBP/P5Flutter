@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/home_page.dart';
+import 'package:p5/login_or_register.dart';
+import 'package:p5/register_page.dart';
 import 'login_page.dart';
 class AuthPage extends StatelessWidget {
   const AuthPage({super.key});
@@ -17,7 +19,7 @@ Widget build(BuildContext context) {
         } 
         else {
           // When the user is not logged in, return the LoginPage
-          return LoginPage(key: UniqueKey()); // You need to pass a unique key to recreate the LoginPage.
+          return LoginOrRegisterPage(); // You need to pass a unique key to recreate the LoginPage.
         }
       },
     ),
