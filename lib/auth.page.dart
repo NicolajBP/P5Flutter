@@ -19,7 +19,7 @@ Widget build(BuildContext context) {
         } 
         else {
           // When the user is not logged in, return the LoginPage
-          return LoginOrRegisterPage(key: UniqueKey()); // You need to pass a unique key to recreate the LoginPage.
+          return LoginOrRegisterPage(); // You need to pass a unique key to recreate the LoginPage.
         }
       },
     ),

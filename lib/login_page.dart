@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Padding(
-                padding: EdgeInsets.only(top: 25, bottom: 250),
+                padding: EdgeInsets.only(top: 25, bottom: 50),
                 child: Text(
                   "My Diabuddy",
                   style: TextStyle(

@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:p5/MyTextField.dart';
+import 'package:p5/components/MyTextField.dart';
 import 'package:p5/main.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -72,7 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Padding(
-                padding: EdgeInsets.only(top: 25, bottom: 250),
+                padding: EdgeInsets.only(top: 25, bottom: 50),
                 child: Text(
                   "My Diabuddy",
                   style: TextStyle(
@@ -83,7 +83,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               const Text(
-                'Welcome back',
+                'Register your account here',
                 style: TextStyle(
                   color: Color.fromARGB(255, 10, 172, 10),
                   fontSize: 16,
@@ -131,7 +131,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     signUserUp(context); // Call the sign-in method
                   },
                   child: const Text(
-                    "Login",
+                    "Sign up",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
