@@ -44,11 +44,27 @@ class _RegisterPageState extends State<RegisterPage> {
         email: usernameController.text,
         password: passwordController.text,
         );
-        Map<String, dynamic> ?data = {"email": usernameController.text};
-        await firestore.collection('users_test')
+        // Map<String, dynamic> ?data = {"email": usernameController.text};
+        var collection = FirebaseFirestore.instance.collection("users");
+        collection
         .doc(currentUser.user!.uid)
-        .set(data)
-        .then((value) => null);
+        .set({
+          "email": usernameController.text,
+          "userType": "patient",
+        })
+        .then((_) => print("Added"))
+        .catchError((error) => print("Add failed: $error"));
+
+        collection
+        .doc(currentUser.user!.uid)
+        .collection("userInfo") // Laver en ny collection "userInfo"
+        .doc() // Laver autoID
+        .set({ // Tilføjer attributter
+          "test": "test",
+          "userType": "patient",
+        })
+        .then((_) => print("Added"))
+        .catchError((error) => print("Add failed: $error"));
       } else {
         // show error message "passwords dont match"
         setState(() {
