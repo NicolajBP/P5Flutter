@@ -72,9 +72,8 @@ DateTime _selectedDate = DateTime.now();
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Icon(Icons.directions_run_outlined, size: 70.0,),
-                Text('Register exercise',
-                style: TextStyle(height: 1, fontSize: 14)),
+                Icon(Icons.restaurant, size: 70.0,),
+                Text("Register nutrient intake"),
               ],)
             ),
     
@@ -95,8 +94,9 @@ DateTime _selectedDate = DateTime.now();
           child: const Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-            Icon(Icons.restaurant, size: 70.0,),
-            Text("Register nutrient intake"),
+                 Icon(Icons.directions_run_outlined, size: 70.0,),
+                  Text('Register exercise',
+                  style: TextStyle(height: 1, fontSize: 14)),
         ],)
         )
     ],)
