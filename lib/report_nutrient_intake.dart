@@ -24,6 +24,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   String time = "";
   //definere input varibler som strings
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
+  
 
 final TextEditingController noteController = TextEditingController();
 
