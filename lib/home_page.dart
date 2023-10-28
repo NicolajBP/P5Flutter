@@ -1,21 +1,20 @@
-<<<<<<< HEAD
 import 'package:firebase_auth/firebase_auth.dart';
-=======
 import 'package:flutter/foundation.dart';
->>>>>>> Ellens-homepage.0
 import 'package:flutter/material.dart';
 import 'package:p5/myEntries.dart';
 import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
 import 'package:p5/test_page.dart'; // Vi skal altid have den her import (giver adgang til alle widgets)
-<<<<<<< HEAD
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
+import 'package:date_picker_timeline/date_picker_timeline.dart';
+
 
 class HomePage extends StatelessWidget {
    
   
-  HomePage({Key? key}) : super(key: key);
- 
+HomePage({Key? key}) : super(key: key);
+
 
   
 //sign user out 
@@ -23,23 +22,6 @@ void signUserOut(){
   FirebaseAuth.instance.signOut();
 
 
-=======
-import 'package:intl/intl.dart';
-import 'package:date_picker_timeline/date_picker_timeline.dart';
-
-
-class HomePage extends StatefulWidget {
-  const HomePage({Key? key});
-
-
-@override
-  State<HomePage> createState() =>
-      _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-DateTime _selectedDate = DateTime.now();
->>>>>>> Ellens-homepage.0
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +107,6 @@ DateTime _selectedDate = DateTime.now();
     ],)
       );
   }
-<<<<<<< HEAD
 // ef3320a880efa9714fbb239e3d60a7007d0bbe20
 }
 final user =FirebaseAuth.instance.currentUser!;
@@ -208,6 +189,4 @@ Widget build(BuildContext context) {
     ),
   );
 }
-=======
->>>>>>> Ellens-homepage.0
 }
