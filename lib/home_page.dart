@@ -10,29 +10,43 @@ import 'package:intl/intl.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 
 
-class HomePage extends StatelessWidget {
-   
-  
-HomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
 
+  @override
+  State<HomePage> createState() => 
+    _HomePageSate();
   
+}
 //sign user out 
 void signUserOut(){
   FirebaseAuth.instance.signOut();
+}
 
-
+class _HomePageSate extends State<HomePage> {
+DateTime _selectedDate = DateTime.now();
+final user =FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+      //title: const Text("Logged in as " + user.email!),
+      actions: const [
+        IconButton(
+          onPressed: signUserOut,
+          icon: Icon(Icons.logout),
+        ),
+      ],
+    ),
       body: Column(
         children: [
           
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: DatePicker(
-                DateTime.now().subtract(const Duration(days:2)),
+              child: DatePicker(                                //kalenderbar
+                DateTime.now().subtract(const Duration(days:2)), //vælger hvor mange dage vi kigger tilbage
                 height: 80,
                 width: 70,
                 initialSelectedDate: DateTime.now(),
@@ -47,8 +61,7 @@ void signUserOut(){
                     _selectedDate = date;  //variabel der kender hvilken dag det er
                  },
                       ),
-            ),
-       //Text(initialSelectedDate.toString())   
+            ),  
       Container(
               color: Theme.of(context).colorScheme.primary,
               margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
@@ -57,7 +70,7 @@ void signUserOut(){
               width: double.infinity,
               child: const Text("Her kommer der en graf"),
             ),
-      const SizedBox(height: 150),
+      const SizedBox(height: 120),
     
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -107,86 +120,8 @@ void signUserOut(){
     ],)
       );
   }
-// ef3320a880efa9714fbb239e3d60a7007d0bbe20
 }
-final user =FirebaseAuth.instance.currentUser!;
 
- @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: Text("Logged in as " + user.email!),
-      actions: [
-        IconButton(
-          onPressed: signUserOut,
-          icon: Icon(Icons.logout),
-        ),
-      ],
-    ),
-    body: Column(
-      children: [
-        Container(
-          color: Colors.lightBlue,
-          margin: const EdgeInsets.fromLTRB(100, 20, 100, 20),
-          padding: const EdgeInsets.all(50),
-          height: 250,
-          width: double.infinity,
-          child: const Text("Her kommer der en graf"),
-        ),
-        const SizedBox(height: 5),
-        Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) {
-                  return const ReportNutrientIntakePage();
-                }),
-              );
-            },
-            child: const Text("Report nutrient intake"),
-          ),
-        ),
-        const SizedBox(height: 5),
-        Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) {
-                  return const ReportExercise();
-                }),
-              );
-            },
-            child: const Text("Report exercise"),
-          ),
-        ),
-        const SizedBox(height: 5),
-        Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) {
-                  return const TestPage();
-                }),
-              );
-            },
-            child: const Text("Test Page"),
-          ),
-        ),
-        const SizedBox(height: 5),
-         Center(
-          child: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) {
-                  return myEntries();
-                }),
-              );
-            },
-            child: const Text("MyEntries"),
-          ),
-        ),
-      ],
-    ),
-  );
-}
-}
+// ef3320a880efa9714fbb239e3d60a7007d0bbe20
+
+
