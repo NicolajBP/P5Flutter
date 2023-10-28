@@ -40,9 +40,20 @@ final user =FirebaseAuth.instance.currentUser!;
         ),
       ],
     ),
+      
+      
       body: Column(
         children: [
-          
+           ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (BuildContext context) {
+                  return myEntries();
+                }),
+              );
+            },
+            child: const Text("MyEntries"),
+           ),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: DatePicker(                                //kalenderbar
