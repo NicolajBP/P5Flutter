@@ -45,6 +45,18 @@ class _myEntriesState extends State<myEntries> {
     });
   }
 
+  // funktion til sletning af en entry
+  Future<void> deleteEntry(String entryId) async {
+    await myCollection.doc(entryId).delete();
+    getEntries(); // Refresh the list after deletion
+  }
+
+  // Function to navigate to the edit screen
+  void editEntry(Map<String, dynamic> entry) {
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,14 +76,15 @@ class _myEntriesState extends State<myEntries> {
           Map<String, dynamic> entry = entriesData[index];
 
           // Hent værdierne for Mealsize, note og tidspunkt fra Firestore-dataene eller skriver ingen data fundet når null-værdier er fundet.
-          String titleText = entry['mealSize'] ?? 'Ukendt måltidsstørrelse';
-          String noteText = entry['note'] ?? 'Ingen note tilgængelig';
-          String timeText = entry['time'] ?? 'Ingen tidspunkt angivet';
+          String titleText = entry['meal_size'] ?? 'Unknown Size';
+          print('Meal Size: $titleText');
+          String noteText = entry['note'] ?? '';
+          String timeText = entry['time'] ?? '';
 
           // Opret en mini liste med titel og undertitel
           return ListTile(
             title: Text(titleText),
-            subtitle: Text('Note: $noteText, Tidspunkt: $timeText'),
+            subtitle: Text('Note: $noteText, Time: $timeText'),
           );
         },
       ),
