@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:p5/components/MyTextField.dart';
 import 'package:p5/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
+
 
 DateTime now = DateTime.now(); 
 String date = now.toString().substring(0,10);
@@ -46,7 +46,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
     // try creating the user
     try {
-      UserInfo userToAdd = UserInfo(email: usernameController.text, userType: "personell");
       // CGMData cgmData = CGMData(measurements: "2")
   
       // check if password is confirmed
