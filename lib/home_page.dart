@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/myEntries.dart';
+import 'package:p5/register_page.dart';
 import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -70,8 +71,10 @@ final user =FirebaseAuth.instance.currentUser!;
                  ),
                  onDateChange: (date) {
                     _selectedDate = date;  //variabel der kender hvilken dag det er
+                    dateYYYY_MM_DD = _selectedDate.toString().substring(0,10);
                  },
                       ),
+                      
             ),  
       Container(
               height: 250,
