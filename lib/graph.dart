@@ -99,6 +99,8 @@ updateDataSource(Timer timer){
 }
  */
 
+
+// Det Her er widget der bygger grafen op
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -146,4 +148,3 @@ class LiveData {
 
   LiveData({this.time, this.speed});
 }
-
