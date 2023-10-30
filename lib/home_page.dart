@@ -30,30 +30,10 @@ final user =FirebaseAuth.instance.currentUser!;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-      //title: const Text("Logged in as " + user.email!),
-      actions: const [
-        IconButton(
-          onPressed: signUserOut,
-          icon: Icon(Icons.logout),
-        ),
-      ],
-    ),
-      
+    return Scaffold(     
       
       body: Column(
         children: [
-           ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) {
-                  return myEntries();
-                }),
-              );
-            },
-            child: const Text("MyEntries"),
-           ),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: DatePicker(                                //kalenderbar
@@ -81,12 +61,23 @@ final user =FirebaseAuth.instance.currentUser!;
               width: double.infinity,
               child: const Text("Her kommer der en graf"),
             ),
-      const SizedBox(height: 120),
-    
+      const SizedBox(height: 80),
+
+            ElevatedButton( //my entries button
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (BuildContext context) {
+                  return myEntries();
+                }),
+              );
+            },
+            child: const Text("MyEntries"),
+           ),
+
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-        ElevatedButton(
+        ElevatedButton(                                   //nutrient intake button
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (BuildContext context) {
@@ -108,7 +99,7 @@ final user =FirebaseAuth.instance.currentUser!;
   
       const SizedBox(width: 30),
 
-        ElevatedButton(
+        ElevatedButton(                                       //exercise button
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (BuildContext context) {

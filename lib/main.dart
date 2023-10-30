@@ -69,11 +69,6 @@ class RootPage extends StatefulWidget {
 
 
 
-
- 
-
-
-
   @override
   State<RootPage> createState() => _RootPageState();
 }
@@ -93,6 +88,12 @@ class _RootPageState extends State<RootPage> {
       // Scaffold indeholder app bar, body og navigation bar
       appBar: AppBar(
         title: const Text('P5 CGM app'), // Tilføjer tekst til vores AppBar
+        actions: const [
+        IconButton(
+          onPressed: signUserOut,
+          icon: Icon(Icons.logout),
+        ),
+      ],
       ), // App bar er den øverste menu vi kan se i appen
       body: pages[currentPage],
       // floatingActionButton: FloatingActionButton(
