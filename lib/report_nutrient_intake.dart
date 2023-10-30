@@ -92,6 +92,12 @@ void _saveDataToFirestore() async {
     mealSize = "Large";
   }
 
+  if (time.isEmpty) {
+    // If the time is empty, update it with the current time
+    time = _time.format(context);
+  }
+
+
   try {
     // Gem data i Firestore-databasen
     await firestore.collection('nutrition_entries').add({
