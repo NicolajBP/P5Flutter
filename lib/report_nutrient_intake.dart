@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart'; 
 
 class ReportNutrientIntakePage extends StatefulWidget {
@@ -132,6 +133,7 @@ void _saveDataToFirestore() async {
     });
   } catch (e) {
     debugPrint("Error saving to Firestoe $e");
+     // ignore: use_build_context_synchronously
      ScaffoldMessenger.of(context).showSnackBar(
   const SnackBar(
     content: Text('Error saving the entry, try again.'),

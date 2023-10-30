@@ -6,6 +6,7 @@ import 'package:p5/main.dart';
 class LoginPage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
   final Function()? onTap;
+  // ignore: use_key_in_widget_constructors
   const LoginPage({Key? key, required this.onTap});
 
   @override

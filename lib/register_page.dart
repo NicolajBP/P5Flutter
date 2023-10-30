@@ -14,6 +14,7 @@ String date = now.toString().substring(0,10);
 class RegisterPage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
   final Function()? onTap;
+  // ignore: use_key_in_widget_constructors
   const RegisterPage({Key? key, required this.onTap});
 
   @override
