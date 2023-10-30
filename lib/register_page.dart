@@ -8,7 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 
 DateTime now = DateTime.now(); 
-String date = now.toString().substring(0,10);
+String dateYYYY_MM_DD = now.toString().substring(0,10);
 
 
 class RegisterPage extends StatefulWidget {
@@ -73,7 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
         collection
         .doc(currentUser.user!.uid)
         .collection("patientData")
-        .doc(date)
+        .doc(dateYYYY_MM_DD)
         .set({ // Tilføjer attributter
           "cgmData": {
             "0": "",

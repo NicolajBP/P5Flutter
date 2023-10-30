@@ -109,7 +109,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
           .collection('users')
           .doc(user.uid)
           .collection("patientData")
-          .doc(date)
+          .doc(dateYYYY_MM_DD)
           .update({
             "nutrientEntries": FieldValue.arrayUnion([entryData])
           })
