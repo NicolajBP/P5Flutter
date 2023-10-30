@@ -14,18 +14,21 @@ class ReportNutrientIntakePage extends StatefulWidget {
 class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  
+    // Firestore instance til at interegerer med databasen.
+
   bool isSwitched = false;
   bool? isBoxChecked = false;
   
   String mealSize = "";
   String note = "";
   String time = "";
+  //definere input varibler som strings
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
+  
 
 final TextEditingController noteController = TextEditingController();
 
-
+  // Tids valg metode
 void _selectTime() async {
   final TimeOfDay? newTime = await showTimePicker(
     context: context,
@@ -38,11 +41,13 @@ void _selectTime() async {
     });
   }
 }
-
+ //
   bool isPressed1 = false;
   bool isPressed2 = false;
   bool isPressed3 = false;
-  //bools til når knappen er trukket
+  //bools til når knappen er ikke trukket
+
+
 void resetButtonStates() {
   setState(() {
      isPressed1 = false;
@@ -50,19 +55,24 @@ void resetButtonStates() {
      isPressed3 = false;
   });
 }
+//funktionen der nulstiller knapperne
+
+
   int selectedButtonIndex = -1;
 //en værdi til kanppen når den er ikke trukket
  
  
+ //data gemmes med denne funktion
 void _saveDataToFirestore() async {
   // Opret en liste til at gemme navnene på de manglende felter
   List<String> manglendeFelter = [];
 
   if (selectedButtonIndex == -1) {
     // Hvis intet knap til valg af portionsstørrelse er valgt
-    // tilføj "Meal Size" til listen over manglende felter
+    
     manglendeFelter.add("Meal Size");
   }
+  // tilføj "Meal Size" til listen over manglende felter
   if (note.isEmpty) {
     // Hvis feltet til notater er tomt
     // tilføj "Note" til listen over manglende felter
