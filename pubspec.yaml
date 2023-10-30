@@ -40,7 +40,7 @@ dependencies:
   google_fonts: ^6.1.0
   intl: ^0.18.1
   date_picker_timeline:
-
+  excel: ^2.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -52,6 +52,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
   cloud_firestore: ^4.11.0
+  syncfusion_flutter_charts: ^23.1.42
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

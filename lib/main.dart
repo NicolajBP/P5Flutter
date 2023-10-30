@@ -1,11 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:p5/home_page.dart';
 import 'package:p5/profile_page.dart';
 import 'package:p5/trends.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+
 import 'auth.page.dart';
+import 'firebase_options.dart';
 
 // I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
 // Widgets kan have argumenter som tager endnu en widget som input
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner:
           false, // Tilføjer eller fjerner en "debug" ribbon i højre hjørne
       theme: ThemeData(
-       useMaterial3: true,
+    useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
       seedColor: Colors.teal,
       brightness: Brightness.light,

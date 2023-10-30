@@ -7,39 +7,14 @@ import 'package:p5/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 
-class UserInfo {
-  final String email;
-  final String userType;
-
-  UserInfo(
-      {required this.email,
-      required this.userType,
-});
-
-  Map<String, dynamic> toMap() {
-    return {
-      'email': email,
-      'userType': userType,
-    };
-  }
-}
-
-// class CGMData {
-//   final int measurements;
-
-//   CGMData(
-//       {required this.measurements,  
-//     });
-    
-// }
-
-
-
+DateTime now = DateTime.now(); 
+String date = now.toString().substring(0,10);
 
 
 class RegisterPage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
   final Function()? onTap;
+  // ignore: use_key_in_widget_constructors
   const RegisterPage({Key? key, required this.onTap});
 
   @override
@@ -72,7 +47,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
     // try creating the user
     try {
-      UserInfo userToAdd = UserInfo(email: usernameController.text, userType: "personell");
       // CGMData cgmData = CGMData(measurements: "2")
   
       // check if password is confirmed
@@ -86,23 +60,54 @@ class _RegisterPageState extends State<RegisterPage> {
         collection
         .doc(currentUser.user!.uid)
         .set({
-          "userInfo": userToAdd.toMap(),
-          "cgmData": userToAdd.toMap(),
-        },
-        )
+          "userInfo": {
+            "email": usernameController.text,
+            "userType": "patient",
+            "uid": currentUser.user!.uid
+          },
+        })
+        .then((_) => print("Added"))
+        .catchError((error) => print("Add failed: $error"));
+        
+
+        collection
+        .doc(currentUser.user!.uid)
+        .collection("patientData")
+        .doc(date)
+        .set({ // Tilføjer attributter
+          "cgmData": {
+            "0": "",
+            "1": "",
+            "2": "",
+          },
+          "exerciseEntries": {
+            "0": {
+              "type": "",
+              "intensity": "",
+              "timeStamp": ""
+            },
+            "1": {
+              "type": "",
+              "intensity": "",
+              "timeStamp": ""
+            }
+          },
+          "nutrientEntries": {
+            "0": {
+              "mealSize": "",
+              "mealNote": "",
+              "timeStamp": ""
+            },
+            "1": {
+              "mealSize": "",
+              "mealNote": "",
+              "timeStamp": ""
+            },
+          },
+        })
         .then((_) => print("Added"))
         .catchError((error) => print("Add failed: $error"));
 
-        // collection
-        // .doc(currentUser.user!.uid)
-        // .collection("userInfo") // Laver en ny collection "userInfo"
-        // .doc() // Laver autoID
-        // .set({ // Tilføjer attributter
-        //   "test": "test",
-        //   "userType": "patient",
-        // })
-        // .then((_) => print("Added"))
-        // .catchError((error) => print("Add failed: $error"));
       } else {
         // show error message "passwords dont match"
         setState(() {

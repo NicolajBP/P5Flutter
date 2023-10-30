@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:p5/myEntries.dart';
 import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
-import 'package:p5/test_page.dart'; // Vi skal altid have den her import (giver adgang til alle widgets)
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import "package:p5/graph.dart";
 
 
 class HomePage extends StatefulWidget {
@@ -54,12 +54,9 @@ final user =FirebaseAuth.instance.currentUser!;
                       ),
             ),  
       Container(
-              color: Theme.of(context).colorScheme.primary,
-              margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
-              padding: const EdgeInsets.all(20),
               height: 250,
               width: double.infinity,
-              child: const Text("Her kommer der en graf"),
+              child: LiveChartWidget(),
             ),
       const SizedBox(height: 80),
 
@@ -123,7 +120,3 @@ final user =FirebaseAuth.instance.currentUser!;
       );
   }
 }
-
-// ef3320a880efa9714fbb239e3d60a7007d0bbe20
-
-
