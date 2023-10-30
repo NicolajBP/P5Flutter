@@ -91,18 +91,6 @@ class _RegisterPageState extends State<RegisterPage> {
               "timeStamp": ""
             }
           },
-          "nutrientEntries": {
-            "0": {
-              "mealSize": "",
-              "mealNote": "",
-              "timeStamp": ""
-            },
-            "1": {
-              "mealSize": "",
-              "mealNote": "",
-              "timeStamp": ""
-            },
-          },
         })
         .then((_) => print("Added"))
         .catchError((error) => print("Add failed: $error"));
