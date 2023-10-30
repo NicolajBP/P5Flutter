@@ -4,9 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 // Definere navn af vores collection "nutrition_entries"
 CollectionReference myCollection = FirebaseFirestore.instance.collection('nutrition_entries');
 
-// Definere navn af vores collection "nutrition_entries"
-CollectionReference myCollection = FirebaseFirestore.instance.collection('nutrition_entries');
-
 // ignore: camel_case_types
 class myEntries extends StatefulWidget {
   const myEntries({super.key});
