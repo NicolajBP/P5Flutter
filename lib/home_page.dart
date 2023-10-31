@@ -51,7 +51,7 @@ final user =FirebaseAuth.instance.currentUser!;
                  ),
                  onDateChange: (date) {
                     _selectedDate = date;  //variabel der kender hvilken dag det er
-                    dateYYYY_MM_DD = _selectedDate.toString().substring(0,10);
+                    dateYYYY_MM_DD = _selectedDate.toString().substring(0,10); // Bruges til at indlæse "YYYY-MM-DD" (document ID) fra databasen
                  },
                       ),
                       
