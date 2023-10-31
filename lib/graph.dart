@@ -86,6 +86,8 @@ LiveData(time:DateTime(2021,2,8,14,0),speed:203.4),
 LiveData(time:DateTime(2021,2,8,14,15),speed:181.8),
 
     ];
+
+    
   }
 
 /*  int time =30;
@@ -99,10 +101,21 @@ updateDataSource(Timer timer){
 }
  */
 
-
 // Det Her er widget der bygger grafen op
   @override
   Widget build(BuildContext context) {
+    
+    final List<LineData1> lineData1 = <LineData1>[
+            LineData1(DateTime(2021,2,8,0,0),220),
+            LineData1(DateTime(2021,2,8,14,0),220),
+        ];
+    
+    final List<LineData2> lineData2 = <LineData2>[
+            LineData2(DateTime(2021,2,8,0,0),110),
+            LineData2(DateTime(2021,2,8,14,0),110),
+        ];
+
+
     return SafeArea(
         child: Scaffold(
             body: SfCartesianChart(
@@ -113,7 +126,24 @@ updateDataSource(Timer timer){
           dataSource: chartData,
           xValueMapper: (LiveData data, _) => data.time,
           yValueMapper: (LiveData data, _) => data.speed,
-        )
+        ),
+        LineSeries<LineData1, DateTime>(
+          dataSource: lineData1,
+           dashArray: <double>[5, 5],
+           color: Colors.red,
+          xValueMapper: (LineData1 data, _) => data.time,
+          yValueMapper: (LineData1 data, _) => data.y1,
+          dataLabelSettings: const DataLabelSettings(
+            isVisible: true,
+           )
+           ),
+          LineSeries<LineData2, DateTime>(
+          dataSource: lineData2,
+           dashArray: <double>[5, 5],
+           color: Colors.red,
+          xValueMapper: (LineData2 data, _) => data.time,
+          yValueMapper: (LineData2 data, _) => data.y2,
+           ),
       ],
       primaryXAxis: DateTimeAxis(intervalType: DateTimeIntervalType.hours, interval:1),
       primaryYAxis: NumericAxis(minimum: 70, maximum: 300),
@@ -148,3 +178,15 @@ class LiveData {
 
   LiveData({this.time, this.speed});
 }
+
+  class LineData1 {
+        LineData1(this.time, this.y1);
+        final DateTime? time;
+        final int y1;
+    }
+
+  class LineData2 {
+        LineData2(this.time, this.y2);
+        final DateTime? time;
+        final int y2;
+    }
