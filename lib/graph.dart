@@ -86,6 +86,8 @@ LiveData(time:DateTime(2021,2,8,14,0),speed:203.4),
 LiveData(time:DateTime(2021,2,8,14,15),speed:181.8),
 
     ];
+
+    
   }
 
 /*  int time =30;
@@ -99,10 +101,10 @@ updateDataSource(Timer timer){
 }
  */
 
-
 // Det Her er widget der bygger grafen op
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
         child: Scaffold(
             body: SfCartesianChart(
@@ -113,10 +115,51 @@ updateDataSource(Timer timer){
           dataSource: chartData,
           xValueMapper: (LiveData data, _) => data.time,
           yValueMapper: (LiveData data, _) => data.speed,
-        )
+        ),
       ],
-      primaryXAxis: DateTimeAxis(intervalType: DateTimeIntervalType.hours, interval:1),
-      primaryYAxis: NumericAxis(minimum: 70, maximum: 300),
+      primaryXAxis: DateTimeAxis(
+      intervalType: DateTimeIntervalType.hours, interval:1,
+      plotBands: <PlotBand>[                                      //grøn bånd
+            PlotBand(
+            isVisible: true,
+            start: DateTime(2021,2,8,0,0),      //x-aksen start - går nok galt når vi ændrer dagen
+            end: DateTime(2021,2,8,14,0),
+            associatedAxisStart: 120,           //y-aksen start
+            associatedAxisEnd: 200,
+            shouldRenderAboveSeries: false,
+            color: const Color.fromARGB(5, 197, 239, 197),    //farve
+            opacity: 0.5,                                      //gennemsigtighed (0-1)
+            ),
+        ]
+      ),
+      primaryYAxis: NumericAxis(
+        minimum: 70,
+        maximum: 300,
+        plotBands: <PlotBand>[
+          PlotBand(                             //LOW stiplet linje
+                isVisible: true,
+                start: 100,
+                end: 100,
+                borderWidth: 2,
+                borderColor: Colors.red,
+                dashArray: const <double>[4, 5],
+                text: 'LOW',
+                textStyle: const TextStyle(color: Colors.red),
+                horizontalTextAlignment: TextAnchor.end,
+                ),      
+          PlotBand(                             //HIGH stiplet linje
+                isVisible: true,
+                start: 220,
+                end: 220,
+                borderWidth: 2,
+                borderColor: Colors.red,
+                dashArray: const <double>[4, 5],
+                text: 'HIGH',
+                textStyle: const TextStyle(color: Colors.red),
+                horizontalTextAlignment: TextAnchor.end,
+                )
+        ]
+        ),
     )));
   }
 
