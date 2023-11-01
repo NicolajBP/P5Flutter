@@ -14,12 +14,11 @@ import 'firebase_options.dart';
 Key password = const Key("password");
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-WidgetsFlutterBinding.ensureInitialized();
-  
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-);
+  );
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -37,28 +36,28 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner:
           false, // Tilføjer eller fjerner en "debug" ribbon i højre hjørne
       theme: ThemeData(
-    useMaterial3: true,
-      colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.teal,
-      brightness: Brightness.light,
-    ),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.teal,
+          brightness: Brightness.light,
+        ),
 
-    // Define the default `TextTheme`. Use this to specify the default
-    // text styling for headlines, titles, bodies of text, and more.
-    textTheme: TextTheme(
-      displayLarge: const TextStyle(
-        fontSize: 72,
-        fontWeight: FontWeight.bold,
+        // Define the default `TextTheme`. Use this to specify the default
+        // text styling for headlines, titles, bodies of text, and more.
+        textTheme: TextTheme(
+          displayLarge: const TextStyle(
+            fontSize: 72,
+            fontWeight: FontWeight.bold,
+          ),
+          // ···
+          titleLarge: GoogleFonts.oswald(
+            fontSize: 30,
+            fontStyle: FontStyle.italic,
+          ),
+          bodyMedium: GoogleFonts.merriweather(),
+          displaySmall: GoogleFonts.pacifico(),
+        ),
       ),
-      // ···
-      titleLarge: GoogleFonts.oswald(
-        fontSize: 30,
-        fontStyle: FontStyle.italic,
-      ),
-      bodyMedium: GoogleFonts.merriweather(),
-      displaySmall: GoogleFonts.pacifico(),
-    ),
-  ),
       home: const RootPage(),
     );
   }
@@ -68,8 +67,6 @@ class RootPage extends StatefulWidget {
   // Stateful widget gør at UI kan opdateres når brugeren interagerer med skærmen
   const RootPage({super.key});
 
-
-
   @override
   State<RootPage> createState() => _RootPageState();
 }
@@ -78,7 +75,7 @@ class _RootPageState extends State<RootPage> {
   int currentPage = 0;
   List<Widget> pages = [
     // LoginPage(key: password),
-     HomePage(),
+    HomePage(),
     const Trends(),
     const ProfilePage(),
   ];
@@ -90,11 +87,11 @@ class _RootPageState extends State<RootPage> {
       appBar: AppBar(
         title: const Text('P5 CGM app'), // Tilføjer tekst til vores AppBar
         actions: const [
-        IconButton(
-          onPressed: signUserOut,
-          icon: Icon(Icons.logout),
-        ),
-      ],
+          IconButton(
+            onPressed: signUserOut,
+            icon: Icon(Icons.logout),
+          ),
+        ],
       ), // App bar er den øverste menu vi kan se i appen
       body: pages[currentPage],
       // floatingActionButton: FloatingActionButton(
