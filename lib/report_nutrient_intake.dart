@@ -169,7 +169,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     //"kroppen" af siden
     return Scaffold(
       appBar: AppBar(
-        title: const Text("P5 CGM app"),
+        title: const Text("Register nutrient intake"),
         automaticallyImplyLeading: true, //tilbageknap i appbar
         leading: IconButton(
           onPressed: () {
@@ -177,7 +177,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
-
+      
         actions: [
           IconButton(
             //informationsknap i appbar

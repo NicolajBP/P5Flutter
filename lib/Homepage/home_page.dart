@@ -33,6 +33,10 @@ final user =FirebaseAuth.instance.currentUser!;
   Widget build(BuildContext context) {
     return Scaffold(     
       
+       appBar: AppBar(
+        title: const Text("Home"),
+      ),
+
       body: Column(
         children: [
             Padding(

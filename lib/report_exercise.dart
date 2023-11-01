@@ -15,17 +15,16 @@ class _ReportExerciseState extends State<ReportExercise> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("P5 CGM app"),
-        automaticallyImplyLeading:
-            true, // Fjerner automatisk genereret tilbageknap
+       appBar: AppBar(
+        title: const Text("Register Exercise"),
+        automaticallyImplyLeading: true, //tilbageknap i appbar
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context)
-                .pop(); // Tager os tilbage til den forrige side --> pop() betyder at vi fjerner den nuværende side
+            Navigator.of(context).pop();
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
+      
         actions: [
           IconButton(
               onPressed: () {
