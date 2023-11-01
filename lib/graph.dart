@@ -104,17 +104,6 @@ updateDataSource(Timer timer){
 // Det Her er widget der bygger grafen op
   @override
   Widget build(BuildContext context) {
-    
-    final List<LineData1> lineData1 = <LineData1>[
-            LineData1(DateTime(2021,2,8,0,0),220),
-            LineData1(DateTime(2021,2,8,14,0),220),
-        ];
-    
-    final List<LineData2> lineData2 = <LineData2>[
-            LineData2(DateTime(2021,2,8,0,0),110),
-            LineData2(DateTime(2021,2,8,14,0),110),
-        ];
-
 
     return SafeArea(
         child: Scaffold(
@@ -127,26 +116,50 @@ updateDataSource(Timer timer){
           xValueMapper: (LiveData data, _) => data.time,
           yValueMapper: (LiveData data, _) => data.speed,
         ),
-        LineSeries<LineData1, DateTime>(
-          dataSource: lineData1,
-           dashArray: <double>[5, 5],
-           color: Colors.red,
-          xValueMapper: (LineData1 data, _) => data.time,
-          yValueMapper: (LineData1 data, _) => data.y1,
-          dataLabelSettings: const DataLabelSettings(
-            isVisible: true,
-           )
-           ),
-          LineSeries<LineData2, DateTime>(
-          dataSource: lineData2,
-           dashArray: <double>[5, 5],
-           color: Colors.red,
-          xValueMapper: (LineData2 data, _) => data.time,
-          yValueMapper: (LineData2 data, _) => data.y2,
-           ),
       ],
-      primaryXAxis: DateTimeAxis(intervalType: DateTimeIntervalType.hours, interval:1),
-      primaryYAxis: NumericAxis(minimum: 70, maximum: 300),
+      primaryXAxis: DateTimeAxis(
+      intervalType: DateTimeIntervalType.hours, interval:1,
+      plotBands: <PlotBand>[                                      //grøn bånd
+            PlotBand(
+            isVisible: true,
+            start: DateTime(2021,2,8,0,0),      //x-aksen start - går nok galt når vi ændrer dagen
+            end: DateTime(2021,2,8,14,0),
+            associatedAxisStart: 120,           //y-aksen start
+            associatedAxisEnd: 200,
+            shouldRenderAboveSeries: false,
+            color: const Color.fromARGB(5, 197, 239, 197),    //farve
+            opacity: 0.5,                                      //gennemsigtighed (0-1)
+            ),
+        ]
+      ),
+      primaryYAxis: NumericAxis(
+        minimum: 70,
+        maximum: 300,
+        plotBands: <PlotBand>[
+          PlotBand(                             //LOW stiplet linje
+                isVisible: true,
+                start: 100,
+                end: 100,
+                borderWidth: 2,
+                borderColor: Colors.red,
+                dashArray: const <double>[4, 5],
+                text: 'LOW',
+                textStyle: const TextStyle(color: Colors.red),
+                horizontalTextAlignment: TextAnchor.end,
+                ),      
+          PlotBand(                             //HIGH stiplet linje
+                isVisible: true,
+                start: 220,
+                end: 220,
+                borderWidth: 2,
+                borderColor: Colors.red,
+                dashArray: const <double>[4, 5],
+                text: 'HIGH',
+                textStyle: const TextStyle(color: Colors.red),
+                horizontalTextAlignment: TextAnchor.end,
+                )
+        ]
+        ),
     )));
   }
 
@@ -178,15 +191,3 @@ class LiveData {
 
   LiveData({this.time, this.speed});
 }
-
-  class LineData1 {
-        LineData1(this.time, this.y1);
-        final DateTime? time;
-        final int y1;
-    }
-
-  class LineData2 {
-        LineData2(this.time, this.y2);
-        final DateTime? time;
-        final int y2;
-    }
