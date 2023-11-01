@@ -50,7 +50,7 @@ List<Register> getRegisterData(){
     Register(times:DateTime(2021,2,8,6,30)),
     Register(times:DateTime(2021,2,8,6,45)),
     Register(times:DateTime(2021,2,8,7,0),eating: 1),
-    Register(times:DateTime(2021,2,8,7,15)),
+    Register(times:DateTime(2021,2,8,7,15),eating: 1),
     Register(times:DateTime(2021,2,8,7,30)),
     Register(times:DateTime(2021,2,8,7,45)),
     Register(times:DateTime(2021,2,8,8,0)),
