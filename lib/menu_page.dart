@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p5/profile_page.dart';
 import 'notfications_page.dart';
 
 class MenuPage extends StatefulWidget {
@@ -40,6 +41,9 @@ class _MenuPageState extends State<MenuPage> {
               padding: const EdgeInsets.all(10.0),
               child: OutlinedButton.icon(               //Profile button
                 onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                    return const ProfilePage();
+                  }));
                 }, 
                 icon: const Icon(
                   Icons.person,
@@ -47,13 +51,28 @@ class _MenuPageState extends State<MenuPage> {
                   color: Colors.white,
                   size: 80,
                 ),
-                label: const Text(
-                  'User',
+                label: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [ 
+                  Column(children: [
+                    Text('User',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25,
+                    fontWeight: FontWeight.bold,
                   ),
-                  textAlign: TextAlign.start,
+                  //textAlign: TextAlign.left,
+                ),
+                  Text('Edit profile',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                  ),)
+                  ]),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                )]
                 ),
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.primary,
@@ -75,13 +94,20 @@ class _MenuPageState extends State<MenuPage> {
                 icon: const Icon(
                   Icons.logout
                 ),
-                label: const Text(
+                label: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [ Text(
                   'Log out',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 25,
                   ),
                   textAlign: TextAlign.start,
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                )]
                 ),
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.background,
@@ -103,12 +129,20 @@ class _MenuPageState extends State<MenuPage> {
                 icon: const Icon(
                   Icons.notifications
                 ),
-                label: const Text(
+                label: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [ Text(
                   'Notifications',
                   style: TextStyle(
                     color: Colors.black,
-                    fontSize: 25
+                    fontSize: 25,
                   ),
+                  textAlign: TextAlign.start,
+                ),
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                )]
                 ),
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.background,
