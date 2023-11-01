@@ -1,11 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:p5/home_page.dart';
-import 'package:p5/profile_page.dart';
+import 'package:p5/Homepage/home_page.dart';
+import 'package:p5/menu_page.dart';
 import 'package:p5/trends.dart';
 
-import 'auth.page.dart';
+
+import 'Login/auth.page.dart';
 import 'firebase_options.dart';
 
 // I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
@@ -80,7 +81,7 @@ class _RootPageState extends State<RootPage> {
     // LoginPage(key: password),
      HomePage(),
     const Trends(),
-    const ProfilePage(),
+    const MenuPage(),
   ];
 
   @override
@@ -107,7 +108,7 @@ class _RootPageState extends State<RootPage> {
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: "Home"),
           NavigationDestination(icon: Icon(Icons.line_axis), label: "Trends"),
-          NavigationDestination(icon: Icon(Icons.person), label: "Profile")
+          NavigationDestination(icon: Icon(Icons.menu), label: "Menu")
         ],
         onDestinationSelected: (int index) {
           setState(() {

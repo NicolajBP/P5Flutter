@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:p5/register_page.dart';
+import 'package:p5/Login/register_page.dart';
 
 class ReportNutrientIntakePage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
