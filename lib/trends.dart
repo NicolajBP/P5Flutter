@@ -8,6 +8,18 @@ class Trends extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
+   appBar: AppBar(
+        title: const Text("Trends"),
+        automaticallyImplyLeading: true, //tilbageknap i appbar
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(Icons.arrow_back_ios),
+        ),
+      ),
+
       body: SingleChildScrollView(
         scrollDirection: axisDirectionToAxis(AxisDirection.down),
         child: Column(

@@ -1,11 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:p5/home_page.dart';
-import 'package:p5/profile_page.dart';
+import 'package:p5/Homepage/home_page.dart';
+import 'package:p5/menu_page.dart';
 import 'package:p5/trends.dart';
 
-import 'auth.page.dart';
+
+import 'Login/auth.page.dart';
 import 'firebase_options.dart';
 
 // I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
@@ -77,22 +78,14 @@ class _RootPageState extends State<RootPage> {
     // LoginPage(key: password),
     HomePage(),
     const Trends(),
-    const ProfilePage(),
+    const MenuPage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // Scaffold indeholder app bar, body og navigation bar
-      appBar: AppBar(
-        title: const Text('P5 CGM app'), // Tilføjer tekst til vores AppBar
-        actions: const [
-          IconButton(
-            onPressed: signUserOut,
-            icon: Icon(Icons.logout),
-          ),
-        ],
-      ), // App bar er den øverste menu vi kan se i appen
+
       body: pages[currentPage],
       // floatingActionButton: FloatingActionButton(
       //   onPressed: () {
@@ -104,7 +97,7 @@ class _RootPageState extends State<RootPage> {
         destinations: const [
           NavigationDestination(icon: Icon(Icons.home), label: "Home"),
           NavigationDestination(icon: Icon(Icons.line_axis), label: "Trends"),
-          NavigationDestination(icon: Icon(Icons.person), label: "Profile")
+          NavigationDestination(icon: Icon(Icons.menu), label: "Menu")
         ],
         onDestinationSelected: (int index) {
           setState(() {

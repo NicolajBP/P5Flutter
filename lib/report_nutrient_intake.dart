@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:p5/register_page.dart';
+import 'package:p5/Login/register_page.dart';
 
 class ReportNutrientIntakePage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
@@ -173,7 +173,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     //"kroppen" af siden
     return Scaffold(
       appBar: AppBar(
-        title: const Text("P5 CGM app"),
+        title: const Text("Register nutrient intake"),
         automaticallyImplyLeading: true, //tilbageknap i appbar
         leading: IconButton(
           onPressed: () {
@@ -181,7 +181,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
-
+      
         actions: [
           IconButton(
             //informationsknap i appbar
