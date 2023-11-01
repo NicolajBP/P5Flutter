@@ -1,19 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:p5/register_page.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:excel/excel.dart';
 import 'dart:io';
 import 'package:path/path.dart';
 
 
+
+
+
 class LiveChartWidget extends StatefulWidget {
+  final List<dynamic> cgmData;
+
+   LiveChartWidget(this.cgmData);
+  
   @override
-  State<LiveChartWidget> createState() => _LiveChartWidgetState();
+  State<LiveChartWidget> createState() => _LiveChartWidgetState(cgmData);
+
+  
 }
 
 class _LiveChartWidgetState extends State<LiveChartWidget> {
   late List<LiveData> chartData;
+    final List<dynamic> cgmData;
+
+   _LiveChartWidgetState(this.cgmData);
   /*  late ChartSeriesController _chartSeriesController; */
+
+
+
 
   @override
   void initState() {
@@ -27,8 +43,8 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
   List<LiveData> getChartData() {
     return <LiveData>[
       
-LiveData(time:DateTime(2021,2,8,0,15),speed:133.2),
-LiveData(time:DateTime(2021,2,8,0,30),speed:129.6),
+LiveData(time:DateTime(2021,2,8,0,15),speed:cgmData[0]),
+LiveData(time:DateTime(2021,2,8,0,30),speed:cgmData[1]),
 LiveData(time:DateTime(2021,2,8,0,45),speed:131.4),
 LiveData(time:DateTime(2021,2,8,1,0),speed:122.4),
 LiveData(time:DateTime(2021,2,8,1,15),speed:124.2),
