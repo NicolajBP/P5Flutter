@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-import 'package:excel/excel.dart';
-import 'dart:io';
-import 'package:path/path.dart';
 
 
 class LiveChartWidget extends StatefulWidget {
@@ -13,14 +9,81 @@ class LiveChartWidget extends StatefulWidget {
 
 class _LiveChartWidgetState extends State<LiveChartWidget> {
   late List<LiveData> chartData;
+  late List<Register> registerData;
   /*  late ChartSeriesController _chartSeriesController; */
 
   @override
   void initState() {
     super.initState();
     chartData = getChartData();
+    registerData = getRegisterData();
     /* Timer.periodic(const Duration(seconds: 1), updateDataSource); */
   }
+
+List<Register> getRegisterData(){
+  return <Register>[
+    Register(times:DateTime(2021,2,8,0,15)),
+    Register(times:DateTime(2021,2,8,0,30)),
+    Register(times:DateTime(2021,2,8,0,45)),
+    Register(times:DateTime(2021,2,8,1,0)),
+    Register(times:DateTime(2021,2,8,1,15)),
+    Register(times:DateTime(2021,2,8,1,30)),
+    Register(times:DateTime(2021,2,8,1,45)),
+    Register(times:DateTime(2021,2,8,2,0)),
+    Register(times:DateTime(2021,2,8,2,15)),
+    Register(times:DateTime(2021,2,8,2,30)),
+    Register(times:DateTime(2021,2,8,2,45)),
+    Register(times:DateTime(2021,2,8,3,0)),
+    Register(times:DateTime(2021,2,8,3,15)),
+    Register(times:DateTime(2021,2,8,3,30)),
+    Register(times:DateTime(2021,2,8,3,45)),
+    Register(times:DateTime(2021,2,8,4,0)),
+    Register(times:DateTime(2021,2,8,4,15)),
+    Register(times:DateTime(2021,2,8,4,30)),
+    Register(times:DateTime(2021,2,8,4,45)),
+    Register(times:DateTime(2021,2,8,5,0)),
+    Register(times:DateTime(2021,2,8,5,15)),
+    Register(times:DateTime(2021,2,8,5,30)),
+    Register(times:DateTime(2021,2,8,5,45)),
+    Register(times:DateTime(2021,2,8,6,0)),
+    Register(times:DateTime(2021,2,8,6,15)),
+    Register(times:DateTime(2021,2,8,6,30)),
+    Register(times:DateTime(2021,2,8,6,45)),
+    Register(times:DateTime(2021,2,8,7,0),eating: 1),
+    Register(times:DateTime(2021,2,8,7,15)),
+    Register(times:DateTime(2021,2,8,7,30)),
+    Register(times:DateTime(2021,2,8,7,45)),
+    Register(times:DateTime(2021,2,8,8,0)),
+    Register(times:DateTime(2021,2,8,8,15)),
+    Register(times:DateTime(2021,2,8,8,30)),
+    Register(times:DateTime(2021,2,8,8,45)),
+    Register(times:DateTime(2021,2,8,9,0)),
+    Register(times:DateTime(2021,2,8,9,15)),
+    Register(times:DateTime(2021,2,8,9,30)),
+    Register(times:DateTime(2021,2,8,9,45)),
+    Register(times:DateTime(2021,2,8,10,0),eating: 1),
+    Register(times:DateTime(2021,2,8,10,15)),
+    Register(times:DateTime(2021,2,8,10,30)),
+    Register(times:DateTime(2021,2,8,10,45)),
+    Register(times:DateTime(2021,2,8,11,0)),
+    Register(times:DateTime(2021,2,8,11,15)),
+    Register(times:DateTime(2021,2,8,11,30),exercise: 1),
+    Register(times:DateTime(2021,2,8,11,45)),
+    Register(times:DateTime(2021,2,8,12,0)),
+    Register(times:DateTime(2021,2,8,12,15)),
+    Register(times:DateTime(2021,2,8,12,30)),
+    Register(times:DateTime(2021,2,8,12,45)),
+    Register(times:DateTime(2021,2,8,13,0)),
+    Register(times:DateTime(2021,2,8,13,15)),
+    Register(times:DateTime(2021,2,8,13,30)),
+    Register(times:DateTime(2021,2,8,13,45)),
+    Register(times:DateTime(2021,2,8,14,0)),
+    Register(times:DateTime(2021,2,8,14,15)),
+  ];
+}
+
+
+
 
 // Den behøver ikke opdatere hele tiden, den opdatere hver gang man går på homepage,så hvis den downloader data fra firebase inden opdatere den fint
 
@@ -102,66 +165,103 @@ updateDataSource(Timer timer){
  */
 
 // Det Her er widget der bygger grafen op
-  @override
-  Widget build(BuildContext context) {
 
-    return SafeArea(
-        child: Scaffold(
-            body: SfCartesianChart(
-      title: ChartTitle(text: 'CGM-data'),
-      legend: const Legend(isVisible: false),
-      series: <ChartSeries>[
-        LineSeries<LiveData, DateTime>(
-          dataSource: chartData,
-          xValueMapper: (LiveData data, _) => data.time,
-          yValueMapper: (LiveData data, _) => data.speed,
-        ),
-      ],
-      primaryXAxis: DateTimeAxis(
-      intervalType: DateTimeIntervalType.hours, interval:1,
-      plotBands: <PlotBand>[                                      //grøn bånd
-            PlotBand(
-            isVisible: true,
-            start: DateTime(2021,2,8,0,0),      //x-aksen start - går nok galt når vi ændrer dagen
-            end: DateTime(2021,2,8,14,0),
-            associatedAxisStart: 120,           //y-aksen start
-            associatedAxisEnd: 200,
-            shouldRenderAboveSeries: false,
-            color: const Color.fromARGB(5, 197, 239, 197),    //farve
-            opacity: 0.5,                                      //gennemsigtighed (0-1)
-            ),
-        ]
-      ),
-      primaryYAxis: NumericAxis(
-        minimum: 70,
-        maximum: 300,
-        plotBands: <PlotBand>[
-          PlotBand(                             //LOW stiplet linje
-                isVisible: true,
-                start: 100,
-                end: 100,
-                borderWidth: 2,
-                borderColor: Colors.red,
-                dashArray: const <double>[4, 5],
-                text: 'LOW',
-                textStyle: const TextStyle(color: Colors.red),
-                horizontalTextAlignment: TextAnchor.end,
-                ),      
-          PlotBand(                             //HIGH stiplet linje
-                isVisible: true,
-                start: 220,
-                end: 220,
-                borderWidth: 2,
-                borderColor: Colors.red,
-                dashArray: const <double>[4, 5],
-                text: 'HIGH',
-                textStyle: const TextStyle(color: Colors.red),
-                horizontalTextAlignment: TextAnchor.end,
+
+@override
+  Widget build(BuildContext context) {
+  return Scaffold(
+            body: Center(
+                child: Container(
+                    child: Column(children: [
+                      Container(
+                        child: SfCartesianChart(
+                          title: ChartTitle(text: 'CGM-data'),
+                          legend: const Legend(isVisible: false),
+                          series: <ChartSeries>[
+                            LineSeries<LiveData, DateTime>(
+                              dataSource: chartData,
+                              xValueMapper: (LiveData data, _) => data.time,
+                              yValueMapper: (LiveData data, _) => data.speed,
+                            ),
+                          ],
+                          primaryXAxis: DateTimeAxis(
+                          intervalType: DateTimeIntervalType.auto, interval:1,
+                          plotBands: <PlotBand>[                                      //grøn bånd
+                                PlotBand(
+                                isVisible: true,
+                                start: DateTime(2021,2,8,0,0),      //x-aksen start - går nok galt når vi ændrer dagen
+                                end: DateTime(2021,2,8,14,15),
+                                associatedAxisStart: 120,           //y-aksen start
+                                associatedAxisEnd: 200,
+                                shouldRenderAboveSeries: false,
+                                color: const Color.fromARGB(5, 197, 239, 197),    //farve
+                                opacity: 0.5,                                      //gennemsigtighed (0-1)
+                                ),
+                            ]
+                          ),
+                          primaryYAxis: NumericAxis(
+                            minimum: 70,
+                            maximum: 300,
+                            plotBands: <PlotBand>[
+                              PlotBand(                             //LOW stiplet linje
+                                    isVisible: true,
+                                    start: 100,
+                                    end: 100,
+                                    borderWidth: 2,
+                                    borderColor: Colors.red,
+                                    dashArray: const <double>[4, 5],
+                                    text: 'LOW',
+                                    textStyle: const TextStyle(color: Colors.red),
+                                    horizontalTextAlignment: TextAnchor.end,
+                                    ),
+                              PlotBand(                             //HIGH stiplet linje
+                                    isVisible: true,
+                                    start: 220,
+                                    end: 220,
+                                    borderWidth: 2,
+                                    borderColor: Colors.red,
+                                    dashArray: const <double>[4, 5],
+                                    text: 'HIGH',
+                                    textStyle: const TextStyle(color: Colors.red),
+                                    horizontalTextAlignment: TextAnchor.end,
+                                    )
+                                  ]
+                                ),
+                              ),
+                            ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 30),
+                        child: Container(
+                          height: 50,
+                          child: SfCartesianChart(
+                            legend: const Legend(isVisible: false),
+                            series: <ChartSeries>[
+                              ScatterSeries<Register, DateTime>(
+                                dataSource: registerData,
+                                xValueMapper: (Register data, _) => data.times,
+                                yValueMapper: (Register data, _) => data.eating,
+                                markerSettings: const MarkerSettings(height: 15,
+                                      width: 15,
+                                      // Scatter will render in diamond shape
+                                      shape: DataMarkerType.diamond
+                                      )
+                              ),
+                            ],
+                            primaryXAxis: DateTimeAxis(
+                            intervalType: DateTimeIntervalType.auto, interval:1,
+                            isVisible: false),
+                            primaryYAxis: NumericAxis(minimum: 0, maximum: 2,interval: 2,
+                            isVisible: false
+                            )
+                        ),
+                                          ),
+                      )
+                  ],
                 )
-        ]
-        ),
-    )));
-  }
+              )
+            )
+          );
+}
 
 /*   @override
   Widget build(BuildContext context) {
@@ -190,4 +290,12 @@ class LiveData {
   final num? speed;
 
   LiveData({this.time, this.speed});
+}
+
+
+class Register {
+  final DateTime? times;
+  final num? eating;
+  final num? exercise;
+  Register({this.eating, this.times, this.exercise});
 }
