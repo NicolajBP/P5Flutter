@@ -103,22 +103,25 @@ updateDataSource(Timer timer){
 // Det Her er widget der bygger grafen op
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-            body: SfCartesianChart(
-      title: ChartTitle(text: 'CGM-data'),
-      legend: const Legend(isVisible: false),
-      series: <ChartSeries>[
-        LineSeries<LiveData, DateTime>(
-          dataSource: chartData,
-          xValueMapper: (LiveData data, _) => data.time,
-          yValueMapper: (LiveData data, _) => data.speed,
+    return Scaffold(
+            body: Column(children: [
+            SfCartesianChart(
+              title: ChartTitle(text: 'CGM-data'),
+              legend: const Legend(isVisible: false),
+              series: <ChartSeries>[
+                LineSeries<LiveData, DateTime>(
+                  dataSource: chartData,
+                  xValueMapper: (LiveData data, _) => data.time,
+                  yValueMapper: (LiveData data, _) => data.speed,
+                )
+              ],
+            primaryXAxis: DateTimeAxis(intervalType: DateTimeIntervalType.hours, interval:1),
+          primaryYAxis: NumericAxis(minimum: 70, maximum: 300),
         )
       ],
-      primaryXAxis: DateTimeAxis(intervalType: DateTimeIntervalType.hours, interval:1),
-      primaryYAxis: NumericAxis(minimum: 70, maximum: 300),
-    )));
-  }
+    )
+  );
+}
 
 /*   @override
   Widget build(BuildContext context) {
