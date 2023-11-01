@@ -33,7 +33,7 @@ class GetCgmData extends StatelessWidget {
           debugPrint("${data['cgmData']["0"]}");
           List<dynamic> cgmData = [];
 
-          for (var i = 0; i < 2; i++) { // Den siger null når der er mere end i < 2
+          for (var i = 0; i < 20; i++) { // Den siger null når der er mere end i < 2
             // cgmData[i] = data['cgmData']["$i"];
             num data2add = num.parse("${data['cgmData']["$i"]}");
             cgmData.add(data2add);

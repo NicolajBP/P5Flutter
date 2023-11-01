@@ -73,6 +73,7 @@ class _RegisterPageState extends State<RegisterPage> {
               "cgmData": {
                 "0": 154.8,
                 "1": 147.6,
+                "2": 100.0, // IKKE DEN RIGTIGE VÆRDI, INDSÆT KORREKT
                 "3": 145.8,
                 "4": 133.2,
                 "5": 126.0,
