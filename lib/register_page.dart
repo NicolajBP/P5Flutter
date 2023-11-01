@@ -6,10 +6,8 @@ import 'package:p5/components/MyTextField.dart';
 import 'package:p5/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-DateTime now = DateTime.now(); 
-String dateYYYY_MM_DD = now.toString().substring(0,10);
-
+DateTime now = DateTime.now();
+String dateYYYY_MM_DD = now.toString().substring(0, 10);
 
 class RegisterPage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
@@ -21,16 +19,12 @@ class RegisterPage extends StatefulWidget {
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
-
-
 class _RegisterPageState extends State<RegisterPage> {
   // Text editing controllers
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-
-
 
   String errorMessage = ''; // Store the error message
 
@@ -48,54 +42,63 @@ class _RegisterPageState extends State<RegisterPage> {
     // try creating the user
     try {
       // CGMData cgmData = CGMData(measurements: "2")
-  
+
       // check if password is confirmed
       if (passwordController.text == confirmPasswordController.text) {
-        final UserCredential currentUser = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: usernameController.text,
-        password: passwordController.text,
+        final UserCredential currentUser =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: usernameController.text,
+          password: passwordController.text,
         );
         // Map<String, dynamic> ?data = {"email": usernameController.text};
         var collection = FirebaseFirestore.instance.collection("users");
         collection
-        .doc(currentUser.user!.uid)
-        .set({
-          "userInfo": {
-            "email": usernameController.text,
-            "userType": "patient",
-            "uid": currentUser.user!.uid
-          },
-        })
-        .then((_) => print("Added"))
-        .catchError((error) => print("Add failed: $error"));
-        
+            .doc(currentUser.user!.uid)
+            .set({
+              "userInfo": {
+                "email": usernameController.text,
+                "userType": "patient",
+                "uid": currentUser.user!.uid
+              },
+            })
+            .then((_) => print("Added"))
+            .catchError((error) => print("Add failed: $error"));
 
         collection
-        .doc(currentUser.user!.uid)
-        .collection("patientData")
-        .doc(dateYYYY_MM_DD)
-        .set({ // Tilføjer attributter
-          "cgmData": {
-            "0": "",
-            "1": "",
-            "2": "",
-          },
-          "exerciseEntries": {
-            "0": {
-              "type": "",
-              "intensity": "",
-              "timeStamp": ""
-            },
-            "1": {
-              "type": "",
-              "intensity": "",
-              "timeStamp": ""
-            }
-          },
-        })
-        .then((_) => print("Added"))
-        .catchError((error) => print("Add failed: $error"));
-
+            .doc(currentUser.user!.uid)
+            .collection("patientData")
+            .doc(dateYYYY_MM_DD)
+            .set({
+              // Tilføjer attributter
+              "cgmData": {
+                "0": 154.8,
+                "1": 147.6,
+                "3": 145.8,
+                "4": 133.2,
+                "5": 126.0,
+                "6": 135.0,
+                "7": 147.6,
+                "8": 142.2,
+                "9": 140.4,
+                "10": 149.4,
+                "11": 145.8,
+                "12": 136.8,
+                "13": 145.8,
+                "14": 149.4,
+                "15": 145.8,
+                "16": 142.2,
+                "17": 140.4,
+                "18": 138.6,
+                "19": 145.8,
+                "20": 147.6,
+              },
+              "exerciseEntries": {
+                "0": {"type": "", "intensity": "", "timeStamp": ""},
+                "1": {"type": "", "intensity": "", "timeStamp": ""}
+              },
+            })
+            .then((_) => print("Added"))
+            .catchError((error) => print("Add failed: $error"));
       } else {
         // show error message "passwords dont match"
         setState(() {
@@ -171,7 +174,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 inputType: TextInputType.text,
                 isPassword: true,
               ),
-              
+
               // Confirm password field
               MyTextField(
                 controller: confirmPasswordController,
