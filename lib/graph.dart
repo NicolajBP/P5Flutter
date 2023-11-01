@@ -8,11 +8,18 @@ class LiveChartWidget extends StatefulWidget {
 
 class _LiveChartWidgetState extends State<LiveChartWidget> {
   late List<LiveData> chartData;
+  late ZoomPanBehavior _zoomPanBehavior;
   /*  late ChartSeriesController _chartSeriesController; */
 
   @override
   void initState() {
     super.initState();
+    _zoomPanBehavior = ZoomPanBehavior(
+                  enableSelectionZooming: true,
+                  selectionRectBorderColor: Colors.red,
+                  selectionRectBorderWidth: 1,
+                  selectionRectColor: Colors.grey
+                );
     chartData = getChartData();
 
     /* Timer.periodic(const Duration(seconds: 1), updateDataSource); */
@@ -104,6 +111,7 @@ updateDataSource(Timer timer){
                 child: Column(
       children: [
         SfCartesianChart(
+          zoomPanBehavior: _zoomPanBehavior,
           title: ChartTitle(text: 'CGM-data'),
           legend: const Legend(isVisible: false),
           series: <ChartSeries>[
