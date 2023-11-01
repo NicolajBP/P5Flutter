@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:p5/register_page.dart';
@@ -113,7 +114,9 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
           .update({
             "nutrientEntries": FieldValue.arrayUnion([entryData])
           })
+          // ignore: avoid_print
           .then((_) => print("Added"))
+          // ignore: avoid_print
           .catchError((error) => print("Add failed: $error"));
 
       // ignore: use_build_context_synchronously
@@ -141,6 +144,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       });
     } catch (e) {
       debugPrint("Error saving to Firestoe $e");
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Error saving the entry, try again.'),
