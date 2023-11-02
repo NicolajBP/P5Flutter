@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+// ignore: use_key_in_widget_constructors
 class LiveChartWidget extends StatefulWidget {
   @override
   State<LiveChartWidget> createState() => _LiveChartWidgetState();
@@ -100,6 +101,7 @@ updateDataSource(Timer timer){
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
+            // ignore: avoid_unnecessary_containers
             child: Container(
                 child: Column(
       children: [
