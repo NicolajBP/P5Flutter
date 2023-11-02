@@ -30,14 +30,14 @@ class LiveChartWidget extends StatefulWidget {
 class _LiveChartWidgetState extends State<LiveChartWidget> {
   late List<LiveData> chartData;
   late ZoomPanBehavior _zoomPanBehavior;
-  final List<dynamic> cgmValues;
+  final List<dynamic> cgmValues; // Vi laver en masse lister / arrays for at gemme vores værdier fra databasen så de kan indsættes i grafen
   final List<dynamic> cgmTimeStamps;
   final List<dynamic> cgmNutrientIntakes;
   final List<dynamic> cgmNutrientValues;
   final List<dynamic> exerciseNotes;
   final List<dynamic> exerciseValues;
 
-  _LiveChartWidgetState(
+  _LiveChartWidgetState( // Constructor (?)
       this.cgmValues,
       this.cgmTimeStamps,
       this.cgmNutrientIntakes,
@@ -49,7 +49,7 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
   @override
   void initState() {
     super.initState();
-    _zoomPanBehavior = ZoomPanBehavior(
+    _zoomPanBehavior = ZoomPanBehavior( // Noget med zoom som Seb har lavet?
         enableSelectionZooming: true,
         selectionRectBorderColor: Colors.red,
         selectionRectBorderWidth: 1,
@@ -61,10 +61,10 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
 
 // Den behøver ikke opdatere hele tiden, den opdatere hver gang man går på homepage,så hvis den downloader data fra firebase inden opdatere den fint
 
-  List<LiveData> getChartData() {
+  List<LiveData> getChartData() { // Function der returnerer dataen til grafen
     List<LiveData> mapLiveData = [];
 
-    for (var i = 0; i < 96; i++) {
+    for (var i = 0; i < 96; i++) { // Vi indlæser alt data til grafen i en for loop
       // For-loop for at spare tid på at skrive hvad der skal returneres af <LiveData> nedenfor
       mapLiveData.add(
         LiveData(
@@ -103,12 +103,12 @@ updateDataSource(Timer timer){
           title: ChartTitle(text: 'CGM-data'),
           legend: const Legend(isVisible: false),
           series: <ChartSeries>[
-            LineSeries<LiveData, DateTime>(
+            LineSeries<LiveData, DateTime>( // Her plottes linjen på grafen
               dataSource: chartData,
               xValueMapper: (LiveData data, _) => data.time,
               yValueMapper: (LiveData data, _) => data.bloodSugarLevel,
             ),
-            ScatterSeries<LiveData, DateTime>(
+            ScatterSeries<LiveData, DateTime>( // Her plottes nutrient intake ikonerne
                 dataSource: chartData,
                 xValueMapper: (LiveData data, _) => data.time,
                 yValueMapper: (LiveData data, _) => data.nutrientIntakeValue,
@@ -117,7 +117,7 @@ updateDataSource(Timer timer){
                     height: 10,
                     width: 10,
                     image: NetworkImage('images/INTAKE.png'))),
-            ScatterSeries<LiveData, DateTime>(
+            ScatterSeries<LiveData, DateTime>( // Her plottes exercise ikonerne
                 dataSource: chartData,
                 xValueMapper: (LiveData data, _) => data.time,
                 yValueMapper: (LiveData data, _) => data.exerciseValue,
@@ -132,7 +132,7 @@ updateDataSource(Timer timer){
               interval: 1,
               plotBands: <PlotBand>[
                 //grøn bånd
-                PlotBand(
+                PlotBand( // Er det her den grønne boks på grafen??
                   isVisible: true,
                   start: cgmTimeStamps[
                       0], //x-aksen start - går nok galt når vi ændrer dagen
@@ -198,7 +198,7 @@ updateDataSource(Timer timer){
   } */
 }
 
-class LiveData {
+class LiveData { // Her defineres klassen LiveData
   final DateTime? time;
   final num? bloodSugarLevel;
   final num? nutrientIntakeValue;
