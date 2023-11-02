@@ -71,7 +71,7 @@ class _RegisterPageState extends State<RegisterPage> {
             .set({
               // Tilføjer attributter
               "cgmData": {
-                "0": 154.8,
+                "0": {"mg/dL": 154.8, "timeStamp": "04-02-2021  00:00:00"},
                 "1": 147.6,
                 "2": 100.0, // IKKE DEN RIGTIGE VÆRDI, INDSÆT KORREKT
                 "3": 145.8,

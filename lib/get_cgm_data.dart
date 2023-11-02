@@ -30,13 +30,14 @@ class GetCgmData extends StatelessWidget {
           Map<String, dynamic> data =
               snapshot.data!.data() as Map<String, dynamic>;
 
-          debugPrint("${data['cgmData']["0"]}");
-          List<dynamic> cgmData = [];
+          debugPrint("${data['cgmData']["0"]["mg/dL"]}");
+          List<dynamic> cgmData = []; // Man skal åbenbart gøre sådan her for at lave et array i Flutter
 
-          for (var i = 0; i < 20; i++) { // Den siger null når der er mere end i < 2
+          for (var i = 0; i < 1; i++) { // Det er åbenbart sådan her man skal lave for-loops i Flutter
             // cgmData[i] = data['cgmData']["$i"];
-            num data2add = num.parse("${data['cgmData']["$i"]}");
-            cgmData.add(data2add);
+            num data2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}"); // Konverterer String fra JSON til num da vi skal bruge det til grafen
+            DateTime time2add = DateTime.parse("${data['cgmData']["$i"]["timeStamp"]}");
+            cgmData.add(data2add); // Tildeler num-værdien fra ovenstående linje til arrayet / listen
           }
 
           return Container(
