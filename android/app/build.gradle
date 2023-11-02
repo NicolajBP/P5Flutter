@@ -23,17 +23,16 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.example.p5"
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
 
     sourceSets {
@@ -41,10 +40,7 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId "com.example.p5"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion flutter.minSdkVersion
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
@@ -53,9 +49,7 @@ android {
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            // Configure your release signingConfig here
         }
     }
 }
@@ -65,19 +59,19 @@ flutter {
 }
 
 dependencies {
-  // ...
+    // ...
 
-  // Import the Firebase BoM
-  implementation(platform("com.google.firebase:firebase-bom:32.5.0"))
+    // Import the Firebase BoM
+    implementation platform("com.google.firebase:firebase-bom:32.5.0")
 
-  // When using the BoM, you don't specify versions in Firebase library dependencies
+    // When using the BoM, you don't specify versions in Firebase library dependencies
 
-  // Add the dependency for the Firebase SDK for Google Analytics
-  implementation("com.google.firebase:firebase-analytics")
+    // Add the dependency for the Firebase SDK for Google Analytics
+    implementation "com.google.firebase:firebase-analytics"
 
-  // TODO: Add the dependencies for any other Firebase products you want to use
-  // See https://firebase.google.com/docs/android/setup#available-libraries
-  // For example, add the dependencies for Firebase Authentication and Cloud Firestore
-  implementation("com.google.firebase:firebase-auth")
-  implementation("com.google.firebase:firebase-firestore")
+    // TODO: Add the dependencies for any other Firebase products you want to use
+    // See https://firebase.google.com/docs/android/setup#available-libraries
+    // For example, add the dependencies for Firebase Authentication and Cloud Firestore
+    implementation "com.google.firebase:firebase-auth"
+    implementation "com.google.firebase:firebase-firestore"
 }
