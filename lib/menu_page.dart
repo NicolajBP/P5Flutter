@@ -90,6 +90,7 @@ class _MenuPageState extends State<MenuPage> {
               padding: const EdgeInsets.all(5.0),
               child: OutlinedButton.icon(               //logout button
                 onPressed: () {
+                  
                 }, 
                 icon: const Icon(
                   Icons.logout
