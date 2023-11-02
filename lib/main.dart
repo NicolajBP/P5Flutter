@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:p5/Homepage/home_page.dart';
 import 'package:p5/MenuPage/menu_page.dart';
+import 'package:p5/components/firebase_api.dart';
 import 'package:p5/trends.dart';
 
 
@@ -17,9 +18,9 @@ Key password = const Key("password");
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
+  await FirebaseApi(). initNotifications();
+
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
