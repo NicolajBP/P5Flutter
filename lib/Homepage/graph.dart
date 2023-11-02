@@ -182,7 +182,9 @@ updateDataSource(Timer timer){
 class LiveData {
   final DateTime? time;
   final num? bloodSugarLevel;
+  final num? nutrientIntakeValue;
+  final String? nutrientIntakeNote;
   List<dynamic>? mappedData;
 
-  LiveData({this.time, this.bloodSugarLevel, this.mappedData});
+  LiveData({this.time, this.bloodSugarLevel, this.mappedData, this.nutrientIntakeValue, this.nutrientIntakeNote});
 }
