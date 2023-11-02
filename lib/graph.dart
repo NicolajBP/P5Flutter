@@ -37,8 +37,8 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
   List<LiveData> getChartData() {
     List<LiveData> mapLiveData = [];
 
-
-    for (var i = 0; i < 96; i++) { // For-loop for at spare tid på at skrive hvad der skal returneres af <LiveData> nedenfor
+    for (var i = 0; i < 96; i++) {
+      // For-loop for at spare tid på at skrive hvad der skal returneres af <LiveData> nedenfor
       mapLiveData
           .add(LiveData(time: cgmTimeStamps[i], bloodSugarLevel: cgmValues[i]));
     }
@@ -61,21 +61,23 @@ updateDataSource(Timer timer){
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-            body: SfCartesianChart(
-      title: ChartTitle(text: 'CGM-data'),
-      legend: const Legend(isVisible: false),
-      series: <ChartSeries>[
-        LineSeries<LiveData, DateTime>(
-          dataSource: chartData,
-          xValueMapper: (LiveData data, _) => data.time,
-          yValueMapper: (LiveData data, _) => data.bloodSugarLevel,
-        )
-      ],
-      primaryXAxis:
-          DateTimeAxis(intervalType: DateTimeIntervalType.hours, interval: 1),
-      primaryYAxis: NumericAxis(minimum: 70, maximum: 300),
-    )));
+      child: Scaffold(
+        body: SfCartesianChart(
+          title: ChartTitle(text: 'CGM-data'),
+          legend: const Legend(isVisible: false),
+          series: <ChartSeries>[
+            LineSeries<LiveData, DateTime>(
+              dataSource: chartData,
+              xValueMapper: (LiveData data, _) => data.time,
+              yValueMapper: (LiveData data, _) => data.bloodSugarLevel,
+            )
+          ],
+          primaryXAxis: DateTimeAxis(
+              intervalType: DateTimeIntervalType.hours, interval: 1),
+          primaryYAxis: NumericAxis(minimum: 70, maximum: 300),
+        ),
+      ),
+    );
   }
 
 /*   @override

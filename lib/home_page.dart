@@ -26,6 +26,7 @@ void signUserOut() {
 class _HomePageSate extends State<HomePage> {
   DateTime _selectedDate = DateTime.now();
   final user = FirebaseAuth.instance.currentUser!;
+  final dateUpdater = ValueNotifier<String>(DateTime.now().toString().substring(0,10));
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +51,21 @@ class _HomePageSate extends State<HomePage> {
                 color: Colors.grey),
             onDateChange: (date) {
               _selectedDate = date; //variabel der kender hvilken dag det er
-              dateYYYY_MM_DD = _selectedDate.toString().substring(0,
-                  10); // Bruges til at indlæse "YYYY-MM-DD" (document ID) fra databasen
+              dateUpdater.value = _selectedDate.toString().substring(0,10);
+              // dateYYYY_MM_DD = _selectedDate.toString().substring(0,10); // Bruges til at indlæse "YYYY-MM-DD" (document ID) fra databasen
+              debugPrint("Selected day: $dateYYYY_MM_DD");
             },
           ),
         ),
-        GetCgmData(user.uid,dateYYYY_MM_DD),
+        ValueListenableBuilder(
+          //TODO 2nd: listen playerPointsToAdd
+          valueListenable: dateUpdater,
+          builder: (context, value, widget) {
+            // TODO here you can setState or whatever you need
+            return GetCgmData(user.uid, dateUpdater.value);
+          },
+        ),
+        // GetCgmData(user.uid, dateYYYY_MM_DD),
         // Container(
         //   height: 250,
         //   width: double.infinity,

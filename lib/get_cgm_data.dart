@@ -53,7 +53,9 @@ class GetCgmData extends StatelessWidget {
           // return LiveChartWidget();
         }
 
-        return Text("loading");
+        return Center(
+          child: CircularProgressIndicator(), // Loadende cirkel hvis ikke der er data endnu
+        );;
       },
     );
   }
