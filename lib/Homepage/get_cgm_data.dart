@@ -33,22 +33,25 @@ class GetCgmData extends StatelessWidget {
 
           debugPrint("${data['cgmData']["0"]["mg/dL"]}");
           debugPrint("${data['cgmData']["0"]["timeStamp"]}");
-          List<dynamic> cgmTimeStamps = [];
-          List<dynamic> cgmValues = []; // Man skal åbenbart gøre sådan her for at lave et array i Flutter
+          debugPrint("${data['cgmData']["0"]["nutrientIntake"]}");
+          List<dynamic> cgmTimeStamps = []; // Man skal åbenbart gøre sådan her for at lave et array i Flutter
+          List<dynamic> cgmValues = []; 
+          List<dynamic> cgmNutrientNotes = [];
+          List<dynamic> cgmNutrientValues = [];
 
           for (var i = 0; i < 96; i++) { // Det er åbenbart sådan her man skal lave for-loops i Flutter
-            // cgmData[i] = data['cgmData']["$i"];
             num data2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}"); // Konverterer String fra JSON til num da vi skal bruge det til grafen
             DateTime time2add = DateTime.parse("${data['cgmData']["$i"]["timeStamp"]}");
-            assert(data2add is num);
-            // String formattedDate = DateFormat('yyyy-MM-dd').format(time2add);
-            cgmValues.add(data2add); // Tildeler num-værdien fra ovenstående linje til arrayet / listen
-            cgmTimeStamps.add(time2add);
+            String food2add = "${data['cgmData']["$i"]["nutrientIntake"]}";
+
+            cgmValues.add(data2add); // Tildeler num-værdien (blodsukkerniveau)fra ovenstående linje til arrayet / listen
+            cgmTimeStamps.add(time2add); // Vi tilføjer timestamps til arrayet
+            cgmNutrientNotes.add(food2add); // Vi tilføjer mad til arrayet
           }
         
 
           return Container(
-              height: 250, width: double.infinity, child: LiveChartWidget(cgmValues, cgmTimeStamps));
+              height: 250, width: double.infinity, child: LiveChartWidget(cgmValues, cgmTimeStamps, cgmNutrientNotes));
           // return Text("Full Name: ${data['cgmData']}");
           // return LiveChartWidget();
         }

@@ -9,12 +9,13 @@ import 'package:path/path.dart';
 class LiveChartWidget extends StatefulWidget {
   final List<dynamic> cgmValues;
   final List<dynamic> cgmTimeStamps;
+  final List<dynamic> cgmNutrientIntakes;
 
-  LiveChartWidget(this.cgmValues, this.cgmTimeStamps);
+  LiveChartWidget(this.cgmValues, this.cgmTimeStamps, this.cgmNutrientIntakes);
 
   @override
   State<LiveChartWidget> createState() =>
-      _LiveChartWidgetState(cgmValues, cgmTimeStamps);
+      _LiveChartWidgetState(cgmValues, cgmTimeStamps, cgmNutrientIntakes);
 }
 
 class _LiveChartWidgetState extends State<LiveChartWidget> {
@@ -22,19 +23,20 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
   late ZoomPanBehavior _zoomPanBehavior;
   final List<dynamic> cgmValues;
   final List<dynamic> cgmTimeStamps;
+  final List<dynamic> cgmNutrientIntakes;
 
-  _LiveChartWidgetState(this.cgmValues, this.cgmTimeStamps);
+  _LiveChartWidgetState(
+      this.cgmValues, this.cgmTimeStamps, this.cgmNutrientIntakes);
   /*  late ChartSeriesController _chartSeriesController; */
 
-@override
+  @override
   void initState() {
     super.initState();
     _zoomPanBehavior = ZoomPanBehavior(
-                  enableSelectionZooming: true,
-                  selectionRectBorderColor: Colors.red,
-                  selectionRectBorderWidth: 1,
-                  selectionRectColor: Colors.grey
-                );
+        enableSelectionZooming: true,
+        selectionRectBorderColor: Colors.red,
+        selectionRectBorderWidth: 1,
+        selectionRectColor: Colors.grey);
     chartData = getChartData();
 
     /* Timer.periodic(const Duration(seconds: 1), updateDataSource); */
@@ -47,8 +49,13 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
 
     for (var i = 0; i < 96; i++) {
       // For-loop for at spare tid på at skrive hvad der skal returneres af <LiveData> nedenfor
-      mapLiveData
-          .add(LiveData(time: cgmTimeStamps[i], bloodSugarLevel: cgmValues[i]));
+      cgmNutrientIntakes[i] != null
+          ? mapLiveData.add(
+              LiveData(time: cgmTimeStamps[i], bloodSugarLevel: cgmValues[i]))
+          : mapLiveData.add(LiveData(
+              time: cgmTimeStamps[i],
+              bloodSugarLevel: cgmValues[i],
+              nutrientIntakeValue: cgmValues[i]));
     }
 
     return mapLiveData;
@@ -83,17 +90,15 @@ updateDataSource(Timer timer){
               xValueMapper: (LiveData data, _) => data.time,
               yValueMapper: (LiveData data, _) => data.bloodSugarLevel,
             ),
-            // ScatterSeries<LiveData, DateTime>(
-            //   dataSource: chartData,
-            //   xValueMapper: (LiveData data, _) => data.time,
-            //   yValueMapper: (LiveData data, _) => data.neutrientIntake,
-            //   markerSettings:const MarkerSettings(
-            //     shape: DataMarkerType.image,
-            //     height: 10,
-            //     width: 10,
-            //     image: NetworkImage('images/INTAKE.png')
-            //   )
-            //   ),
+            ScatterSeries<LiveData, DateTime>(
+                dataSource: chartData,
+                xValueMapper: (LiveData data, _) => data.time,
+                yValueMapper: (LiveData data, _) => data.nutrientIntakeValue,
+                markerSettings: const MarkerSettings(
+                    shape: DataMarkerType.image,
+                    height: 10,
+                    width: 10,
+                    image: NetworkImage('images/INTAKE.png'))),
             //   ScatterSeries<LiveData, DateTime>(
             //   dataSource: chartData,
             //   xValueMapper: (LiveData data, _) => data.time,
@@ -113,7 +118,8 @@ updateDataSource(Timer timer){
                 //grøn bånd
                 PlotBand(
                   isVisible: true,
-                  start: cgmTimeStamps[0], //x-aksen start - går nok galt når vi ændrer dagen
+                  start: cgmTimeStamps[
+                      0], //x-aksen start - går nok galt når vi ændrer dagen
                   end: cgmTimeStamps[95],
                   associatedAxisStart: 120, //y-aksen start
                   associatedAxisEnd: 200,
@@ -151,10 +157,7 @@ updateDataSource(Timer timer){
           ]),
         ),
       ],
-    )
-    )
-    )
-    );
+    ))));
   }
 
 /*   @override
@@ -186,5 +189,10 @@ class LiveData {
   final String? nutrientIntakeNote;
   List<dynamic>? mappedData;
 
-  LiveData({this.time, this.bloodSugarLevel, this.mappedData, this.nutrientIntakeValue, this.nutrientIntakeNote});
+  LiveData(
+      {this.time,
+      this.bloodSugarLevel,
+      this.mappedData,
+      this.nutrientIntakeValue,
+      this.nutrientIntakeNote});
 }
