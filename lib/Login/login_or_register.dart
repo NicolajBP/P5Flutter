@@ -32,6 +32,7 @@ class _LoginOrRegisterPageState extends State<LoginOrRegisterPage> {
       return RegisterPage(onTap: togglePages);
     }
     
+    // ignore: dead_code
     return Container();
   }
 }

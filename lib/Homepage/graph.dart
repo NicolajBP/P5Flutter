@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:intl/intl.dart';
+// ignore: unused_import
 import 'package:p5/Login/register_page.dart';
+// ignore: depend_on_referenced_packages
 import 'package:syncfusion_flutter_charts/charts.dart';
+// ignore: unused_import
 import 'package:excel/excel.dart';
+// ignore: unused_import
 import 'dart:io';
+// ignore: depend_on_referenced_packages, unused_import
 import 'package:path/path.dart';
 
 class LiveChartWidget extends StatefulWidget {
@@ -14,10 +20,12 @@ class LiveChartWidget extends StatefulWidget {
   final List<dynamic> exerciseNotes;
   final List<dynamic> exerciseValues;
 
-  LiveChartWidget(this.cgmValues, this.cgmTimeStamps, this.cgmNutrientIntakes,
+  // ignore: use_key_in_widget_constructors
+  const LiveChartWidget(this.cgmValues, this.cgmTimeStamps, this.cgmNutrientIntakes,
       this.cgmNutrientValues, this.exerciseNotes, this.exerciseValues);
 
   @override
+  // ignore: no_logic_in_create_state
   State<LiveChartWidget> createState() => _LiveChartWidgetState(
       cgmValues,
       cgmTimeStamps,
@@ -95,8 +103,7 @@ updateDataSource(Timer timer){
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-            child: Container(
-                child: Column(
+            child: Column(
       children: [
         SfCartesianChart(
           zoomPanBehavior: _zoomPanBehavior,
@@ -109,40 +116,40 @@ updateDataSource(Timer timer){
               yValueMapper: (LiveData data, _) => data.bloodSugarLevel,
             ),
             ScatterSeries<LiveData, DateTime>( // Her plottes nutrient intake ikonerne
-                dataSource: chartData,
-                xValueMapper: (LiveData data, _) => data.time,
-                yValueMapper: (LiveData data, _) => data.nutrientIntakeValue,
-                markerSettings: const MarkerSettings(
-                    shape: DataMarkerType.image,
-                    height: 10,
-                    width: 10,
-                    image: NetworkImage('images/INTAKE.png'))),
+            dataSource: chartData,
+            xValueMapper: (LiveData data, _) => data.time,
+            yValueMapper: (LiveData data, _) => data.nutrientIntakeValue,
+            markerSettings: const MarkerSettings(
+                shape: DataMarkerType.image,
+                height: 10,
+                width: 10,
+                image: NetworkImage('images/INTAKE.png'))),
             ScatterSeries<LiveData, DateTime>( // Her plottes exercise ikonerne
-                dataSource: chartData,
-                xValueMapper: (LiveData data, _) => data.time,
-                yValueMapper: (LiveData data, _) => data.exerciseValue,
-                markerSettings: const MarkerSettings(
-                    shape: DataMarkerType.image,
-                    height: 12,
-                    width: 12,
-                    image: NetworkImage('images/EXERCISE.png')))
+            dataSource: chartData,
+            xValueMapper: (LiveData data, _) => data.time,
+            yValueMapper: (LiveData data, _) => data.exerciseValue,
+            markerSettings: const MarkerSettings(
+                shape: DataMarkerType.image,
+                height: 12,
+                width: 12,
+                image: NetworkImage('images/EXERCISE.png')))
           ],
           primaryXAxis: DateTimeAxis(
               intervalType: DateTimeIntervalType.auto,
               interval: 1,
               plotBands: <PlotBand>[
-                //grøn bånd
-                PlotBand( // Er det her den grønne boks på grafen??
-                  isVisible: true,
-                  start: cgmTimeStamps[
-                      0], //x-aksen start - går nok galt når vi ændrer dagen
-                  end: cgmTimeStamps[95],
-                  associatedAxisStart: 120, //y-aksen start
-                  associatedAxisEnd: 200,
-                  shouldRenderAboveSeries: false,
-                  color: const Color.fromARGB(5, 197, 239, 197), //farve
-                  opacity: 0.5, //gennemsigtighed (0-1)
-                ),
+            //grøn bånd
+            PlotBand( // Er det her den grønne boks på grafen??
+              isVisible: true,
+              start: cgmTimeStamps[
+                  0], //x-aksen start - går nok galt når vi ændrer dagen
+              end: cgmTimeStamps[95],
+              associatedAxisStart: 120, //y-aksen start
+              associatedAxisEnd: 200,
+              shouldRenderAboveSeries: false,
+              color: const Color.fromARGB(5, 197, 239, 197), //farve
+              opacity: 0.5, //gennemsigtighed (0-1)
+            ),
               ]),
           primaryYAxis:
               NumericAxis(minimum: 70, maximum: 300, plotBands: <PlotBand>[
@@ -173,7 +180,7 @@ updateDataSource(Timer timer){
           ]),
         ),
       ],
-    ))));
+    )));
   }
 
 /*   @override

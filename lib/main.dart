@@ -76,7 +76,7 @@ class _RootPageState extends State<RootPage> {
   int currentPage = 0;
   List<Widget> pages = [
     // LoginPage(key: password),
-    HomePage(),
+    const HomePage(),
     const Trends(),
     const MenuPage(),
   ];

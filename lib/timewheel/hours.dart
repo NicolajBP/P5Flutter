@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MyHours extends StatefulWidget {
   int hours;
   MyHours({required this.hours});

@@ -1,15 +1,20 @@
+// ignore: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore: unused_import
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:intl/intl.dart';
 import 'package:p5/Homepage/graph.dart';
+// ignore: unused_import
 import 'dart:convert';
 
 class GetCgmData extends StatelessWidget {
   final String documentId;
   final String dateId;
 
-  GetCgmData(this.documentId, this.dateId);
+  // ignore: use_key_in_widget_constructors
+  const GetCgmData(this.documentId, this.dateId);
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +25,11 @@ class GetCgmData extends StatelessWidget {
       builder:
           (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text("Something went wrong");
+          return const Text("Something went wrong");
         }
 
         if (snapshot.hasData && !snapshot.data!.exists) {
-          return Text("Document does not exist");
+          return const Text("Document does not exist");
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
@@ -53,7 +58,7 @@ class GetCgmData extends StatelessWidget {
 
 
             if (("${data['cgmData']["$i"]["nutrientValue"]}").isEmpty) {
-            num? foodValue2add = null;
+            num? foodValue2add;
               cgmNutrientValues.add(foodValue2add); // Vi tilføjer mad til arrayet
             } else {
               num foodValue2add = num.parse("${data['cgmData']["$i"]["nutrientValue"]}");
@@ -61,7 +66,7 @@ class GetCgmData extends StatelessWidget {
             }
 
             if (("${data['cgmData']["$i"]["exerciseValue"]}").isEmpty) {
-            num? exerciseValue2add = null;
+            num? exerciseValue2add;
               cgmExerciseValues.add(exerciseValue2add); // Vi tilføjer mad til arrayet
             } else {
               num exerciseValue2add = num.parse("${data['cgmData']["$i"]["exerciseValue"]}");
@@ -71,13 +76,13 @@ class GetCgmData extends StatelessWidget {
           }
         
 
-          return Container(
+          return SizedBox(
               height: 250, width: double.infinity, child: LiveChartWidget(cgmValues, cgmTimeStamps, cgmNutrientNotes, cgmNutrientValues,cgmExerciseNotes, cgmExerciseValues));
           // return Text("Full Name: ${data['cgmData']}");
           // return LiveChartWidget();
         }
 
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(), // Loadende cirkel hvis ikke der er data endnu
         );
       },
