@@ -65,6 +65,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
 
   //data gemmes med denne funktion
   void _saveDataToFirestore() async {
+    // ignore: unused_local_variable
     var collection = FirebaseFirestore.instance.collection("users");
 
     // Opret en liste til at gemme navnene på de manglende felter

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:p5/components/Firebase_api.dart';
 import 'package:p5/home_page.dart';
 import 'package:p5/profile_page.dart';
 import 'package:p5/trends.dart';
@@ -19,6 +20,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseApi().initNotifications();
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
