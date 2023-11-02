@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:p5/timewheel/hours.dart';
 import 'package:p5/timewheel/minutes.dart';
 import 'package:p5/timewheel/days.dart';
-class NotficationPage extends StatefulWidget {
-  const NotficationPage({super.key});
+class TimeWheel extends StatefulWidget {
+  const TimeWheel({super.key});
 
   @override
-  State<NotficationPage> createState() => _NotficationPageState();
+  State<TimeWheel> createState() => _TimeWheelState();
 }
 
-class _NotficationPageState extends State<NotficationPage> {
+class _TimeWheelState extends State<TimeWheel> {
  
 
   int currentday = 0;         //Allokerer plads til hvor værdien skal ind.

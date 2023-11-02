@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:p5/profile_page.dart';
-import 'notfications_page.dart';
+import 'TimeWheel.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
