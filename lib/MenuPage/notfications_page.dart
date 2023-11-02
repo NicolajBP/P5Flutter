@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p5/MenuPage/TimeWheel.dart';
 
 
 class NotficationPage extends StatefulWidget {
@@ -77,7 +78,9 @@ bool _inactivityNotificantion = false;
       ),
 
       _inactivityNotificantion == true ?
-        Column(children: [],)                                             //INPUT tidswheel her
+        const Column(children: [
+          TimeWheel()
+        ],)                                             //INPUT tidswheel her
 
         : Container()
 

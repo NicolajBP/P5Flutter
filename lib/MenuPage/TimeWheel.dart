@@ -11,7 +11,6 @@ class TimeWheel extends StatefulWidget {
 
 class _TimeWheelState extends State<TimeWheel> {
  
-
   int currentday = 0;         //Allokerer plads til hvor værdien skal ind.
   int currenthour = 0;
   int currentminute = 0;
