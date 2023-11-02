@@ -32,7 +32,6 @@ class _HomePageSate extends State<HomePage> {
     return Scaffold(
         body: Column(
       children: [
-        GetCgmData(user.uid,dateYYYY_MM_DD),
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: DatePicker(
@@ -56,6 +55,7 @@ class _HomePageSate extends State<HomePage> {
             },
           ),
         ),
+        GetCgmData(user.uid,dateYYYY_MM_DD),
         // Container(
         //   height: 250,
         //   width: double.infinity,
