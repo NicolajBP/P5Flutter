@@ -24,7 +24,10 @@ void signUserOut() {
 }
 
 class _HomePageSate extends State<HomePage> {
-  DateTime _selectedDate = DateTime.now();
+  // DateTime _selectedDate = DateTime.now(); // Starter med i dag som standard
+  DateTime _selectedDate = DateTime(2023,11,2); // Starter på 2. november som standard (data er importeret for 1., 2. og 3. november)
+
+
   final user = FirebaseAuth.instance.currentUser!;
   final dateUpdater =
       ValueNotifier<String>(DateTime.now().toString().substring(0, 10));

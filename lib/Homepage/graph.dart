@@ -10,12 +10,21 @@ class LiveChartWidget extends StatefulWidget {
   final List<dynamic> cgmValues;
   final List<dynamic> cgmTimeStamps;
   final List<dynamic> cgmNutrientIntakes;
+  final List<dynamic> cgmNutrientValues;
+  final List<dynamic> exerciseNotes;
+  final List<dynamic> exerciseValues;
 
-  LiveChartWidget(this.cgmValues, this.cgmTimeStamps, this.cgmNutrientIntakes);
+  LiveChartWidget(this.cgmValues, this.cgmTimeStamps, this.cgmNutrientIntakes,
+      this.cgmNutrientValues, this.exerciseNotes, this.exerciseValues);
 
   @override
-  State<LiveChartWidget> createState() =>
-      _LiveChartWidgetState(cgmValues, cgmTimeStamps, cgmNutrientIntakes);
+  State<LiveChartWidget> createState() => _LiveChartWidgetState(
+      cgmValues,
+      cgmTimeStamps,
+      cgmNutrientIntakes,
+      cgmNutrientValues,
+      exerciseNotes,
+      exerciseValues);
 }
 
 class _LiveChartWidgetState extends State<LiveChartWidget> {
@@ -24,9 +33,17 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
   final List<dynamic> cgmValues;
   final List<dynamic> cgmTimeStamps;
   final List<dynamic> cgmNutrientIntakes;
+  final List<dynamic> cgmNutrientValues;
+  final List<dynamic> exerciseNotes;
+  final List<dynamic> exerciseValues;
 
   _LiveChartWidgetState(
-      this.cgmValues, this.cgmTimeStamps, this.cgmNutrientIntakes);
+      this.cgmValues,
+      this.cgmTimeStamps,
+      this.cgmNutrientIntakes,
+      this.cgmNutrientValues,
+      this.exerciseNotes,
+      this.exerciseValues);
   /*  late ChartSeriesController _chartSeriesController; */
 
   @override
@@ -49,13 +66,14 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
 
     for (var i = 0; i < 96; i++) {
       // For-loop for at spare tid på at skrive hvad der skal returneres af <LiveData> nedenfor
-      cgmNutrientIntakes[i] != null
-          ? mapLiveData.add(
-              LiveData(time: cgmTimeStamps[i], bloodSugarLevel: cgmValues[i]))
-          : mapLiveData.add(LiveData(
-              time: cgmTimeStamps[i],
-              bloodSugarLevel: cgmValues[i],
-              nutrientIntakeValue: cgmValues[i]));
+      mapLiveData.add(
+        LiveData(
+          time: cgmTimeStamps[i],
+          bloodSugarLevel: cgmValues[i],
+          nutrientIntakeValue: cgmNutrientValues[i],
+          exerciseValue: exerciseValues[i],
+        ),
+      );
     }
 
     return mapLiveData;
@@ -99,17 +117,15 @@ updateDataSource(Timer timer){
                     height: 10,
                     width: 10,
                     image: NetworkImage('images/INTAKE.png'))),
-            //   ScatterSeries<LiveData, DateTime>(
-            //   dataSource: chartData,
-            //   xValueMapper: (LiveData data, _) => data.time,
-            //   yValueMapper: (LiveData data, _) => data.exercise,
-            //   markerSettings:const MarkerSettings(
-            //     shape: DataMarkerType.image,
-            //     height: 10,
-            //     width: 10,
-            //     image: NetworkImage('images/EXERCISE.png')
-            //   )
-            //   )
+            ScatterSeries<LiveData, DateTime>(
+                dataSource: chartData,
+                xValueMapper: (LiveData data, _) => data.time,
+                yValueMapper: (LiveData data, _) => data.exerciseValue,
+                markerSettings: const MarkerSettings(
+                    shape: DataMarkerType.image,
+                    height: 12,
+                    width: 12,
+                    image: NetworkImage('images/EXERCISE.png')))
           ],
           primaryXAxis: DateTimeAxis(
               intervalType: DateTimeIntervalType.auto,
@@ -187,6 +203,9 @@ class LiveData {
   final num? bloodSugarLevel;
   final num? nutrientIntakeValue;
   final String? nutrientIntakeNote;
+  final num? exerciseValue;
+  final String? exerciseNote;
+
   List<dynamic>? mappedData;
 
   LiveData(
@@ -194,5 +213,7 @@ class LiveData {
       this.bloodSugarLevel,
       this.mappedData,
       this.nutrientIntakeValue,
-      this.nutrientIntakeNote});
+      this.nutrientIntakeNote,
+      this.exerciseNote,
+      this.exerciseValue});
 }
