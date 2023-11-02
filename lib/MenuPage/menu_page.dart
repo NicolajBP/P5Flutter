@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:p5/profile_page.dart';
+import 'package:p5/Homepage/home_page.dart';
+import 'package:p5/MenuPage/profile_page.dart';
 import 'notfications_page.dart';
 
 class MenuPage extends StatefulWidget {
@@ -87,18 +88,20 @@ class _MenuPageState extends State<MenuPage> {
           const SizedBox(height: 10),
 
             Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: OutlinedButton.icon(               //logout button
+              padding: const EdgeInsets.all(8.0),
+              child: OutlinedButton.icon(               //notification button
                 onPressed: () {
-                  
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                    return const NotficationPage();
+                  }));
                 }, 
                 icon: const Icon(
-                  Icons.logout
+                  Icons.notifications
                 ),
                 label: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [ Text(
-                  'Log out',
+                  'Notifications',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 25,
@@ -119,23 +122,24 @@ class _MenuPageState extends State<MenuPage> {
                   )
               ),
             ),
+
+            const SizedBox(height: 10),
+
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: OutlinedButton.icon(               //notification button
+              padding: const EdgeInsets.all(5.0),
+              child: OutlinedButton.icon(               //logout button
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-                    return const NotficationPage();
-                  }));
+                  signUserOut();
                 }, 
                 icon: const Icon(
-                  Icons.notifications
+                  Icons.logout
                 ),
                 label: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [ Text(
-                  'Notifications',
+                  'Log out',
                   style: TextStyle(
-                    color: Colors.black,
+                    color: Colors.red,
                     fontSize: 25,
                   ),
                   textAlign: TextAlign.start,
