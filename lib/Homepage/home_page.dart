@@ -71,17 +71,25 @@ final user =FirebaseAuth.instance.currentUser!;
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (BuildContext context) {
-                  return myEntries();
-                }),
+                  return myEntries();  }),
               );
             },
-            child: const Text("MyEntries"),
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.white),
+            ),
+            child: Text("MyEntries",
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.primary
+            ),
+            ),
            ),
+
+      const SizedBox(height: 10),
 
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-        ElevatedButton(                                   //nutrient intake button
+        OutlinedButton(                                   //nutrient intake button
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (BuildContext context) {
@@ -89,21 +97,28 @@ final user =FirebaseAuth.instance.currentUser!;
               return const ReportNutrientIntakePage();
             }));
           }, 
-          style: ElevatedButton.styleFrom(
+          style: OutlinedButton.styleFrom(
+          side: const BorderSide(
+          color: Colors.transparent),
+          elevation: 7,
+          shadowColor:  const Color.fromARGB(255, 209, 198, 191),
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
           shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0))),
             child: const Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Icon(Icons.restaurant, size: 70.0,),
-                Text("Register nutrient intake"),
+                Text("Register \nnutrient intake",
+                style: TextStyle(color: Colors.black),
+                textAlign: TextAlign.center,),
               ],)
             ),
     
   
       const SizedBox(width: 30),
 
-        ElevatedButton(                                       //exercise button
+        OutlinedButton(                                       //exercise button
           onPressed: () {
             Navigator.of(context)
                 .push(MaterialPageRoute(builder: (BuildContext context) {
@@ -111,15 +126,22 @@ final user =FirebaseAuth.instance.currentUser!;
               return const ReportExercise();
             }));
           },
-          style: ElevatedButton.styleFrom(
+          style: OutlinedButton.styleFrom(
+          side: const BorderSide(
+          color: Colors.transparent),
+          elevation: 7,
+          shadowColor:  const Color.fromARGB(255, 209, 198, 191),
+          backgroundColor: Theme.of(context).colorScheme.onPrimary,
           shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0))),
           child: const Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
                  Icon(Icons.directions_run_outlined, size: 70.0,),
-                  Text('Register exercise',
-                  style: TextStyle(height: 1, fontSize: 14)),
+                  Text('Register \nexercise',
+                  style: TextStyle(
+                    color: Colors.black),
+                    textAlign: TextAlign.center,),
         ],)
         )
     ],)

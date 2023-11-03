@@ -52,10 +52,10 @@ class _MenuPageState extends State<MenuPage> {
                   color: Colors.white,
                   size: 80,
                 ),
-                label: const Row(
+                label: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [ 
-                  Column(children: [
+                  const Column(children: [
                     Text('User',
                   style: TextStyle(
                     color: Colors.white,
@@ -72,13 +72,13 @@ class _MenuPageState extends State<MenuPage> {
                   ]),
                 Icon(
                   Icons.arrow_forward_ios,
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.onPrimary,
                 )]
                 ),
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   minimumSize: const Size(600, 100),
-                  side: const BorderSide(color: Colors.teal),
+                  side: BorderSide(color: Theme.of(context).colorScheme.primary),
                   shape:const ContinuousRectangleBorder(),
                   alignment: Alignment.centerLeft,
                   )
@@ -116,7 +116,7 @@ class _MenuPageState extends State<MenuPage> {
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.background,
                   minimumSize: const Size(600, 70),
-                  side: const BorderSide(color: Colors.teal),
+                  side: BorderSide(color: Theme.of(context).colorScheme.primary),
                   shape: LinearBorder.bottom(),
                   alignment: Alignment.centerLeft,
                   )
@@ -134,17 +134,17 @@ class _MenuPageState extends State<MenuPage> {
                 icon: const Icon(
                   Icons.logout
                 ),
-                label: const Row(
+                label: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [ Text(
                   'Log out',
                   style: TextStyle(
-                    color: Colors.red,
+                    color: Theme.of(context).colorScheme.primary,
                     fontSize: 25,
                   ),
                   textAlign: TextAlign.start,
                 ),
-                Icon(
+                const Icon(
                   Icons.arrow_forward_ios,
                   color: Colors.black,
                 )]
@@ -152,7 +152,7 @@ class _MenuPageState extends State<MenuPage> {
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.background,
                   minimumSize: const Size(600, 70),
-                  side: const BorderSide(color: Colors.teal),
+                  side: BorderSide(color: Theme.of(context).colorScheme.primary),
                   shape: LinearBorder.bottom(),
                   alignment: Alignment.centerLeft,
                   )

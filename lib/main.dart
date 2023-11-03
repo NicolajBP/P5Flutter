@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.teal,
+          seedColor: Color.fromRGBO(210, 50, 50, 100),
           brightness: Brightness.light,
         ),
 
@@ -76,7 +76,7 @@ class _RootPageState extends State<RootPage> {
   int currentPage = 0;
   List<Widget> pages = [
     // LoginPage(key: password),
-    HomePage(),
+    const HomePage(),
     const Trends(),
     const MenuPage(),
   ];
@@ -95,10 +95,13 @@ class _RootPageState extends State<RootPage> {
       // ), // onPressed fortæller appen hvad der skal ske når man trykker på
       bottomNavigationBar: NavigationBar(
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.home), label: "Home"),
           NavigationDestination(icon: Icon(Icons.line_axis), label: "Trends"),
+          NavigationDestination(icon: Icon(Icons.home), label: "Home"),
           NavigationDestination(icon: Icon(Icons.menu), label: "Menu")
         ],
+        backgroundColor: Theme.of(context).colorScheme.onSecondary,
+        elevation: 6,
+        shadowColor:  const Color.fromARGB(255, 209, 198, 191),
         onDestinationSelected: (int index) {
           setState(() {
             currentPage = index;
