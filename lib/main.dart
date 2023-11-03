@@ -94,8 +94,8 @@ class _RootPageState extends State<RootPage> {
       // ), // onPressed fortæller appen hvad der skal ske når man trykker på
       bottomNavigationBar: NavigationBar(
         destinations: const [
-          NavigationDestination(icon: Icon(Icons.line_axis), label: "Trends"),
           NavigationDestination(icon: Icon(Icons.home), label: "Home"),
+          NavigationDestination(icon: Icon(Icons.line_axis), label: "Trends"),
           NavigationDestination(icon: Icon(Icons.menu), label: "Menu")
         ],
         backgroundColor: Theme.of(context).colorScheme.onSecondary,
