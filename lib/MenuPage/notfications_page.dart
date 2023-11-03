@@ -10,8 +10,8 @@ class NotficationPage extends StatefulWidget {
 }
 
 class _NotficationPageState extends State<NotficationPage> {
-bool _notifications = false;
-bool _inactivityNotificantion = false;
+bool _notifications = true;
+bool _inactivityNotificantion = true;
 
   @override
   Widget build(BuildContext context) {
