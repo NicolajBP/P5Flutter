@@ -5,7 +5,6 @@ import 'package:p5/Homepage/home_page.dart';
 import 'package:p5/MenuPage/menu_page.dart';
 import 'package:p5/trends.dart';
 
-
 import 'Login/auth.page.dart';
 import 'firebase_options.dart';
 
