@@ -18,13 +18,6 @@ bool _inactivityNotificantion = false;
     return Scaffold(
         appBar: AppBar(                                           //appbar
         title: const Text("Notifications"),
-        automaticallyImplyLeading: true,                          //tilbageknap i appbar
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
       ),
       body: Column(
         children: [

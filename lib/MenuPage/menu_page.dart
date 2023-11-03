@@ -19,14 +19,7 @@ class _MenuPageState extends State<MenuPage> {
 
         appBar: AppBar(
         title: const Text("Menu"),
-        automaticallyImplyLeading: true, //tilbageknap i appbar
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(Icons.arrow_back_ios),
         ),
-      ),
 
       body: ListView(
         padding: EdgeInsets.zero,

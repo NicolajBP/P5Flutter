@@ -21,7 +21,7 @@ class MyTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          focusColor: Colors.blue[700],
+          focusColor: Color.fromRGBO(210, 50, 50, 100),
           focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(color: Color.fromARGB(255, 170, 41, 41)),
           ),

@@ -6,7 +6,7 @@ import 'package:p5/Login/register_page.dart';
 import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
+//import 'package:intl/intl.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:p5/Homepage/graph.dart';
 import 'package:p5/Homepage/get_cgm_data.dart';

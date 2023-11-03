@@ -84,10 +84,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              const Text(
+              Text(
                 'Welcome back',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 10, 172, 10),
+                  color: Theme.of(context).colorScheme.primary,
                   fontSize: 16,
                 ),
               ),
@@ -115,7 +115,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green[700],
+                    backgroundColor: Theme.of(context).colorScheme.primary,
                   ),
                   onPressed: () {
                     signUserIn(context); // Call the sign-in method
