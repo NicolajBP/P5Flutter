@@ -72,7 +72,7 @@ class GetCgmData extends StatelessWidget {
         
 
           return Container(
-              height: 250, width: double.infinity, child: LiveChartWidget(cgmValues, cgmTimeStamps, cgmNutrientNotes, cgmNutrientValues,cgmExerciseNotes, cgmExerciseValues));
+              height: 300, width: double.infinity, child: LiveChartWidget(cgmValues, cgmTimeStamps, cgmNutrientNotes, cgmNutrientValues,cgmExerciseNotes, cgmExerciseValues));
           // return Text("Full Name: ${data['cgmData']}");
           // return LiveChartWidget();
         }

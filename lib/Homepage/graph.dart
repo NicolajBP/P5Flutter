@@ -145,7 +145,8 @@ updateDataSource(Timer timer){
                 ),
               ]),
           primaryYAxis:
-              NumericAxis(minimum: 70, maximum: 300, plotBands: <PlotBand>[
+              NumericAxis(/* minimum: 70, maximum: 400, */ 
+            plotBands: <PlotBand>[
             PlotBand(
               //LOW stiplet linje
               isVisible: true,
