@@ -43,6 +43,15 @@ dependencies:
   excel: ^2.1.0
   firebase_messaging: ^14.7.3
   firebase_analytics: ^10.6.3
+  # Awesome plugins
+  awesome_notifications_core: ^0.8.0 # use the latest version available
+  awesome_notifications: any # <- this version will be managed by core plugin
+  awesome_notifications_fcm: any # <- this version will be managed by core plugin
+  firebase_crashlytics: ^3.4.3
+  
+
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

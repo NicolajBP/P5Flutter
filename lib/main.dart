@@ -17,7 +17,7 @@ Key password = const Key("password");
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
   await FirebaseApi(). initNotifications();
 
