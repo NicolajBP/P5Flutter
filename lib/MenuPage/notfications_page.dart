@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/MenuPage/time_wheel.dart';
 
@@ -12,6 +13,7 @@ class NotficationPage extends StatefulWidget {
 class _NotficationPageState extends State<NotficationPage> {
 bool _notifications = false;
 bool _inactivityNotificantion = false;
+
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +53,10 @@ bool _inactivityNotificantion = false;
         ),
       ),
 
-      _notifications == true ?                                  //Når de er true displayer vi resten
-        Column(
+
+
+
+      if (_notifications == true) Column(
           children: [
                   Padding(
         padding: const EdgeInsets.all(8.0),
@@ -77,8 +81,12 @@ bool _inactivityNotificantion = false;
         ),
       ),
 
-      _inactivityNotificantion == true ?
-        Column(
+
+
+
+      if (_inactivityNotificantion == true) 
+      Column(
+
           children: [
                   Padding(
         padding: const EdgeInsets.all(8.0),
@@ -92,32 +100,69 @@ bool _inactivityNotificantion = false;
             borderRadius: BorderRadius.all(
             Radius.circular(20.0),),
           ),
-          child: SwitchListTile(                                  //selve on/of button
-                title: const Text('Current time between notification:'),
-                value: _inactivityNotificantion,
-                onChanged: (bool value) {
-                    setState(() {
-                      _inactivityNotificantion = value;  }); },             //hvis _notifications = true så er de slået til
-      secondary: const Icon(Icons.access_time),)
+          child: ListTile(                              //selve bar button
+          leading: const Icon(Icons.access_time),      //Icon
+          title: const Text('Current time between notification:'),    //Text  i baren
+          trailing: CupertinoButton(                          //Vi laver en knap til højre side
+            child: const Text('D/H/M'),                          //Knappens tekst
+            onPressed: () {
+              showCupertinoModalPopup(                      //Knappen skal lave et popup ved tryk
+                context: context, 
+                builder: (BuildContext builder) {
+                  return CupertinoPopupSurface(            //Vi returner popup
+                    child: Container(
+                      color: CupertinoColors.white,       //Hvid baggrund
+                      alignment: Alignment.center,
+                      width: double.infinity,
+                      height: 400,
+                      child:  Column(children: [
+                        const Center(
+                          child: SizedBox(                   //Timewheel indsættes henover
+                            width: double.infinity,
+                            height: 300,
+                            child: TimeWheel(),
+                          ),
+                        ),
+                        Center(                              //Knap som gemmer indstillet tid.
+                          child: CupertinoButton(
+                            child: const Text('Gem'), 
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            ),
+                          ),
+                          // Container(                                   //Gradient som jeg opgav xD
+                          //   padding: const EdgeInsets.all(5.0),
+                          //   alignment: Alignment.bottomCenter,
+                          //   gradient: LinearGradient(
+                          //   begin: Alignment.topCenter,
+                          //   end: Alignment.bottomCenter,
+                          //   colors: <Color>[
+                          //     Colors.black.withAlpha(0),
+                          //     Colors.black12,
+                          //     Colors.black45,
+                          //     ],
+                          //   ),
+                          // ),
+                      ],
+                    ),
+                  ),
+                );
+                },
+              );
+            },
+          )
           ),
         ),
       ),
-
-        const Column(children: [
-          SizedBox(
-            height: 300,
-            width: 300,
-            child: TimeWheel()),
-        ],)                                             //INPUT tidswheel her
-
-          ]): Container()
+          )]) else Container()
 
           ],
-        )
-        : Container()                                           //Hvis ikke den er true displayer vi ikke noget
+        ) else Container()                                           //Hvis ikke den er true displayer vi ikke noget
         ]
       ),  
     );  
   } 
 }
+
 

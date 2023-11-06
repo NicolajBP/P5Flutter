@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:p5/timewheel/hours.dart';
 import 'package:p5/timewheel/minutes.dart';
 import 'package:p5/timewheel/days.dart';
+
+
 class TimeWheel extends StatefulWidget {
   const TimeWheel({super.key});
 
@@ -10,39 +12,41 @@ class TimeWheel extends StatefulWidget {
 }
 
 class _TimeWheelState extends State<TimeWheel> {
- late FixedExtentScrollController _controller;
- late FixedExtentScrollController _controller1;
- late FixedExtentScrollController _controller2;
+ late FixedExtentScrollController _controllerday;
+ late FixedExtentScrollController _controllerhour;
+ late FixedExtentScrollController _controllerminute;
+
+ 
 
 @override
 void initState() {
   super.initState();
 
-  _controller = FixedExtentScrollController();
-  _controller1 = FixedExtentScrollController();
-  _controller2 = FixedExtentScrollController();
+  _controllerday = FixedExtentScrollController();
+  _controllerhour = FixedExtentScrollController();
+  _controllerminute = FixedExtentScrollController();
 }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-    //      onPressed: () {
-    //        Navigator.of(context).pop();
       body: SizedBox(
-        width: 300,
-        height: 170,
+        width: double.infinity,
+        height: 600,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             
             //dage
             SizedBox(
-              width: 70,
+              width: 100,
               child: ListWheelScrollView.useDelegate(
-                controller: _controller,
+                controller: _controllerday,
                 itemExtent: 50, 
                 perspective: 0.005, //Perspektivet på hjulet
                 diameterRatio: 1.3,//Diameter af hjulet
+                useMagnifier: true,
+                magnification: 1.5,
                 physics: const FixedExtentScrollPhysics(), //Sørger for den altid ender på et tal.
                 childDelegate: ListWheelChildBuilderDelegate(
                   childCount: 8, //Mængde af tal vi vil have i hjulet
@@ -62,12 +66,14 @@ void initState() {
       
             //Timer 
             SizedBox(
-              width: 70,
+              width: 100,
               child: ListWheelScrollView.useDelegate(
-                controller: _controller1,
+                controller: _controllerhour,
                 itemExtent: 50, 
                 perspective: 0.005, //Perspektivet på hjulet
                 diameterRatio: 1.3, //Diameter af hjulet
+                useMagnifier: true,
+                magnification: 1.5,
                 physics: const FixedExtentScrollPhysics(), //Sørger for den altid ender på et tal.
                 childDelegate: ListWheelChildBuilderDelegate(
                   childCount: 24, //Mængde af tal vi vil have i hjulet
@@ -86,12 +92,14 @@ void initState() {
       
             //Minutter
             SizedBox(
-              width: 70,
+              width: 100,
               child: ListWheelScrollView.useDelegate(
-                controller: _controller2,
+                controller: _controllerminute,
                 itemExtent: 50, 
                 perspective: 0.005,//Perspektivet på hjulet
                 diameterRatio: 1.3, //Diameter af hjulet
+                useMagnifier: true,
+                magnification: 1.5,
                 physics: const FixedExtentScrollPhysics(), //Sørger for den altid ender på et tal.
                 childDelegate: ListWheelChildBuilderDelegate(
                   childCount: 60,  //Mængde af tal vi vil have i hjulet
