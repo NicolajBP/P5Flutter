@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:p5/Login/register_page.dart';
 
 class ReportNutrientIntakePage extends StatefulWidget {
@@ -41,7 +41,11 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
         _time = newTime;
         time = _time.format(
             context); // definere det tid vi har som tidsvarieble til at gemme
+            
       });
+      /* if (kDebugMode) {
+        print(time);
+      } */
     }
   }
 
@@ -97,10 +101,10 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       time = _time.format(context);
     }
 
-    Map<String, dynamic> entryData = {
-      'meal_size': mealSize,
-      'note': note,
-      'time': time,
+    Map<String, String> entryData = {
+      'nutrientNote': note,
+      'mealSize': mealSize,
+      'nutrientValue': time,
       // Add more fields and data as needed
     };
 
@@ -112,8 +116,8 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
           .collection("patientData")
           .doc(dateYYYY_MM_DD)
           .update({
-            "nutrientEntries": FieldValue.arrayUnion([entryData])
-          })
+            "neutrientIntake":{ FieldValue.arrayUnion([entryData]),
+          }})
           // ignore: avoid_print
           .then((_) => print("Added"))
           // ignore: avoid_print

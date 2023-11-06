@@ -1,10 +1,10 @@
 // import 'dart:ffi';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/components/MyTextField.dart';
 import 'package:p5/main.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 DateTime now = DateTime.now();
 DateTime yesterday = now.subtract(Duration(days: 1));
@@ -79,6 +79,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 154.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -87,6 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 147.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -95,6 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 145.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -103,6 +106,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 133.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -111,6 +115,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 126,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "Løb",
                   "exerciseValue": 126
                 },
@@ -119,6 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 135,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -127,6 +133,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 147.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -135,6 +142,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 142.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -143,6 +151,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 140.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -151,6 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 149.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -159,6 +169,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 145.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -167,6 +178,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 136.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -175,6 +187,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 145.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -183,6 +196,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 149.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -191,6 +205,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 145.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -199,6 +214,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 142.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -207,6 +223,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 140.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -215,6 +232,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 138.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -223,6 +241,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 145.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -231,6 +250,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 147.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -239,6 +259,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 144,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -247,6 +268,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 140.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -255,6 +277,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 136.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -263,6 +286,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 144,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -271,6 +295,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 149.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -279,6 +304,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 145.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -287,6 +313,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 153,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -295,6 +322,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 167.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -303,6 +331,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 169.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -311,6 +340,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 165.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -319,6 +349,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 158.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -327,6 +358,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 165.6,
                   "nutrientNote": "Steamed bun 120 g\nMilk cereal 100 g",
                   "nutrientValue": 165.6,
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -335,6 +367,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 203.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -343,6 +376,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 255.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -351,6 +385,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 298.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -359,6 +394,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 325.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -367,6 +403,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 334.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -375,6 +412,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 325.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "Cykel",
                   "exerciseValue": 325.8
                 },
@@ -383,6 +421,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 307.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -391,6 +430,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 280.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -399,6 +439,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 246.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -407,6 +448,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 212.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -415,6 +457,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 185.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -423,6 +466,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 160.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -431,6 +475,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 145.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -439,6 +484,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 140.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -448,6 +494,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "nutrientNote":
                       "Chicken leg 50 g\nVegetable 55 g\nBean sprout 25 g\nRice 100 g",
                   "nutrientValue": 133.2,
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -456,6 +503,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 129.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -464,6 +512,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 145.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -472,6 +521,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 174.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -480,6 +530,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 201.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -488,6 +539,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 217.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -496,6 +548,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 230.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -504,6 +557,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 237.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -512,6 +566,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 248.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -520,6 +575,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 252,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -528,6 +584,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 248.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -536,6 +593,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 244.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -544,6 +602,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 244.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -552,6 +611,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 241.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -560,6 +620,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 225,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -568,6 +629,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 216,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -576,6 +638,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 228.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -584,6 +647,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 241.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -592,6 +656,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 237.6,
                   "nutrientNote": "Egg 50 g",
                   "nutrientValue": 237.6,
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -600,6 +665,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 228.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -608,6 +674,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 226.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -616,6 +683,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 225,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -624,6 +692,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 214.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -632,6 +701,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 187.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -640,6 +710,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 181.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -648,6 +719,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 181.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -656,6 +728,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 176.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -664,6 +737,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 178.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -672,6 +746,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 190.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -680,6 +755,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 196.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -688,6 +764,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 194.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -696,6 +773,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 199.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -713,6 +791,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 192.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -721,6 +800,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 196.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -729,6 +809,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 212.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -737,6 +818,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 221.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -745,6 +827,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 201.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -753,6 +836,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 169.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -761,6 +845,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 142.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -769,6 +854,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 133.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -777,6 +863,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 140.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -785,6 +872,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 147.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -793,6 +881,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 147.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -801,6 +890,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 147.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -809,6 +899,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 149.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -817,6 +908,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 151.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -825,6 +917,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 163.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -833,6 +926,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 174.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -841,6 +935,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 178.2,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 }
@@ -864,6 +959,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 181.8,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -872,6 +968,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 180,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -880,6 +977,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 176.4,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
@@ -888,6 +986,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   "mg/dL": 174.6,
                   "nutrientNote": "",
                   "nutrientValue": "",
+                  "mealSize":"",
                   "exerciseNote": "",
                   "exerciseValue": ""
                 },
