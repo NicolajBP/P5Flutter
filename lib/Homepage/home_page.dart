@@ -86,19 +86,19 @@ class _HomePageSate extends State<HomePage> {
             // ),
             // const SizedBox(height: 80),
 
-            ElevatedButton(
-              //my entries button
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (BuildContext context) {
-                    return myEntries();
-                  }),
-                );
-              },
-              child: const Text("MyEntries"),
-            ),
-           ),
 
+           ElevatedButton( //my entries button
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (BuildContext context) {
+                  return myEntries();  }),
+              );
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.white),
+
+           ), child: null,
+            ),
       const SizedBox(height: 10),
 
       Row(

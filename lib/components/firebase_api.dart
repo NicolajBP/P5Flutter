@@ -1,4 +1,3 @@
-
 import 'package:firebase_messaging/firebase_messaging.dart';
 class FirebaseApi{
 
@@ -21,6 +20,8 @@ Future<void> initNotifications() async {
 print('token: ' + fCMtoken.toString());
 
 //function to handle recived messages
+
+
 
 //function to initialize foreground and background settings
 
