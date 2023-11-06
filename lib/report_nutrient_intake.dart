@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:p5/Login/register_page.dart';
 
 class ReportNutrientIntakePage extends StatefulWidget {
@@ -98,9 +98,9 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     }
 
     Map<String, dynamic> entryData = {
-      'meal_size': mealSize,
-      'note': note,
-      'time': time,
+      'mealSize': mealSize,
+      'neutrientNote': note,
+      'neutrientTime': time,
       // Add more fields and data as needed
     };
 
