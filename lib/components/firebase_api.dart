@@ -1,4 +1,4 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
+/* import 'package:firebase_messaging/firebase_messaging.dart';
 class FirebaseApi{
 
 //instance of firebase messaging 
@@ -27,3 +27,4 @@ print('token: ' + fCMtoken.toString());
 
 }
 }
+ */

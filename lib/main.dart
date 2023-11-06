@@ -21,8 +21,8 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
  
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
-  await FirebaseApi(). initNotifications();
-
+  /* await FirebaseApi(). initNotifications();
+ */
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
