@@ -1,4 +1,3 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,10 +5,13 @@ import 'package:p5/Homepage/home_page.dart';
 import 'package:p5/MenuPage/menu_page.dart';
 import 'package:p5/components/firebase_api.dart';
 import 'package:p5/trends.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 
 import 'Login/auth.page.dart';
 import 'firebase_options.dart';
+
+FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
 // I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
 // Widgets kan have argumenter som tager endnu en widget som input
@@ -18,32 +20,9 @@ Key password = const Key("password");
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
-  if (!isAllowed) {
-    AwesomeNotifications().requestPermissionToSendNotifications();
-  }
-});
-
-
-  
-AwesomeNotifications().initialize(
-  'P5Flutter/images/logo.png', // Replace with the actual image path or asset path
-  [
-    NotificationChannel(
-      channelKey: 'basic_channel',
-      channelName: 'Basic Channel',
-      channelDescription: 'A basic channel',
-      importance: NotificationImportance.High,
-      defaultColor: Colors.teal,
-      ledColor: Colors.red,
-      channelShowBadge: true,
-      
-    ),
-  ],
-);
+ 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
- // await FirebaseApi(). initNotifications();
+  await FirebaseApi(). initNotifications();
 
   runApp(
     MaterialApp(
