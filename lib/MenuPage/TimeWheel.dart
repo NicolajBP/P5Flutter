@@ -1,3 +1,4 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
 import 'package:p5/timewheel/hours.dart';
 import 'package:p5/timewheel/minutes.dart';
@@ -40,6 +41,7 @@ class _TimeWheelState extends State<TimeWheel> {
                 
                 setState((){
                   currentday = value; //Værdien for dage
+                  // ignore: avoid_print
                   print(value);
                 });
               },
@@ -71,6 +73,7 @@ class _TimeWheelState extends State<TimeWheel> {
                 
                 setState((){
                   currenthour = value; //Værdien for timer
+                  // ignore: avoid_print
                   print(value);
                 });
               },
@@ -101,6 +104,7 @@ class _TimeWheelState extends State<TimeWheel> {
                 
                 setState((){
                   currentminute = value;  //Værdien for minut
+                  // ignore: avoid_print
                   print(currentminute);
                 });
               },

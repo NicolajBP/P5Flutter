@@ -11,6 +11,7 @@ class LoginPage extends StatefulWidget {
 
   @override
   State<LoginPage> createState() => _LoginPageState();
+  
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -27,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
     showDialog(
       context: context,
       builder: (context) {
-        return Center(
+        return const Center(
           child: CircularProgressIndicator(),
         );
       },
@@ -39,6 +40,7 @@ class _LoginPageState extends State<LoginPage> {
         password: passwordController.text,
       );
       // Navigate to the home page when authentication is successful.
+      // ignore: use_build_context_synchronously
       Navigator.of(context).push(
         MaterialPageRoute(builder: (BuildContext context) {
           return const MyApp();
@@ -60,12 +62,15 @@ class _LoginPageState extends State<LoginPage> {
         });
       }
       // Dismiss the loading circle when the authentication fails
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
     }
   }
 
   @override
   Widget build(BuildContext context) {
+
+    
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -106,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
               if (errorMessage.isNotEmpty) // Display error message if not empty
                 Text(
                   errorMessage,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.red, // You can choose the color
                   ),
                 ),

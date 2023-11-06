@@ -1,10 +1,14 @@
+
+// ignore_for_file: unused_import
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/myEntries.dart';
 import 'package:p5/Login/register_page.dart';
 import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
+
+// ignore: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:intl/intl.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
@@ -22,6 +26,8 @@ class HomePage extends StatefulWidget {
 void signUserOut() {
   FirebaseAuth.instance.signOut();
 }
+
+
 
 class _HomePageSate extends State<HomePage> {
   // DateTime _selectedDate = DateTime.now(); // Starter med i dag som standard
@@ -80,20 +86,16 @@ class _HomePageSate extends State<HomePage> {
             // ),
             // const SizedBox(height: 80),
 
-            ElevatedButton( //my entries button
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) {
-                  return myEntries();  }),
-              );
-            },
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.white),
-            ),
-            child: Text("MyEntries",
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.primary
-            ),
+            ElevatedButton(
+              //my entries button
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return myEntries();
+                  }),
+                );
+              },
+              child: const Text("MyEntries"),
             ),
            ),
 

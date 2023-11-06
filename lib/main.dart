@@ -3,10 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:p5/Homepage/home_page.dart';
 import 'package:p5/MenuPage/menu_page.dart';
+import 'package:p5/components/firebase_api.dart';
 import 'package:p5/trends.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
 import 'Login/auth.page.dart';
 import 'firebase_options.dart';
+
+FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
 // I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
 // Widgets kan have argumenter som tager endnu en widget som input
@@ -15,10 +19,10 @@ Key password = const Key("password");
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+ 
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
+  await FirebaseApi(). initNotifications();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,

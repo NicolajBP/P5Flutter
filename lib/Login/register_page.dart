@@ -4,13 +4,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/components/MyTextField.dart';
 import 'package:p5/main.dart';
+// ignore: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 DateTime now = DateTime.now();
-DateTime yesterday = now.subtract(Duration(days: 1));
-DateTime tomorrow = now.add(Duration(days: 1));
+DateTime yesterday = now.subtract(const Duration(days: 1));
+DateTime tomorrow = now.add(const Duration(days: 1));
+// ignore: non_constant_identifier_names
 String dateYYYY_MM_DD = now.toString().substring(0, 10);
+// ignore: non_constant_identifier_names
 String yesterdayYYYY_MM_DD = yesterday.toString().substring(0, 10);
+// ignore: non_constant_identifier_names
 String tomorrowYYYY_MM_DD = tomorrow.toString().substring(0, 10);
 
 class RegisterPage extends StatefulWidget {
@@ -65,7 +69,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 "uid": currentUser.user!.uid
               },
             })
+            // ignore: avoid_print
             .then((_) => print("Added"))
+            // ignore: avoid_print
             .catchError((error) => print("Add failed: $error"));
 
         collection
@@ -850,7 +856,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 "1": {"type": "", "intensity": "", "timeStamp": ""}
               },
             })
+            // ignore: avoid_print
             .then((_) => print("Added"))
+            // ignore: avoid_print
             .catchError((error) => print("Add failed: $error"));
 
         collection
@@ -1634,7 +1642,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 "1": {"type": "", "intensity": "", "timeStamp": ""}
               },
             })
+            // ignore: avoid_print
             .then((_) => print("Added"))
+            // ignore: avoid_print
             .catchError((error) => print("Add failed: $error"));
 
         collection
@@ -2420,7 +2430,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 "1": {"type": "", "intensity": "", "timeStamp": ""}
               },
             })
+            // ignore: avoid_print
             .then((_) => print("Added"))
+            // ignore: avoid_print
             .catchError((error) => print("Add failed: $error"));
       } else {
         // show error message "passwords dont match"
@@ -2430,6 +2442,7 @@ class _RegisterPageState extends State<RegisterPage> {
       }
 
       // Navigate to the home page when authentication is successful.
+      // ignore: use_build_context_synchronously
       Navigator.of(context).push(
         MaterialPageRoute(builder: (BuildContext context) {
           return const MyApp();
@@ -2451,6 +2464,7 @@ class _RegisterPageState extends State<RegisterPage> {
         });
       }
       // Dismiss the loading circle when the authentication fails
+      // ignore: use_build_context_synchronously
       Navigator.of(context).pop();
     }
   }
@@ -2509,7 +2523,7 @@ class _RegisterPageState extends State<RegisterPage> {
               if (errorMessage.isNotEmpty) // Display error message if not empty
                 Text(
                   errorMessage,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.red, // You can choose the color
                   ),
                 ),

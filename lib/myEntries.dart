@@ -1,4 +1,6 @@
+// ignore: file_names
 import 'package:flutter/material.dart';
+// ignore: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 // Definere navn af vores collection "nutrition_entries"
@@ -12,6 +14,7 @@ class myEntries extends StatefulWidget {
   State<myEntries> createState() => _myEntriesState();
 }
 
+// ignore: camel_case_types
 class _myEntriesState extends State<myEntries> {
   // En liste til at gemme dataene fra vores database
   List<Map<String, dynamic>> entriesData = [];
@@ -77,6 +80,7 @@ class _myEntriesState extends State<myEntries> {
 
           // Hent værdierne for Mealsize, note og tidspunkt fra Firestore-dataene eller skriver ingen data fundet når null-værdier er fundet.
           String titleText = entry['meal_size'] ?? 'Unknown Size';
+          // ignore: avoid_print
           print('Meal Size: $titleText');
           String noteText = entry['note'] ?? '';
           String timeText = entry['time'] ?? '';

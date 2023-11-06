@@ -14,11 +14,11 @@ Widget build(BuildContext context) {
       builder: (context, snapshot) {
         // When the user is logged in
         if (snapshot.hasData) {
-          return MyApp();
+          return const MyApp();
         } 
         else {
           // When the user is not logged in, return the LoginPage
-          return LoginOrRegisterPage(); // You need to pass a unique key to recreate the LoginPage.
+          return const LoginOrRegisterPage(); // You need to pass a unique key to recreate the LoginPage.
         }
       },
     ),
