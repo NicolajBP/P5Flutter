@@ -3,6 +3,8 @@ import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
 
 int itemCountTrends = 2;
+var average = 35;
+var unit = 'mmol/L';
 
 class Trends extends StatelessWidget {
   const Trends({super.key});
@@ -56,37 +58,115 @@ class Trends extends StatelessWidget {
               child: const Text("Her kommer der en trend"),
             ),
       Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,      //GNS kasse
         children: [
-        Container(
-              color: Colors.lightBlue,
-              // margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
-              // padding: const EdgeInsets.all(20),
-              height: 200,
-              width: 190,
-              child: const Text("Her kommer der en trend"),
+        Material(
+          borderRadius: BorderRadius.circular(15.0),
+          elevation: 7,
+          shadowColor: const Color.fromARGB(255, 209, 198, 191),    
+      child: Column(children: [
+        const Text('Average',             //overskrift
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.black
+              ),), 
+      Container(
+          height: 180,
+          width: 190,
+        decoration: const BoxDecoration(
+        color: Colors.transparent,
+          ),
+        child: Column(                                       //Kolonne med gennemsnit variablen og enheden
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(average.toString(),                        //indsæt variabel for average
+            style: const TextStyle(
+              fontSize: 60,
+              color: Colors.black
+            ),),
+            Text(unit,                                        //indsæt variabel for enhed
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 14 ),)
+          ],)
+        ),
+        ],)
+      ),
+       
+      const SizedBox(width: 50),
+  
+        Column(
+        children: [
+        Material(
+          borderRadius: BorderRadius.circular(15.0),
+          elevation: 7,
+          shadowColor: const Color.fromARGB(255, 209, 198, 191), 
+          child: 
+          Container(
+            height: 95,
+            width: 190,
+            decoration: const BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.all(
+            Radius.circular(15.0),),
             ),
-      const SizedBox(width: 30),
-        Container(
-              color: Colors.lightBlue,
-              // margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
-              // padding: const EdgeInsets.all(20),
-              height: 200,
-              width: 190,
-              child: const Text("Her kommer der en trend"),
+            child: Column(
+            children: [
+            const Text('Minimum'),
+            Row( 
+              mainAxisAlignment: MainAxisAlignment.center,
+            children: [ 
+            Icon(Icons.arrow_downward,
+            color: Theme.of(context).colorScheme.primary,
+            size: 55,),
+            const Text('17.0', 
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+            ),),
+        ]),
+        ],)
+          ),
+        ),
+
+  const SizedBox(height: 10,),
+
+        Material( 
+          borderRadius: BorderRadius.circular(15.0),
+          elevation: 7,
+          shadowColor: const Color.fromARGB(255, 209, 198, 191),
+          child: Container(
+            height: 95,
+            width: 190,
+            decoration: const BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.all(
+            Radius.circular(15.0),),
             ),
+            child: Column(
+            children: [
+            const Text('Maximum'),
+            Row( 
+              mainAxisAlignment: MainAxisAlignment.center,
+            children: [ 
+            Icon(Icons.arrow_upward,
+            color: Theme.of(context).colorScheme.primary,
+            size: 55,),
+            const Text('180.0', 
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+            ),),
+        ]),
+        ],)
+        ),
+        ),
+        ])
     ],)
             
             
-            
-            // Container(
-            //   color: Colors.lightBlue,
-            //   margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
-            //   padding: const EdgeInsets.all(20),
-            //   height: 200,
-            //   width: double.infinity,
-            //   child: const Text("Her kommer der en trend"),
-            // ),
           ],
         ),
       ),
