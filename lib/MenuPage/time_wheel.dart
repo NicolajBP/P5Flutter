@@ -12,20 +12,25 @@ class TimeWheel extends StatefulWidget {
 }
 
 class _TimeWheelState extends State<TimeWheel> {
- late FixedExtentScrollController _controllerday;
- late FixedExtentScrollController _controllerhour;
- late FixedExtentScrollController _controllerminute;
+  // late FixedExtentScrollController _controllerday;
+//  late FixedExtentScrollController _controllerhour;
+//  late FixedExtentScrollController _controllerminute;
 
- 
+ int currentDay = 0;
+ late String stringDay = "$currentDay";
+ int currentHour = 12;
+ late String stringHour = "$currentHour";
+ int currentMinute = 0;
+ late String stringMinute = "$currentMinute";
 
-@override
-void initState() {
-  super.initState();
+// @override
+// void initState() {
+//   super.initState();
 
-  _controllerday = FixedExtentScrollController();
-  _controllerhour = FixedExtentScrollController();
-  _controllerminute = FixedExtentScrollController();
-}
+  // _controllerday = FixedExtentScrollController();
+  // _controllerhour = FixedExtentScrollController();
+  // _controllerminute = FixedExtentScrollController();
+// }
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +46,13 @@ void initState() {
             SizedBox(
               width: 100,
               child: ListWheelScrollView.useDelegate(
-                controller: _controllerday,
+                // controller: _controllerday,
                 itemExtent: 50, 
+                onSelectedItemChanged: (value) {
+                  setState(() {
+                    currentDay = value;
+                  });
+                },
                 perspective: 0.005, //Perspektivet på hjulet
                 diameterRatio: 1.3,//Diameter af hjulet
                 useMagnifier: true,
@@ -57,6 +67,7 @@ void initState() {
                   },
                 ),
               ),
+              
             ),
       
             const SizedBox(
@@ -68,8 +79,13 @@ void initState() {
             SizedBox(
               width: 100,
               child: ListWheelScrollView.useDelegate(
-                controller: _controllerhour,
+                // controller: _controllerhour,
                 itemExtent: 50, 
+                onSelectedItemChanged: (value) {
+                  setState(() {
+                    currentHour = value;
+                  });
+                },
                 perspective: 0.005, //Perspektivet på hjulet
                 diameterRatio: 1.3, //Diameter af hjulet
                 useMagnifier: true,
@@ -94,8 +110,13 @@ void initState() {
             SizedBox(
               width: 100,
               child: ListWheelScrollView.useDelegate(
-                controller: _controllerminute,
+                // controller: _controllerminute,
                 itemExtent: 50, 
+                onSelectedItemChanged: (value) {
+                  setState(() {
+                    currentMinute = value;
+                  });
+                },
                 perspective: 0.005,//Perspektivet på hjulet
                 diameterRatio: 1.3, //Diameter af hjulet
                 useMagnifier: true,

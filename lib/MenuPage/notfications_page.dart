@@ -4,8 +4,8 @@ import 'package:p5/MenuPage/time_wheel.dart';
 
 
 class NotficationPage extends StatefulWidget {
-  const NotficationPage({super.key});
 
+  const NotficationPage({super.key});
   @override
   State<NotficationPage> createState() => _NotficationPageState();
 }
@@ -14,6 +14,9 @@ class _NotficationPageState extends State<NotficationPage> {
 bool _notifications = false;
 bool _inactivityNotificantion = false;
 
+
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +107,7 @@ bool _inactivityNotificantion = false;
           leading: const Icon(Icons.access_time),      //Icon
           title: const Text('Current time between notification:'),    //Text  i baren
           trailing: CupertinoButton(                          //Vi laver en knap til højre side
-            child: const Text('D/H/M'),                          //Knappens tekst
+            child: const Text("current"),                          //Knappens tekst
             onPressed: () {
               showCupertinoModalPopup(                      //Knappen skal lave et popup ved tryk
                 context: context, 
@@ -128,22 +131,12 @@ bool _inactivityNotificantion = false;
                             child: const Text('Gem'), 
                             onPressed: () {
                               Navigator.of(context).pop();
+                              setState(() {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const NotficationPage()));
+                              });
                             },
                             ),
                           ),
-                          // Container(                                   //Gradient som jeg opgav xD
-                          //   padding: const EdgeInsets.all(5.0),
-                          //   alignment: Alignment.bottomCenter,
-                          //   gradient: LinearGradient(
-                          //   begin: Alignment.topCenter,
-                          //   end: Alignment.bottomCenter,
-                          //   colors: <Color>[
-                          //     Colors.black.withAlpha(0),
-                          //     Colors.black12,
-                          //     Colors.black45,
-                          //     ],
-                          //   ),
-                          // ),
                       ],
                     ),
                   ),
