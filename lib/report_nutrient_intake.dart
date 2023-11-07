@@ -127,7 +127,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
         ),
       );
 
-      debugPrint("The data is saved  to Firestore.");
+      debugPrint("The data is saved to Firestore.");
 
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(

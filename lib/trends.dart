@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:p5/Login/register_page.dart';
+import 'package:p5/fetch_cgm_data.dart';
 import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
 
 int itemCountTrends = 2;
+ final user = FirebaseAuth.instance.currentUser!;
 
 class Trends extends StatelessWidget {
   const Trends({super.key});
@@ -47,14 +51,7 @@ class Trends extends StatelessWidget {
               child: const Text("Button"),
             ),
     ],),
-            Container(
-              color: Colors.lightBlue,
-              margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
-              padding: const EdgeInsets.all(20),
-              height: 300,
-              width: double.infinity,
-              child: const Text("Her kommer der en trend"),
-            ),
+           FetchCgmData(user.uid, dateYYYY_MM_DD),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
