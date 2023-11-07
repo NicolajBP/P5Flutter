@@ -16,12 +16,12 @@ class _TimeWheelState extends State<TimeWheel> {
 //  late FixedExtentScrollController _controllerhour;
 //  late FixedExtentScrollController _controllerminute;
 
- int currentDay = 0;
- late String stringDay = "$currentDay";
- int currentHour = 12;
- late String stringHour = "$currentHour";
- int currentMinute = 0;
- late String stringMinute = "$currentMinute";
+ int _currentDay = 0;
+ late String stringDay = "$_currentDay";
+ int _currentHour = 12;
+ late String stringHour = "$_currentHour";
+ int _currentMinute = 0;
+ late String stringMinute = "$_currentMinute";
 
 // @override
 // void initState() {
@@ -50,7 +50,7 @@ class _TimeWheelState extends State<TimeWheel> {
                 itemExtent: 50, 
                 onSelectedItemChanged: (value) {
                   setState(() {
-                    currentDay = value;
+                    _currentDay = value;
                   });
                 },
                 perspective: 0.005, //Perspektivet på hjulet
@@ -83,7 +83,7 @@ class _TimeWheelState extends State<TimeWheel> {
                 itemExtent: 50, 
                 onSelectedItemChanged: (value) {
                   setState(() {
-                    currentHour = value;
+                    _currentHour = value;
                   });
                 },
                 perspective: 0.005, //Perspektivet på hjulet
@@ -114,7 +114,7 @@ class _TimeWheelState extends State<TimeWheel> {
                 itemExtent: 50, 
                 onSelectedItemChanged: (value) {
                   setState(() {
-                    currentMinute = value;
+                    _currentMinute = value;
                   });
                 },
                 perspective: 0.005,//Perspektivet på hjulet

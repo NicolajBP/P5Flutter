@@ -14,6 +14,10 @@ class _NotficationPageState extends State<NotficationPage> {
 bool _notifications = false;
 bool _inactivityNotificantion = false;
 
+late int _dayTime = 0;
+late int _hourTime = 0;
+late int _minuteTime = 0;
+
 
 
   
@@ -107,7 +111,7 @@ bool _inactivityNotificantion = false;
           leading: const Icon(Icons.access_time),      //Icon
           title: const Text('Current time between notification:'),    //Text  i baren
           trailing: CupertinoButton(                          //Vi laver en knap til højre side
-            child: const Text("current"),                          //Knappens tekst
+            child: const Text("$_dayTime"),                          //Knappens tekst
             onPressed: () {
               showCupertinoModalPopup(                      //Knappen skal lave et popup ved tryk
                 context: context, 
