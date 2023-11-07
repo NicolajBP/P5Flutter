@@ -111,7 +111,7 @@ late int _minuteTime = 0;
           leading: const Icon(Icons.access_time),      //Icon
           title: const Text('Current time between notification:'),    //Text  i baren
           trailing: CupertinoButton(                          //Vi laver en knap til højre side
-            child: const Text("$_dayTime"),                          //Knappens tekst
+            child: const Text("current"),                          //Knappens tekst
             onPressed: () {
               showCupertinoModalPopup(                      //Knappen skal lave et popup ved tryk
                 context: context, 
