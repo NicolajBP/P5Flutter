@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:p5/report_exercise.dart';
+import 'package:p5/report_nutrient_intake.dart';
 
 int itemCountTrends = 2;
 
@@ -10,36 +12,81 @@ class Trends extends StatelessWidget {
     return Scaffold(
 
    appBar: AppBar(
-        title: const Text("Trends"),
-        automaticallyImplyLeading: true, //tilbageknap i appbar
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
+        title: const Text("Statistics"),
       ),
 
       body: SingleChildScrollView(
         scrollDirection: axisDirectionToAxis(AxisDirection.down),
         child: Column(
           children: [
+             Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          OutlinedButton(
+              onPressed: () {
+                debugPrint("Button");
+              },
+              child: const Text("Button"),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                debugPrint("Outlined Button");
+              },
+              child: const Text("Button"),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                debugPrint("Button");
+              },
+              child: const Text("Button"),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                debugPrint("Button");
+              },
+              child: const Text("Button"),
+            ),
+    ],),
             Container(
               color: Colors.lightBlue,
               margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
               padding: const EdgeInsets.all(20),
-              height: 200,
+              height: 300,
               width: double.infinity,
               child: const Text("Her kommer der en trend"),
             ),
-            Container(
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+        Container(
               color: Colors.lightBlue,
-              margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
-              padding: const EdgeInsets.all(20),
+              // margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
+              // padding: const EdgeInsets.all(20),
               height: 200,
-              width: double.infinity,
+              width: 190,
               child: const Text("Her kommer der en trend"),
             ),
+      const SizedBox(width: 30),
+        Container(
+              color: Colors.lightBlue,
+              // margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
+              // padding: const EdgeInsets.all(20),
+              height: 200,
+              width: 190,
+              child: const Text("Her kommer der en trend"),
+            ),
+    ],)
+            
+            
+            
+            // Container(
+            //   color: Colors.lightBlue,
+            //   margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
+            //   padding: const EdgeInsets.all(20),
+            //   height: 200,
+            //   width: double.infinity,
+            //   child: const Text("Her kommer der en trend"),
+            // ),
           ],
         ),
       ),
