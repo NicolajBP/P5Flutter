@@ -85,12 +85,12 @@ class _MenuPageState extends State<MenuPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: OutlinedButton.icon(               //notification button
-                onPressed: () {},
-                // onPressed: () {
-                //   Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-                //     return const NotficationPage();
-                //   }));
-                // }, 
+                // onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                    return const NotficationPage();
+                  }));
+                }, 
                 icon: const Icon(
                   Icons.notifications
                 ),
