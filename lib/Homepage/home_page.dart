@@ -1,19 +1,18 @@
 
 // ignore_for_file: unused_import
 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:p5/myEntries.dart';
-import 'package:p5/Login/register_page.dart';
-import 'package:p5/report_exercise.dart';
-import 'package:p5/report_nutrient_intake.dart';
-
 // ignore: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:intl/intl.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
-import 'package:p5/Homepage/graph.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:p5/Homepage/get_cgm_data.dart';
+import 'package:p5/Homepage/graph.dart';
+import 'package:p5/Login/register_page.dart';
+import 'package:p5/myEntries.dart';
+import 'package:p5/report_exercise.dart';
+import 'package:p5/report_nutrient_intake.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
