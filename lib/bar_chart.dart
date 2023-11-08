@@ -11,6 +11,7 @@ import 'package:excel/excel.dart';
 import 'dart:io';
 // ignore: depend_on_referenced_packages, unused_import
 import 'package:path/path.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class BarChartWidget extends StatefulWidget {
   final List<dynamic> cgmValues;
@@ -86,21 +87,24 @@ class _BarChartWidgetState extends State<BarChartWidget> {
 
     chartData = <ChartSampleData>[
       ChartSampleData(
-          time: "Low",
+          time: "Below Range",
           bloodSugarLevel: low,
-          color: const Color.fromARGB(255, 118, 44, 39)),
+          color: Color.fromARGB(217, 194, 25, 13)),
       ChartSampleData(
           time: "In Range",
           bloodSugarLevel: inRange,
-          color: Color.fromARGB(255, 73, 103, 49)),
-      ChartSampleData(time: "High", bloodSugarLevel: high, color: Colors.amber),
+          color: Color.fromARGB(217, 80, 168, 9)),
+      ChartSampleData(
+        time: "Above Range", 
+        bloodSugarLevel: high, 
+        color: Color.fromARGB(217, 211, 161, 10)),
     ];
 
     chartDataBackground = <ChartSampleData>[
-      ChartSampleData(time: "Low", bloodSugarLevel: 100, color: Colors.grey),
+      ChartSampleData(time: "Below Range", bloodSugarLevel: 100, color: Colors.grey),
       ChartSampleData(
           time: "In Range", bloodSugarLevel: 100, color: Colors.grey),
-      ChartSampleData(time: "High", bloodSugarLevel: 100, color: Colors.grey),
+      ChartSampleData(time: "Above Range", bloodSugarLevel: 100, color: Colors.grey),
     ];
 
     // return mapLiveData;
@@ -158,7 +162,14 @@ updateDataSource(Timer timer){
             child: Column(children: [
       SfCartesianChart(
         enableSideBySideSeriesPlacement: false,
-        primaryXAxis: CategoryAxis(),
+        primaryYAxis: NumericAxis(
+          //majorGridLines: MajorGridLines(width: 0.5),
+         // axisLine: AxisLine(width: 0.5)
+        ),
+        primaryXAxis: CategoryAxis(
+          majorGridLines: const MajorGridLines(width: 0),
+          axisLine: const AxisLine(width: 0)
+        ),
         //  isTransposed: true,
         series: <ChartSeries>[
           // Renders bar chart
@@ -174,6 +185,12 @@ updateDataSource(Timer timer){
             xValueMapper: (ChartSampleData data, _) => data.time,
             yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
             pointColorMapper: (ChartSampleData data, _) => data.color,
+            dataLabelMapper: (ChartSampleData data, _) => "${data.bloodSugarLevel?.toStringAsFixed(2)}%",
+            dataLabelSettings: const DataLabelSettings(
+            isVisible: true,
+            textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+            labelPosition: ChartDataLabelPosition.inside,
+            )
           )
         ],
       ),
