@@ -107,6 +107,7 @@ class _BarChartWidgetState extends State<BarChartWidget> {
     return chartData;
   }
 
+  // Udregner gennemsnit
   num fetchAverage() {
     num sum = 0;
 
@@ -118,17 +119,19 @@ class _BarChartWidgetState extends State<BarChartWidget> {
     return average;
   }
 
+  // Udregner minimum
   num fetchMininum() {
     cgmValues.sort();
 
     return cgmValues[0];
   }
 
-    num fetchMaximum() {
+  // Udregner maximum
+  num fetchMaximum() {
     var length = cgmValues.length;
     cgmValues.sort();
 
-    return cgmValues[length-1];
+    return cgmValues[length - 1];
   }
 
 /*  int time =30;
@@ -153,28 +156,26 @@ updateDataSource(Timer timer){
     return Scaffold(
         body: Center(
             child: Column(children: [
-      Container(
-        child: SfCartesianChart(
-          enableSideBySideSeriesPlacement: false,
-          primaryXAxis: CategoryAxis(),
-          //  isTransposed: true,
-          series: <ChartSeries>[
-            // Renders bar chart
-            ColumnSeries<ChartSampleData, String>(
-              opacity: 0.2,
-              dataSource: chartDataBackground,
-              xValueMapper: (ChartSampleData data, _) => data.time,
-              yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
-              pointColorMapper: (ChartSampleData data, _) => data.color,
-            ),
-            ColumnSeries<ChartSampleData, String>(
-              dataSource: chartData,
-              xValueMapper: (ChartSampleData data, _) => data.time,
-              yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
-              pointColorMapper: (ChartSampleData data, _) => data.color,
-            )
-          ],
-        ),
+      SfCartesianChart(
+        enableSideBySideSeriesPlacement: false,
+        primaryXAxis: CategoryAxis(),
+        //  isTransposed: true,
+        series: <ChartSeries>[
+          // Renders bar chart
+          ColumnSeries<ChartSampleData, String>(
+            opacity: 0.2,
+            dataSource: chartDataBackground,
+            xValueMapper: (ChartSampleData data, _) => data.time,
+            yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
+            pointColorMapper: (ChartSampleData data, _) => data.color,
+          ),
+          ColumnSeries<ChartSampleData, String>(
+            dataSource: chartData,
+            xValueMapper: (ChartSampleData data, _) => data.time,
+            yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
+            pointColorMapper: (ChartSampleData data, _) => data.color,
+          )
+        ],
       ),
       // const SizedBox(width: 200),
       Row(
@@ -243,7 +244,7 @@ updateDataSource(Timer timer){
                               color: Theme.of(context).colorScheme.primary,
                               size: 55,
                             ),
-                             Text(
+                            Text(
                               min.toStringAsFixed(1),
                               textAlign: TextAlign.center,
                               style: const TextStyle(
@@ -282,7 +283,7 @@ updateDataSource(Timer timer){
                               color: Theme.of(context).colorScheme.primary,
                               size: 55,
                             ),
-                             Text(
+                            Text(
                               max.toStringAsFixed(1),
                               textAlign: TextAlign.center,
                               style: const TextStyle(

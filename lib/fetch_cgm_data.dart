@@ -61,15 +61,10 @@ class FetchStatsPage extends StatelessWidget {
 
         }
 
-        return Container(
-          color: Colors.blue,
-          margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
-          padding: const EdgeInsets.all(20),
-          height: 300,
-          width: double.infinity,
-          child: const Text("Her kommer der en trend"),
-        )
-        ;
+        return
+         const Center(
+          child: CircularProgressIndicator(), // Loadende cirkel hvis ikke der er data endnu
+        );
       },
     );
   }
