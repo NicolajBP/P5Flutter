@@ -11,10 +11,10 @@ import 'Login/auth.page.dart';
 import 'firebase_options.dart';
 
 FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-final navigatorkey = GlobalKey<NavigatorState>();
-//En plugin som vil blive brugt til samarbejde med notfikationer
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+// final navigatorkey = GlobalKey<NavigatorState>();
+// //En plugin som vil blive brugt til samarbejde med notfikationer
+// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+//     FlutterLocalNotificationsPlugin();
 // I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
 // Widgets kan have argumenter som tager endnu en widget som input
 
@@ -34,7 +34,7 @@ Future<void> main() async {
     android: initializationSettingsAndroid,
   );
 
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  // await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
   runApp(
     MaterialApp(
@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
 
-      navigatorKey: navigatorkey,
+      // navigatorKey: navigatorkey,
       debugShowCheckedModeBanner:
           false, // Tilføjer eller fjerner en "debug" ribbon i højre hjørne
       theme: ThemeData(

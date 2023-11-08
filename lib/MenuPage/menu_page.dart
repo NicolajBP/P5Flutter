@@ -82,41 +82,41 @@ class _MenuPageState extends State<MenuPage> {
 
           const SizedBox(height: 10),
 
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: OutlinedButton.icon(               //notification button
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-                    return const NotficationPage();
-                  }));
-                }, 
-                icon: const Icon(
-                  Icons.notifications
-                ),
-                label: const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [ Text(
-                  'Notifications',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25,
-                  ),
-                  textAlign: TextAlign.start,
-                ),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Colors.black,
-                )]
-                ),
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.background,
-                  minimumSize: const Size(600, 70),
-                  side: BorderSide(color: Theme.of(context).colorScheme.primary),
-                  shape: LinearBorder.bottom(),
-                  alignment: Alignment.centerLeft,
-                  )
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: OutlinedButton.icon(               //notification button
+            //     onPressed: () {
+            //       Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+            //         return const NotficationPage();
+            //       }));
+            //     }, 
+            //     icon: const Icon(
+            //       Icons.notifications
+            //     ),
+            //     label: const Row(
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //     children: [ Text(
+            //       'Notifications',
+            //       style: TextStyle(
+            //         color: Colors.black,
+            //         fontSize: 25,
+            //       ),
+            //       textAlign: TextAlign.start,
+            //     ),
+            //     Icon(
+            //       Icons.arrow_forward_ios,
+            //       color: Colors.black,
+            //     )]
+            //     ),
+            //     style: OutlinedButton.styleFrom(
+            //       backgroundColor: Theme.of(context).colorScheme.background,
+            //       minimumSize: const Size(600, 70),
+            //       side: BorderSide(color: Theme.of(context).colorScheme.primary),
+            //       shape: LinearBorder.bottom(),
+            //       alignment: Alignment.centerLeft,
+            //       )
+            //   ),
+            // ),
 
             const SizedBox(height: 10),
 
