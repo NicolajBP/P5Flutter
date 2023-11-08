@@ -11,6 +11,7 @@ var average = 35;
 var unit = 'mmol/L';
 var minimum = 17;
 var maximum = 180;
+int daysToAnalyze = 1;
 
 bool isPressed1 = false;
 bool isPressed2 = false;
@@ -149,7 +150,7 @@ class _TrendsState extends State<Trends> {
                 ),
               ],
             ),
-            StatisticWidgets(user.uid, dateYYYY_MM_DD),
+            StatisticWidgets(user.uid, dateYYYY_MM_DD, daysToAnalyze),
           ],
         ),
       ),
