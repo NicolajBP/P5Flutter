@@ -25,8 +25,10 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   String mealSize = "";
   String note = "";
   String time = "";
+
   //definere input varibler som strings
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
+   String formattedTime = DateTime.now().toIso8601String();
 
   final TextEditingController noteController = TextEditingController();
 
@@ -47,13 +49,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
         _time = newTime;
 
       // Format the time in ISO 8601 format
-      time = DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-        DateTime.now().day,
-        newTime.hour,
-        newTime.minute,
-      ).toIso8601String();
+      
       });
     }
   }
@@ -107,15 +103,15 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
 
     if (time.isEmpty) {
       // If the time is empty, update it with the current time
-      time = _time.format(context);
+      time = formattedTime;
     }
    // Format the time in "yyyy-MM-ddTHH:mm:ss" format
-  String formattedTime = DateTime.now().toIso8601String();
+ 
 
   Map<String, dynamic> entryData = {
     'meal_size': mealSize,
     'note': note,
-    'time': formattedTime, // Store the time in ISO 8601 format
+    'time': time, // Store the time in ISO 8601 format
   };
     
     
@@ -255,7 +251,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       Icons.access_time,
       size: 50.0,
     ),
-    label: Text('${_time.hour}:${_time.minute}',
+    label: Text(time,
         style: const TextStyle(height: 1, fontSize: 36)),
   ),
 ),
