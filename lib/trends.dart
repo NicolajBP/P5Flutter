@@ -6,12 +6,27 @@ import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
 
 int itemCountTrends = 2;
- final user = FirebaseAuth.instance.currentUser!;
+final user = FirebaseAuth.instance.currentUser!;
 var average = 35;
 var unit = 'mmol/L';
+var minimum = 17;
+var maximum = 180;
 
-class Trends extends StatelessWidget {
+bool isPressed1 = false;
+bool isPressed2 = false;
+bool isPressed3 = false;
+bool isPressed4 = false;
+//bools til når tidsknapperne ikke er pressed
+
+class Trends extends StatefulWidget {
   const Trends({super.key});
+
+  @override
+  State<Trends> createState() => _TrendsState();
+}
+
+class _TrendsState extends State<Trends> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,31 +41,113 @@ class Trends extends StatelessWidget {
         child: Column(
           children: [
              Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           OutlinedButton(
               onPressed: () {
-                debugPrint("Button");
-              },
-              child: const Text("Button"),
+                if (isPressed1 == false) { 
+                setState(() {
+                  isPressed1 = true;
+                  isPressed2 = false;
+                  isPressed3 = false;
+                  isPressed4 = false;
+                });}
+                else {
+                  setState(() {
+                    isPressed1=false;
+                  });
+                }
+              },  
+              style: OutlinedButton.styleFrom(
+              side:  BorderSide(color: Theme.of(context).colorScheme.primary),
+              backgroundColor: isPressed1 
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.onPrimary
+               ),
+               child: Text("7 d",
+               style: TextStyle(
+                color: isPressed1 ? Theme.of(context).colorScheme.onPrimary
+                : Theme.of(context).colorScheme.primary )),
+            ),
+
+            OutlinedButton(
+              onPressed: () {
+              if (isPressed2 == false) { 
+                setState(() {
+                  isPressed2 = true;
+                  isPressed1 = false;
+                  isPressed3 = false;
+                  isPressed4 = false;
+                });}
+                else {
+                  setState(() {
+                    isPressed2=false;
+                  });
+                }
+              },  
+              style: OutlinedButton.styleFrom(
+              side:  BorderSide(color: Theme.of(context).colorScheme.primary),
+              backgroundColor: isPressed2 
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.onPrimary
+               ),
+              child: Text("3 d",
+              style: TextStyle(
+                color: isPressed2 ? Theme.of(context).colorScheme.onPrimary
+                : Theme.of(context).colorScheme.primary )),
+            
             ),
             OutlinedButton(
               onPressed: () {
-                debugPrint("Outlined Button");
-              },
-              child: const Text("Button"),
+                  if (isPressed3 == false) { 
+                setState(() {
+                  isPressed3 = true;
+                  isPressed2 = false;
+                  isPressed1 = false;
+                  isPressed4 = false;
+                });}
+                else {
+                  setState(() {
+                    isPressed3=false;
+                  });
+                }
+              },  
+              style: OutlinedButton.styleFrom(
+              side:  BorderSide(color: Theme.of(context).colorScheme.primary),
+              backgroundColor: isPressed3 
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.onPrimary
+               ),
+              child: Text("24h",
+              style: TextStyle(
+                color: isPressed3 ? Theme.of(context).colorScheme.onPrimary
+                : Theme.of(context).colorScheme.primary )),
             ),
             OutlinedButton(
-              onPressed: () {
-                debugPrint("Button");
-              },
-              child: const Text("Button"),
-            ),
-            OutlinedButton(
-              onPressed: () {
-                debugPrint("Button");
-              },
-              child: const Text("Button"),
+             onPressed: () {
+                if (isPressed4 == false) { 
+                setState(() {
+                  isPressed4 = true;
+                  isPressed2 = false;
+                  isPressed3 = false;
+                  isPressed1 = false;
+                });}
+                else {
+                  setState(() {
+                    isPressed4=false;
+                  });
+                } 
+              },  
+              style: OutlinedButton.styleFrom(
+              side:  BorderSide(color: Theme.of(context).colorScheme.primary),
+              backgroundColor: isPressed4 
+              ? Theme.of(context).colorScheme.primary
+              : Theme.of(context).colorScheme.onPrimary
+               ),
+              child: Text("Today",
+              style: TextStyle(
+                color: isPressed4 ? Theme.of(context).colorScheme.onPrimary
+                : Theme.of(context).colorScheme.primary )),
             ),
     ],),
                       FetchCgmData(user.uid, dateYYYY_MM_DD),
@@ -116,7 +213,7 @@ class Trends extends StatelessWidget {
             Icon(Icons.arrow_downward,
             color: Theme.of(context).colorScheme.primary,
             size: 55,),
-            const Text('17.0', 
+            Text(minimum.toString(), 
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 40,
@@ -150,7 +247,7 @@ class Trends extends StatelessWidget {
             Icon(Icons.arrow_upward,
             color: Theme.of(context).colorScheme.primary,
             size: 55,),
-            const Text('180.0', 
+            Text(maximum.toString(), 
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 40,
