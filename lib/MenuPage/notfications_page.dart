@@ -110,7 +110,7 @@ DateTime dateTime = DateTime(3000, 2, 1, 10, 20);
                   leading: const Icon(Icons.access_time),                                           //Icon
                   title: const Text('Current time between notification:'),                          //Tekst
                   trailing: CupertinoButton(                                                        //Knap
-                    child: Text('Kl. ${dateTime.hour}:${dateTime.minute} hver ${dateTime.day}'),    //Tid der står
+                    child: Text('Kl. ${dateTime.hour}:${dateTime.minute}'),    //Tid der står
                     onPressed: () {
                       showCupertinoModalPopup(            //POPup med widget indeni
                         context: context, 
@@ -124,7 +124,7 @@ DateTime dateTime = DateTime(3000, 2, 1, 10, 20);
                               setState(() => dateTime = newTime);
                             },
                             use24hFormat: true,                   //24 timers format
-                            mode: CupertinoDatePickerMode.dateAndTime,  //Her vælger man mode :)
+                            mode: CupertinoDatePickerMode.time,  //Her vælger man mode :)
                             ),
                           ),
                           );
