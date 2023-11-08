@@ -30,7 +30,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
 
   final TextEditingController noteController = TextEditingController();
 
-  
+  // Tids valg metode
   void _selectTime() async {
     final TimeOfDay? newTime = await showTimePicker(
       context: context,
@@ -118,6 +118,9 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     'time': formattedTime, // Store the time in ISO 8601 format
   };
     
+    
+
+
 
     try {
       // Gem data i Firestore-databasen
@@ -244,19 +247,18 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-              child: OutlinedButton.icon(
-                //Sætter ring om "tids knappen"
-                onPressed: _selectTime,
-                icon: const Icon(
-                  Icons.access_time,
-                  size: 50.0,
-                ),
-                label: Text(_time.format(context),
-                    style: const TextStyle(height: 1, fontSize: 36)),
-              ),
-            ),
+           Padding(
+  padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+  child: OutlinedButton.icon(
+    onPressed: _selectTime,
+    icon: const Icon(
+      Icons.access_time,
+      size: 50.0,
+    ),
+    label: Text('${_time.hour}:${_time.minute}',
+        style: const TextStyle(height: 1, fontSize: 36)),
+  ),
+),
 
             const Padding(
               padding: EdgeInsets.only(top: 0.0, bottom: 20),
