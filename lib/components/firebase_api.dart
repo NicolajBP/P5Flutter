@@ -8,7 +8,7 @@ class NotificationService {
   Future<void> initNotification() async {
     // Android indstillinger
     AndroidInitializationSettings initializationSettingsAndroid =
-        const AndroidInitializationSettings('android/app/src/main/res/logo.png');
+        const AndroidInitializationSettings('images/logo.png');
 
     // iOS indstillinger
     var initializationSettingsIOS = DarwinInitializationSettings(
@@ -43,4 +43,3 @@ class NotificationService {
         id, title, body, await notificationDetails());
   }
 }
- */
