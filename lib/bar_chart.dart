@@ -27,6 +27,7 @@ class BarChartWidget extends StatefulWidget {
 
 class _BarChartWidgetState extends State<BarChartWidget> {
   late List<ChartSampleData> chartData;
+  late List<ChartSampleData> chartDataBackground;
   late ZoomPanBehavior _zoomPanBehavior;
   final List<dynamic>
       cgmValues; // Vi laver en masse lister / arrays for at gemme vores værdier fra databasen så de kan indsættes i grafen
@@ -91,9 +92,17 @@ class _BarChartWidgetState extends State<BarChartWidget> {
     num average = sum / cgmValues.length;
 
     chartData = <ChartSampleData>[
-      ChartSampleData(time: "Low", bloodSugarLevel: low),
-      ChartSampleData(time: "In Range", bloodSugarLevel: inRange),
-      ChartSampleData(time: "High", bloodSugarLevel: high),
+      ChartSampleData(time: "Low", bloodSugarLevel: low, color: const Color.fromARGB(255, 118, 44, 39)),
+      ChartSampleData(
+          time: "In Range", bloodSugarLevel: inRange, color: Color.fromARGB(255, 73, 103, 49)),
+      ChartSampleData(
+          time: "High", bloodSugarLevel: high, color: Colors.amber),
+    ];
+
+    chartDataBackground = <ChartSampleData>[
+      ChartSampleData(time: "Low", bloodSugarLevel: 100, color: Colors.grey),
+      ChartSampleData(time: "In Range", bloodSugarLevel: 100, color: Colors.grey),
+      ChartSampleData(time: "High", bloodSugarLevel: 100, color: Colors.grey),
     ];
 
     // return mapLiveData;
@@ -120,14 +129,24 @@ updateDataSource(Timer timer){
         body: Center(
             child: Container(
                 child: SfCartesianChart(
+                    enableSideBySideSeriesPlacement: false,
                     primaryXAxis: CategoryAxis(),
                     //  isTransposed: true,
                     series: <ChartSeries>[
           // Renders bar chart
           ColumnSeries<ChartSampleData, String>(
-              dataSource: chartData,
-              xValueMapper: (ChartSampleData data, _) => data.time,
-              yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel)
+            opacity: 0.2,
+            dataSource: chartDataBackground,
+            xValueMapper: (ChartSampleData data, _) => data.time,
+            yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
+            pointColorMapper: (ChartSampleData data, _) => data.color,
+          ),
+          ColumnSeries<ChartSampleData, String>(
+            dataSource: chartData,
+            xValueMapper: (ChartSampleData data, _) => data.time,
+            yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
+            pointColorMapper: (ChartSampleData data, _) => data.color,
+          )
         ]))));
   }
 }
@@ -135,6 +154,7 @@ updateDataSource(Timer timer){
 class ChartSampleData {
   final String? time;
   final num? bloodSugarLevel;
+  final Color? color;
 
-  ChartSampleData({this.time, this.bloodSugarLevel});
+  ChartSampleData({this.time, this.bloodSugarLevel, this.color});
 }
