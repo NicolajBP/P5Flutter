@@ -212,7 +212,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                       noteController, // Use the controller to manage the text field
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: const Color.fromARGB(255, 156, 180, 168),
+                    fillColor: Color.fromARGB(170, 243, 62, 17),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),
@@ -270,15 +270,15 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                 ElevatedButton(
                   // Small button
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(60, 80),
+                    minimumSize: const Size(45, 35),
                     backgroundColor: selectedButtonIndex == 0
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onPrimary,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(15.0),
                     ),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
+                        horizontal: 10, vertical: 10),
                   ),
                   onPressed: () {
                     debugPrint("Button 1 Clicked");
@@ -305,21 +305,21 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                   ),
                 ),
 
-                const SizedBox(width: 30),
+                const SizedBox(width: 10),
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
                 ElevatedButton(
                   // Medium button
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(60, 80),
+                    minimumSize: const Size(45, 35),
                     backgroundColor: selectedButtonIndex == 1
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onPrimary,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(15.0),
                     ),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
+                        horizontal: 15, vertical: 5),
                   ),
                   onPressed: () {
                     debugPrint("Medium button Clicked");
@@ -346,21 +346,21 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                   ),
                 ),
 
-                const SizedBox(width: 30),
+                const SizedBox(width: 10),
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 ElevatedButton(
                   // Large button
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(60, 80),
+                    minimumSize: const Size(45,35),
                     backgroundColor: selectedButtonIndex == 2
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onPrimary,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(15.0),
                     ),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
+                        horizontal: 10, vertical: 10),
                   ),
                   onPressed: () {
                     debugPrint("Large button Clicked");
