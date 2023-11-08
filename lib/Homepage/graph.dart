@@ -1,16 +1,17 @@
+// ignore: unused_import
+import 'dart:io';
+
+// ignore: unused_import
+import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:intl/intl.dart';
 // ignore: unused_import
 import 'package:p5/Login/register_page.dart';
-// ignore: depend_on_referenced_packages
-import 'package:syncfusion_flutter_charts/charts.dart';
-// ignore: unused_import
-import 'package:excel/excel.dart';
-// ignore: unused_import
-import 'dart:io';
 // ignore: depend_on_referenced_packages, unused_import
 import 'package:path/path.dart';
+// ignore: depend_on_referenced_packages
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class LiveChartWidget extends StatefulWidget {
   final List<dynamic> cgmValues;
@@ -123,7 +124,7 @@ updateDataSource(Timer timer){
                 shape: DataMarkerType.image,
                 height: 10,
                 width: 10,
-                image: NetworkImage('images/INTAKE.png'))),
+                image: AssetImage('images/INTAKE.png'))),
             ScatterSeries<LiveData, DateTime>( // Her plottes exercise ikonerne
             dataSource: chartData,
             xValueMapper: (LiveData data, _) => data.time,
@@ -132,7 +133,7 @@ updateDataSource(Timer timer){
                 shape: DataMarkerType.image,
                 height: 12,
                 width: 12,
-                image: NetworkImage('images/EXERCISE.png')))
+                image: AssetImage('images/EXERCISE.png')))
           ],
           primaryXAxis: DateTimeAxis(
               intervalType: DateTimeIntervalType.auto,
