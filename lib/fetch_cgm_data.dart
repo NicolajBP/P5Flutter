@@ -11,12 +11,12 @@ import 'dart:convert';
 
 import 'package:p5/bar_chart.dart';
 
-class FetchCgmData extends StatelessWidget {
+class FetchStatsPage extends StatelessWidget {
   final String documentId;
   final String dateId;
 
   // ignore: use_key_in_widget_constructors
-  const FetchCgmData(this.documentId, this.dateId);
+  const FetchStatsPage(this.documentId, this.dateId);
 
   @override
   Widget build(BuildContext context) {
@@ -57,17 +57,13 @@ class FetchCgmData extends StatelessWidget {
           }
 
           return Container(
-              height: 300, width: double.infinity, child:  BarChartWidget(cgmValues, cgmTimeStamps));
-         
+              height: 600, width: double.infinity, child:  BarChartWidget(cgmValues, cgmTimeStamps));
+
         }
 
-        return Container(
-          color: Colors.red,
-          margin: const EdgeInsets.fromLTRB(50, 20, 50, 20),
-          padding: const EdgeInsets.all(20),
-          height: 300,
-          width: double.infinity,
-          child: const Text("Her kommer der en trend"),
+        return
+         const Center(
+          child: CircularProgressIndicator(), // Loadende cirkel hvis ikke der er data endnu
         );
       },
     );

@@ -7,6 +7,7 @@ import 'package:p5/report_nutrient_intake.dart';
 
 int itemCountTrends = 2;
 final user = FirebaseAuth.instance.currentUser!;
+final user = FirebaseAuth.instance.currentUser!;
 var average = 35;
 var unit = 'mmol/L';
 var minimum = 17;
@@ -31,11 +32,9 @@ class _TrendsState extends State<Trends> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-   appBar: AppBar(
+      appBar: AppBar(
         title: const Text("Statistics"),
       ),
-
       body: SingleChildScrollView(
         scrollDirection: axisDirectionToAxis(AxisDirection.down),
         child: Column(
