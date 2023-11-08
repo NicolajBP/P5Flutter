@@ -88,6 +88,9 @@ class _BarChartWidgetState extends State<BarChartWidget> {
           break;
       }
     }
+          low = (low/cgmValues.length)*100;
+      inRange = (inRange/cgmValues.length)*100;
+      high = (high/cgmValues.length)*100;
 
     num average = sum / cgmValues.length;
 
