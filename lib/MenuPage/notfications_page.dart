@@ -1,5 +1,8 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:p5/MenuPage/TimeWheel.dart';
+import 'package:p5/components/firebase_api.dart';
 
 
 class NotficationPage extends StatefulWidget {
@@ -70,17 +73,28 @@ bool _inactivityNotificantion = true;
         ),
       ),
 
-      _inactivityNotificantion == true ?
-        const Column(children: [
-          TimeWheel()
-        ],)                                             //INPUT tidswheel her
+                _inactivityNotificantion == true
+                        ? const Column(
+                            children: [
 
-        : Container()
+                              //TimeWheel(),
+                            ],
+                          )
+                        : Container()
+                  ],
+                )
+              : Container(),
+          if (_notifications && _inactivityNotificantion)
+            ElevatedButton(
+              onPressed: () {
+               
+               NotificationService()
+               .showNotification(title: 'TestLocal', body: 'håber det virker');
 
-          ],
-        )
-        : Container()                                           //Hvis ikke den er true displayer vi ikke noget
-        ]
+              },
+              child: Text('test'),
+            ),
+        ],
       ),  
     );  
   } 
