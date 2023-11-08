@@ -1,12 +1,12 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:p5/Homepage/home_page.dart';
 import 'package:p5/MenuPage/menu_page.dart';
-import 'package:p5/components/firebase_api.dart';
 import 'package:p5/trends.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+
 import 'Login/auth.page.dart';
 import 'firebase_options.dart';
 

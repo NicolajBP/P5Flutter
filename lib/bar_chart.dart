@@ -1,16 +1,17 @@
+// ignore: unused_import
+import 'dart:io';
+
+// ignore: unused_import
+import 'package:excel/excel.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:intl/intl.dart';
 // ignore: unused_import
 import 'package:p5/Login/register_page.dart';
-// ignore: depend_on_referenced_packages
-import 'package:syncfusion_flutter_charts/charts.dart';
-// ignore: unused_import
-import 'package:excel/excel.dart';
-// ignore: unused_import
-import 'dart:io';
 // ignore: depend_on_referenced_packages, unused_import
 import 'package:path/path.dart';
+// ignore: depend_on_referenced_packages
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class BarChartWidget extends StatefulWidget {
   final List<dynamic> cgmValues;
@@ -181,6 +182,7 @@ updateDataSource(Timer timer){
       Row(
         mainAxisAlignment: MainAxisAlignment.center, //GNS kasse
         children: [
+
           const SizedBox(height: 200),
           Material(
               borderRadius: BorderRadius.circular(15.0),
@@ -194,7 +196,6 @@ updateDataSource(Timer timer){
                   ),
                   Container(
                     height: 180,
-                    width: 190,
                     decoration: const BoxDecoration(
                       color: Colors.transparent,
                     ),
@@ -226,7 +227,7 @@ updateDataSource(Timer timer){
               shadowColor: const Color.fromARGB(255, 209, 198, 191),
               child: Container(
                   height: 95,
-                  width: 190,
+
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                     borderRadius: BorderRadius.all(
@@ -265,7 +266,7 @@ updateDataSource(Timer timer){
               shadowColor: const Color.fromARGB(255, 209, 198, 191),
               child: Container(
                   height: 95,
-                  width: 190,
+
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                     borderRadius: BorderRadius.all(
