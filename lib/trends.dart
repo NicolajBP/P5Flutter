@@ -7,7 +7,6 @@ import 'package:p5/report_nutrient_intake.dart';
 
 int itemCountTrends = 2;
 final user = FirebaseAuth.instance.currentUser!;
-final user = FirebaseAuth.instance.currentUser!;
 var average = 35;
 var unit = 'mmol/L';
 var minimum = 17;
@@ -149,7 +148,7 @@ class _TrendsState extends State<Trends> {
                 : Theme.of(context).colorScheme.primary )),
             ),
     ],),
-                      FetchCgmData(user.uid, dateYYYY_MM_DD),
+                      FetchStatsPage(user.uid, dateYYYY_MM_DD),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,      //GNS kasse
         children: [
