@@ -29,6 +29,8 @@ class _BarChartWidgetState extends State<BarChartWidget> {
   late List<ChartSampleData> chartData;
   late List<ChartSampleData> chartDataBackground;
   late num average;
+  late num min;
+  late num max;
   var unit = 'mg/dL';
   late ZoomPanBehavior _zoomPanBehavior;
   final List<dynamic>
@@ -66,7 +68,6 @@ class _BarChartWidgetState extends State<BarChartWidget> {
     num inRange = 0;
     num high = 0;
     for (var i = 0; i < cgmValues.length; i++) {
-
       switch (cgmValues[i]) {
         case <= 140:
           low++;
@@ -82,7 +83,6 @@ class _BarChartWidgetState extends State<BarChartWidget> {
     low = (low / cgmValues.length) * 100;
     inRange = (inRange / cgmValues.length) * 100;
     high = (high / cgmValues.length) * 100;
-
 
     chartData = <ChartSampleData>[
       ChartSampleData(
@@ -107,20 +107,29 @@ class _BarChartWidgetState extends State<BarChartWidget> {
     return chartData;
   }
 
- num fetchAverage() {
-    // List<ChartSampleData > chartData = [];
+  num fetchAverage() {
     num sum = 0;
 
-        for (var i = 0; i < cgmValues.length; i++) {
-      // Vi indlæser alt data til grafen i en for loop
-      // For-loop for at spare tid på at skrive hvad der skal returneres af <LiveData> nedenfor
+    for (var i = 0; i < cgmValues.length; i++) {
       sum += cgmValues[i];
-      }
-       num average = sum / cgmValues.length;
+    }
+    num average = sum / cgmValues.length;
 
-  return average;
- }
+    return average;
+  }
 
+  num fetchMininum() {
+    cgmValues.sort();
+
+    return cgmValues[0];
+  }
+
+    num fetchMaximum() {
+    var length = cgmValues.length;
+    cgmValues.sort();
+
+    return cgmValues[length-1];
+  }
 
 /*  int time =30;
 updateDataSource(Timer timer){
@@ -139,163 +148,158 @@ updateDataSource(Timer timer){
     // List<ChartSampleData> chartData = [];
     chartData = fetchChartData();
     average = fetchAverage();
+    min = fetchMininum();
+    max = fetchMaximum();
     return Scaffold(
-      body: Center(
-        child: Column(
-          children: [
-            Container(
-              child: SfCartesianChart(
-                enableSideBySideSeriesPlacement: false,
-                primaryXAxis: CategoryAxis(),
-                //  isTransposed: true,
-                series: <ChartSeries>[
-                  // Renders bar chart
-                  ColumnSeries<ChartSampleData, String>(
-                    opacity: 0.2,
-                    dataSource: chartDataBackground,
-                    xValueMapper: (ChartSampleData data, _) => data.time,
-                    yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
-                    pointColorMapper: (ChartSampleData data, _) => data.color,
-                  ),
-                  ColumnSeries<ChartSampleData, String>(
-                    dataSource: chartData,
-                    xValueMapper: (ChartSampleData data, _) => data.time,
-                    yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
-                    pointColorMapper: (ChartSampleData data, _) => data.color,
-                  )
-                ],
-              ),
+        body: Center(
+            child: Column(children: [
+      Container(
+        child: SfCartesianChart(
+          enableSideBySideSeriesPlacement: false,
+          primaryXAxis: CategoryAxis(),
+          //  isTransposed: true,
+          series: <ChartSeries>[
+            // Renders bar chart
+            ColumnSeries<ChartSampleData, String>(
+              opacity: 0.2,
+              dataSource: chartDataBackground,
+              xValueMapper: (ChartSampleData data, _) => data.time,
+              yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
+              pointColorMapper: (ChartSampleData data, _) => data.color,
             ),
-            // const SizedBox(width: 200),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center, //GNS kasse
-              children: [
-                 const SizedBox(height: 200),
-                Material(
-                    borderRadius: BorderRadius.circular(15.0),
-                    elevation: 7,
-                    shadowColor: const Color.fromARGB(255, 209, 198, 191),
-                    child: Column(
-                      children: [
-                        const Text(
-                          'Average', //overskrift
-                          style: TextStyle(fontSize: 14, color: Colors.black),
-                        ),
-                        Container(
-                            height: 180,
-                            width: 190,
-                            decoration: const BoxDecoration(
-                              color: Colors.transparent,
-                            ),
-                            child: Column(
-                              //Kolonne med gennemsnit variablen og enheden
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  average
-                                      .toStringAsFixed(1), //indsæt variabel for average
-                                  style: const TextStyle(
-                                      fontSize: 60, color: Colors.black),
-                                ),
-                                Text(
-                                  unit, //indsæt variabel for enhed
-                                  style: const TextStyle(
-                                      color: Colors.black, fontSize: 14),
-                                )
-                              ],
-                            ),
-                            ),
-                      ],
-                    )),
-                const SizedBox(width: 50),
-                Column(children: [
-                  Material(
-                    borderRadius: BorderRadius.circular(15.0),
-                    elevation: 7,
-                    shadowColor: const Color.fromARGB(255, 209, 198, 191),
-                    child: Container(
-                        height: 95,
-                        width: 190,
-                        decoration: const BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15.0),
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            const Text('Minimum'),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.arrow_downward,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    size: 55,
-                                  ),
-                                  const Text(
-                                    '17.0',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 40,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ]),
-                          ],
-                        )),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Material(
-                    borderRadius: BorderRadius.circular(15.0),
-                    elevation: 7,
-                    shadowColor: const Color.fromARGB(255, 209, 198, 191),
-                    child: Container(
-                        height: 95,
-                        width: 190,
-                        decoration: const BoxDecoration(
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15.0),
-                          ),
-                        ),
-                        child: Column(
-                          children: [
-                            const Text('Maximum'),
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.arrow_upward,
-                                    color:
-                                        Theme.of(context).colorScheme.primary,
-                                    size: 55,
-                                  ),
-                                  const Text(
-                                    '180.0',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: 40,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ]),
-                          ],
-                        )),
-                  ),
-                ])
-              ],
+            ColumnSeries<ChartSampleData, String>(
+              dataSource: chartData,
+              xValueMapper: (ChartSampleData data, _) => data.time,
+              yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
+              pointColorMapper: (ChartSampleData data, _) => data.color,
             )
-          ]
-        )
+          ],
+        ),
+      ),
+      // const SizedBox(width: 200),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center, //GNS kasse
+        children: [
+          const SizedBox(height: 200),
+          Material(
+              borderRadius: BorderRadius.circular(15.0),
+              elevation: 7,
+              shadowColor: const Color.fromARGB(255, 209, 198, 191),
+              child: Column(
+                children: [
+                  const Text(
+                    'Average', //overskrift
+                    style: TextStyle(fontSize: 14, color: Colors.black),
+                  ),
+                  Container(
+                    height: 180,
+                    width: 190,
+                    decoration: const BoxDecoration(
+                      color: Colors.transparent,
+                    ),
+                    child: Column(
+                      //Kolonne med gennemsnit variablen og enheden
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Text(
+                          average
+                              .toStringAsFixed(1), //indsæt variabel for average
+                          style: const TextStyle(
+                              fontSize: 60, color: Colors.black),
+                        ),
+                        Text(
+                          unit, //indsæt variabel for enhed
+                          style: const TextStyle(
+                              color: Colors.black, fontSize: 14),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )),
+          const SizedBox(width: 50),
+          Column(children: [
+            Material(
+              borderRadius: BorderRadius.circular(15.0),
+              elevation: 7,
+              shadowColor: const Color.fromARGB(255, 209, 198, 191),
+              child: Container(
+                  height: 95,
+                  width: 190,
+                  decoration: const BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15.0),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      const Text('Minimum'),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.arrow_downward,
+                              color: Theme.of(context).colorScheme.primary,
+                              size: 55,
+                            ),
+                             Text(
+                              min.toStringAsFixed(1),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ]),
+                    ],
+                  )),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Material(
+              borderRadius: BorderRadius.circular(15.0),
+              elevation: 7,
+              shadowColor: const Color.fromARGB(255, 209, 198, 191),
+              child: Container(
+                  height: 95,
+                  width: 190,
+                  decoration: const BoxDecoration(
+                    color: Colors.transparent,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(15.0),
+                    ),
+                  ),
+                  child: Column(
+                    children: [
+                      const Text('Maximum'),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.arrow_upward,
+                              color: Theme.of(context).colorScheme.primary,
+                              size: 55,
+                            ),
+                             Text(
+                              max.toStringAsFixed(1),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 40,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ]),
+                    ],
+                  )),
+            ),
+          ])
+        ],
       )
-    );
-
+    ])));
   }
-  }
+}
 
 class ChartSampleData {
   final String? time;
