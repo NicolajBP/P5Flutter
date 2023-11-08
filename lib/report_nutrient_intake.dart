@@ -113,9 +113,9 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   String formattedTime = DateTime.now().toIso8601String();
 
   Map<String, dynamic> entryData = {
-    'meal_size': mealSize,
-    'note': note,
-    'time': formattedTime, // Store the time in ISO 8601 format
+    'nutrientSize': mealSize,
+    'nutrientNote': note,
+    'nutrientTimeStamp': formattedTime, // Store the time in ISO 8601 format
   };
     
     
