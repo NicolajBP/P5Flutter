@@ -11,12 +11,12 @@ import 'dart:convert';
 
 import 'package:p5/bar_chart.dart';
 
-class FetchStatsPage extends StatelessWidget {
+class StatisticWidgets extends StatelessWidget {
   final String documentId;
   final String dateId;
 
   // ignore: use_key_in_widget_constructors
-  const FetchStatsPage(this.documentId, this.dateId);
+  const StatisticWidgets(this.documentId, this.dateId);
 
   @override
   Widget build(BuildContext context) {
