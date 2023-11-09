@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -5,15 +6,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:p5/Homepage/home_page.dart';
 import 'package:p5/MenuPage/menu_page.dart';
 import 'package:p5/trends.dart';
-import 'package:firebase_analytics/firebase_analytics.dart';
+
 import 'Login/auth.page.dart';
 import 'firebase_options.dart';
 
 FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-final navigatorkey = GlobalKey<NavigatorState>();
-//En plugin som vil blive brugt til samarbejde med notfikationer
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
+// final navigatorkey = GlobalKey<NavigatorState>();
+// //En plugin som vil blive brugt til samarbejde med notfikationer
+// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+//     FlutterLocalNotificationsPlugin();
 // I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
 // Widgets kan have argumenter som tager endnu en widget som input
 
@@ -33,7 +34,7 @@ Future<void> main() async {
     android: initializationSettingsAndroid,
   );
 
-  await flutterLocalNotificationsPlugin.initialize(initializationSettings);
+  // await flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
   runApp(
     MaterialApp(
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
 
-      navigatorKey: navigatorkey,
+      // navigatorKey: navigatorkey,
       debugShowCheckedModeBanner:
           false, // Tilføjer eller fjerner en "debug" ribbon i højre hjørne
       theme: ThemeData(
@@ -90,7 +91,7 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-  int currentPage = 0;
+  int currentPage = 1;
   List<Widget> pages = [
     // LoginPage(key: password),
     const HomePage(),

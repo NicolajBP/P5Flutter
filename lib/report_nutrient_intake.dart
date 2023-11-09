@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
 // ignore: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:p5/Login/register_page.dart';
 
 class ReportNutrientIntakePage extends StatefulWidget {
@@ -25,8 +25,10 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   String mealSize = "";
   String note = "";
   String time = "";
+  String formattedTime = "";
   //definere input varibler som strings
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
+  
 
   final TextEditingController noteController = TextEditingController();
 
@@ -35,12 +37,25 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     final TimeOfDay? newTime = await showTimePicker(
       context: context,
       initialTime: _time,
+      builder: (BuildContext context, Widget? child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: child!,
+        );
+      },
     );
     if (newTime != null) {
       setState(() {
         _time = newTime;
-        time = _time.format(
-            context); // definere det tid vi har som tidsvarieble til at gemme
+
+      // Format the time in ISO 8601 format
+      time = DateTime(
+        DateTime.now().year,
+        DateTime.now().month,
+        DateTime.now().day,
+        newTime.hour,
+        newTime.minute,
+      ).toIso8601String();
       });
     }
   }
@@ -94,15 +109,19 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
 
     if (time.isEmpty) {
       // If the time is empty, update it with the current time
-      time = _time.format(context);
+      time = formattedTime = DateTime.now().toIso8601String();
     }
+   // Format the time in "yyyy-MM-ddTHH:mm:ss" format
+  
+  Map<String, dynamic> entryData = {
+    'nutrientSize': mealSize,
+    'nutrientNote': note,
+    'nutrientTimeStamp': time, // Store the time in ISO 8601 format
+  };
+    
+    
 
-    Map<String, dynamic> entryData = {
-      'meal_size': mealSize,
-      'note': note,
-      'time': time,
-      // Add more fields and data as needed
-    };
+
 
     try {
       // Gem data i Firestore-databasen
@@ -127,7 +146,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
         ),
       );
 
-      debugPrint("The data is saved  to Firestore.");
+      debugPrint("The data is saved to Firestore.");
 
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
@@ -229,19 +248,18 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
               ),
             ),
 
-            Padding(
-              padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-              child: OutlinedButton.icon(
-                //Sætter ring om "tids knappen"
-                onPressed: _selectTime,
-                icon: const Icon(
-                  Icons.access_time,
-                  size: 50.0,
-                ),
-                label: Text(_time.format(context),
-                    style: const TextStyle(height: 1, fontSize: 36)),
-              ),
-            ),
+           Padding(
+  padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+  child: OutlinedButton.icon(
+    onPressed: _selectTime,
+    icon: const Icon(
+      Icons.access_time,
+      size: 50.0,
+    ),
+    label: Text('${_time.hour}:${_time.minute}',
+        style: const TextStyle(height: 1, fontSize: 36)),
+  ),
+),
 
             const Padding(
               padding: EdgeInsets.only(top: 0.0, bottom: 20),
