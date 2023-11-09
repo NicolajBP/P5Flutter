@@ -337,7 +337,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 5),
+                        horizontal: 10, vertical: 10),
                   ),
                   onPressed: () {
                     debugPrint("Medium button Clicked");

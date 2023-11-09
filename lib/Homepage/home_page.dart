@@ -88,10 +88,7 @@ class _HomePageSate extends State<HomePage> {
 
            ElevatedButton( //my entries button
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) {
-                  return myEntries();  }),
-              );
+              
             },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(Colors.white),
