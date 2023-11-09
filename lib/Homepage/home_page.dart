@@ -30,7 +30,7 @@ void signUserOut() {
 
 class _HomePageSate extends State<HomePage> {
   // DateTime _selectedDate = DateTime.now(); // Starter med i dag som standard
-  DateTime _selectedDate = DateTime(2023,11,2); // Starter på 2. november som standard (data er importeret for 1., 2. og 3. november)
+  DateTime _selectedDate = DateTime(2023,11,8); // Starter på 8. november som standard (data er importeret for 1., 2. og 3. november)
 
 
   final user = FirebaseAuth.instance.currentUser!;
@@ -50,7 +50,7 @@ class _HomePageSate extends State<HomePage> {
               child: DatePicker(
                 //kalenderbar
                 DateTime.now().subtract(const Duration(
-                    days: 2)), //vælger hvor mange dage vi kigger tilbage
+                    days: 3)), //vælger hvor mange dage vi kigger tilbage
                 height: 80,
                 width: 70,
                 initialSelectedDate: DateTime.now(),

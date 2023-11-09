@@ -1,3 +1,4 @@
+import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/Login/register_page.dart';
@@ -11,6 +12,7 @@ var average = 35;
 var unit = 'mmol/L';
 var minimum = 17;
 var maximum = 180;
+int daysToAnalyze = 1;
 
 bool isPressed1 = false;
 bool isPressed2 = false;
@@ -26,6 +28,10 @@ class Trends extends StatefulWidget {
 }
 
 class _TrendsState extends State<Trends> {
+   DateTime _selectedDate = DateTime(2023,11,8); // Starter på 2. november som standard (data er importeret for 1., 2. og 3. november)
+
+  final dateUpdater =
+      ValueNotifier<String>(DateTime.now().toString().substring(0, 10));
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,120 +42,38 @@ class _TrendsState extends State<Trends> {
         scrollDirection: axisDirectionToAxis(AxisDirection.down),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                OutlinedButton(
-                  onPressed: () {
-                    if (isPressed1 == false) {
-                      setState(() {
-                        isPressed1 = true;
-                        isPressed2 = false;
-                        isPressed3 = false;
-                        isPressed4 = false;
-                      });
-                    } else {
-                      setState(() {
-                        isPressed1 = false;
-                      });
-                    }
-                  },
-                  style: OutlinedButton.styleFrom(
-                      side: BorderSide(
-                          color: Theme.of(context).colorScheme.primary),
-                      backgroundColor: isPressed1
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.onPrimary),
-                  child: Text("7 d",
-                      style: TextStyle(
-                          color: isPressed1
-                              ? Theme.of(context).colorScheme.onPrimary
-                              : Theme.of(context).colorScheme.primary)),
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    if (isPressed2 == false) {
-                      setState(() {
-                        isPressed2 = true;
-                        isPressed1 = false;
-                        isPressed3 = false;
-                        isPressed4 = false;
-                      });
-                    } else {
-                      setState(() {
-                        isPressed2 = false;
-                      });
-                    }
-                  },
-                  style: OutlinedButton.styleFrom(
-                      side: BorderSide(
-                          color: Theme.of(context).colorScheme.primary),
-                      backgroundColor: isPressed2
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.onPrimary),
-                  child: Text("3 d",
-                      style: TextStyle(
-                          color: isPressed2
-                              ? Theme.of(context).colorScheme.onPrimary
-                              : Theme.of(context).colorScheme.primary)),
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    if (isPressed3 == false) {
-                      setState(() {
-                        isPressed3 = true;
-                        isPressed2 = false;
-                        isPressed1 = false;
-                        isPressed4 = false;
-                      });
-                    } else {
-                      setState(() {
-                        isPressed3 = false;
-                      });
-                    }
-                  },
-                  style: OutlinedButton.styleFrom(
-                      side: BorderSide(
-                          color: Theme.of(context).colorScheme.primary),
-                      backgroundColor: isPressed3
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.onPrimary),
-                  child: Text("24h",
-                      style: TextStyle(
-                          color: isPressed3
-                              ? Theme.of(context).colorScheme.onPrimary
-                              : Theme.of(context).colorScheme.primary)),
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    if (isPressed4 == false) {
-                      setState(() {
-                        isPressed4 = true;
-                        isPressed2 = false;
-                        isPressed3 = false;
-                        isPressed1 = false;
-                      });
-                    } else {
-                      setState(() {
-                        isPressed4 = false;
-                      });
-                    }
-                  },
-                  style: OutlinedButton.styleFrom(
-                      side: BorderSide(
-                          color: Theme.of(context).colorScheme.primary),
-                      backgroundColor: isPressed4
-                          ? Theme.of(context).colorScheme.primary
-                          : Theme.of(context).colorScheme.onPrimary),
-                  child: Text("Today",
-                      style: TextStyle(
-                          color: isPressed4
-                              ? Theme.of(context).colorScheme.onPrimary
-                              : Theme.of(context).colorScheme.primary)),
-                ),
-              ],
+           Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: DatePicker(
+                //kalenderbar
+                DateTime.now().subtract(const Duration(
+                    days: 3)), //vælger hvor mange dage vi kigger tilbage
+                height: 80,
+                width: 70,
+                initialSelectedDate: DateTime.now(),
+                selectionColor: Theme.of(context).colorScheme.primary,
+                selectedTextColor: Theme.of(context).colorScheme.onPrimary,
+                dateTextStyle: const TextStyle(
+                    //vi kan ogåså ændre på skriften af de andre
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.grey),
+                onDateChange: (date) {
+                  _selectedDate = date; //variabel der kender hvilken dag det er
+                  dateUpdater.value = _selectedDate.toString().substring(0, 10);
+                  // dateYYYY_MM_DD = _selectedDate.toString().substring(0,10); // Bruges til at indlæse "YYYY-MM-DD" (document ID) fra databasen
+                  debugPrint("Selected day: $dateYYYY_MM_DD");
+                },
+              ),
             ),
-            StatisticWidgets(user.uid, dateYYYY_MM_DD),
+             ValueListenableBuilder(
+              //TODO 2nd: listen playerPointsToAdd
+              valueListenable: dateUpdater,
+              builder: (context, value, widget) {
+                // TODO here you can setState or whatever you need
+                return StatisticWidgets(user.uid, dateUpdater.value, daysToAnalyze);
+              },
+            ),
           ],
         ),
       ),
