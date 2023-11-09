@@ -77,24 +77,7 @@ class _HomePageSate extends State<HomePage> {
                 return GetCgmData(user.uid, dateUpdater.value);
               },
             ),
-            // GetCgmData(user.uid, dateYYYY_MM_DD),
-            // Container(
-            //   height: 250,
-            //   width: double.infinity,
-            //   child: LiveChartWidget(),
-            // ),
-            // const SizedBox(height: 80),
 
-
-           ElevatedButton( //my entries button
-            onPressed: () {
-              
-            },
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.white),
-
-           ), child: null,
-            ),
       const SizedBox(height: 10),
 
       Row(
