@@ -76,6 +76,7 @@ class MyApp extends StatelessWidget {
           bodyMedium: GoogleFonts.merriweather(),
           displaySmall: GoogleFonts.pacifico(),
         ),
+        fontFamily: GoogleFonts.merriweather().fontFamily,
       ),
       home: const RootPage(),
     );

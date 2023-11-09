@@ -162,13 +162,19 @@ updateDataSource(Timer timer){
             child: Column(children: [
       SfCartesianChart(
         enableSideBySideSeriesPlacement: false,
+        
         primaryYAxis: NumericAxis(
           //majorGridLines: MajorGridLines(width: 0.5),
          // axisLine: AxisLine(width: 0.5)
         ),
         primaryXAxis: CategoryAxis(
           majorGridLines: const MajorGridLines(width: 0),
-          axisLine: const AxisLine(width: 0)
+          axisLine: const AxisLine(width: 0),
+          labelStyle: const TextStyle(
+          color: Colors.black,
+          fontSize: 16, 
+          //fontFamily: 'Roboto'
+          )
         ),
         //  isTransposed: true,
         series: <ChartSeries>[
@@ -188,13 +194,17 @@ updateDataSource(Timer timer){
             dataLabelMapper: (ChartSampleData data, _) => "${data.bloodSugarLevel?.toStringAsFixed(2)}%",
             dataLabelSettings: const DataLabelSettings(
             isVisible: true,
-            textStyle: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+            textStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+               fontSize: 14, 
+               ),
             labelPosition: ChartDataLabelPosition.inside,
             )
           )
         ],
       ),
-      // const SizedBox(width: 200),
+      
+      const SizedBox(height: 60),
       Row(
         mainAxisAlignment: MainAxisAlignment.center, //GNS kasse
         children: [
