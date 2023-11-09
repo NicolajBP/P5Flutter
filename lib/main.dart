@@ -4,7 +4,6 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:p5/Homepage/home_page.dart';
 import 'package:p5/MenuPage/menu_page.dart';
-import 'package:p5/components/firebase_api.dart';
 import 'package:p5/trends.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'Login/auth.page.dart';
@@ -57,7 +56,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Color.fromRGBO(210, 50, 50, 100),
+          seedColor: const Color.fromRGBO(210, 50, 50, 100),
           brightness: Brightness.light,
         ),
 

@@ -1,8 +1,11 @@
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+  
 class NotificationService {
   final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
+
+
 
   // Initialiserer tjenesten og konfigurerer notoficationsindstillinger
   Future<void> initNotification() async {
@@ -22,11 +25,15 @@ class NotificationService {
     var initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
 
-    // Initialiserer meddelelsesplugin med indstillinger
+    // Initialiserer notifikations plugin med indstillinger
     await notificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse:
             (NotificationResponse notificationResponse) async {});
   }
+
+
+
+
 
   // Returnerer settings for begge platformer
   notificationDetails() {
