@@ -14,12 +14,13 @@ import 'package:p5/bar_chart.dart';
 class StatisticWidgets extends StatelessWidget {
   final String documentId;
   final String dateId;
+  final int daysAnalyzed;
 
   // ignore: use_key_in_widget_constructors
-  const StatisticWidgets(this.documentId, this.dateId);
+  const StatisticWidgets(this.documentId, this.dateId, this.daysAnalyzed);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     CollectionReference users = FirebaseFirestore.instance.collection("users");
 
     return FutureBuilder<DocumentSnapshot>(
