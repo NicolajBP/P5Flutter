@@ -86,7 +86,6 @@ class _MenuPageState extends State<MenuPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: OutlinedButton.icon(               //notification button
-                // onPressed: () {},
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
                     return const NotficationPage();
@@ -162,9 +161,16 @@ class _MenuPageState extends State<MenuPage> {
 
             const SizedBox(height: 10),
 
+
+
+
+
+
+
+//////////////////////////////////////////////////logout button//////////////////////////////////////////////////////////////////////////////
             Padding(
               padding: const EdgeInsets.all(5.0),
-              child: OutlinedButton.icon(               //logout button
+              child: OutlinedButton.icon(              
                 onPressed: () {
                   signUserOut();
                 }, 
@@ -196,6 +202,7 @@ class _MenuPageState extends State<MenuPage> {
               ),
             ),
             ],
+
           )
         ],
       ),

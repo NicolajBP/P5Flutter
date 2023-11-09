@@ -11,11 +11,11 @@ import 'Login/auth.page.dart';
 import 'firebase_options.dart';
 
 FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-// final navigatorkey = GlobalKey<NavigatorState>();
-// //En plugin som vil blive brugt til samarbejde med notfikationer
-// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-//     FlutterLocalNotificationsPlugin();
-// I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
+ final navigatorkey = GlobalKey<NavigatorState>();
+ //En plugin som vil blive brugt til samarbejde med notfikationer
+ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+     FlutterLocalNotificationsPlugin();
+//I Flutter starter alle widgets med stort forbogstav (det er basically klasser)
 // Widgets kan have argumenter som tager endnu en widget som input
 
 Key password = const Key("password");

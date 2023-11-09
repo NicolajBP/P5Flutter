@@ -85,18 +85,6 @@ class _HomePageSate extends State<HomePage> {
             // ),
             // const SizedBox(height: 80),
 
-
-           ElevatedButton( //my entries button
-            onPressed: () {
-              
-            },
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.white),
-
-           ), child: null,
-            ),
-      const SizedBox(height: 10),
-
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
