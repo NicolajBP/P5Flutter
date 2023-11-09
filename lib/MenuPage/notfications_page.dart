@@ -17,7 +17,7 @@ class _NotficationPageState extends State<NotficationPage> {
 bool _notifications = true;
 bool _inactivityNotificantion = true;
 
-DateTime dateTime = DateTime(3000, 2, 1, 12, 30);                       //En datetime instance, hvorved vores dato & tid er indsat
+DateTime dateTime = DateTime.now();                       //En datetime instance, hvorved vores dato & tid er indsat som nuværende tid
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +94,7 @@ if (_inactivityNotificantion == true)
                   leading: const Icon(Icons.access_time),                                           //Icon
                   title: const Text('Current time between notification:'),                          //Tekst
                   trailing: CupertinoButton(                                                        //Knap
-                    child: Text('Kl. ${dateTime.hour}:${dateTime.minute} hver ${dateTime.day}'),    //Tid der står
+                    child: Text('Kl. ${dateTime.hour}'.padLeft(2, '0') + ':' + '${dateTime.minute}'.padLeft(2, '0')),    //Tid der står
                     onPressed: () {
                       showCupertinoModalPopup(                                                      //POPup med widget indeni
                         context: context, 
@@ -106,6 +106,7 @@ if (_inactivityNotificantion == true)
                             initialDateTime: dateTime,                                              //Den vælger nuværende date og tid
                             onDateTimeChanged: (DateTime newTime) {                                 //Når man ændrer på tid/dato skifter den NewTime variable
                               setState(() => dateTime = newTime);
+                              
                             },
                             use24hFormat: true,                                                     //24 timers format
                             mode: CupertinoDatePickerMode.dateAndTime,                              //Her vælger man mode :) Vælg evt. kun Time, hvis det er bedre. 
