@@ -110,7 +110,7 @@ DateTime dateTime = DateTime(3000, 2, 1, 10, 20);
                   leading: const Icon(Icons.access_time),                                           //Icon
                   title: const Text('Current time between notification:'),                          //Tekst
                   trailing: CupertinoButton(                                                        //Knap
-                    child: Text('Kl. ${dateTime.hour}:${dateTime.minute}'),    //Tid der står
+                    child: Text('Kl.'+' ${dateTime.hour}'.padLeft(2,'0') +':'+'${dateTime.minute}'.padLeft(2,'0')),    //Tid der står
                     onPressed: () {
                       showCupertinoModalPopup(            //POPup med widget indeni
                         context: context, 
