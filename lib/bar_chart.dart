@@ -195,20 +195,20 @@ updateDataSource(Timer timer){
             pointColorMapper: (ChartSampleData data, _) => data.color,
           ),
           ColumnSeries<ChartSampleData, String>(
-              dataSource: chartData,
-              xValueMapper: (ChartSampleData data, _) => data.time,
-              yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
-              pointColorMapper: (ChartSampleData data, _) => data.color,
-              dataLabelMapper: (ChartSampleData data, _) =>
-                  "${data.bloodSugarLevel?.toStringAsFixed(2)}%",
-              dataLabelSettings: const DataLabelSettings(
-                isVisible: true,
-                textStyle: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
-                ),
-                labelPosition: ChartDataLabelPosition.inside,
-              ))
+            dataSource: chartData,
+            xValueMapper: (ChartSampleData data, _) => data.time,
+            yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
+            pointColorMapper: (ChartSampleData data, _) => data.color,
+            dataLabelMapper: (ChartSampleData data, _) => "${data.bloodSugarLevel?.toStringAsFixed(1)}%",
+            dataLabelSettings: const DataLabelSettings(
+            isVisible: true,
+            textStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+               fontSize: 14, 
+               ),
+            labelPosition: ChartDataLabelPosition.inside,
+            )
+          )
         ],
       ),
       const SizedBox(height: 30),
