@@ -1,4 +1,3 @@
-
 // ignore_for_file: unused_import
 
 // ignore: depend_on_referenced_packages
@@ -26,12 +25,10 @@ void signUserOut() {
   FirebaseAuth.instance.signOut();
 }
 
-
-
 class _HomePageSate extends State<HomePage> {
   // DateTime _selectedDate = DateTime.now(); // Starter med i dag som standard
-  DateTime _selectedDate = DateTime(2023,11,8); // Starter på 8. november som standard (data er importeret for 1., 2. og 3. november)
-
+  DateTime _selectedDate = DateTime(2023, 11,
+      8); // Starter på 8. november som standard (data er importeret for 1., 2. og 3. november)
 
   final user = FirebaseAuth.instance.currentUser!;
   final dateUpdater =
@@ -77,69 +74,83 @@ class _HomePageSate extends State<HomePage> {
                 return GetCgmData(user.uid, dateUpdater.value);
               },
             ),
-
-      const SizedBox(height: 10),
-
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-        OutlinedButton(                                   //nutrient intake button
-          onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (BuildContext context) {
-              // Bruges som "router" --> vi føres fra denne side til en anden side (i det her tilfælde vores ReportNutrientIntakePage)
-              return const ReportNutrientIntakePage();
-            }));
-          }, 
-          style: OutlinedButton.styleFrom(
-          side: const BorderSide(
-          color: Colors.transparent),
-          elevation: 7,
-          shadowColor:  const Color.fromARGB(255, 209, 198, 191),
-          backgroundColor: Theme.of(context).colorScheme.onPrimary,
-          shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0))),
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            const SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.restaurant, size: 70.0,),
-                Text("Register \nnutrient intake",
-                style: TextStyle(color: Colors.black),
-                textAlign: TextAlign.center,),
-              ],)
-            ),
-    
-  
-      const SizedBox(width: 30),
-
-        OutlinedButton(                                       //exercise button
-          onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (BuildContext context) {
-              // Bruges som "router" --> vi føres fra denne side til en anden side (i det her tilfælde vores ReportNutrientIntakePage)
-              return const ReportExercise();
-            }));
-          },
-          style: OutlinedButton.styleFrom(
-          side: const BorderSide(
-          color: Colors.transparent),
-          elevation: 7,
-          shadowColor:  const Color.fromARGB(255, 209, 198, 191),
-          backgroundColor: Theme.of(context).colorScheme.onPrimary,
-          shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.0))),
-          child: const Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-                 Icon(Icons.directions_run_outlined, size: 70.0,),
-                  Text('Register \nexercise',
-                  style: TextStyle(
-                    color: Colors.black),
-                    textAlign: TextAlign.center,),
-        ],)
-        )
-    ],)
-    ],)
-      );
+                OutlinedButton(
+                    //nutrient intake button
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        // Bruges som "router" --> vi føres fra denne side til en anden side (i det her tilfælde vores ReportNutrientIntakePage)
+                        return const ReportNutrientIntakePage();
+                      }));
+                    },
+                    style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.transparent),
+                        elevation: 7,
+                        shadowColor: const Color.fromARGB(255, 209, 198, 191),
+                        backgroundColor:
+                            Theme.of(context).colorScheme.onPrimary,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0))),
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          width: 140,
+                          height: 80,
+                          child: Icon(
+                            Icons.restaurant,
+                            size: 70.0,
+                          ),
+                        ),
+                        Text(
+                          "Register \nnutrient intake",
+                          style: TextStyle(color: Colors.black),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    )),
+                const SizedBox(width: 30),
+                OutlinedButton(
+                    //exercise button
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        // Bruges som "router" --> vi føres fra denne side til en anden side (i det her tilfælde vores ReportNutrientIntakePage)
+                        return const ReportExercise();
+                      }));
+                    },
+                    style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.transparent),
+                        elevation: 7,
+                        shadowColor: const Color.fromARGB(255, 209, 198, 191),
+                        backgroundColor:
+                            Theme.of(context).colorScheme.onPrimary,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0))),
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                            width: 140,
+                            height: 80,
+                            child: Icon(
+                              Icons.directions_run_outlined,
+                              size: 70.0,
+                            )),
+                        Text(
+                          'Register \nexercise',
+                          style: TextStyle(color: Colors.black),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ))
+              ],
+            )
+          ],
+        ));
   }
 }

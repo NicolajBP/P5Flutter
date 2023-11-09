@@ -193,7 +193,10 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     //"kroppen" af siden
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Register nutrient intake"),
+        title: const Padding(
+          padding: EdgeInsets.fromLTRB(65, 0, 65, 0),
+          child: Text("Register nutrient intake"),
+        ),
         automaticallyImplyLeading: true, //tilbageknap i appbar
         leading: IconButton(
           onPressed: () {

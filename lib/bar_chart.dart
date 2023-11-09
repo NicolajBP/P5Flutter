@@ -102,16 +102,18 @@ class _BarChartWidgetState extends State<BarChartWidget> {
           bloodSugarLevel: inRange,
           color: Color.fromARGB(217, 80, 168, 9)),
       ChartSampleData(
-        time: "Above Range", 
-        bloodSugarLevel: high, 
-        color: Color.fromARGB(217, 211, 161, 10)),
+          time: "Above Range",
+          bloodSugarLevel: high,
+          color: Color.fromARGB(217, 211, 161, 10)),
     ];
 
     chartDataBackground = <ChartSampleData>[
-      ChartSampleData(time: "Below Range", bloodSugarLevel: 100, color: Colors.grey),
+      ChartSampleData(
+          time: "Below Range", bloodSugarLevel: 100, color: Colors.grey),
       ChartSampleData(
           time: "In Range", bloodSugarLevel: 100, color: Colors.grey),
-      ChartSampleData(time: "Above Range", bloodSugarLevel: 100, color: Colors.grey),
+      ChartSampleData(
+          time: "Above Range", bloodSugarLevel: 100, color: Colors.grey),
     ];
 
     // return mapLiveData;
@@ -169,20 +171,19 @@ updateDataSource(Timer timer){
             child: Column(children: [
       SfCartesianChart(
         enableSideBySideSeriesPlacement: false,
-        
+
         primaryYAxis: NumericAxis(
-          //majorGridLines: MajorGridLines(width: 0.5),
-         // axisLine: AxisLine(width: 0.5)
-        ),
+            //majorGridLines: MajorGridLines(width: 0.5),
+            // axisLine: AxisLine(width: 0.5)
+            ),
         primaryXAxis: CategoryAxis(
-          majorGridLines: const MajorGridLines(width: 0),
-          axisLine: const AxisLine(width: 0),
-          labelStyle: const TextStyle(
-          color: Colors.black,
-          fontSize: 16, 
-          //fontFamily: 'Roboto'
-          )
-        ),
+            majorGridLines: const MajorGridLines(width: 0),
+            axisLine: const AxisLine(width: 0),
+            labelStyle: const TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+              //fontFamily: 'Roboto'
+            )),
         //  isTransposed: true,
         series: <ChartSeries>[
           // Renders bar chart
@@ -194,28 +195,26 @@ updateDataSource(Timer timer){
             pointColorMapper: (ChartSampleData data, _) => data.color,
           ),
           ColumnSeries<ChartSampleData, String>(
-            dataSource: chartData,
-            xValueMapper: (ChartSampleData data, _) => data.time,
-            yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
-            pointColorMapper: (ChartSampleData data, _) => data.color,
-            dataLabelMapper: (ChartSampleData data, _) => "${data.bloodSugarLevel?.toStringAsFixed(2)}%",
-            dataLabelSettings: const DataLabelSettings(
-            isVisible: true,
-            textStyle: TextStyle(
-              fontWeight: FontWeight.bold,
-               fontSize: 14, 
-               ),
-            labelPosition: ChartDataLabelPosition.inside,
-            )
-          )
+              dataSource: chartData,
+              xValueMapper: (ChartSampleData data, _) => data.time,
+              yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
+              pointColorMapper: (ChartSampleData data, _) => data.color,
+              dataLabelMapper: (ChartSampleData data, _) =>
+                  "${data.bloodSugarLevel?.toStringAsFixed(2)}%",
+              dataLabelSettings: const DataLabelSettings(
+                isVisible: true,
+                textStyle: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+                labelPosition: ChartDataLabelPosition.inside,
+              ))
         ],
       ),
-      
       const SizedBox(height: 60),
       Row(
         mainAxisAlignment: MainAxisAlignment.center, //GNS kasse
         children: [
-
           const SizedBox(height: 200),
           Material(
               borderRadius: BorderRadius.circular(15.0),
@@ -223,9 +222,12 @@ updateDataSource(Timer timer){
               shadowColor: const Color.fromARGB(255, 209, 198, 191),
               child: Column(
                 children: [
-                  const Text(
-                    'Average', //overskrift
-                    style: TextStyle(fontSize: 14, color: Colors.black),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(65, 0, 65, 0),
+                    child: Text(
+                      'Average', //overskrift
+                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    ),
                   ),
                   Container(
                     height: 180,
@@ -252,7 +254,7 @@ updateDataSource(Timer timer){
                   ),
                 ],
               )),
-          const SizedBox(width: 50),
+          const SizedBox(width: 25),
           Column(children: [
             Material(
               borderRadius: BorderRadius.circular(15.0),
@@ -260,7 +262,6 @@ updateDataSource(Timer timer){
               shadowColor: const Color.fromARGB(255, 209, 198, 191),
               child: Container(
                   height: 95,
-
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                     borderRadius: BorderRadius.all(
@@ -269,7 +270,10 @@ updateDataSource(Timer timer){
                   ),
                   child: Column(
                     children: [
-                      const Text('Minimum'),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(65, 0, 65, 0),
+                        child: Text('Minimum'),
+                      ),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -299,7 +303,6 @@ updateDataSource(Timer timer){
               shadowColor: const Color.fromARGB(255, 209, 198, 191),
               child: Container(
                   height: 95,
-
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                     borderRadius: BorderRadius.all(
@@ -308,7 +311,10 @@ updateDataSource(Timer timer){
                   ),
                   child: Column(
                     children: [
-                      const Text('Maximum'),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(65, 0, 65, 0),
+                        child: Text('Maximum'),
+                      ),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
