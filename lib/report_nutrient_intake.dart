@@ -256,7 +256,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       Icons.access_time,
       size: 50.0,
     ),
-    label: Text('${_time.hour}:${_time.minute}',
+    label: Text('${_time.hour}'.padLeft(2,'0') + ':'+'${_time.minute}'.padLeft(2,'0'),
         style: const TextStyle(height: 1, fontSize: 36)),
   ),
 ),
