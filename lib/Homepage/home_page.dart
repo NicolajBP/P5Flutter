@@ -99,11 +99,11 @@ class _HomePageSate extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         SizedBox(
-                          width: 140,
+                          width: 110,
                           height: 80,
                           child: Icon(
                             Icons.restaurant,
-                            size: 70.0,
+                            size: 60.0,
                           ),
                         ),
                         Text(
@@ -135,11 +135,11 @@ class _HomePageSate extends State<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         SizedBox(
-                            width: 140,
+                            width: 110,
                             height: 80,
                             child: Icon(
                               Icons.directions_run_outlined,
-                              size: 70.0,
+                              size: 60.0,
                             )),
                         Text(
                           'Register \nexercise',

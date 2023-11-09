@@ -211,7 +211,7 @@ updateDataSource(Timer timer){
               ))
         ],
       ),
-      const SizedBox(height: 60),
+      const SizedBox(height: 30),
       Row(
         mainAxisAlignment: MainAxisAlignment.center, //GNS kasse
         children: [
@@ -223,7 +223,7 @@ updateDataSource(Timer timer){
               child: Column(
                 children: [
                   const Padding(
-                    padding: EdgeInsets.fromLTRB(65, 0, 65, 0),
+                    padding: EdgeInsets.fromLTRB(55, 0, 5, 0),
                     child: Text(
                       'Average', //overskrift
                       style: TextStyle(fontSize: 14, color: Colors.black),
@@ -242,7 +242,7 @@ updateDataSource(Timer timer){
                           average
                               .toStringAsFixed(1), //indsæt variabel for average
                           style: const TextStyle(
-                              fontSize: 60, color: Colors.black),
+                              fontSize: 50, color: Colors.black),
                         ),
                         Text(
                           unit, //indsæt variabel for enhed
@@ -271,7 +271,7 @@ updateDataSource(Timer timer){
                   child: Column(
                     children: [
                       const Padding(
-                        padding: EdgeInsets.fromLTRB(65, 0, 65, 0),
+                        padding: EdgeInsets.fromLTRB(55, 0, 55, 0),
                         child: Text('Minimum'),
                       ),
                       Row(
@@ -280,13 +280,13 @@ updateDataSource(Timer timer){
                             Icon(
                               Icons.arrow_downward,
                               color: Theme.of(context).colorScheme.primary,
-                              size: 55,
+                              size: 45,
                             ),
                             Text(
                               min.toStringAsFixed(1),
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                fontSize: 40,
+                                fontSize: 32,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -312,7 +312,7 @@ updateDataSource(Timer timer){
                   child: Column(
                     children: [
                       const Padding(
-                        padding: EdgeInsets.fromLTRB(65, 0, 65, 0),
+                        padding: EdgeInsets.fromLTRB(55, 0, 55, 0),
                         child: Text('Maximum'),
                       ),
                       Row(
@@ -321,13 +321,13 @@ updateDataSource(Timer timer){
                             Icon(
                               Icons.arrow_upward,
                               color: Theme.of(context).colorScheme.primary,
-                              size: 55,
+                              size: 45,
                             ),
                             Text(
                               max.toStringAsFixed(1),
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                fontSize: 40,
+                                fontSize: 32,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
