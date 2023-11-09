@@ -25,8 +25,10 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   String mealSize = "";
   String note = "";
   String time = "";
+  String formattedTime = "";
   //definere input varibler som strings
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
+  
 
   final TextEditingController noteController = TextEditingController();
 
@@ -107,15 +109,14 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
 
     if (time.isEmpty) {
       // If the time is empty, update it with the current time
-      time = _time.format(context);
+      time = formattedTime = DateTime.now().toIso8601String();
     }
    // Format the time in "yyyy-MM-ddTHH:mm:ss" format
-  String formattedTime = DateTime.now().toIso8601String();
-
+  
   Map<String, dynamic> entryData = {
     'nutrientSize': mealSize,
     'nutrientNote': note,
-    'nutrientTimeStamp': formattedTime, // Store the time in ISO 8601 format
+    'nutrientTimeStamp': time, // Store the time in ISO 8601 format
   };
     
     
@@ -255,7 +256,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       Icons.access_time,
       size: 50.0,
     ),
-    label: Text('${_time.hour}:${_time.minute}',
+    label: Text('${_time.hour}'.padLeft(2,'0') + ':'+'${_time.minute}'.padLeft(2,'0'),
         style: const TextStyle(height: 1, fontSize: 36)),
   ),
 ),
@@ -336,7 +337,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                       borderRadius: BorderRadius.circular(15.0),
                     ),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 5),
+                        horizontal: 10, vertical: 10),
                   ),
                   onPressed: () {
                     debugPrint("Medium button Clicked");
