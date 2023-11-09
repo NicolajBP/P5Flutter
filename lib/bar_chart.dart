@@ -198,7 +198,7 @@ updateDataSource(Timer timer){
             xValueMapper: (ChartSampleData data, _) => data.time,
             yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
             pointColorMapper: (ChartSampleData data, _) => data.color,
-            dataLabelMapper: (ChartSampleData data, _) => "${data.bloodSugarLevel?.toStringAsFixed(2)}%",
+            dataLabelMapper: (ChartSampleData data, _) => "${data.bloodSugarLevel?.toStringAsFixed(1)}%",
             dataLabelSettings: const DataLabelSettings(
             isVisible: true,
             textStyle: TextStyle(

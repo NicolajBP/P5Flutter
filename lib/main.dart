@@ -92,7 +92,7 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-  int currentPage = 1;
+  int currentPage = 0;
   List<Widget> pages = [
     // LoginPage(key: password),
     const HomePage(),

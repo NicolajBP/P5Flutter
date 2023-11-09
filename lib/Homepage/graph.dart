@@ -154,6 +154,11 @@ updateDataSource(Timer timer){
               ]),
           primaryYAxis:
               NumericAxis(/* minimum: 70, maximum: 400, */ 
+              title: AxisTitle(
+                text: 'Blood glucose [mg/dL]',
+                textStyle: TextStyle(fontSize: 10),
+                alignment: ChartAlignment.center),
+               
             plotBands: <PlotBand>[
             PlotBand(
               //LOW stiplet linje
