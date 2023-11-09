@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:intl/intl.dart';
-import 'package:p5/Homepage/graph.dart';
 // ignore: unused_import
 import 'dart:convert';
 
@@ -14,12 +13,13 @@ import 'package:p5/bar_chart.dart';
 class StatisticWidgets extends StatelessWidget {
   final String documentId;
   final String dateId;
+  final int daysAnalyzed;
 
   // ignore: use_key_in_widget_constructors
-  const StatisticWidgets(this.documentId, this.dateId);
+  const StatisticWidgets(this.documentId, this.dateId, this.daysAnalyzed);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     CollectionReference users = FirebaseFirestore.instance.collection("users");
 
     return FutureBuilder<DocumentSnapshot>(
@@ -56,6 +56,7 @@ class StatisticWidgets extends StatelessWidget {
             cgmTimeStamps.add(time2add); // Vi tilføjer timestamps til arrayet
           }
 
+          // ignore: sized_box_for_whitespace
           return Container(
               height: 600, width: double.infinity, child:  BarChartWidget(cgmValues, cgmTimeStamps));
 

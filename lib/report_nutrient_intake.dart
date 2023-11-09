@@ -80,6 +80,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
 
   //data gemmes med denne funktion
   void _saveDataToFirestore() async {
+    // ignore: unused_local_variable
     var collection = FirebaseFirestore.instance.collection("users");
 
     // Opret en liste til at gemme navnene på de manglende felter
@@ -192,7 +193,10 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     //"kroppen" af siden
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Register nutrient intake"),
+        title: const Padding(
+          padding: EdgeInsets.fromLTRB(65, 0, 65, 0),
+          child: Text("Register nutrient intake"),
+        ),
         automaticallyImplyLeading: true, //tilbageknap i appbar
         leading: IconButton(
           onPressed: () {
@@ -231,7 +235,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                       noteController, // Use the controller to manage the text field
                   decoration: InputDecoration(
                     filled: true,
-                    fillColor: Color.fromARGB(170, 243, 62, 17),
+                    fillColor: const Color.fromARGB(170, 243, 62, 17),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(25.0),
                     ),
@@ -256,6 +260,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       Icons.access_time,
       size: 50.0,
     ),
+    // ignore: prefer_interpolation_to_compose_strings
     label: Text('${_time.hour}'.padLeft(2,'0') + ':'+'${_time.minute}'.padLeft(2,'0'),
         style: const TextStyle(height: 1, fontSize: 36)),
   ),
