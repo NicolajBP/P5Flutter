@@ -30,6 +30,7 @@ Future<void> main() async {
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings('@mipmap/ic_launcher');
 
+  // ignore: unused_local_variable
   const InitializationSettings initializationSettings = InitializationSettings(
     android: initializationSettingsAndroid,
   );
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Color.fromRGBO(210, 50, 50, 100),
+          seedColor: const Color.fromRGBO(210, 50, 50, 100),
           brightness: Brightness.light,
         ),
 
@@ -76,6 +77,7 @@ class MyApp extends StatelessWidget {
           bodyMedium: GoogleFonts.merriweather(),
           displaySmall: GoogleFonts.pacifico(),
         ),
+        fontFamily: GoogleFonts.merriweather().fontFamily,
       ),
       home: const RootPage(),
     );
@@ -91,7 +93,7 @@ class RootPage extends StatefulWidget {
 }
 
 class _RootPageState extends State<RootPage> {
-  int currentPage = 1;
+  int currentPage = 0;
   List<Widget> pages = [
     // LoginPage(key: password),
     const HomePage(),

@@ -12,6 +12,13 @@ import 'package:p5/Login/register_page.dart';
 import 'package:path/path.dart';
 // ignore: depend_on_referenced_packages
 import 'package:syncfusion_flutter_charts/charts.dart';
+// ignore: unused_import
+import 'package:excel/excel.dart';
+// ignore: unused_import
+import 'dart:io';
+// ignore: depend_on_referenced_packages, unused_import
+import 'package:path/path.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class BarChartWidget extends StatefulWidget {
   final List<dynamic> cgmValues;
@@ -87,21 +94,26 @@ class _BarChartWidgetState extends State<BarChartWidget> {
 
     chartData = <ChartSampleData>[
       ChartSampleData(
-          time: "Low",
+          time: "Below Range",
           bloodSugarLevel: low,
-          color: const Color.fromARGB(255, 118, 44, 39)),
+          color: Color.fromARGB(217, 194, 25, 13)),
       ChartSampleData(
           time: "In Range",
           bloodSugarLevel: inRange,
-          color: Color.fromARGB(255, 73, 103, 49)),
-      ChartSampleData(time: "High", bloodSugarLevel: high, color: Colors.amber),
+          color: Color.fromARGB(217, 80, 168, 9)),
+      ChartSampleData(
+          time: "Above Range",
+          bloodSugarLevel: high,
+          color: Color.fromARGB(217, 211, 161, 10)),
     ];
 
     chartDataBackground = <ChartSampleData>[
-      ChartSampleData(time: "Low", bloodSugarLevel: 100, color: Colors.grey),
+      ChartSampleData(
+          time: "Below Range", bloodSugarLevel: 100, color: Colors.grey),
       ChartSampleData(
           time: "In Range", bloodSugarLevel: 100, color: Colors.grey),
-      ChartSampleData(time: "High", bloodSugarLevel: 100, color: Colors.grey),
+      ChartSampleData(
+          time: "Above Range", bloodSugarLevel: 100, color: Colors.grey),
     ];
 
     // return mapLiveData;
@@ -159,7 +171,19 @@ updateDataSource(Timer timer){
             child: Column(children: [
       SfCartesianChart(
         enableSideBySideSeriesPlacement: false,
-        primaryXAxis: CategoryAxis(),
+
+        primaryYAxis: NumericAxis(
+            //majorGridLines: MajorGridLines(width: 0.5),
+            // axisLine: AxisLine(width: 0.5)
+            ),
+        primaryXAxis: CategoryAxis(
+            majorGridLines: const MajorGridLines(width: 0),
+            axisLine: const AxisLine(width: 0),
+            labelStyle: const TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+              //fontFamily: 'Roboto'
+            )),
         //  isTransposed: true,
         series: <ChartSeries>[
           // Renders bar chart
@@ -175,14 +199,22 @@ updateDataSource(Timer timer){
             xValueMapper: (ChartSampleData data, _) => data.time,
             yValueMapper: (ChartSampleData data, _) => data.bloodSugarLevel,
             pointColorMapper: (ChartSampleData data, _) => data.color,
+            dataLabelMapper: (ChartSampleData data, _) => "${data.bloodSugarLevel?.toStringAsFixed(1)}%",
+            dataLabelSettings: const DataLabelSettings(
+            isVisible: true,
+            textStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+               fontSize: 14, 
+               ),
+            labelPosition: ChartDataLabelPosition.inside,
+            )
           )
         ],
       ),
-      // const SizedBox(width: 200),
+      const SizedBox(height: 30),
       Row(
         mainAxisAlignment: MainAxisAlignment.center, //GNS kasse
         children: [
-
           const SizedBox(height: 200),
           Material(
               borderRadius: BorderRadius.circular(15.0),
@@ -190,12 +222,15 @@ updateDataSource(Timer timer){
               shadowColor: const Color.fromARGB(255, 209, 198, 191),
               child: Column(
                 children: [
-                  const Text(
-                    'Average', //overskrift
-                    style: TextStyle(fontSize: 14, color: Colors.black),
-                  ),
+
+                     const Text(
+                      'Average', //overskrift
+                      style: TextStyle(fontSize: 14, color: Colors.black),
+                    ),
+              
                   Container(
-                    height: 180,
+                    height: 160,
+                    width: 120,
                     decoration: const BoxDecoration(
                       color: Colors.transparent,
                     ),
@@ -207,7 +242,7 @@ updateDataSource(Timer timer){
                           average
                               .toStringAsFixed(1), //indsæt variabel for average
                           style: const TextStyle(
-                              fontSize: 60, color: Colors.black),
+                              fontSize: 40, color: Colors.black),
                         ),
                         Text(
                           unit, //indsæt variabel for enhed
@@ -219,15 +254,14 @@ updateDataSource(Timer timer){
                   ),
                 ],
               )),
-          const SizedBox(width: 50),
+          const SizedBox(width: 20),
           Column(children: [
             Material(
               borderRadius: BorderRadius.circular(15.0),
               elevation: 7,
               shadowColor: const Color.fromARGB(255, 209, 198, 191),
               child: Container(
-                  height: 95,
-
+                  height: 80,
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                     borderRadius: BorderRadius.all(
@@ -236,20 +270,23 @@ updateDataSource(Timer timer){
                   ),
                   child: Column(
                     children: [
-                      const Text('Minimum'),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(55, 0, 55, 0),
+                        child: Text('Minimum'),
+                      ),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
                               Icons.arrow_downward,
                               color: Theme.of(context).colorScheme.primary,
-                              size: 55,
+                              size: 45,
                             ),
                             Text(
                               min.toStringAsFixed(1),
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                fontSize: 40,
+                                fontSize: 32,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -258,15 +295,14 @@ updateDataSource(Timer timer){
                   )),
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
             Material(
               borderRadius: BorderRadius.circular(15.0),
               elevation: 7,
               shadowColor: const Color.fromARGB(255, 209, 198, 191),
               child: Container(
-                  height: 95,
-
+                  height: 80,
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                     borderRadius: BorderRadius.all(
@@ -275,20 +311,23 @@ updateDataSource(Timer timer){
                   ),
                   child: Column(
                     children: [
-                      const Text('Maximum'),
+                      const Padding(
+                        padding: EdgeInsets.fromLTRB(55, 0, 55, 0),
+                        child: Text('Maximum'),
+                      ),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
                               Icons.arrow_upward,
                               color: Theme.of(context).colorScheme.primary,
-                              size: 55,
+                              size: 45,
                             ),
                             Text(
                               max.toStringAsFixed(1),
                               textAlign: TextAlign.center,
                               style: const TextStyle(
-                                fontSize: 40,
+                                fontSize: 32,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
