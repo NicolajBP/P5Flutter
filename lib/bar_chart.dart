@@ -222,15 +222,15 @@ updateDataSource(Timer timer){
               shadowColor: const Color.fromARGB(255, 209, 198, 191),
               child: Column(
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(55, 0, 5, 0),
-                    child: Text(
+
+                     const Text(
                       'Average', //overskrift
                       style: TextStyle(fontSize: 14, color: Colors.black),
                     ),
-                  ),
+              
                   Container(
-                    height: 180,
+                    height: 160,
+                    width: 120,
                     decoration: const BoxDecoration(
                       color: Colors.transparent,
                     ),
@@ -242,7 +242,7 @@ updateDataSource(Timer timer){
                           average
                               .toStringAsFixed(1), //indsæt variabel for average
                           style: const TextStyle(
-                              fontSize: 50, color: Colors.black),
+                              fontSize: 40, color: Colors.black),
                         ),
                         Text(
                           unit, //indsæt variabel for enhed
@@ -254,14 +254,14 @@ updateDataSource(Timer timer){
                   ),
                 ],
               )),
-          const SizedBox(width: 25),
+          const SizedBox(width: 20),
           Column(children: [
             Material(
               borderRadius: BorderRadius.circular(15.0),
               elevation: 7,
               shadowColor: const Color.fromARGB(255, 209, 198, 191),
               child: Container(
-                  height: 95,
+                  height: 80,
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                     borderRadius: BorderRadius.all(
@@ -295,14 +295,14 @@ updateDataSource(Timer timer){
                   )),
             ),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
             Material(
               borderRadius: BorderRadius.circular(15.0),
               elevation: 7,
               shadowColor: const Color.fromARGB(255, 209, 198, 191),
               child: Container(
-                  height: 95,
+                  height: 80,
                   decoration: const BoxDecoration(
                     color: Colors.transparent,
                     borderRadius: BorderRadius.all(
