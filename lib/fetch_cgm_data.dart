@@ -20,7 +20,7 @@ class StatisticWidgets extends StatelessWidget {
   const StatisticWidgets(this.documentId, this.dateId, this.daysAnalyzed);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {  
     CollectionReference users = FirebaseFirestore.instance.collection("users");
 
     return FutureBuilder<DocumentSnapshot>(
