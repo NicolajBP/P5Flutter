@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/Login/register_page.dart';
 import 'package:p5/fetch_cgm_data.dart';
-import 'package:p5/report_exercise.dart';
-import 'package:p5/report_nutrient_intake.dart';
+/* import 'package:p5/report_exercise.dart';
+import 'package:p5/report_nutrient_intake.dart'; */
 
 int itemCountTrends = 2;
 final user = FirebaseAuth.instance.currentUser!;

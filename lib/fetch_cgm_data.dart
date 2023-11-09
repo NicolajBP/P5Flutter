@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:intl/intl.dart';
-import 'package:p5/Homepage/graph.dart';
 // ignore: unused_import
 import 'dart:convert';
 
@@ -56,6 +55,7 @@ class StatisticWidgets extends StatelessWidget {
             cgmTimeStamps.add(time2add); // Vi tilføjer timestamps til arrayet
           }
 
+          // ignore: sized_box_for_whitespace
           return Container(
               height: 600, width: double.infinity, child:  BarChartWidget(cgmValues, cgmTimeStamps));
 
