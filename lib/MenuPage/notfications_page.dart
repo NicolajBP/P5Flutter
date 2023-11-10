@@ -127,16 +127,21 @@ if (_inactivityNotificantion == true)
           ],
         )                                    
         
-      :Container()]
-      // if (_notifications && _inactivityNotificantion)
-      //     ElevatedButton(
-      //       onPressed: () {
-      //          NotificationService()
-      //          .showNotification(title: 'TestLocal', body: 'håber det virker');
-      //         },
-      //         child: Text('test'),
-      // ),
-      ),  
+              : Container(),
+          if (_notifications && _inactivityNotificantion)
+            ElevatedButton(
+              onPressed: () {
+               
+               NotificationService().scheduleNotification(
+            title: 'Scheduled Notification',
+            body: '$dateTime',
+            scheduledNotificationDateTime: dateTime);
+
+              },
+              child: Text('test'),
+            ),
+        ],
+  ),  
     );  
   } 
 }
