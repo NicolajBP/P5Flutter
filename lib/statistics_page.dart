@@ -20,14 +20,14 @@ bool isPressed3 = false;
 bool isPressed4 = false;
 //bools til når tidsknapperne ikke er pressed
 
-class Trends extends StatefulWidget {
-  const Trends({super.key});
+class StatisticsPage extends StatefulWidget {
+  const StatisticsPage({super.key});
 
   @override
-  State<Trends> createState() => _TrendsState();
+  State<StatisticsPage> createState() => _StatisticsPageState();
 }
 
-class _TrendsState extends State<Trends> {
+class _StatisticsPageState extends State<StatisticsPage> {
    DateTime _selectedDate = DateTime(2023,11,8); // Starter på 2. november som standard (data er importeret for 1., 2. og 3. november)
 
   final dateUpdater =
@@ -36,7 +36,7 @@ class _TrendsState extends State<Trends> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Statistics"),
+        title: const Center(child: Text("Statistics")),
       ),
       body: SingleChildScrollView(
         scrollDirection: axisDirectionToAxis(AxisDirection.down),

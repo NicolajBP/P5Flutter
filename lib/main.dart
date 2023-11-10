@@ -5,7 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:p5/Homepage/home_page.dart';
 import 'package:p5/MenuPage/menu_page.dart';
-import 'package:p5/trends.dart';
+import 'package:p5/statistics_page.dart';
 
 import 'Login/auth.page.dart';
 import 'firebase_options.dart';
@@ -97,7 +97,7 @@ class _RootPageState extends State<RootPage> {
   List<Widget> pages = [
     // LoginPage(key: password),
     const HomePage(),
-    const Trends(),
+    const StatisticsPage(),
     const MenuPage(),
   ];
 

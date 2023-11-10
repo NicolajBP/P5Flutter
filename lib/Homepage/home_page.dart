@@ -38,7 +38,7 @@ class _HomePageSate extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Home"),
+          title: const Center(child: Text("Inspect your blood glucose")),
         ),
         body: SingleChildScrollView(
           child: Column(

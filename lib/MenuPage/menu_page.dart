@@ -21,7 +21,7 @@ class _MenuPageState extends State<MenuPage> {
     return Scaffold(   
 
         appBar: AppBar(
-        title: const Text("Menu"),
+        title: const Center(child: Text("Menu")),
         ),
 
       body: ListView(
