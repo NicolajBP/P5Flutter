@@ -77,13 +77,13 @@ class _BarChartWidgetState extends State<BarChartWidget> {
     num high = 0;
     for (var i = 0; i < cgmValues.length; i++) {
       switch (cgmValues[i]) {
-        case <= 140:
+        case <= 70:
           low++;
           break;
-        case > 140 && <= 200:
+        case > 70 && <= 180:
           inRange++;
           break;
-        case > 200:
+        case > 180:
           high++;
           break;
       }
