@@ -26,9 +26,9 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   String note = "";
   String time = "";
   String formattedTime = "";
+  var newDate;
   //definere input varibler som strings
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
-  
 
   final TextEditingController noteController = TextEditingController();
 
@@ -46,16 +46,24 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     );
     if (newTime != null) {
       setState(() {
-        _time = newTime;
 
-      // Format the time in ISO 8601 format
-      time = DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-        DateTime.now().day,
-        newTime.hour,
-        newTime.minute,
-      ).toIso8601String();
+
+        // Her rundes der ned til tætteste kvarter, derudover sættes time til det rigtige format ///
+        _time = newTime;
+        DateTime dt = time as DateTime;
+        var newDate = alignDateTime(dt, Duration(minutes: 15));
+        time = newDate as String;
+        print(dt); // prints 2022-01-07 15:35:56.288
+        print(time); // prints 2022-01-07 15:30:00.000
+
+        // Format the time in ISO 8601 format
+        time = DateTime(
+          DateTime.now().year,
+          DateTime.now().month,
+          DateTime.now().day,
+          newTime.hour,
+          newTime.minute,
+        ).toIso8601String();
       });
     }
   }
@@ -110,19 +118,20 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
 
     if (time.isEmpty) {
       // If the time is empty, update it with the current time
-      time = formattedTime = DateTime.now().toIso8601String();
+      time = formattedTime = newDate.toIso8601String();
     }
-   // Format the time in "yyyy-MM-ddTHH:mm:ss" format
-  
-  Map<String, dynamic> entryData = {
-    'nutrientSize': mealSize,
-    'nutrientNote': note,
-    'nutrientTimeStamp': time, // Store the time in ISO 8601 format
-  };
-    
-    
+    // Format the time in "yyyy-MM-ddTHH:mm:ss" format
 
+    DateTime dt = DateTime.now();
+    newDate = alignDateTime(dt, Duration(minutes: 15));
+    print(dt); // prints 2022-01-07 15:35:56.288
+    print(newDate); // prints 2022-01-07 15:30:00.000
 
+    Map<String, dynamic> entryData = {
+      'nutrientSize': mealSize,
+      'nutrientNote': note,
+      'nutrientTimeStamp': time, // Store the time in ISO 8601 format
+    };
 
     try {
       // Gem data i Firestore-databasen
@@ -204,7 +213,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
-      
+
         actions: [
           IconButton(
             //informationsknap i appbar
@@ -252,19 +261,22 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
               ),
             ),
 
-           Padding(
-  padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-  child: OutlinedButton.icon(
-    onPressed: _selectTime,
-    icon: const Icon(
-      Icons.access_time,
-      size: 50.0,
-    ),
-    // ignore: prefer_interpolation_to_compose_strings
-    label: Text('${_time.hour}'.padLeft(2,'0') + ':'+'${_time.minute}'.padLeft(2,'0'),
-        style: const TextStyle(height: 1, fontSize: 36)),
-  ),
-),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+              child: OutlinedButton.icon(
+                onPressed: _selectTime,
+                icon: const Icon(
+                  Icons.access_time,
+                  size: 50.0,
+                ),
+                // ignore: prefer_interpolation_to_compose_strings
+                label: Text(
+                    '${_time.hour}'.padLeft(2, '0') +
+                        ':' +
+                        '${_time.minute}'.padLeft(2, '0'),
+                    style: const TextStyle(height: 1, fontSize: 36)),
+              ),
+            ),
 
             const Padding(
               padding: EdgeInsets.only(top: 0.0, bottom: 20),
@@ -375,7 +387,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                 ElevatedButton(
                   // Large button
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(45,35),
+                    minimumSize: const Size(45, 35),
                     backgroundColor: selectedButtonIndex == 2
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onPrimary,
@@ -475,4 +487,39 @@ Widget _buildPopupDialog(BuildContext context) {
       ),
     ],
   );
+}
+
+/////////////////////////////////////////////// Afrunder ///////////////////////////////////////////////////
+
+DateTime alignDateTime(DateTime dt, Duration alignment,
+    [bool roundUp = false]) {
+  assert(alignment >= Duration.zero);
+  if (alignment == Duration.zero) return dt;
+  final correction = Duration(
+      days: 0,
+      hours: alignment.inDays > 0
+          ? dt.hour
+          : alignment.inHours > 0
+              ? dt.hour % alignment.inHours
+              : 0,
+      minutes: alignment.inHours > 0
+          ? dt.minute
+          : alignment.inMinutes > 0
+              ? dt.minute % alignment.inMinutes
+              : 0,
+      seconds: alignment.inMinutes > 0
+          ? dt.second
+          : alignment.inSeconds > 0
+              ? dt.second % alignment.inSeconds
+              : 0,
+      milliseconds: alignment.inSeconds > 0
+          ? dt.millisecond
+          : alignment.inMilliseconds > 0
+              ? dt.millisecond % alignment.inMilliseconds
+              : 0,
+      microseconds: alignment.inMilliseconds > 0 ? dt.microsecond : 0);
+  if (correction == Duration.zero) return dt;
+  final corrected = dt.subtract(correction);
+  final result = roundUp ? corrected.add(alignment) : corrected;
+  return result;
 }
