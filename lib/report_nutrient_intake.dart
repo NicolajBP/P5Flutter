@@ -454,7 +454,7 @@ Widget _buildPopupDialog(BuildContext context) {
   //Widget til popup informations knap
   return AlertDialog(
     title: const Text(
-      'Information about portion size',
+      'Information about portion sizes',
       style: TextStyle(fontWeight: FontWeight.bold),
     ),
     content: const Column(
