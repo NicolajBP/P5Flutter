@@ -15,12 +15,13 @@ class ReportNutrientIntakePage extends StatefulWidget {
 
 class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  _ButtonStateModel _buttonStateModel = _ButtonStateModel(-1);
   final user = FirebaseAuth.instance.currentUser!;
 
   // Firestore instance til at interegerer med databasen.
 
-  bool isSwitched = false;
-  bool? isBoxChecked = false;
+  // bool isSwitched = false;
+  // bool? isBoxChecked = false;
 
   String mealSize = "";
   String note = "";
@@ -28,7 +29,6 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   String formattedTime = "";
   //definere input varibler som strings
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
-  
 
   final TextEditingController noteController = TextEditingController();
 
@@ -48,14 +48,14 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       setState(() {
         _time = newTime;
 
-      // Format the time in ISO 8601 format
-      time = DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-        DateTime.now().day,
-        newTime.hour,
-        newTime.minute,
-      ).toIso8601String();
+        // Format the time in ISO 8601 format
+        time = DateTime(
+          DateTime.now().year,
+          DateTime.now().month,
+          DateTime.now().day,
+          newTime.hour,
+          newTime.minute,
+        ).toIso8601String();
       });
     }
   }
@@ -75,7 +75,9 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   // }
 //funktionen der nulstiller knapperne
 
-  int selectedButtonIndex = -1;
+
+
+  // int selectedButtonIndex = -1;
 //en værdi til kanppen når den er ikke trukket
 
   //data gemmes med denne funktion
@@ -86,7 +88,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     // Opret en liste til at gemme navnene på de manglende felter
     List<String> manglendeFelter = [];
 
-    if (selectedButtonIndex == -1) {
+    if (_buttonStateModel.selectedButtonIndex == -1) {
       // Hvis intet knap til valg af portionsstørrelse er valgt
 
       manglendeFelter.add("Meal Size");
@@ -100,11 +102,11 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
 
     // Definer portionsstørelsen baseret på den valgt knaps indeks
     String mealSize = "";
-    if (selectedButtonIndex == 0) {
+    if (_buttonStateModel.selectedButtonIndex == 0) {
       mealSize = "Small";
-    } else if (selectedButtonIndex == 1) {
+    } else if (_buttonStateModel.selectedButtonIndex == 1) {
       mealSize = "Medium";
-    } else if (selectedButtonIndex == 2) {
+    } else if (_buttonStateModel.selectedButtonIndex == 2) {
       mealSize = "Large";
     }
 
@@ -112,17 +114,13 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       // If the time is empty, update it with the current time
       time = formattedTime = DateTime.now().toIso8601String();
     }
-   // Format the time in "yyyy-MM-ddTHH:mm:ss" format
-  
-  Map<String, dynamic> entryData = {
-    'nutrientSize': mealSize,
-    'nutrientNote': note,
-    'nutrientTimeStamp': time, // Store the time in ISO 8601 format
-  };
-    
-    
+    // Format the time in "yyyy-MM-ddTHH:mm:ss" format
 
-
+    Map<String, dynamic> entryData = {
+      'nutrientSize': mealSize,
+      'nutrientNote': note,
+      'nutrientTimeStamp': time, // Store the time in ISO 8601 format
+    };
 
     try {
       // Gem data i Firestore-databasen
@@ -158,7 +156,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       );
       // Nulstil formularen efter at dataen er blevet gemt
       setState(() {
-        selectedButtonIndex = -1;
+        _buttonStateModel.selectedButtonIndex = -1;
         note = ""; // Clear the note text field
         time = "";
       });
@@ -204,7 +202,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
-      
+
         actions: [
           IconButton(
             //informationsknap i appbar
@@ -252,19 +250,22 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
               ),
             ),
 
-           Padding(
-  padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-  child: OutlinedButton.icon(
-    onPressed: _selectTime,
-    icon: const Icon(
-      Icons.access_time,
-      size: 50.0,
-    ),
-    // ignore: prefer_interpolation_to_compose_strings
-    label: Text('${_time.hour}'.padLeft(2,'0') + ':'+'${_time.minute}'.padLeft(2,'0'),
-        style: const TextStyle(height: 1, fontSize: 36)),
-  ),
-),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+              child: OutlinedButton.icon(
+                onPressed: _selectTime,
+                icon: const Icon(
+                  Icons.access_time,
+                  size: 50.0,
+                ),
+                // ignore: prefer_interpolation_to_compose_strings
+                label: Text(
+                    '${_time.hour}'.padLeft(2, '0') +
+                        ':' +
+                        '${_time.minute}'.padLeft(2, '0'),
+                    style: const TextStyle(height: 1, fontSize: 36)),
+              ),
+            ),
 
             const Padding(
               padding: EdgeInsets.only(top: 0.0, bottom: 20),
@@ -294,7 +295,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                   // Small button
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(45, 35),
-                    backgroundColor: selectedButtonIndex == 0
+                    backgroundColor: _buttonStateModel.selectedButtonIndex == 0
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onPrimary,
                     shape: RoundedRectangleBorder(
@@ -305,15 +306,15 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                   ),
                   onPressed: () {
                     debugPrint("Button 1 Clicked");
-                    if (selectedButtonIndex == 0) {
+                    if (_buttonStateModel.selectedButtonIndex == 0) {
                       // Reset if the button is already selected
                       setState(() {
-                        selectedButtonIndex = -1;
+                        _buttonStateModel.selectedButtonIndex = -1;
                       });
                     } else {
                       // Set the clicked button state
                       setState(() {
-                        selectedButtonIndex = 0;
+                        _buttonStateModel.selectedButtonIndex = 0;
                       });
                     }
                   },
@@ -322,7 +323,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                     style: TextStyle(
                         height: 1,
                         fontSize: 30,
-                        color: selectedButtonIndex == 0
+                        color: _buttonStateModel.selectedButtonIndex == 0
                             ? Theme.of(context).colorScheme.onPrimary
                             : Theme.of(context).colorScheme.primary),
                   ),
@@ -335,7 +336,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                   // Medium button
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(45, 35),
-                    backgroundColor: selectedButtonIndex == 1
+                    backgroundColor: _buttonStateModel.selectedButtonIndex == 1
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onPrimary,
                     shape: RoundedRectangleBorder(
@@ -346,15 +347,15 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                   ),
                   onPressed: () {
                     debugPrint("Medium button Clicked");
-                    if (selectedButtonIndex == 1) {
+                    if (_buttonStateModel.selectedButtonIndex == 1) {
                       // Reset if the button is already selected
                       setState(() {
-                        selectedButtonIndex = -1;
+                        _buttonStateModel.selectedButtonIndex = -1;
                       });
                     } else {
                       // Set the clicked button state
                       setState(() {
-                        selectedButtonIndex = 1;
+                        _buttonStateModel.selectedButtonIndex = 1;
                       });
                     }
                   },
@@ -363,7 +364,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                     style: TextStyle(
                         height: 1,
                         fontSize: 30,
-                        color: selectedButtonIndex == 1
+                        color: _buttonStateModel.selectedButtonIndex == 1
                             ? Theme.of(context).colorScheme.onPrimary
                             : Theme.of(context).colorScheme.primary),
                   ),
@@ -375,8 +376,8 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                 ElevatedButton(
                   // Large button
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(45,35),
-                    backgroundColor: selectedButtonIndex == 2
+                    minimumSize: const Size(45, 35),
+                    backgroundColor: _buttonStateModel.selectedButtonIndex == 2
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onPrimary,
                     shape: RoundedRectangleBorder(
@@ -387,15 +388,15 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                   ),
                   onPressed: () {
                     debugPrint("Large button Clicked");
-                    if (selectedButtonIndex == 2) {
+                    if (_buttonStateModel.selectedButtonIndex == 2) {
                       // Reset if the button is already selected
                       setState(() {
-                        selectedButtonIndex = -1;
+                        _buttonStateModel.selectedButtonIndex = -1;
                       });
                     } else {
                       // Set the clicked button state
                       setState(() {
-                        selectedButtonIndex = 2;
+                        _buttonStateModel.selectedButtonIndex = 2;
                       });
                     }
                   },
@@ -404,7 +405,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                     style: TextStyle(
                         height: 1,
                         fontSize: 30,
-                        color: selectedButtonIndex == 2
+                        color: _buttonStateModel.selectedButtonIndex == 2
                             ? Theme.of(context).colorScheme.onPrimary
                             : Theme.of(context).colorScheme.primary),
                   ),
@@ -421,7 +422,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(60, 80),
                     backgroundColor: note.isNotEmpty &&
-                            selectedButtonIndex != -1
+                            _buttonStateModel.selectedButtonIndex != -1
                         ? Theme.of(context).colorScheme.primary
                         : Colors
                             .grey, // Change button color to gray if data is incomplete
@@ -432,7 +433,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                         horizontal: 20, vertical: 10),
                   ),
                   onPressed: () {
-                    if (note.isNotEmpty && selectedButtonIndex != -1) {
+                    if (note.isNotEmpty && _buttonStateModel.selectedButtonIndex != -1) {
                       _saveDataToFirestore();
                       noteController.clear();
                     }
@@ -475,4 +476,11 @@ Widget _buildPopupDialog(BuildContext context) {
       ),
     ],
   );
+}
+
+class _ButtonStateModel { // Her defineres klassen LiveData
+  int selectedButtonIndex;
+
+  _ButtonStateModel(
+      this.selectedButtonIndex);
 }
