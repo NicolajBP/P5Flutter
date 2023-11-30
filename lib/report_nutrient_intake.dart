@@ -61,18 +61,18 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   }
 
   //
-  bool isPressed1 = false;
-  bool isPressed2 = false;
-  bool isPressed3 = false;
-  //bools til når knappen er ikke trukket
+  // bool isPressed1 = false;
+  // bool isPressed2 = false;
+  // bool isPressed3 = false;
+  // //bools til når knappen er ikke trukket
 
-  void resetButtonStates() {
-    setState(() {
-      isPressed1 = false;
-      isPressed2 = false;
-      isPressed3 = false;
-    });
-  }
+  // void resetButtonStates() {
+  //   setState(() {
+  //     isPressed1 = false;
+  //     isPressed2 = false;
+  //     isPressed3 = false;
+  //   });
+  // }
 //funktionen der nulstiller knapperne
 
   int selectedButtonIndex = -1;

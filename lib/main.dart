@@ -10,6 +10,7 @@ import 'package:p5/statistics_page.dart';
 import 'Login/auth.page.dart';
 import 'firebase_options.dart';
 
+
 FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 //  final navigatorkey = GlobalKey<NavigatorState>();
 //  //En plugin som vil blive brugt til samarbejde med notfikationer
