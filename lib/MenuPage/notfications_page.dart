@@ -36,13 +36,15 @@ class _NotficationPageState extends State<NotficationPage> {
                     Radius.circular(20.0),
                   ),
                 ),
-                child: SwitchListTile(
+                child: 
+                SwitchListTile(
                   title: const Text('Allow notifications'),
                   value: _notifications,
                   onChanged: (bool value) {
                     setState(() {
                       _notifications = value;
-                    });
+                    },
+                    );
                   },
                   secondary: const Icon(Icons.notifications),
                 ),
@@ -126,7 +128,7 @@ class _NotificationSettingsWidgetState
                 title: const Text('Notification Time:'),
                 trailing: CupertinoButton(
                   child: Text(
-                    'Kl. ${widget.dateTime.hour}'.padLeft(2, '0') +
+                    '${widget.dateTime.hour}'.padLeft(2, '0') +
                         ':' +
                         '${widget.dateTime.minute}'.padLeft(2, '0'),
                   ),
@@ -141,7 +143,7 @@ class _NotificationSettingsWidgetState
                           initialDateTime: widget.dateTime,
                           onDateTimeChanged: widget.onDateTimeChanged,
                           use24hFormat: true,
-                          mode: CupertinoDatePickerMode.dateAndTime,
+                          mode: CupertinoDatePickerMode.time,
                         ),
                       ),
                     );
