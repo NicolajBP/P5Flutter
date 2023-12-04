@@ -82,10 +82,10 @@ class _myEntriesState extends State<myEntries> {
           Map<String, dynamic> entry = entriesData[index];
 
           // Hent værdierne for Mealsize, note og tidspunkt fra Firestore-dataene eller skriver ingen data fundet når null-værdier er fundet.
-          String titleText = entry['meal_size'] ?? 'Unknown Size';
+          String titleText = entry['Note'] ?? 'Unknown Size';
           // ignore: avoid_print
-          print('Meal Size: $titleText');
-          String noteText = entry['note'] ?? '';
+          print('Note: $titleText');
+          String noteText = entry['Meal Size'] ?? '';
           String timeText = entry['time'] ?? '';
 
           // Opret en mini liste med titel og undertitel

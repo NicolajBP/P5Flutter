@@ -51,7 +51,7 @@ class NotificationService {
       String? title,
       String? body,
       String? payLoad,
-      required DateTime scheduledNotificationDateTime}) async {
+      required DateTime scheduledNotificationDateTime, required Duration interval}) async {
     return notificationsPlugin.zonedSchedule(
         id,
         title,

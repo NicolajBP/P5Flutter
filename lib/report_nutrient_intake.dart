@@ -194,9 +194,12 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
-          padding: EdgeInsets.fromLTRB(65, 0, 65, 0),
-          child: Text("Register nutrient intake"),
-        ),
+  padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+  child: Text(
+    "Register nutrient intake",
+    style: TextStyle(fontSize: 19), // Set the desired font size here
+  ),
+),
         automaticallyImplyLeading: true, //tilbageknap i appbar
         leading: IconButton(
           onPressed: () {
@@ -231,23 +234,24 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                 child:
                     ////////////////TextBox/////////////////////
                     TextField(
-                  controller:
-                      noteController, // Use the controller to manage the text field
-                  decoration: InputDecoration(
-                    filled: true,
-                    fillColor: const Color.fromARGB(170, 243, 62, 17),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                    hintText: 'Type of food',
-                  ),
-                  maxLines: 5,
-                  onChanged: (value) {
-                    setState(() {
-                      note = value;
-                    });
-                  },
-                ),
+  controller: noteController,
+  decoration: InputDecoration(
+    filled: true,
+    fillColor: Theme.of(context).colorScheme.primary,
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(25.0),
+    ),
+    hintText: 'Type of food',
+    hintStyle: TextStyle(color: Colors.white),
+  ),
+  style: TextStyle(color: Colors.white),
+  maxLines: 5,
+  onChanged: (value) {
+    setState(() {
+      note = value;
+    });
+  },
+)
 ////////////////////////
               ),
             ),
@@ -279,7 +283,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
                       letterSpacing: 0.5,
-                      //  fontFamily: 'Roboto',
+                      fontFamily: 'Roboto',
                     ),
                   ),
                 ],
@@ -293,7 +297,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                 ElevatedButton(
                   // Small button
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(45, 35),
+                    minimumSize: const Size(40, 30),
                     backgroundColor: selectedButtonIndex == 0
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onPrimary,
@@ -321,20 +325,20 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                     "Small",
                     style: TextStyle(
                         height: 1,
-                        fontSize: 30,
+                        fontSize: 20,
                         color: selectedButtonIndex == 0
                             ? Theme.of(context).colorScheme.onPrimary
                             : Theme.of(context).colorScheme.primary),
                   ),
                 ),
 
-                const SizedBox(width: 10),
+                const SizedBox(width: 7),
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
                 ElevatedButton(
                   // Medium button
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(45, 35),
+                    minimumSize: const Size(40, 30),
                     backgroundColor: selectedButtonIndex == 1
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onPrimary,
@@ -362,20 +366,20 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                     "Medium",
                     style: TextStyle(
                         height: 1,
-                        fontSize: 30,
+                        fontSize: 20,
                         color: selectedButtonIndex == 1
                             ? Theme.of(context).colorScheme.onPrimary
                             : Theme.of(context).colorScheme.primary),
                   ),
                 ),
 
-                const SizedBox(width: 10),
+                const SizedBox(width: 7),
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 ElevatedButton(
                   // Large button
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(45,35),
+                    minimumSize: const Size(40,30),
                     backgroundColor: selectedButtonIndex == 2
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onPrimary,
@@ -403,7 +407,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                     "Large",
                     style: TextStyle(
                         height: 1,
-                        fontSize: 30,
+                        fontSize: 20,
                         color: selectedButtonIndex == 2
                             ? Theme.of(context).colorScheme.onPrimary
                             : Theme.of(context).colorScheme.primary),
@@ -416,20 +420,20 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
             const SizedBox(height: 20),
             ConstrainedBox(
                 constraints:
-                    const BoxConstraints.tightFor(width: 420, height: 50),
+                    const BoxConstraints.tightFor(width: 300, height: 50),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(60, 80),
+                    minimumSize: const Size(50, 60),
                     backgroundColor: note.isNotEmpty &&
                             selectedButtonIndex != -1
                         ? Theme.of(context).colorScheme.primary
                         : Colors
                             .grey, // Change button color to gray if data is incomplete
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
+                      borderRadius: BorderRadius.circular(15.0),
                     ),
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 10),
+                        horizontal: 15, vertical: 11),
                   ),
                   onPressed: () {
                     if (note.isNotEmpty && selectedButtonIndex != -1) {
