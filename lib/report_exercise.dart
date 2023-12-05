@@ -5,6 +5,7 @@ import 'package:p5/Login/register_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:p5/components/firebase_api.dart';
 import 'package:interval_time_picker/interval_time_picker.dart';
+
 class ReportExercise extends StatefulWidget {
   const  ReportExercise({super.key});
 
@@ -12,9 +13,11 @@ class ReportExercise extends StatefulWidget {
   State<ReportExercise> createState() => _ReportExerciseState();
 }
 
+
 class _ReportExerciseState extends State<ReportExercise> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser!;
+   Duration notificationInterval = Duration(minutes: 30);
 
   // Firestore instance til at interegerer med databasen.
 
@@ -253,19 +256,22 @@ class _ReportExerciseState extends State<ReportExercise> {
  
 ///// Duration button ////////
 
-  Padding(
-  padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),  
-  child: OutlinedButton.icon(
-    onPressed:_selectTime, //showIntervalPicker(context),
-    icon: const Icon(
-      Icons.access_time,
-      size: 50.0,
-    ),
-    // ignore: prefer_interpolation_to_compose_strings
-    label: Text('${_time.hour}'.padLeft(2,'0') + ':'+'${_time.minute}'.padLeft(2,'0'),
-        style: const TextStyle(height: 1, fontSize: 36)),
-  ),
-),
+// Padding(
+//   padding: const EdgeInsets.all(8.0),
+//   child: GestureDetector(
+//     onTap: _showIntervalPicker,
+//   child: ListTile(
+//   trailing: CupertinoButton(
+//                     child: Text(
+//                       '${widget.notificationInterval.inHours}h ${widget.notificationInterval.inMinutes.remainder(60)}min',
+//                     ),
+//                     onPressed: () {
+//                       _showIntervalPicker(context);
+//                     },
+//                   ),
+//   ),
+//   ),
+// ),
 
 
 /////// time of day button //////
@@ -467,7 +473,7 @@ class _ReportExerciseState extends State<ReportExercise> {
       ),
     );
   }
-}
+
 
 Widget _buildPopupDialog(BuildContext context) {
   //Widget til popup informations knap
@@ -498,3 +504,4 @@ Widget _buildPopupDialog(BuildContext context) {
 }
 
 
+}
