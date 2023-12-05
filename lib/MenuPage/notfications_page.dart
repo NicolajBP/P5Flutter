@@ -133,13 +133,12 @@ class _NotificationSettingsWidgetState
                         '${widget.dateTime.minute}'.padLeft(2, '0'),
                   ),
                   onPressed: () {
-                    showCupertinoModalPopup(
+                    showModalBottomSheet(                                       //Inactivityreminder
                       context: context,
                       builder: (BuildContext context) => SizedBox(
                         height: 250,
                         width: double.infinity,
                         child: CupertinoDatePicker(
-                          backgroundColor: Colors.white,
                           initialDateTime: widget.dateTime,
                           onDateTimeChanged: widget.onDateTimeChanged,
                           use24hFormat: true,
@@ -171,7 +170,10 @@ class _NotificationSettingsWidgetState
             alignment: Alignment.center,
             child: const Text(
               'Or',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18, 
+                fontWeight: FontWeight.bold
+                ),
             ),
           ),
         ),
@@ -228,7 +230,7 @@ class _NotificationSettingsWidgetState
     showModalBottomSheet(
       context: context,
       builder: (BuildContext builder) {
-        return Container(
+        return SizedBox(
           height: 250,
           child: CupertinoTimerPicker(
             mode: CupertinoTimerPickerMode.hm,
