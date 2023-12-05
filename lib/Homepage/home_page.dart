@@ -187,7 +187,7 @@ class _HomePageSate extends State<HomePage> {
                       
                       const SnackBar(
 
-                        content: Text('Data is saved successfully.'),
+                        content: Text('CGM-data added successfully.'),
                         
                         duration:
                             Duration(seconds: 2), // Ændre længden af display
