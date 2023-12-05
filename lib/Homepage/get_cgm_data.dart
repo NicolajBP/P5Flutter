@@ -46,10 +46,22 @@ class GetCgmData extends StatelessWidget {
           List<dynamic> cgmNutrientValues = [];
           List<dynamic> cgmExerciseNotes = [];
           List<dynamic> cgmExerciseValues = [];
+          List<DateTime> timeSlots = [];
+
+          DateTime? lastMidnight = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 00);
+          for (var i = 0; i < 96; i++) {
+            var newTime = lastMidnight.add(Duration(minutes: 15));
+            timeSlots.add(newTime);
+          }
+
+          // DateTime? lastMidnight = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 00);
+          debugPrint(lastMidnight.toString());
+          int j = 0;
 
           for (var i = 0; i < 96; i++) { // Det er åbenbart sådan her man skal lave for-loops i Flutter
             num data2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}"); // Konverterer String fra JSON til num da vi skal bruge det til grafen
             DateTime time2add = DateTime.parse("${data['cgmData']["$i"]["timeStamp"]}");
+
             String food2add = "${data['cgmData']["$i"]["nutrientIntake"]}";   // Konverterer String fra JSON til num da vi skal bruge det til grafen
             
             cgmValues.add(data2add); // Tildeler num-værdien (blodsukkerniveau)fra ovenstående linje til arrayet / listen
@@ -65,6 +77,22 @@ class GetCgmData extends StatelessWidget {
               cgmNutrientValues.add(foodValue2add); // Vi tilføjer mad til arrayet
             }
 
+
+            DateTime? nutrientTime2add = DateTime.parse("${data['nutrientEntries'][j]["nutrientTimeStamp"]}");
+            debugPrint(nutrientTime2add.toString());
+            lastMidnight.add(Duration(minutes: 15) * i);
+            debugPrint(lastMidnight.toString());
+            debugPrint(timeSlots.toString());
+
+            if (nutrientTime2add == lastMidnight) {
+              cgmNutrientValues.add(num.parse("${data['cgmData']["$i"]["nutrientValue"]}"));
+              j++;
+            } else {
+            }
+            lastMidnight.add(Duration(minutes: 15));
+            
+
+
             if (("${data['cgmData']["$i"]["exerciseValue"]}").isEmpty) {
             num? exerciseValue2add;
               cgmExerciseValues.add(exerciseValue2add); // Vi tilføjer mad til arrayet
@@ -73,6 +101,23 @@ class GetCgmData extends StatelessWidget {
               cgmExerciseValues.add(exerciseValue2add); // Vi tilføjer mad til arrayet
             }
 
+          }
+
+          // DateTime lastMidnight = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 00);
+          // int j = 0;
+          for (var i = 0; i < 96; i++) {
+            
+            DateTime? nutrientTime2add = DateTime.parse("${data['nutrientEntries'][j]["nutrientTimeStamp"]}");
+
+            if (nutrientTime2add == lastMidnight) {
+            cgmTimeStamps.add(nutrientTime2add);
+            cgmNutrientValues.add(num.parse("${data['cgmData']["$i"]["nutrientValue"]}"));
+            lastMidnight.add(Duration(minutes: 15));
+            j++;
+            } else {
+              lastMidnight.add(Duration(minutes: 15));
+            }
+          
           }
         
 
