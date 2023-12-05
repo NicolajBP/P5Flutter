@@ -52,21 +52,23 @@ late var currentUser = FirebaseAuth.instance.currentUser;
                 label: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                 children: [ 
-                  Column(children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
                     const Text('Logged in as:',               //Text: Logged in
                       style: TextStyle(
                       color: Colors.white,
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
                   ),
                   textAlign: TextAlign.left,
                 ),
                   Text('${currentUser!.email}',                //Display current logged in email.
-                  textAlign: TextAlign.start,                  //Bør starte først
+                  textAlign: TextAlign.left,                  //Bør starte først
                   style: const TextStyle(
                     color: Colors.white,                    //Hvid farve
-                    fontSize: 16,                             //Størrelse 16
-                    
+                    fontSize: 22,                             //Størrelse 16
+                    fontWeight: FontWeight.bold,
                   ),
                   )
                   ]
