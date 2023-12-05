@@ -40,7 +40,7 @@ dependencies:
   google_fonts: ^6.1.0
   intl: ^0.18.1
   date_picker_timeline:
-  excel: ^2.1.0
+  excel: ^2.1.0 # Vi fikser det her
   firebase_messaging: ^14.7.3
   firebase_analytics: ^10.6.3
   firebase_crashlytics: ^3.4.3
