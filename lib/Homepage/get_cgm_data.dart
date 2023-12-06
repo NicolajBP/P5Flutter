@@ -47,6 +47,7 @@ class GetCgmData extends StatelessWidget {
           List<dynamic> cgmExerciseNotes = [];
           List<dynamic> cgmExerciseValues = [];
           List<dynamic> timeSlots = [];
+          bool nutrientValueAdded = false;
           // List<DateTime> timeSlots = [];
 
           DateTime lastMidnight = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 00);
@@ -70,6 +71,7 @@ class GetCgmData extends StatelessWidget {
             cgmTimeStamps.add(time2add); // Vi tilføjer timestamps til arrayet
 
 
+
             // DateTime? nutrientTime2add = DateTime.parse("${data['nutrientEntries'][j]["nutrientTimeStamp"]}");
             
             // debugPrint(nutrientTime2add.toString());
@@ -86,22 +88,25 @@ class GetCgmData extends StatelessWidget {
                // cgmNutrientValues.add(num.parse("${data['cgmData']["$i"]["nutrientValue"]}"));
                 num? foodValue2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}");
                 cgmNutrientValues.add(foodValue2add);
+                            nutrientValueAdded = true;
                 // debugPrint("Nu er klokken");
                 // debugPrint(time2add.toString());
                 // cgmTimeStamps.add(nutrientTime2add);
-                
               } 
-
             }
             // cgmTimeStamps.add(time2add);
             // timeSlots.add(newTime);
 
             // FIKS DET HER --> FOR LOOP SKAL SKRIVES SAMMEN MED IF-STATEMENT
 
-            if (("${data['cgmData']["$i"]["nutrientValue"]}").isEmpty) {
+            if (("${data['cgmData']["$i"]["nutrientValue"]}").isEmpty && nutrientValueAdded == false)  {
             num? foodValue2add;
               cgmNutrientValues.add(foodValue2add); // Vi tilføjer mad til arrayet
-            } else {
+            } else if(
+              ("${data['cgmData']["$i"]["nutrientValue"]}").isEmpty && nutrientValueAdded == true) {
+
+            }
+            else {
               num foodValue2add = num.parse("${data['cgmData']["$i"]["nutrientValue"]}");
               cgmNutrientValues.add(foodValue2add); // Vi tilføjer mad til arrayet
             }
@@ -119,6 +124,7 @@ class GetCgmData extends StatelessWidget {
 
             // newTime = newTime.add(Duration(minutes: 15));
             debugPrint(newTime.toString());
+            nutrientValueAdded = false;
 
           }
 
