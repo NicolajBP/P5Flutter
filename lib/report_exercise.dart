@@ -265,7 +265,7 @@ class _ReportExerciseState extends State<ReportExercise> {
           const Padding(
               padding: EdgeInsets.only(top: 0.0, bottom: 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     //Overskrift til de tre meal sizes
@@ -351,63 +351,61 @@ Padding(
                 ],
               ),
             ),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-//////////////////////////// Slider bar     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-              StatefulBuilder(
-                builder: (context,state)
-                {
-                return Slider(
-                  value: currentSliderValue,
-                  max: 10,
-                  min: 1,
-                  divisions: 9,
-                  label: currentSliderValue.round().toString(),
-                  onChanged: (double value) {
-                      state(() {
-                    currentSliderValue = value;
-                  });
-                  //   setState(() {
-                  //   currentSliderValue = value;
-                  // });
-                  },
-                );
-                },
-                ),
-          
-          
-////////////////////////////////  save button  ///////////////////////////////////////////////////////////////////////////////////////
-             const SizedBox(height: 20),
-            ConstrainedBox(
-                constraints:
-                    const BoxConstraints.tightFor(width: 300, height: 50),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(50, 60),
-                    backgroundColor: note.isNotEmpty 
-                        ? Theme.of(context).colorScheme.primary
-                        : Colors
-                            .grey, // Change button color to gray if data is incomplete
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 15, vertical: 11),
-                  ),
-                  // && Duration.isNotEmpty
-                  onPressed: () {
-                    if (note.isNotEmpty ) {
-                      _saveDataToFirestore();
-                      noteController.clear();
-                    }
-                  },
-                  child: const Text(
-                    "Save",
-                    style:
-                        TextStyle(height: 1, fontSize: 30, color: Colors.white),
-                  ),
-                ))
+    //////////////////////////// Slider bar //////////////////////////////
+    Padding(
+      padding: const EdgeInsets.only(bottom: 20.0), // Add some bottom padding
+      child: StatefulBuilder(
+        builder: (context, state) {
+          return Slider(
+            value: currentSliderValue,
+            max: 10,
+            min: 1,
+            divisions: 9,
+            label: currentSliderValue.round().toString(),
+            onChanged: (double value) {
+              state(() {
+                currentSliderValue = value;
+              });
+            },
+          );
+        },
+      ),
+    ),
+
+    const SizedBox(height: 1,),
+
+    ///////////////////////// Save button ////////////////////////////
+    Padding(
+      padding: const EdgeInsets.only(bottom: 20.0), // Add some bottom padding
+      child: ConstrainedBox(
+        constraints: const BoxConstraints.tightFor(width: 300, height: 50),
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size(50, 60),
+            backgroundColor: note.isNotEmpty
+                ? Theme.of(context).colorScheme.primary
+                : Colors.grey, // Change button color to gray if data is incomplete
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 11),
+          ),
+          onPressed: () {
+            if (note.isNotEmpty) {
+              _saveDataToFirestore();
+              noteController.clear();
+            }
+          },
+          child: const Text(
+            "Save",
+            style: TextStyle(height: 1, fontSize: 30, color: Colors.white),
+          ),
+                )
+                )
+    ) 
           ],
         ),
       ]
@@ -415,6 +413,7 @@ Padding(
     )
     );
   }
+  
 
 
 Widget _buildPopupDialog(BuildContext context) {
