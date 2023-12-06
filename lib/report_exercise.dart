@@ -222,7 +222,7 @@ time = nearestQuarter(DateTime(
         automaticallyImplyLeading: true, //tilbageknap i appbar
         leading: IconButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(time);
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
