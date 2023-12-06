@@ -18,7 +18,6 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'dart:io';
 // ignore: depend_on_referenced_packages, unused_import
 // import 'package:path/path.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class BarChartWidget extends StatefulWidget {
   final List<dynamic> cgmValues;
@@ -30,6 +29,7 @@ class BarChartWidget extends StatefulWidget {
   @override
   // ignore: no_logic_in_create_state
   State<BarChartWidget> createState() =>
+      // ignore: no_logic_in_create_state
       _BarChartWidgetState(cgmValues, cgmTimeStamps);
 }
 
@@ -40,7 +40,6 @@ class _BarChartWidgetState extends State<BarChartWidget> {
   late num min;
   late num max;
   var unit = 'mg/dL';
-  late ZoomPanBehavior _zoomPanBehavior;
   final List<dynamic>
       cgmValues; // Vi laver en masse lister / arrays for at gemme vores værdier fra databasen så de kan indsættes i grafen
   final List<dynamic> cgmTimeStamps;
@@ -56,12 +55,6 @@ class _BarChartWidgetState extends State<BarChartWidget> {
   @override
   void initState() {
     super.initState();
-    _zoomPanBehavior = ZoomPanBehavior(
-        // Noget med zoom som Seb har lavet?
-        enableSelectionZooming: true,
-        selectionRectBorderColor: Colors.red,
-        selectionRectBorderWidth: 1,
-        selectionRectColor: Colors.grey);
     // chartData = fetchChartData();
 
     /* Timer.periodic(const Duration(seconds: 1), updateDataSource); */
@@ -96,15 +89,15 @@ class _BarChartWidgetState extends State<BarChartWidget> {
       ChartSampleData(
           time: "Below Range",
           bloodSugarLevel: low,
-          color: Color.fromARGB(217, 194, 25, 13)),
+          color: const Color.fromARGB(217, 194, 25, 13)),
       ChartSampleData(
           time: "In Range",
           bloodSugarLevel: inRange,
-          color: Color.fromARGB(217, 80, 168, 9)),
+          color: const Color.fromARGB(217, 80, 168, 9)),
       ChartSampleData(
           time: "Above Range",
           bloodSugarLevel: high,
-          color: Color.fromARGB(217, 211, 161, 10)),
+          color: const Color.fromARGB(217, 211, 161, 10)),
     ];
 
     chartDataBackground = <ChartSampleData>[

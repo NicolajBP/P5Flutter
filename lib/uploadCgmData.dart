@@ -1,9 +1,11 @@
 // import 'dart:ffi';
 
+// ignore_for_file: file_names
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:p5/components/MyTextField.dart';
-import 'package:p5/main.dart';
 // ignore: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable

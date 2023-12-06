@@ -1,10 +1,11 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/Login/register_page.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:p5/components/firebase_api.dart';
-import 'package:interval_time_picker/interval_time_picker.dart';
+import 'package:p5/components/Durationpicker.dart';
+
 class ReportExercise extends StatefulWidget {
   const  ReportExercise({super.key});
 
@@ -24,28 +25,39 @@ class _ReportExerciseState extends State<ReportExercise> {
   String intensity = "";             //ændret fra mealSize
   String note = "";
   String time = "";
+  String duration = "";
   String formattedTime = "";
   //definere input varibler som strings
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
   
+  //konverter integer til string i durationpicker
+  String _formatDuration(Duration duration) {
+  String twoDigits(int n) => n.toString().padLeft(2, '0');
+  String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
+  return '${twoDigits(duration.inHours)}:$twoDigitMinutes';
+}
+
+
+
+
 
   final TextEditingController noteController = TextEditingController();
 
   // Tids valg metode
-  void _selectTime() async {
-    final TimeOfDay? newTime = await showTimePicker(
-      context: context,
-      initialTime: _time,
-      builder: (BuildContext context, Widget? child) {
-        return MediaQuery(
-          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
-          child: child!,
-        );
-      },
-    );
-    if (newTime != null) {
-      setState(() {
-        _time = newTime;
+ void _selectTime() async {
+  final TimeOfDay? newTime = await showTimePicker(
+    context: context,
+    initialTime: _time,
+    builder: (BuildContext context, Widget? child) {
+      return MediaQuery(
+        data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+        child: child!,
+      );
+    },
+  );
+  if (newTime != null) {
+    setState(() {
+      _time = newTime;
 
       // Format the time in ISO 8601 format
       time = DateTime(
@@ -55,9 +67,9 @@ class _ReportExerciseState extends State<ReportExercise> {
         newTime.hour,
         newTime.minute,
       ).toIso8601String();
-      });
-    }
+    });
   }
+}
 
   //
   bool isPressed1 = false;
@@ -116,6 +128,7 @@ class _ReportExerciseState extends State<ReportExercise> {
   Map<String, dynamic> entryData = {
     'nutrientSize': intensity,
     'nutrientNote': note,
+    'execerciseDuration': duration, // Store the duration in minutes
     'nutrientTimeStamp': time, // Store the time in ISO 8601 format
   };
     
@@ -128,7 +141,7 @@ class _ReportExerciseState extends State<ReportExercise> {
           .collection("patientData")
           .doc(dateYYYY_MM_DD)
           .update({
-            "nutrientEntries": FieldValue.arrayUnion([entryData])
+            "exerciseEntries": FieldValue.arrayUnion([entryData])
           })
           // ignore: avoid_print
           .then((_) => print("Added"))
@@ -222,9 +235,9 @@ class _ReportExerciseState extends State<ReportExercise> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 100.0, bottom: 120),
+              padding: const EdgeInsets.only(top: 50, bottom: 75),
               child: SizedBox(
-                width: 310,
+                width: 275,
                 height: 100,
         
     ////////////////TextBox/////////////////////
@@ -238,9 +251,9 @@ class _ReportExerciseState extends State<ReportExercise> {
       borderRadius: BorderRadius.circular(25.0),
     ),
     hintText: 'Type of exercise',
-    hintStyle: TextStyle(color: Colors.white),
+    hintStyle: const TextStyle(color: Colors.white),
   ),
-  style: TextStyle(color: Colors.white),
+  style: const TextStyle(color: Colors.white),
   maxLines: 5,
   onChanged: (value) {
     setState(() {
@@ -250,27 +263,63 @@ class _ReportExerciseState extends State<ReportExercise> {
 )
 ),
 ),
+//////////////////////////////Overskrift inden duration/////////////////////////////////
+          const Padding(
+              padding: EdgeInsets.only(top: 0.0, bottom: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    //Overskrift til de tre meal sizes
+                    " How long did you exercise for?",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      letterSpacing: 0.5,
+                      fontFamily: 'Roboto',
+                    ),
+                  ),
+                ],
+              ),
+            ),
  
 ///// Duration button ////////
 
-  Padding(
-  padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),  
-  child: OutlinedButton.icon(
-    onPressed:_selectTime, //showIntervalPicker(context),
-    icon: const Icon(
-      Icons.access_time,
-      size: 50.0,
-    ),
-    // ignore: prefer_interpolation_to_compose_strings
-    label: Text('${_time.hour}'.padLeft(2,'0') + ':'+'${_time.minute}'.padLeft(2,'0'),
-        style: const TextStyle(height: 1, fontSize: 36)),
+Padding(
+  padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+  child: DurationPicker(
+    onDurationChanged: (newDuration) {
+      setState(() {
+        duration = _formatDuration(newDuration);
+      });
+    },
   ),
 ),
-
+/////////////////////////////////////overskrift//////////////////////
+        const Padding(
+              padding: EdgeInsets.only(top: 0.0, bottom: 12),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    //Overskrift til de tre meal sizes
+                    " When did you exercise?",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      letterSpacing: 0.5,
+                      fontFamily: 'Roboto',
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
 /////// time of day button //////
   Padding(
-  padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+  padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
   child: OutlinedButton.icon(
     onPressed: _selectTime,
     icon: const Icon(
@@ -286,7 +335,7 @@ class _ReportExerciseState extends State<ReportExercise> {
 
 //////////////// Overskrift til intensity /////////////
             const Padding(
-              padding: EdgeInsets.only(top: 0.0, bottom: 20),
+              padding: EdgeInsets.only(top: 0.0, bottom: 12),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -304,10 +353,11 @@ class _ReportExerciseState extends State<ReportExercise> {
                 ],
               ),
             ),
+///////////////////////////  low button   //////////////////////////////////////////////////////////////////////////////////////////
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-////////////////////////////  low button   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
                 ElevatedButton(
                   // Small button
@@ -439,8 +489,7 @@ class _ReportExerciseState extends State<ReportExercise> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(50, 60),
-                    backgroundColor: note.isNotEmpty &&
-                            selectedButtonIndex != -1
+                    backgroundColor: note.isNotEmpty 
                         ? Theme.of(context).colorScheme.primary
                         : Colors
                             .grey, // Change button color to gray if data is incomplete
@@ -450,8 +499,9 @@ class _ReportExerciseState extends State<ReportExercise> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 15, vertical: 11),
                   ),
+                  // && Duration.isNotEmpty
                   onPressed: () {
-                    if (note.isNotEmpty && selectedButtonIndex != -1) {
+                    if (note.isNotEmpty ) {
                       _saveDataToFirestore();
                       noteController.clear();
                     }

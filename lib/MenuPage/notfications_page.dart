@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api, prefer_interpolation_to_compose_strings
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/components/firebase_api.dart';
@@ -11,9 +13,10 @@ class NotficationPage extends StatefulWidget {
 
 class _NotficationPageState extends State<NotficationPage> {
   bool _notifications = true;
-  bool _inactivityNotification = true;
   DateTime dateTime = DateTime.now();
-  Duration notificationInterval = Duration(minutes: 30); // Default interval is 30 minutes
+  Duration notificationInterval = const Duration(minutes: 30); // Default interval is 30 minutes
+
+//DateTime dateTime = DateTime(3000, 2, 1, 12, 30);                       //En datetime instance, hvorved vores dato & tid er indsat
 
   @override
   Widget build(BuildContext context) {
@@ -36,15 +39,13 @@ class _NotficationPageState extends State<NotficationPage> {
                     Radius.circular(20.0),
                   ),
                 ),
-                child: 
-                SwitchListTile(
+                child: SwitchListTile(
                   title: const Text('Allow notifications'),
                   value: _notifications,
                   onChanged: (bool value) {
                     setState(() {
                       _notifications = value;
-                    },
-                    );
+                    });
                   },
                   secondary: const Icon(Icons.notifications),
                 ),
@@ -74,6 +75,7 @@ class _NotficationPageState extends State<NotficationPage> {
                 // Do nothing when the interval save button is pressed
               },
             ),
+            
         ],
       ),
     );
@@ -88,7 +90,8 @@ class NotificationSettingsWidget extends StatefulWidget {
   final VoidCallback onSaveInactivityReminder;
   final VoidCallback onIntervalSavePressed;
 
-  NotificationSettingsWidget({
+  // ignore: use_key_in_widget_constructors
+  const NotificationSettingsWidget({
     required this.dateTime,
     required this.notificationInterval,
     required this.onDateTimeChanged,
@@ -128,7 +131,7 @@ class _NotificationSettingsWidgetState
                 title: const Text('Notification Time:'),
                 trailing: CupertinoButton(
                   child: Text(
-                    '${widget.dateTime.hour}'.padLeft(2, '0') +
+                    'Kl. ${widget.dateTime.hour}'.padLeft(2, '0') +
                         ':' +
                         '${widget.dateTime.minute}'.padLeft(2, '0'),
                   ),
@@ -143,7 +146,7 @@ class _NotificationSettingsWidgetState
                           initialDateTime: widget.dateTime,
                           onDateTimeChanged: widget.onDateTimeChanged,
                           use24hFormat: true,
-                          mode: CupertinoDatePickerMode.time,
+                          mode: CupertinoDatePickerMode.dateAndTime,
                         ),
                       ),
                     );
@@ -228,7 +231,7 @@ class _NotificationSettingsWidgetState
     showModalBottomSheet(
       context: context,
       builder: (BuildContext builder) {
-        return Container(
+        return SizedBox(
           height: 250,
           child: CupertinoTimerPicker(
             mode: CupertinoTimerPickerMode.hm,

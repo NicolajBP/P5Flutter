@@ -182,7 +182,7 @@ class _HomePageSate extends State<HomePage> {
                     // }
                     startTimer();
                     uploadCgmData(context);
-                    Future.delayed(Duration(seconds: 2)).then((_){
+                    Future.delayed(const Duration(seconds: 2)).then((_){
                       ScaffoldMessenger.of(context).showSnackBar(
                       
                       const SnackBar(

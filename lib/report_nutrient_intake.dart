@@ -242,9 +242,9 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       borderRadius: BorderRadius.circular(25.0),
     ),
     hintText: 'Type of food',
-    hintStyle: TextStyle(color: Colors.white),
+    hintStyle: const TextStyle(color: Colors.white),
   ),
-  style: TextStyle(color: Colors.white),
+  style: const TextStyle(color: Colors.white),
   maxLines: 5,
   onChanged: (value) {
     setState(() {
