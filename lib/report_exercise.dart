@@ -129,10 +129,10 @@ class _ReportExerciseState extends State<ReportExercise> {
    // Format the time in "yyyy-MM-ddTHH:mm:ss" format
   
   Map<String, dynamic> entryData = {
-    'nutrientSize': intensity,
-    'nutrientNote': note,
-    'execerciseDuration': duration, // Store the duration in minutes
-    'nutrientTimeStamp': time, // Store the time in ISO 8601 format
+    'exerciseSize': intensity,
+    'exerciseNote': note,
+    'exerciseDuration': duration, // Store the duration in minutes
+    'exerciseTimeStamp': time, // Store the time in ISO 8601 format
   };
     
 
