@@ -7237,7 +7237,7 @@ class _RegisterPageState extends State<RegisterPage> {
               const Text(
                 'Register your account here',
                 style: TextStyle(
-                  color: const Color.fromRGBO(210, 50, 50, 100),
+                  color:  Color.fromRGBO(210, 50, 50, 100),
                   fontSize: 16,
                 ),
               ),

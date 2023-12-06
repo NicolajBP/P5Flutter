@@ -248,30 +248,6 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
             Padding(
               padding: const EdgeInsets.only(top: 100.0, bottom: 120),
               child: SizedBox(
-                width: 310,
-                height: 160,
-
-                child:
-                    ////////////////TextBox/////////////////////
-                    TextField(
-  controller: noteController,
-  decoration: InputDecoration(
-    filled: true,
-    fillColor: Theme.of(context).colorScheme.primary,
-    border: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(25.0),
-    ),
-    hintText: 'Type of food',
-    hintStyle: const TextStyle(color: Colors.white),
-  ),
-  style: const TextStyle(color: Colors.white),
-  maxLines: 5,
-  onChanged: (value) {
-    setState(() {
-      note = value;
-    });
-  },
-)
                   width: 310,
                   height: 160,
                   child:
@@ -285,9 +261,9 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                         borderRadius: BorderRadius.circular(25.0),
                       ),
                       hintText: 'Type of food',
-                      hintStyle: TextStyle(color: Colors.white),
+                      hintStyle: const TextStyle(color: Colors.white),
                     ),
-                    style: TextStyle(color: Colors.white),
+                    style: const TextStyle(color: Colors.white),
                     maxLines: 5,
                     onChanged: (value) {
                       setState(() {
@@ -309,9 +285,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                 ),
                 // ignore: prefer_interpolation_to_compose_strings
                 label: Text(
-                    '${_time.hour}'.padLeft(2, '0') +
-                        ':' +
-                        '${_time.minute}'.padLeft(2, '0'),
+                    '${'${_time.hour}'.padLeft(2, '0')}:${'${_time.minute}'.padLeft(2, '0')}',
                     style: const TextStyle(height: 1, fontSize: 36)),
               ),
             ),

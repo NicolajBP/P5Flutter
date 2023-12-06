@@ -4,9 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/Login/register_page.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:p5/components/firebase_api.dart';
-import 'package:interval_time_picker/interval_time_picker.dart';
+import 'package:p5/components/Durationpicker.dart';
+
 
 class ReportExercise extends StatefulWidget {
   const  ReportExercise({super.key});
@@ -19,7 +18,7 @@ class ReportExercise extends StatefulWidget {
 class _ReportExerciseState extends State<ReportExercise> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   final user = FirebaseAuth.instance.currentUser!;
-   Duration notificationInterval = Duration(minutes: 30);
+   Duration notificationInterval = const Duration(minutes: 30);
 
   // Firestore instance til at interegerer med databasen.
 
