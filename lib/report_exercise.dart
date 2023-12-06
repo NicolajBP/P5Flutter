@@ -5,7 +5,6 @@ import 'package:p5/Login/register_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:p5/components/firebase_api.dart';
 import 'package:interval_time_picker/interval_time_picker.dart';
-// import 'slider.dart';
 
 class ReportExercise extends StatefulWidget {
   const  ReportExercise({super.key});
@@ -565,7 +564,7 @@ Widget _buildPopupDialog(BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          "An exercise can be everything from a walk, a swim, a ride on your bike or a trip to the gym",
+          "Registerring intensity and duratio is optional.\nAn exercise can be everything from a walk, a swim, a ride on your bike or a trip to the gym",
         ),
       ],
     ),
