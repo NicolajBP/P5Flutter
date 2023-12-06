@@ -816,7 +816,7 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
         "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""}
+          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
         },
         "nutrientEntries": {
           "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
@@ -1606,8 +1606,8 @@ Future<void> uploadCgmData(BuildContext context) async {
             "exerciseValue": ""
           }
         },
-        "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""}
+"exerciseEntries": {
+          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
         },
         "nutrientEntries": {
           "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
@@ -2397,8 +2397,8 @@ Future<void> uploadCgmData(BuildContext context) async {
             "exerciseValue": ""
           }
         },
-        "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""}
+"exerciseEntries": {
+          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
         },
         "nutrientEntries": {
           "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
@@ -3188,8 +3188,8 @@ Future<void> uploadCgmData(BuildContext context) async {
             "exerciseValue": ""
           }
         },
-        "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""}
+"exerciseEntries": {
+          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
         },
         "nutrientEntries": {
           "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
@@ -3979,8 +3979,8 @@ Future<void> uploadCgmData(BuildContext context) async {
             "exerciseValue": ""
           }
         },
-        "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""}
+"exerciseEntries": {
+          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
         },
         "nutrientEntries": {
           "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
@@ -4770,8 +4770,8 @@ Future<void> uploadCgmData(BuildContext context) async {
             "exerciseValue": ""
           }
         },
-        "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""}
+"exerciseEntries": {
+          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
         },
         "nutrientEntries": {
           "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
@@ -5561,8 +5561,8 @@ Future<void> uploadCgmData(BuildContext context) async {
             "exerciseValue": ""
           }
         },
-        "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""}
+"exerciseEntries": {
+          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
         },
         "nutrientEntries": {
           "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
@@ -6348,8 +6348,8 @@ Future<void> uploadCgmData(BuildContext context) async {
     "exerciseValue": ""
   }
 },
-        "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""}
+"exerciseEntries": {
+          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
         },
         "nutrientEntries": {
           "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
@@ -7140,8 +7140,8 @@ Future<void> uploadCgmData(BuildContext context) async {
             "exerciseValue": ""
           }
         },
-        "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""}
+"exerciseEntries": {
+          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
         },
         "nutrientEntries": {
           "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}

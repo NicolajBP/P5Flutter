@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/Login/register_page.dart';
 import 'package:p5/components/Durationpicker.dart';
+import 'package:p5/report_nutrient_intake.dart';
 
 
 class ReportExercise extends StatefulWidget {
@@ -63,13 +64,15 @@ class _ReportExerciseState extends State<ReportExercise> {
       _time = newTime;
 
       // Format the time in ISO 8601 format
-      time = DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-        DateTime.now().day,
-        newTime.hour,
-        newTime.minute,
-      ).toIso8601String();
+time = nearestQuarter(DateTime(
+          DateTime.now().year,
+          DateTime.now().month,
+          DateTime.now().day,
+          newTime.hour,
+          newTime.minute,
+        )).toIso8601String();
+
+        time = time.substring(0, time.length - 4);
     });
   }
 }
@@ -124,15 +127,17 @@ class _ReportExerciseState extends State<ReportExercise> {
 
     if (time.isEmpty) {
       // If the time is empty, update it with the current time
-      time = formattedTime = DateTime.now().toIso8601String();
+      time = nearestQuarter(DateTime.now()).toIso8601String();
+
+      time = time.substring(0, time.length - 4);
     }
    // Format the time in "yyyy-MM-ddTHH:mm:ss" format
   
   Map<String, dynamic> entryData = {
-    'nutrientSize': intensity,
-    'nutrientNote': note,
-    'execerciseDuration': duration, // Store the duration in minutes
-    'nutrientTimeStamp': time, // Store the time in ISO 8601 format
+    'exerciseSize': intensity,
+    'exerciseNote': note,
+    'exerciseDuration': duration, // Store the duration in minutes
+    'exerciseTimeStamp': time, // Store the time in ISO 8601 format
   };
     
 
