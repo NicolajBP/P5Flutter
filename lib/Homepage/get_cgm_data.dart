@@ -5,10 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:intl/intl.dart';
+import 'package:p5/Homepage/graph.dart';
 // ignore: unused_import
 import 'dart:convert';
-
-import 'package:p5/Homepage/graph.dart';
 
 class GetCgmData extends StatelessWidget {
   final String documentId;
@@ -57,7 +56,7 @@ class GetCgmData extends StatelessWidget {
 
           for (var k = 0; k < 96; k++) {
             timeSlots.add(testTime);
-            testTime = testTime.add(Duration(minutes: 15));
+            testTime = testTime.add(const Duration(minutes: 15));
           }
 
           // DateTime? lastMidnight = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 00);
@@ -132,8 +131,6 @@ class GetCgmData extends StatelessWidget {
 
           return SizedBox(
               height: 300, width: double.infinity, child: LiveChartWidget(cgmValues, cgmTimeStamps, cgmNutrientNotes, cgmNutrientValues,cgmExerciseNotes, cgmExerciseValues));
-          // return Text("Full Name: ${data['cgmData']}");
-          // return LiveChartWidget();
         }
 
         return const Center(
