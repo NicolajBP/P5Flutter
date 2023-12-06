@@ -86,6 +86,9 @@ class GetCgmData extends StatelessWidget {
                // cgmNutrientValues.add(num.parse("${data['cgmData']["$i"]["nutrientValue"]}"));
                 num? foodValue2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}");
                 cgmNutrientValues.add(foodValue2add);
+                // debugPrint("Nu er klokken");
+                // debugPrint(time2add.toString());
+                // cgmTimeStamps.add(nutrientTime2add);
                 
               } 
 
@@ -93,7 +96,7 @@ class GetCgmData extends StatelessWidget {
             // cgmTimeStamps.add(time2add);
             // timeSlots.add(newTime);
 
-            
+            // FIKS DET HER --> FOR LOOP SKAL SKRIVES SAMMEN MED IF-STATEMENT
 
             if (("${data['cgmData']["$i"]["nutrientValue"]}").isEmpty) {
             num? foodValue2add;
@@ -114,7 +117,7 @@ class GetCgmData extends StatelessWidget {
               cgmExerciseValues.add(exerciseValue2add); // Vi tilføjer mad til arrayet
             }
 
-            newTime = newTime.add(Duration(minutes: 15));
+            // newTime = newTime.add(Duration(minutes: 15));
             debugPrint(newTime.toString());
 
           }
