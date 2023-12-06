@@ -32,6 +32,7 @@ class _ReportExerciseState extends State<ReportExercise> {
   String formattedTime = "";
   //definere input varibler som strings
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
+         double currentSliderValue = 5;  // Dette er intensiteten. Gem denne variabel i FIREBASE!!!!!!!!! HJÆLP
   
   //konverter integer til string i durationpicker
   String _formatDuration(Duration duration) {
@@ -112,15 +113,7 @@ class _ReportExerciseState extends State<ReportExercise> {
       manglendeFelter.add("Note");
     }
 
-    // Definer portionsstørelsen baseret på den valgt knaps indeks
-    String intensity = "";
-    if (selectedButtonIndex == 0) {
-      intensity = "Low";
-    } else if (selectedButtonIndex == 1) {
-      intensity = "Medium";
-    } else if (selectedButtonIndex == 2) {
-      intensity = "High";
-    }
+
 
     if (time.isEmpty) {
       // If the time is empty, update it with the current time
@@ -129,10 +122,10 @@ class _ReportExerciseState extends State<ReportExercise> {
    // Format the time in "yyyy-MM-ddTHH:mm:ss" format
   
   Map<String, dynamic> entryData = {
-    'nutrientSize': intensity,
-    'nutrientNote': note,
+    'exerciseintesity': currentSliderValue.toInt(),
+    'exerciseNote': note,
     'execerciseDuration': duration, // Store the duration in minutes
-    'nutrientTimeStamp': time, // Store the time in ISO 8601 format
+    'exerciseTimeStamp': time, // Store the time in ISO 8601 format
   };
     
 
@@ -202,7 +195,7 @@ class _ReportExerciseState extends State<ReportExercise> {
 
   @override
   Widget build(BuildContext context) {
-       double currentSliderValue = 5;  // Dette er intensiteten. Gem denne variabel i FIREBASE!!!!!!!!! HJÆLP
+
        
     //"kroppen" af siden
     return Scaffold(
@@ -383,181 +376,7 @@ Padding(
                 },
                 ),
           
-              
-              // SliderExample(
-
-              // ),
-
-
-           
-            // Text('$currentSliderValue'),
-            // Container(
-            //   alignment: Alignment.center,
-            //   child: SizedBox(
-            //     width: double.infinity,
-            //     child: CupertinoSlider( 
-            //       //key:  Key('slider'),
-            //       value: currentSliderValue,
-            //       //mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //       // This allows the slider to jump between divisions.
-            //       // If null, the slide movement is continuous.
-            //       divisions: 5,
-            //       // The maximum and minimum slider value
-            //       max: 5,
-            //       min: 1,
-            //       //activeColor: Colors.red,
-            //       //thumbColor: Colors.redAccent,
-            //     onChangeStart: (double value) {
-            //       setState(() {
-            //         //sliderStatus = 'Sliding';
-            //       });
-            //     },
-            //     // This is called when sliding has ended.
-            //     onChangeEnd: (double value) {
-            //       setState(() {
-            //         //sliderStatus = 'Finished sliding';
-            //       });
-            //     },  
-                
-            //       // This is called when slider value is changed.
-            //       onChanged: (double value) {
-            //         setState(() {
-            //           currentSliderValue = value;
-            //         });
-            //       },
-            //     ),
-            //   ),
-            // ),
-            // Text(
-            //   sliderStatus ?? '',
-            //   style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-            //         fontSize: 12,
-            //       ),
-            // ),
-////////////////////////////  low button   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-                // ElevatedButton(
-                //   // Small button
-                //   style: ElevatedButton.styleFrom(
-                //     minimumSize: const Size(40, 30),
-                //     backgroundColor: selectedButtonIndex == 0
-                //         ? Theme.of(context).colorScheme.primary
-                //         : Theme.of(context).colorScheme.onPrimary,
-                //     shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(15.0),
-                //     ),
-                //     padding: const EdgeInsets.symmetric(
-                //         horizontal: 10, vertical: 10),
-                //   ),
-                //   onPressed: () {
-                //     debugPrint("Button 1 Clicked");
-                //     if (selectedButtonIndex == 0) {
-                //       // Reset if the button is already selected
-                //       setState(() {
-                //         selectedButtonIndex = -1;
-                //       });
-                //     } else {
-                //       // Set the clicked button state
-                //       setState(() {
-                //         selectedButtonIndex = 0;
-                //       });
-                //     }
-                //   },
-                //   child: Text(
-                //     "Low",
-                //     style: TextStyle(
-                //         height: 1,
-                //         fontSize: 20,
-                //         color: selectedButtonIndex == 0
-                //             ? Theme.of(context).colorScheme.onPrimary
-                //             : Theme.of(context).colorScheme.primary),
-                //   ),
-                // ),
-
-                // const SizedBox(width: 7),
-
-////////////////////////////////    Medium button/////////////////////////////////////////////////////////////////////
-                // ElevatedButton(
-                //   // Medium button
-                //   style: ElevatedButton.styleFrom(
-                //     minimumSize: const Size(40, 30),
-                //     backgroundColor: selectedButtonIndex == 1
-                //         ? Theme.of(context).colorScheme.primary
-                //         : Theme.of(context).colorScheme.onPrimary,
-                //     shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(15.0),
-                //     ),
-                //     padding: const EdgeInsets.symmetric(
-                //         horizontal: 10, vertical: 10),
-                //   ),
-                //   onPressed: () {
-                //     debugPrint("Medium button Clicked");
-                //     if (selectedButtonIndex == 1) {
-                //       // Reset if the button is already selected
-                //       setState(() {
-                //         selectedButtonIndex = -1;
-                //       });
-                //     } else {
-                //       // Set the clicked button state
-                //       setState(() {
-                //         selectedButtonIndex = 1;
-                //       });
-                //     }
-                //   },
-                //   child: Text(
-                //     "Medium",
-                //     style: TextStyle(
-                //         height: 1,
-                //         fontSize: 20,
-                //         color: selectedButtonIndex == 1
-                //             ? Theme.of(context).colorScheme.onPrimary
-                //             : Theme.of(context).colorScheme.primary),
-                //   ),
-                // ),
-
-                // const SizedBox(width: 7),
-
-//////////////////////////////////  high button  /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //     ElevatedButton(
-            //       // Large button
-            //       style: ElevatedButton.styleFrom(
-            //         minimumSize: const Size(40,30),
-            //         backgroundColor: selectedButtonIndex == 2
-            //             ? Theme.of(context).colorScheme.primary
-            //             : Theme.of(context).colorScheme.onPrimary,
-            //         shape: RoundedRectangleBorder(
-            //           borderRadius: BorderRadius.circular(15.0),
-            //         ),
-            //         padding: const EdgeInsets.symmetric(
-            //             horizontal: 10, vertical: 10),
-            //       ),
-            //       onPressed: () {
-            //         debugPrint("Large button Clicked");
-            //         if (selectedButtonIndex == 2) {
-            //           // Reset if the button is already selected
-            //           setState(() {
-            //             selectedButtonIndex = -1;
-            //           });
-            //         } else {
-            //           // Set the clicked button state
-            //           setState(() {
-            //             selectedButtonIndex = 2;
-            //           });
-            //         }
-            //       },
-            //       child: Text(
-            //         "High",
-            //         style: TextStyle(
-            //             height: 1,
-            //             fontSize: 20,
-            //             color: selectedButtonIndex == 2
-            //                 ? Theme.of(context).colorScheme.onPrimary
-            //                 : Theme.of(context).colorScheme.primary),
-            //       ),
-            //     ),
-            //   ],
-            // ),
-
+          
 ////////////////////////////////  save button  ///////////////////////////////////////////////////////////////////////////////////////
              const SizedBox(height: 20),
             ConstrainedBox(

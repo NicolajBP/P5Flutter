@@ -5,9 +5,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // ignore: unused_import
 import 'package:intl/intl.dart';
-import 'package:p5/Homepage/graph.dart';
 // ignore: unused_import
 import 'dart:convert';
+
+import 'package:p5/Homepage/graph.dart';
 
 class GetCgmData extends StatelessWidget {
   final String documentId;
@@ -46,20 +47,6 @@ class GetCgmData extends StatelessWidget {
           List<dynamic> cgmNutrientValues = [];
           List<dynamic> cgmExerciseNotes = [];
           List<dynamic> cgmExerciseValues = [];
-          // List<DateTime> timeSlots = [];
-
-          DateTime lastMidnight = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 00);
-          DateTime newTime = lastMidnight;
-          // for (var i = 0; i < 96; i++) {
-          //   timeSlots.add(newTime);
-          //   newTime = newTime.add(Duration(minutes: 15));
-            
-          // }
-
-          // DateTime? lastMidnight = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 00);
-          // debugPrint(lastMidnight.toString());
-          int j = 0;
-          int jMax = data['nutrientEntries']!.length - 1;
 
           for (var i = 0; i < 96; i++) { // Det er åbenbart sådan her man skal lave for-loops i Flutter
             num data2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}"); // Konverterer String fra JSON til num da vi skal bruge det til grafen
@@ -71,38 +58,7 @@ class GetCgmData extends StatelessWidget {
             cgmTimeStamps.add(time2add); // Vi tilføjer timestamps til arrayet
             cgmNutrientNotes.add(food2add); // Vi tilføjer mad til arrayet
 
-            // DateTime? nutrientTime2add = DateTime.parse("${data['nutrientEntries'][j]["nutrientTimeStamp"]}");
-            
-            // debugPrint(nutrientTime2add.toString());
-            // debugPrint(jMax.toString());
-            // lastMidnight.add(Duration(minutes: 15));
-            debugPrint(newTime.toString());
-            // debugPrint(timeSlots[i].toString());
-            
-        
-            for (j=0; j<jMax; j++) {
-            DateTime? nutrientTime2add = DateTime.parse("${data['nutrientEntries'][j]["nutrientTimeStamp"]}");
-            if (nutrientTime2add.isAtSameMomentAs(newTime)) {
-              // cgmNutrientValues.add(num.parse("${data['cgmData']["$i"]["nutrientValue"]}"));
-              num? foodValue2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}");
-              cgmNutrientValues.add(foodValue2add);
-              if (j < jMax){
-              // j++;
-              }
-              // j++;
-              // debugPrint("NutrientTimeToAdd:");
-              // debugPrint(nutrientTime2add.toString());
-              // debugPrint("NewTimeToAdd start:");
-              // debugPrint(newTime.toString());
-              // debugPrint("NewTimeToAdd stop:");
-              // j++;
-            } else {
-              // j--;
-            }
-            }
-            // timeSlots.add(newTime);
-            newTime = newTime.add(Duration(minutes: 15));
-            debugPrint(newTime.toString());
+   
             
 
             if (("${data['cgmData']["$i"]["nutrientValue"]}").isEmpty) {

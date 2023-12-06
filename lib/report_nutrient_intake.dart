@@ -444,8 +444,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     minimumSize: const Size(50, 60),
-                    backgroundColor: note.isNotEmpty &&
-                            selectedButtonIndex != -1
+                    backgroundColor: note.isNotEmpty 
                         ? Theme.of(context).colorScheme.primary
                         : Colors
                             .grey, // Change button color to gray if data is incomplete
@@ -456,7 +455,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                         horizontal: 15, vertical: 11),
                   ),
                   onPressed: () {
-                    if (note.isNotEmpty && selectedButtonIndex != -1) {
+                    if (note.isNotEmpty) {
                       _saveDataToFirestore();
                       noteController.clear();
                     }
