@@ -814,8 +814,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
         "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""},
-          "1": {"type": "", "intensity": "", "timeStamp": ""}
+          "0": {"type": "", "intensity": "", "timeStamp": ""}
+        },
+        "nutrientEntries": {
+          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
         },
       })
       // ignore: avoid_print
@@ -1603,8 +1605,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
         "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""},
-          "1": {"type": "", "intensity": "", "timeStamp": ""}
+          "0": {"type": "", "intensity": "", "timeStamp": ""}
+        },
+        "nutrientEntries": {
+          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
         },
       })
       // ignore: avoid_print
@@ -2392,8 +2396,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
         "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""},
-          "1": {"type": "", "intensity": "", "timeStamp": ""}
+          "0": {"type": "", "intensity": "", "timeStamp": ""}
+        },
+        "nutrientEntries": {
+          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
         },
       })
       // ignore: avoid_print
@@ -3181,8 +3187,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
         "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""},
-          "1": {"type": "", "intensity": "", "timeStamp": ""}
+          "0": {"type": "", "intensity": "", "timeStamp": ""}
+        },
+        "nutrientEntries": {
+          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
         },
       })
       // ignore: avoid_print
@@ -3970,8 +3978,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
         "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""},
-          "1": {"type": "", "intensity": "", "timeStamp": ""}
+          "0": {"type": "", "intensity": "", "timeStamp": ""}
+        },
+        "nutrientEntries": {
+          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
         },
       })
       // ignore: avoid_print
@@ -4759,8 +4769,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
         "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""},
-          "1": {"type": "", "intensity": "", "timeStamp": ""}
+          "0": {"type": "", "intensity": "", "timeStamp": ""}
+        },
+        "nutrientEntries": {
+          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
         },
       })
       // ignore: avoid_print
@@ -5548,8 +5560,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
         "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""},
-          "1": {"type": "", "intensity": "", "timeStamp": ""}
+          "0": {"type": "", "intensity": "", "timeStamp": ""}
+        },
+        "nutrientEntries": {
+          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
         },
       })
       // ignore: avoid_print
@@ -6334,8 +6348,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
         "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""},
-          "1": {"type": "", "intensity": "", "timeStamp": ""}
+          "0": {"type": "", "intensity": "", "timeStamp": ""}
+        },
+        "nutrientEntries": {
+          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
         },
       })
       // ignore: avoid_print
@@ -7124,8 +7140,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
         "exerciseEntries": {
-          "0": {"type": "", "intensity": "", "timeStamp": ""},
-          "1": {"type": "", "intensity": "", "timeStamp": ""}
+          "0": {"type": "", "intensity": "", "timeStamp": ""}
+        },
+        "nutrientEntries": {
+          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
         },
       })
       // ignore: avoid_print

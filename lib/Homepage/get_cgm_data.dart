@@ -46,17 +46,20 @@ class GetCgmData extends StatelessWidget {
           List<dynamic> cgmNutrientValues = [];
           List<dynamic> cgmExerciseNotes = [];
           List<dynamic> cgmExerciseValues = [];
-          List<DateTime> timeSlots = [];
+          // List<DateTime> timeSlots = [];
 
-          DateTime? lastMidnight = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 00);
-          for (var i = 0; i < 96; i++) {
-            var newTime = lastMidnight.add(Duration(minutes: 15));
-            timeSlots.add(newTime);
-          }
+          DateTime lastMidnight = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 00);
+          DateTime newTime = lastMidnight;
+          // for (var i = 0; i < 96; i++) {
+          //   timeSlots.add(newTime);
+          //   newTime = newTime.add(Duration(minutes: 15));
+            
+          // }
 
           // DateTime? lastMidnight = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 00);
-          debugPrint(lastMidnight.toString());
+          // debugPrint(lastMidnight.toString());
           int j = 0;
+          int jMax = data['nutrientEntries']!.length - 1;
 
           for (var i = 0; i < 96; i++) { // Det er åbenbart sådan her man skal lave for-loops i Flutter
             num data2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}"); // Konverterer String fra JSON til num da vi skal bruge det til grafen
@@ -68,6 +71,39 @@ class GetCgmData extends StatelessWidget {
             cgmTimeStamps.add(time2add); // Vi tilføjer timestamps til arrayet
             cgmNutrientNotes.add(food2add); // Vi tilføjer mad til arrayet
 
+            // DateTime? nutrientTime2add = DateTime.parse("${data['nutrientEntries'][j]["nutrientTimeStamp"]}");
+            
+            // debugPrint(nutrientTime2add.toString());
+            // debugPrint(jMax.toString());
+            // lastMidnight.add(Duration(minutes: 15));
+            debugPrint(newTime.toString());
+            // debugPrint(timeSlots[i].toString());
+            
+        
+            for (j=0; j<jMax; j++) {
+            DateTime? nutrientTime2add = DateTime.parse("${data['nutrientEntries'][j]["nutrientTimeStamp"]}");
+            if (nutrientTime2add.isAtSameMomentAs(newTime)) {
+              // cgmNutrientValues.add(num.parse("${data['cgmData']["$i"]["nutrientValue"]}"));
+              num? foodValue2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}");
+              cgmNutrientValues.add(foodValue2add);
+              if (j < jMax){
+              // j++;
+              }
+              // j++;
+              // debugPrint("NutrientTimeToAdd:");
+              // debugPrint(nutrientTime2add.toString());
+              // debugPrint("NewTimeToAdd start:");
+              // debugPrint(newTime.toString());
+              // debugPrint("NewTimeToAdd stop:");
+              // j++;
+            } else {
+              // j--;
+            }
+            }
+            // timeSlots.add(newTime);
+            newTime = newTime.add(Duration(minutes: 15));
+            debugPrint(newTime.toString());
+            
 
             if (("${data['cgmData']["$i"]["nutrientValue"]}").isEmpty) {
             num? foodValue2add;
@@ -78,20 +114,7 @@ class GetCgmData extends StatelessWidget {
             }
 
 
-            DateTime? nutrientTime2add = DateTime.parse("${data['nutrientEntries'][j]["nutrientTimeStamp"]}");
-            debugPrint(nutrientTime2add.toString());
-            lastMidnight.add(Duration(minutes: 15) * i);
-            debugPrint(lastMidnight.toString());
-            debugPrint(timeSlots.toString());
-
-            if (nutrientTime2add == lastMidnight) {
-              cgmNutrientValues.add(num.parse("${data['cgmData']["$i"]["nutrientValue"]}"));
-              j++;
-            } else {
-            }
-            lastMidnight.add(Duration(minutes: 15));
-            
-
+          
 
             if (("${data['cgmData']["$i"]["exerciseValue"]}").isEmpty) {
             num? exerciseValue2add;
@@ -103,28 +126,9 @@ class GetCgmData extends StatelessWidget {
 
           }
 
-          // DateTime lastMidnight = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 00);
-          // int j = 0;
-          for (var i = 0; i < 96; i++) {
-            
-            DateTime? nutrientTime2add = DateTime.parse("${data['nutrientEntries'][j]["nutrientTimeStamp"]}");
-
-            if (nutrientTime2add == lastMidnight) {
-            cgmTimeStamps.add(nutrientTime2add);
-            cgmNutrientValues.add(num.parse("${data['cgmData']["$i"]["nutrientValue"]}"));
-            lastMidnight.add(Duration(minutes: 15));
-            j++;
-            } else {
-              lastMidnight.add(Duration(minutes: 15));
-            }
-          
-          }
-        
 
           return Container(
-              height: 300, width: double.infinity, child: LiveChartWidget(cgmValues, cgmTimeStamps, cgmNutrientNotes, cgmNutrientValues,cgmExerciseNotes, cgmExerciseValues));
-          // return Text("Full Name: ${data['cgmData']}");
-          // return LiveChartWidget();
+              height: 300, width: double.infinity, child: LiveChartWidget(cgmValues, cgmTimeStamps, cgmNutrientNotes, cgmNutrientValues,cgmExerciseNotes, cgmExerciseValues));;
         }
 
         return const Center(
