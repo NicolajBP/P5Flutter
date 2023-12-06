@@ -7237,7 +7237,7 @@ class _RegisterPageState extends State<RegisterPage> {
               const Text(
                 'Register your account here',
                 style: TextStyle(
-                  color: Color.fromARGB(255, 10, 172, 10),
+                  color: const Color.fromRGBO(210, 50, 50, 100),
                   fontSize: 16,
                 ),
               ),
@@ -7277,7 +7277,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green[700],
+                    backgroundColor: const Color.fromRGBO(210, 50, 50, 100),
                   ),
                   onPressed: () {
                     signUserUp(context); // Call the sign-in method

@@ -5,6 +5,7 @@ import 'package:p5/Login/register_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:p5/components/firebase_api.dart';
 import 'package:interval_time_picker/interval_time_picker.dart';
+import 'slider.dart';
 
 class ReportExercise extends StatefulWidget {
   const  ReportExercise({super.key});
@@ -189,6 +190,8 @@ class _ReportExerciseState extends State<ReportExercise> {
 
   @override
   Widget build(BuildContext context) {
+       double currentSliderValue = 5;  // Dette er intensiteten. Gem denne variabel i FIREBASE!!!!!!!!! HJÆLP
+       
     //"kroppen" af siden
     return Scaffold(
       appBar: AppBar(
@@ -310,135 +313,208 @@ class _ReportExerciseState extends State<ReportExercise> {
                 ],
               ),
             ),
-            Row(
+            Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+//////////////////////////// Slider bar     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+              StatefulBuilder(
+                builder: (context,state)
+                {
+                return Slider(
+                  value: currentSliderValue,
+                  max: 10,
+                  min: 1,
+                  divisions: 9,
+                  label: currentSliderValue.round().toString(),
+                  onChanged: (double value) {
+                      state(() {
+                    currentSliderValue = value;
+                  });
+                  //   setState(() {
+                  //   currentSliderValue = value;
+                  // });
+                  },
+                );
+                },
+                ),
+          
+              
+              // SliderExample(
+
+              // ),
+
+
+           
+            // Text('$currentSliderValue'),
+            // Container(
+            //   alignment: Alignment.center,
+            //   child: SizedBox(
+            //     width: double.infinity,
+            //     child: CupertinoSlider( 
+            //       //key:  Key('slider'),
+            //       value: currentSliderValue,
+            //       //mainAxisAlignment: MainAxisAlignment.spaceAround,
+            //       // This allows the slider to jump between divisions.
+            //       // If null, the slide movement is continuous.
+            //       divisions: 5,
+            //       // The maximum and minimum slider value
+            //       max: 5,
+            //       min: 1,
+            //       //activeColor: Colors.red,
+            //       //thumbColor: Colors.redAccent,
+            //     onChangeStart: (double value) {
+            //       setState(() {
+            //         //sliderStatus = 'Sliding';
+            //       });
+            //     },
+            //     // This is called when sliding has ended.
+            //     onChangeEnd: (double value) {
+            //       setState(() {
+            //         //sliderStatus = 'Finished sliding';
+            //       });
+            //     },  
+                
+            //       // This is called when slider value is changed.
+            //       onChanged: (double value) {
+            //         setState(() {
+            //           currentSliderValue = value;
+            //         });
+            //       },
+            //     ),
+            //   ),
+            // ),
+            // Text(
+            //   sliderStatus ?? '',
+            //   style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+            //         fontSize: 12,
+            //       ),
+            // ),
 ////////////////////////////  low button   /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                ElevatedButton(
-                  // Small button
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(40, 30),
-                    backgroundColor: selectedButtonIndex == 0
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.onPrimary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-                  ),
-                  onPressed: () {
-                    debugPrint("Button 1 Clicked");
-                    if (selectedButtonIndex == 0) {
-                      // Reset if the button is already selected
-                      setState(() {
-                        selectedButtonIndex = -1;
-                      });
-                    } else {
-                      // Set the clicked button state
-                      setState(() {
-                        selectedButtonIndex = 0;
-                      });
-                    }
-                  },
-                  child: Text(
-                    "Low",
-                    style: TextStyle(
-                        height: 1,
-                        fontSize: 20,
-                        color: selectedButtonIndex == 0
-                            ? Theme.of(context).colorScheme.onPrimary
-                            : Theme.of(context).colorScheme.primary),
-                  ),
-                ),
+                // ElevatedButton(
+                //   // Small button
+                //   style: ElevatedButton.styleFrom(
+                //     minimumSize: const Size(40, 30),
+                //     backgroundColor: selectedButtonIndex == 0
+                //         ? Theme.of(context).colorScheme.primary
+                //         : Theme.of(context).colorScheme.onPrimary,
+                //     shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(15.0),
+                //     ),
+                //     padding: const EdgeInsets.symmetric(
+                //         horizontal: 10, vertical: 10),
+                //   ),
+                //   onPressed: () {
+                //     debugPrint("Button 1 Clicked");
+                //     if (selectedButtonIndex == 0) {
+                //       // Reset if the button is already selected
+                //       setState(() {
+                //         selectedButtonIndex = -1;
+                //       });
+                //     } else {
+                //       // Set the clicked button state
+                //       setState(() {
+                //         selectedButtonIndex = 0;
+                //       });
+                //     }
+                //   },
+                //   child: Text(
+                //     "Low",
+                //     style: TextStyle(
+                //         height: 1,
+                //         fontSize: 20,
+                //         color: selectedButtonIndex == 0
+                //             ? Theme.of(context).colorScheme.onPrimary
+                //             : Theme.of(context).colorScheme.primary),
+                //   ),
+                // ),
 
-                const SizedBox(width: 7),
+                // const SizedBox(width: 7),
 
 ////////////////////////////////    Medium button/////////////////////////////////////////////////////////////////////
-                ElevatedButton(
-                  // Medium button
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(40, 30),
-                    backgroundColor: selectedButtonIndex == 1
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.onPrimary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-                  ),
-                  onPressed: () {
-                    debugPrint("Medium button Clicked");
-                    if (selectedButtonIndex == 1) {
-                      // Reset if the button is already selected
-                      setState(() {
-                        selectedButtonIndex = -1;
-                      });
-                    } else {
-                      // Set the clicked button state
-                      setState(() {
-                        selectedButtonIndex = 1;
-                      });
-                    }
-                  },
-                  child: Text(
-                    "Medium",
-                    style: TextStyle(
-                        height: 1,
-                        fontSize: 20,
-                        color: selectedButtonIndex == 1
-                            ? Theme.of(context).colorScheme.onPrimary
-                            : Theme.of(context).colorScheme.primary),
-                  ),
-                ),
+                // ElevatedButton(
+                //   // Medium button
+                //   style: ElevatedButton.styleFrom(
+                //     minimumSize: const Size(40, 30),
+                //     backgroundColor: selectedButtonIndex == 1
+                //         ? Theme.of(context).colorScheme.primary
+                //         : Theme.of(context).colorScheme.onPrimary,
+                //     shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(15.0),
+                //     ),
+                //     padding: const EdgeInsets.symmetric(
+                //         horizontal: 10, vertical: 10),
+                //   ),
+                //   onPressed: () {
+                //     debugPrint("Medium button Clicked");
+                //     if (selectedButtonIndex == 1) {
+                //       // Reset if the button is already selected
+                //       setState(() {
+                //         selectedButtonIndex = -1;
+                //       });
+                //     } else {
+                //       // Set the clicked button state
+                //       setState(() {
+                //         selectedButtonIndex = 1;
+                //       });
+                //     }
+                //   },
+                //   child: Text(
+                //     "Medium",
+                //     style: TextStyle(
+                //         height: 1,
+                //         fontSize: 20,
+                //         color: selectedButtonIndex == 1
+                //             ? Theme.of(context).colorScheme.onPrimary
+                //             : Theme.of(context).colorScheme.primary),
+                //   ),
+                // ),
 
-                const SizedBox(width: 7),
+                // const SizedBox(width: 7),
 
 //////////////////////////////////  high button  /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                ElevatedButton(
-                  // Large button
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(40,30),
-                    backgroundColor: selectedButtonIndex == 2
-                        ? Theme.of(context).colorScheme.primary
-                        : Theme.of(context).colorScheme.onPrimary,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 10, vertical: 10),
-                  ),
-                  onPressed: () {
-                    debugPrint("Large button Clicked");
-                    if (selectedButtonIndex == 2) {
-                      // Reset if the button is already selected
-                      setState(() {
-                        selectedButtonIndex = -1;
-                      });
-                    } else {
-                      // Set the clicked button state
-                      setState(() {
-                        selectedButtonIndex = 2;
-                      });
-                    }
-                  },
-                  child: Text(
-                    "High",
-                    style: TextStyle(
-                        height: 1,
-                        fontSize: 20,
-                        color: selectedButtonIndex == 2
-                            ? Theme.of(context).colorScheme.onPrimary
-                            : Theme.of(context).colorScheme.primary),
-                  ),
-                ),
-              ],
-            ),
+            //     ElevatedButton(
+            //       // Large button
+            //       style: ElevatedButton.styleFrom(
+            //         minimumSize: const Size(40,30),
+            //         backgroundColor: selectedButtonIndex == 2
+            //             ? Theme.of(context).colorScheme.primary
+            //             : Theme.of(context).colorScheme.onPrimary,
+            //         shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.circular(15.0),
+            //         ),
+            //         padding: const EdgeInsets.symmetric(
+            //             horizontal: 10, vertical: 10),
+            //       ),
+            //       onPressed: () {
+            //         debugPrint("Large button Clicked");
+            //         if (selectedButtonIndex == 2) {
+            //           // Reset if the button is already selected
+            //           setState(() {
+            //             selectedButtonIndex = -1;
+            //           });
+            //         } else {
+            //           // Set the clicked button state
+            //           setState(() {
+            //             selectedButtonIndex = 2;
+            //           });
+            //         }
+            //       },
+            //       child: Text(
+            //         "High",
+            //         style: TextStyle(
+            //             height: 1,
+            //             fontSize: 20,
+            //             color: selectedButtonIndex == 2
+            //                 ? Theme.of(context).colorScheme.onPrimary
+            //                 : Theme.of(context).colorScheme.primary),
+            //       ),
+            //     ),
+            //   ],
+            // ),
 
 ////////////////////////////////  save button  ///////////////////////////////////////////////////////////////////////////////////////
-            const SizedBox(height: 20),
+             const SizedBox(height: 20),
             ConstrainedBox(
                 constraints:
                     const BoxConstraints.tightFor(width: 300, height: 50),
@@ -470,7 +546,9 @@ class _ReportExerciseState extends State<ReportExercise> {
                 ))
           ],
         ),
+      ]
       ),
+    )
     );
   }
 
@@ -505,3 +583,4 @@ Widget _buildPopupDialog(BuildContext context) {
 
 
 }
+
