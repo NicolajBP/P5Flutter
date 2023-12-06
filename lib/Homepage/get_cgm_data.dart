@@ -107,9 +107,6 @@ class GetCgmData extends StatelessWidget {
                 num? exerciseValue2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}");
                 cgmExerciseValues.add(exerciseValue2add);
                 exerciseValueAdded = true;
-                // debugPrint("Nu er klokken");
-                // debugPrint(time2add.toString());
-                // cgmTimeStamps.add(nutrientTime2add);
               } 
             }
             }

@@ -816,10 +816,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
         "exerciseEntries": {
-          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
+        {"exerciseSize": "placeholder", "exerciseNote": "placeholder", "exerciseDuration": "placeholder", "exerciseTimeStamp": "1970-01-01T00:00:00"}
         },
         "nutrientEntries": {
-          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
+        {"nutrientNote": "placeholder", "nutrientSize": "placeholder", "nutrientTimeStamp": "1970-01-01T00:00:00"}
         },
       })
       // ignore: avoid_print
@@ -1607,10 +1607,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
 "exerciseEntries": {
-          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
+        {"exerciseSize": "placeholder", "exerciseNote": "placeholder", "exerciseDuration": "placeholder", "exerciseTimeStamp": "1970-01-01T00:00:00"}
         },
         "nutrientEntries": {
-          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
+        {"nutrientNote": "placeholder", "nutrientSize": "placeholder", "nutrientTimeStamp": "1970-01-01T00:00:00"}
         },
       })
       // ignore: avoid_print
@@ -2398,10 +2398,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
 "exerciseEntries": {
-          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
+        {"exerciseSize": "placeholder", "exerciseNote": "placeholder", "exerciseDuration": "placeholder", "exerciseTimeStamp": "1970-01-01T00:00:00"}
         },
         "nutrientEntries": {
-          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
+        {"nutrientNote": "placeholder", "nutrientSize": "placeholder", "nutrientTimeStamp": "1970-01-01T00:00:00"}
         },
       })
       // ignore: avoid_print
@@ -3189,10 +3189,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
 "exerciseEntries": {
-          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
+        {"exerciseSize": "placeholder", "exerciseNote": "placeholder", "exerciseDuration": "placeholder", "exerciseTimeStamp": "1970-01-01T00:00:00"}
         },
         "nutrientEntries": {
-          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
+        {"nutrientNote": "placeholder", "nutrientSize": "placeholder", "nutrientTimeStamp": "1970-01-01T00:00:00"}
         },
       })
       // ignore: avoid_print
@@ -3980,10 +3980,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
 "exerciseEntries": {
-          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
+        {"exerciseSize": "placeholder", "exerciseNote": "placeholder", "exerciseDuration": "placeholder", "exerciseTimeStamp": "1970-01-01T00:00:00"}
         },
         "nutrientEntries": {
-          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
+        {"nutrientNote": "placeholder", "nutrientSize": "placeholder", "nutrientTimeStamp": "1970-01-01T00:00:00"}
         },
       })
       // ignore: avoid_print
@@ -4771,10 +4771,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
 "exerciseEntries": {
-          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
+        {"exerciseSize": "placeholder", "exerciseNote": "placeholder", "exerciseDuration": "placeholder", "exerciseTimeStamp": "1970-01-01T00:00:00"}
         },
         "nutrientEntries": {
-          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
+        {"nutrientNote": "placeholder", "nutrientSize": "placeholder", "nutrientTimeStamp": "1970-01-01T00:00:00"}
         },
       })
       // ignore: avoid_print
@@ -5562,10 +5562,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
 "exerciseEntries": {
-          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
+        {"exerciseSize": "placeholder", "exerciseNote": "placeholder", "exerciseDuration": "placeholder", "exerciseTimeStamp": "1970-01-01T00:00:00"}
         },
         "nutrientEntries": {
-          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
+        {"nutrientNote": "placeholder", "nutrientSize": "placeholder", "nutrientTimeStamp": "1970-01-01T00:00:00"}
         },
       })
       // ignore: avoid_print
@@ -6349,10 +6349,10 @@ Future<void> uploadCgmData(BuildContext context) async {
   }
 },
 "exerciseEntries": {
-          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
+        {"exerciseSize": "placeholder", "exerciseNote": "placeholder", "exerciseDuration": "placeholder", "exerciseTimeStamp": "1970-01-01T00:00:00"}
         },
         "nutrientEntries": {
-          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
+        {"nutrientNote": "placeholder", "nutrientSize": "placeholder", "nutrientTimeStamp": "1970-01-01T00:00:00"}
         },
       })
       // ignore: avoid_print
@@ -7141,10 +7141,10 @@ Future<void> uploadCgmData(BuildContext context) async {
           }
         },
 "exerciseEntries": {
-          "0": {"exerciseSize": "", "exerciseNote": "", "exerciseDuration": "", "exerciseTimeStamp": ""}
+        {"exerciseSize": "placeholder", "exerciseNote": "placeholder", "exerciseDuration": "placeholder", "exerciseTimeStamp": "1970-01-01T00:00:00"}
         },
         "nutrientEntries": {
-          "0": {"nutrientNote": "", "nutrientSize": "", "nutrientTimeStamp": ""}
+        {"nutrientNote": "placeholder", "nutrientSize": "placeholder", "nutrientTimeStamp": "1970-01-01T00:00:00"}
         },
       })
       // ignore: avoid_print
