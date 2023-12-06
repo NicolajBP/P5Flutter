@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
               const Padding(
                 padding: EdgeInsets.only(top: 25, bottom: 50),
                 child: Text(
-                  "My Diabuddy",
+                  "GlucoTeach",
                   style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 20,
@@ -89,10 +89,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              Text(
+              const Text(
                 'Welcome back',
                 style: TextStyle(
-                  color: Theme.of(context).colorScheme.primary,
+                  color:  Color.fromRGBO(210, 50, 50, 100),
                   fontSize: 16,
                 ),
               ),
@@ -120,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                 height: 50,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    backgroundColor: const Color.fromRGBO(210, 50, 50, 100),
                   ),
                   onPressed: () {
                     signUserIn(context); // Call the sign-in method

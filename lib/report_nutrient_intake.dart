@@ -4,6 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/Login/register_page.dart';
 
+DateTime nearestQuarter(DateTime val) {
+
+  return DateTime(val.year, val.month, val.day, val.hour,
+      [15, 30, 45, 60][(val.minute / 15).floor()]);
+}
+
 class ReportNutrientIntakePage extends StatefulWidget {
   // ignore: use_key_in_widget_constructors
   const ReportNutrientIntakePage({Key? key});
@@ -25,10 +31,10 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   String mealSize = "";
   String note = "";
   String time = "";
+  DateTime timePlaceholder = DateTime.now();
   String formattedTime = "";
   //definere input varibler som strings
   TimeOfDay _time = TimeOfDay.now(); //Sætter tiden til den nuværende
-  
 
   final TextEditingController noteController = TextEditingController();
 
@@ -48,14 +54,19 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
       setState(() {
         _time = newTime;
 
-      // Format the time in ISO 8601 format
-      time = DateTime(
-        DateTime.now().year,
-        DateTime.now().month,
-        DateTime.now().day,
-        newTime.hour,
-        newTime.minute,
-      ).toIso8601String();
+        // Format the time in ISO 8601 format
+
+        // time = nearestQuarter(DateTime.now()).toIso8601String();
+
+        time = nearestQuarter(DateTime(
+          DateTime.now().year,
+          DateTime.now().month,
+          DateTime.now().day,
+          newTime.hour,
+          newTime.minute,
+        )).toIso8601String();
+
+        time = time.substring(0, time.length - 4);
       });
     }
   }
@@ -110,18 +121,27 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
 
     if (time.isEmpty) {
       // If the time is empty, update it with the current time
-      time = formattedTime = DateTime.now().toIso8601String();
-    }
-   // Format the time in "yyyy-MM-ddTHH:mm:ss" format
-  
-  Map<String, dynamic> entryData = {
-    'nutrientSize': mealSize,
-    'nutrientNote': note,
-    'nutrientTimeStamp': time, // Store the time in ISO 8601 format
-  };
-    
-    
+      // time = DateTime.now().toIso8601String();
+      time = nearestQuarter(DateTime.now()).toIso8601String();
 
+      time = time.substring(0, time.length - 4);
+      // time = DateTime(
+      //   DateTime.now().year,
+      //   DateTime.now().month,
+      //   DateTime.now().day,
+      //   newTime.hour,
+      //   newTime.minute,
+      // ).toIso8601String();
+
+      // time = time.substring(0, time.length - 4);
+    }
+    // Format the time in "yyyy-MM-ddTHH:mm:ss" format
+
+    Map<String, dynamic> entryData = {
+      'nutrientSize': mealSize,
+      'nutrientNote': note,
+      'nutrientTimeStamp': time, // Store the time in ISO 8601 format
+    };
 
 
     try {
@@ -194,12 +214,12 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
-  padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
-  child: Text(
-    "Register nutrient intake",
-    style: TextStyle(fontSize: 19), // Set the desired font size here
-  ),
-),
+          padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+          child: Text(
+            "Register nutrient intake",
+            style: TextStyle(fontSize: 19), // Set the desired font size here
+          ),
+        ),
         automaticallyImplyLeading: true, //tilbageknap i appbar
         leading: IconButton(
           onPressed: () {
@@ -207,7 +227,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
           },
           icon: const Icon(Icons.arrow_back_ios),
         ),
-      
+
         actions: [
           IconButton(
             //informationsknap i appbar
@@ -252,23 +272,49 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     });
   },
 )
+                  width: 310,
+                  height: 160,
+                  child:
+                      ////////////////TextBox/////////////////////
+                      TextField(
+                    controller: noteController,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Theme.of(context).colorScheme.primary,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                      hintText: 'Type of food',
+                      hintStyle: TextStyle(color: Colors.white),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                    maxLines: 5,
+                    onChanged: (value) {
+                      setState(() {
+                        note = value;
+                      });
+                    },
+                  )
 ////////////////////////
-              ),
+                  ),
             ),
 
-           Padding(
-  padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-  child: OutlinedButton.icon(
-    onPressed: _selectTime,
-    icon: const Icon(
-      Icons.access_time,
-      size: 50.0,
-    ),
-    // ignore: prefer_interpolation_to_compose_strings
-    label: Text('${_time.hour}'.padLeft(2,'0') + ':'+'${_time.minute}'.padLeft(2,'0'),
-        style: const TextStyle(height: 1, fontSize: 36)),
-  ),
-),
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
+              child: OutlinedButton.icon(
+                onPressed: _selectTime,
+                icon: const Icon(
+                  Icons.access_time,
+                  size: 50.0,
+                ),
+                // ignore: prefer_interpolation_to_compose_strings
+                label: Text(
+                    '${_time.hour}'.padLeft(2, '0') +
+                        ':' +
+                        '${_time.minute}'.padLeft(2, '0'),
+                    style: const TextStyle(height: 1, fontSize: 36)),
+              ),
+            ),
 
             const Padding(
               padding: EdgeInsets.only(top: 0.0, bottom: 20),
@@ -379,7 +425,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                 ElevatedButton(
                   // Large button
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(40,30),
+                    minimumSize: const Size(40, 30),
                     backgroundColor: selectedButtonIndex == 2
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.onPrimary,
@@ -466,7 +512,7 @@ Widget _buildPopupDialog(BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          "A Small portion is everything below or around 100g \nMedium is around 300g \nLarge is around or over 500g \n\n A small portion could be an apple, a medium could be two pieces of bread with topping, and a large portion could be a whole pizza.",
+          "Meal size is optional to register.\n We define a small portion to be everything below or around 100g \nMedium is around 300g \nLarge is around or over 500g \n\n A small portion could be an apple, a medium could be two pieces of bread with topping, and a large portion could be a whole pizza.",
         ),
       ],
     ),
