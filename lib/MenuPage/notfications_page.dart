@@ -1,6 +1,9 @@
+// ignore_for_file: library_private_types_in_public_api, prefer_interpolation_to_compose_strings
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/components/firebase_api.dart';
+
 
 class NotficationPage extends StatefulWidget {
   const NotficationPage({super.key});
@@ -11,9 +14,10 @@ class NotficationPage extends StatefulWidget {
 
 class _NotficationPageState extends State<NotficationPage> {
   bool _notifications = true;
-  bool _inactivityNotification = true;
   DateTime dateTime = DateTime.now();
-  Duration notificationInterval = Duration(minutes: 30); // Default interval is 30 minutes
+  Duration notificationInterval = const Duration(minutes: 30); // Default interval is 30 minutes
+
+//DateTime dateTime = DateTime(3000, 2, 1, 12, 30);                       //En datetime instance, hvorved vores dato & tid er indsat
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +76,7 @@ class _NotficationPageState extends State<NotficationPage> {
                 // Do nothing when the interval save button is pressed
               },
             ),
+            
         ],
       ),
     );
@@ -86,7 +91,8 @@ class NotificationSettingsWidget extends StatefulWidget {
   final VoidCallback onSaveInactivityReminder;
   final VoidCallback onIntervalSavePressed;
 
-  NotificationSettingsWidget({
+  // ignore: use_key_in_widget_constructors
+  const NotificationSettingsWidget({
     required this.dateTime,
     required this.notificationInterval,
     required this.onDateTimeChanged,
@@ -131,13 +137,12 @@ class _NotificationSettingsWidgetState
                         '${widget.dateTime.minute}'.padLeft(2, '0'),
                   ),
                   onPressed: () {
-                    showCupertinoModalPopup(
+                    showModalBottomSheet(                                       //Inactivityreminder
                       context: context,
                       builder: (BuildContext context) => SizedBox(
                         height: 250,
                         width: double.infinity,
                         child: CupertinoDatePicker(
-                          backgroundColor: Colors.white,
                           initialDateTime: widget.dateTime,
                           onDateTimeChanged: widget.onDateTimeChanged,
                           use24hFormat: true,
@@ -169,7 +174,10 @@ class _NotificationSettingsWidgetState
             alignment: Alignment.center,
             child: const Text(
               'Or',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18, 
+                fontWeight: FontWeight.bold
+                ),
             ),
           ),
         ),
@@ -226,7 +234,7 @@ class _NotificationSettingsWidgetState
     showModalBottomSheet(
       context: context,
       builder: (BuildContext builder) {
-        return Container(
+        return SizedBox(
           height: 250,
           child: CupertinoTimerPicker(
             mode: CupertinoTimerPickerMode.hm,

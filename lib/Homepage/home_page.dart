@@ -1,6 +1,8 @@
 // ignore_for_file: unused_import
 
 // ignore: depend_on_referenced_packages
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 //import 'package:intl/intl.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
@@ -12,6 +14,9 @@ import 'package:p5/Login/register_page.dart';
 import 'package:p5/myEntries.dart';
 import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
+import 'package:p5/uploadCgmData.dart';
+
+bool isLoading = false;   //create a variable to define wheather loading or not
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -26,6 +31,15 @@ void signUserOut() {
 }
 
 class _HomePageSate extends State<HomePage> {
+
+    void startTimer() {
+    Timer.periodic(const Duration(seconds: 1), (t) {
+      setState(() {
+        isLoading = true; //set loading to false
+      });
+      t.cancel(); //stops the timer
+    });
+  }
   // DateTime _selectedDate = DateTime.now(); // Starter med i dag som standard
   DateTime _selectedDate = DateTime(2023, 11,
       8); // Starter på 8. november som standard (data er importeret for 1., 2. og 3. november)
@@ -60,10 +74,12 @@ class _HomePageSate extends State<HomePage> {
                       fontWeight: FontWeight.w500,
                       color: Colors.grey),
                   onDateChange: (date) {
-                    _selectedDate = date; //variabel der kender hvilken dag det er
-                    dateUpdater.value = _selectedDate.toString().substring(0, 10);
+                    _selectedDate =
+                        date; //variabel der kender hvilken dag det er
+                    dateUpdater.value =
+                        _selectedDate.toString().substring(0, 10);
                     // dateYYYY_MM_DD = _selectedDate.toString().substring(0,10); // Bruges til at indlæse "YYYY-MM-DD" (document ID) fra databasen
-                    debugPrint("Selected day: $dateYYYY_MM_DD");
+                    // debugPrint("Selected day: $dateYYYY_MM_DD");
                   },
                 ),
               ),
@@ -116,41 +132,92 @@ class _HomePageSate extends State<HomePage> {
                       )),
                   const SizedBox(width: 30),
                   OutlinedButton(
-                      //exercise button
-                      onPressed: () {
-                        Navigator.of(context).push(
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          // Bruges som "router" --> vi føres fra denne side til en anden side (i det her tilfælde vores ReportNutrientIntakePage)
-                          return const ReportExercise();
-                        }));
-                      },
-                      style: OutlinedButton.styleFrom(
-                          side: const BorderSide(color: Colors.transparent),
-                          elevation: 7,
-                          shadowColor: const Color.fromARGB(255, 209, 198, 191),
-                          backgroundColor:
-                              Theme.of(context).colorScheme.onPrimary,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0))),
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          SizedBox(
-                              width: 110,
-                              height: 80,
-                              child: Icon(
-                                Icons.directions_run_outlined,
-                                size: 60.0,
-                              )),
-                          Text(
-                            'Register \nexercise',
-                            style: TextStyle(color: Colors.black),
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
-                      ))
+                    //exercise button
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        // Bruges som "router" --> vi føres fra denne side til en anden side (i det her tilfælde vores ReportNutrientIntakePage)
+                        return const ReportExercise();
+                      }));
+                    },
+                    style: OutlinedButton.styleFrom(
+                        side: const BorderSide(color: Colors.transparent),
+                        elevation: 7,
+                        shadowColor: const Color.fromARGB(255, 209, 198, 191),
+                        backgroundColor:
+                            Theme.of(context).colorScheme.onPrimary,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0))),
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                            width: 110,
+                            height: 80,
+                            child: Icon(
+                              Icons.directions_run_outlined,
+                              size: 60.0,
+                            )),
+                        Text(
+                          'Register \nexercise',
+                          style: TextStyle(color: Colors.black),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
-              )
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                width: 240,
+                height: 60,
+                child: OutlinedButton(
+                  //exercise button
+                  onPressed: () {
+                    // if(isLoading){
+                    //   CircularProgressIndicator();
+                    // }
+                    startTimer();
+                    uploadCgmData(context);
+                    Future.delayed(const Duration(seconds: 2)).then((_){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                      
+                      const SnackBar(
+
+                        content: Text('CGM-data added successfully.'),
+                        
+                        duration:
+                            Duration(seconds: 2), // Ændre længden af display
+                      ),
+
+                    );});
+                  },
+                  style: OutlinedButton.styleFrom(
+                      side: const BorderSide(color: Colors.transparent),
+                      elevation: 7,
+                      shadowColor: const Color.fromARGB(255, 209, 198, 191),
+                      backgroundColor: Theme.of(context).colorScheme.onPrimary,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0))),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.add,
+                        size: 60.0,
+                      ),
+                      Text(
+                        'Add CGM data',
+                        style: TextStyle(color: Colors.black),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ));

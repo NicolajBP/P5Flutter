@@ -1,5 +1,5 @@
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:timezone/data/latest.dart' as tz;
 import 'package:timezone/timezone.dart' as tz;
 
 
@@ -8,6 +8,13 @@ class NotificationService {
   final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
  // Initialiserer tjenesten og konfigurerer notoficationsindstillinger
+
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+// class NotificationService {
+//   final FlutterLocalNotificationsPlugin notificationsPlugin =
+//       FlutterLocalNotificationsPlugin();
+
 
   Future<void> initNotification() async {
    // Android indstillinger
@@ -61,6 +68,7 @@ class NotificationService {
           tz.local,
         ),
         await notificationDetails(),
+        // ignore: deprecated_member_use
         androidAllowWhileIdle: true,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);

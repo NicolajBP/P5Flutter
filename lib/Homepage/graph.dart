@@ -83,7 +83,14 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
           exerciseValue: exerciseValues[i],
         ),
       );
+      if (cgmNutrientValues[i] != null) {
+      debugPrint(cgmNutrientValues[i].toString());
+      debugPrint(cgmTimeStamps[i].toString());
+      }
+      
     }
+    debugPrint("Length is:");
+    debugPrint(cgmNutrientValues.length.toString());
 
     return mapLiveData;
   }
@@ -156,7 +163,7 @@ updateDataSource(Timer timer){
               NumericAxis(/* minimum: 70, maximum: 400, */ 
               title: AxisTitle(
                 text: 'Blood glucose [mg/dL]',
-                textStyle: TextStyle(fontSize: 10),
+                textStyle: const TextStyle(fontSize: 10),
                 alignment: ChartAlignment.center),
                
             plotBands: <PlotBand>[

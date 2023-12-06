@@ -1,10 +1,11 @@
 //import 'dart:html';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/Homepage/home_page.dart';
-import 'package:p5/MenuPage/profile_page.dart';
 import 'package:p5/myEntries.dart';
 import 'notfications_page.dart';
+
 
 class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
@@ -14,8 +15,8 @@ class MenuPage extends StatefulWidget {
 }
 
 class _MenuPageState extends State<MenuPage> {
- 
 
+late var currentUser = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(   
@@ -38,38 +39,45 @@ class _MenuPageState extends State<MenuPage> {
               padding: const EdgeInsets.all(10.0),
               child: OutlinedButton.icon(               //Profile button
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-                    return const ProfilePage();
-                  }));
+               //   Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){       //Udkommenteret hvis man trykker på den
+               //     return const ProfilePage();
+               //   }));
                 }, 
-                icon: const Icon(
+                icon: const Icon(                             //Icon af profilbillede
                   Icons.person,
                  // opticalSize: 5.0,
                   color: Colors.white,
                   size: 80,
                 ),
                 label: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                 children: [ 
-                  const Column(children: [
-                    Text('User',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                    const Text('Logged in as:',               //Text: Logged in
+                      style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.normal,
+                  ),
+                  textAlign: TextAlign.left,
+                ),
+                  Text('${currentUser!.email}',                //Display current logged in email.
+                  textAlign: TextAlign.left,                  //Bør starte først
+                  style: const TextStyle(
+                    color: Colors.white,                    //Hvid farve
+                    fontSize: 22,                             //Størrelse 16
                     fontWeight: FontWeight.bold,
                   ),
-                  //textAlign: TextAlign.left,
-                ),
-                  Text('Edit profile',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                  ),)
-                  ]),
-                Icon(
-                  Icons.arrow_forward_ios,
-                  color: Theme.of(context).colorScheme.onPrimary,
-                )]
+                  )
+                  ]
+                  ),
+                //Icon(
+                //  Icons.arrow_forward_ios,
+                //  color: Theme.of(context).colorScheme.onPrimary,
+                //)
+                ]
                 ),
                 style: OutlinedButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.primary,

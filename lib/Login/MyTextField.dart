@@ -1,5 +1,8 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class MyTextField extends StatelessWidget {
   TextEditingController controller;
   String hint;
@@ -21,14 +24,14 @@ class MyTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         decoration: InputDecoration(
-          focusColor: Color.fromRGBO(210, 50, 50, 100),
-          focusedBorder: OutlineInputBorder(
+          focusColor: const Color.fromRGBO(210, 50, 50, 100),
+          focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Color.fromARGB(255, 170, 41, 41)),
           ),
-          border: OutlineInputBorder(
+          border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(5)),
           ),
-          contentPadding: EdgeInsets.all(10),
+          contentPadding: const EdgeInsets.all(10),
           hintStyle: TextStyle(color: Colors.grey[800]),
           hintText: hint,
           fillColor: Colors.transparent,
