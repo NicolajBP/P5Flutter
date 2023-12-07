@@ -47,7 +47,7 @@ class _StatisticsPageState extends State<StatisticsPage> {
               child: DatePicker(
                 //kalenderbar
                 DateTime.now().subtract(const Duration(
-                    days: 3)), //vælger hvor mange dage vi kigger tilbage
+                    days: 4)), //vælger hvor mange dage vi kigger tilbage
                 height: 80,
                 width: 70,
                 initialSelectedDate: DateTime.now(),
