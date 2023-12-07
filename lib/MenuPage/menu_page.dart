@@ -67,7 +67,7 @@ late var currentUser = FirebaseAuth.instance.currentUser;
                   textAlign: TextAlign.left,                  //Bør starte først
                   style: const TextStyle(
                     color: Colors.white,                    //Hvid farve
-                    fontSize: 22,                             //Størrelse 16
+                    fontSize: 16,                             //Størrelse 16
                     fontWeight: FontWeight.bold,
                   ),
                   )

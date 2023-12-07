@@ -263,7 +263,7 @@ class _ReportExerciseState extends State<ReportExercise> {
 ),
 //////////////////////////////Overskrift inden duration/////////////////////////////////
           const Padding(
-              padding: EdgeInsets.only(top: 0.0, bottom: 20),
+              padding: EdgeInsets.only(top: 0.0, bottom: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -285,7 +285,7 @@ class _ReportExerciseState extends State<ReportExercise> {
 ///// Duration button ////////
 
 Padding(
-  padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+  padding: const EdgeInsets.only(top: 10.0, bottom: 13.0),
   child: DurationPicker(
     onDurationChanged: (newDuration) {
       setState(() {
@@ -298,7 +298,7 @@ Padding(
         const Padding(
               padding: EdgeInsets.only(top: 0.0, bottom: 12),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     //Overskrift til de tre meal sizes
@@ -335,11 +335,11 @@ Padding(
             const Padding(
               padding: EdgeInsets.only(top: 0.0, bottom: 12),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     //Overskrift til de tre meal sizes
-                    "   Choose the intensity of the exercise:",
+                    " Choose the intensity of the exercise",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -352,7 +352,7 @@ Padding(
               ),
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
     //////////////////////////// Slider bar //////////////////////////////
     Padding(
