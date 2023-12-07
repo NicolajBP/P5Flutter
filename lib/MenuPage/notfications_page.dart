@@ -129,7 +129,7 @@ class _NotificationSettingsWidgetState
               ),
               child: ListTile(
                 leading: const Icon(Icons.access_time),
-                title: const Text('Notification Time:'),
+                title: const Text('Time of recurring notification:'),
                 trailing: CupertinoButton(
                   child: Text(
                     'Kl. ${widget.dateTime.hour}'.padLeft(2, '0') +
