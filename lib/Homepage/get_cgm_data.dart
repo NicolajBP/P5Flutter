@@ -62,8 +62,11 @@ class GetCgmData extends StatelessWidget {
           // DateTime? lastMidnight = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day, 0, 00);
           // debugPrint(lastMidnight.toString());
           int j = 0;
-          int jMax = data['nutrientEntries']!.length - 1;
 
+          //check if data['nutrientEntries'] is not null before trying to access its length
+          int jMax = data['nutrientEntries']!= null?data['nutrientEntries'].length - 1:0;
+
+          
           for (var i = 0; i < 96; i++) { // Det er åbenbart sådan her man skal lave for-loops i Flutter
             num data2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}"); // Konverterer String fra JSON til num da vi skal bruge det til grafen
             DateTime time2add = DateTime.parse("${data['cgmData']["$i"]["timeStamp"]}");        

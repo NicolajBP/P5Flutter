@@ -17,7 +17,6 @@ class _NotficationPageState extends State<NotficationPage> {
   DateTime dateTime = DateTime.now();
   Duration notificationInterval = const Duration(minutes: 30); // Default interval is 30 minutes
 
-//DateTime dateTime = DateTime(3000, 2, 1, 12, 30);                       //En datetime instance, hvorved vores dato & tid er indsat
 
   @override
   Widget build(BuildContext context) {

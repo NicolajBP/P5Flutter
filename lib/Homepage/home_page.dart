@@ -84,10 +84,8 @@ class _HomePageSate extends State<HomePage> {
                 ),
               ),
               ValueListenableBuilder(
-                //TODO 2nd: listen playerPointsToAdd
                 valueListenable: dateUpdater,
                 builder: (context, value, widget) {
-                  // TODO here you can setState or whatever you need
                   return GetCgmData(user.uid, dateUpdater.value);
                 },
               ),

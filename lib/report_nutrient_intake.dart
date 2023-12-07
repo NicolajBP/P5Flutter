@@ -465,7 +465,8 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                     style:
                         TextStyle(height: 1, fontSize: 30, color: Colors.white),
                   ),
-                ))
+                )
+                )
           ],
         ),
       ),
