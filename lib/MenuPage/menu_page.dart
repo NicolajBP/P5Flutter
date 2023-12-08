@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/Homepage/home_page.dart';
-import 'package:p5/myEntries.dart';
+import 'package:p5/myEntriesPage.dart';
 import 'notfications_page.dart';
 
 
@@ -67,7 +67,7 @@ late var currentUser = FirebaseAuth.instance.currentUser;
                   textAlign: TextAlign.left,                  //Bør starte først
                   style: const TextStyle(
                     color: Colors.white,                    //Hvid farve
-                    fontSize: 22,                             //Størrelse 16
+                    fontSize: 16,                             //Størrelse 16
                     fontWeight: FontWeight.bold,
                   ),
                   )
@@ -135,7 +135,7 @@ late var currentUser = FirebaseAuth.instance.currentUser;
                 onPressed: () {
                  Navigator.of(context).push(
                 MaterialPageRoute(builder: (BuildContext context) {
-                  return const myEntries();  }),
+               return const MyEntriesPage(userId: 'yourUserId');  }),
               );
                 }, 
                 icon: const Icon(

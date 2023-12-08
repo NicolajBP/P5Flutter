@@ -1,24 +1,26 @@
-
-
-// ignore_for_file: file_names
-
+// ignore: file_names
 import 'package:flutter/material.dart';
-// ignore: depend_on_referenced_packages
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// Definere navn af vores collection "nutrition_entries"
-CollectionReference myCollection = FirebaseFirestore.instance.collection('nutrition_entries');
-
-// ignore: camel_case_types
-class myEntries extends StatefulWidget {
-  const myEntries({super.key});
-
-  @override
-  State<myEntries> createState() => _myEntriesState();
+// Function to construct the collection path based on the user ID
+String getCollectionPath(String userId) {
+  return '/users/$userId/patientData/2023-12-06/nutrientEntries';
 }
 
-// ignore: camel_case_types
-class _myEntriesState extends State<myEntries> {
+class MyEntriesPage  extends StatefulWidget {
+  final String userId;
+
+  const MyEntriesPage ({Key? key, required this.userId}) : super(key: key);
+
+  @override
+  State<MyEntriesPage > createState() => _MyEntriesState();
+}
+
+class _MyEntriesState extends State<MyEntriesPage > {
+  // Use a getter to dynamically get the collection reference
+  CollectionReference get myCollection =>
+      FirebaseFirestore.instance.collection(getCollectionPath(widget.userId));
+
   // En liste til at gemme dataene fra vores database
   List<Map<String, dynamic>> entriesData = [];
 
@@ -28,15 +30,12 @@ class _myEntriesState extends State<myEntries> {
     getEntries();
   }
 
-  // Funktion til at få data fra Firestore
   Future<void> getEntries() async {
-    // Her laver den en querysnapshot som er en øjeblikkelige query
     QuerySnapshot querySnapshot = await myCollection.get();
 
     // Opret en liste til at gemme de hentede data
     List<Map<String, dynamic>> data = [];
 
-   
     for (var doc in querySnapshot.docs) {
       Map<String, dynamic>? entryData = doc.data() as Map<String, dynamic>?;
 
@@ -51,7 +50,6 @@ class _myEntriesState extends State<myEntries> {
     });
   }
 
-  // funktion til sletning af en entry
   Future<void> deleteEntry(String entryId) async {
     await myCollection.doc(entryId).delete();
     getEntries(); // Refresh the list after deletion
@@ -59,9 +57,8 @@ class _myEntriesState extends State<myEntries> {
 
   // Function to navigate to the edit screen
   void editEntry(Map<String, dynamic> entry) {
-
+    // Implement your logic for editing entries
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +80,6 @@ class _myEntriesState extends State<myEntries> {
 
           // Hent værdierne for Mealsize, note og tidspunkt fra Firestore-dataene eller skriver ingen data fundet når null-værdier er fundet.
           String titleText = entry['Note'] ?? 'Unknown Size';
-          // ignore: avoid_print
           print('Note: $titleText');
           String noteText = entry['Meal Size'] ?? '';
           String timeText = entry['time'] ?? '';

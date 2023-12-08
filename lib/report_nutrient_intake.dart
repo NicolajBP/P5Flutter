@@ -459,13 +459,24 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
                       _saveDataToFirestore();
                       noteController.clear();
                     }
+                     else{
+                            ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error. The note field is empty.'),
+          duration: Duration(seconds: 3), // Ændre længden af display
+        ),
+      );
+                    }
+
+                    
                   },
                   child: const Text(
                     "Save",
                     style:
                         TextStyle(height: 1, fontSize: 30, color: Colors.white),
                   ),
-                ))
+                )
+                )
           ],
         ),
       ),

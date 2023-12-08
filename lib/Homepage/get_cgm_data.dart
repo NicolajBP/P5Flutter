@@ -57,7 +57,7 @@ class GetCgmData extends StatelessWidget {
 
           for (var k = 0; k < 96; k++) {
             timeSlots.add(testTime);
-            testTime = testTime.add(Duration(minutes: 15));
+            testTime = testTime.add(const Duration(minutes: 15));
           }
 
 

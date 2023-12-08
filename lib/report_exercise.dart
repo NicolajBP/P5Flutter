@@ -156,15 +156,9 @@ time = nearestQuarter(DateTime(
           // ignore: avoid_print
           .catchError((error) => print("Add failed: $error"));
 
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Data is saved successfully.'),
-          duration: Duration(seconds: 3), // Ændre længden af display
-        ),
-      );
-
       debugPrint("The data is saved to Firestore.");
+
+
 
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
@@ -327,7 +321,7 @@ Padding(
               ),
             ),
 
-/////// time of day button //////
+/////// Clock button //////
   Padding(
   padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
   child: OutlinedButton.icon(
@@ -336,7 +330,6 @@ Padding(
       Icons.access_time,
       size: 50.0,
     ),
-    // ignore: prefer_interpolation_to_compose_strings
     label: Text('${_time.hour}'.padLeft(2,'0') + ':'+'${_time.minute}'.padLeft(2,'0'),
         style: const TextStyle(height: 1, fontSize: 36)),
   ),
@@ -363,7 +356,8 @@ Padding(
                 ],
               ),
             ),
-            Row(
+            Column(
+              
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
 //////////////////////////// Slider bar     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -587,6 +581,15 @@ Padding(
                       _saveDataToFirestore();
                       noteController.clear();
                     }
+                    else{
+                            ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error. The note field is empty.'),
+          duration: Duration(seconds: 3), // Ændre længden af display
+        ),
+      );
+                    }
+
                   },
                   child: const Text(
                     "Save",
