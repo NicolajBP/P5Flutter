@@ -156,15 +156,9 @@ time = nearestQuarter(DateTime(
           // ignore: avoid_print
           .catchError((error) => print("Add failed: $error"));
 
-      // ignore: use_build_context_synchronously
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Data is saved successfully.'),
-          duration: Duration(seconds: 3), // Ændre længden af display
-        ),
-      );
-
       debugPrint("The data is saved to Firestore.");
+
+
 
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
@@ -587,6 +581,15 @@ Padding(
                       _saveDataToFirestore();
                       noteController.clear();
                     }
+                    else{
+                            ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Error. The note field is empty.'),
+          duration: Duration(seconds: 3), // Ændre længden af display
+        ),
+      );
+                    }
+
                   },
                   child: const Text(
                     "Save",

@@ -11,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:p5/Homepage/get_cgm_data.dart';
 import 'package:p5/Homepage/graph.dart';
 import 'package:p5/Login/register_page.dart';
-import 'package:p5/myEntries.dart';
+import 'package:p5/myEntriesPage.dart';
 import 'package:p5/report_exercise.dart';
 import 'package:p5/report_nutrient_intake.dart';
 import 'package:p5/uploadCgmData.dart';
