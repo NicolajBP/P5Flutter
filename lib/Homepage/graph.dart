@@ -85,7 +85,7 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
                   return Container(
                     child: Text(
 
-                      'Value : ${cgmNutrientValues[pointIndex]}\nTime: ${cgmTimeStamps[pointIndex]}'
+                      'Food : ${cgmNutrientIntakes[pointIndex]}\nTime: ${cgmTimeStamps[pointIndex]}'
                        
                     )
                   );

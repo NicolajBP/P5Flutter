@@ -79,10 +79,11 @@ class GetCgmData extends StatelessWidget {
 
             
             if (nutrientEntriesLength! > 0){
-            for (j=0; j<nutrientEntriesLength!; j++) {
+            for (j=0; j<nutrientEntriesLength! -1; j++) {
             DateTime? nutrientTime2add = DateTime.parse("${data['nutrientEntries'][j]["nutrientTimeStamp"]}");
               if (nutrientTime2add.isAtSameMomentAs(timeSlots[i])) {
                 String nutrientNoteToAdd = "${data['nutrientEntries'][j]['nutrientNote']}";
+                cgmNutrientNotes.add(nutrientNoteToAdd);
 
                 num? foodValue2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}");
                 cgmNutrientValues.add(foodValue2add);
@@ -108,7 +109,9 @@ class GetCgmData extends StatelessWidget {
 
             if (("${data['cgmData']["$i"]["nutrientValue"]}").isEmpty && nutrientValueAdded == false)  {
             num? foodValue2add;
+            String? nutrientNoteToAdd;
               cgmNutrientValues.add(foodValue2add); // Vi tilføjer mad til arrayet
+              cgmNutrientNotes.add(nutrientNoteToAdd);
             } else if(
               ("${data['cgmData']["$i"]["nutrientValue"]}").isEmpty && nutrientValueAdded == true) {
 
@@ -116,6 +119,8 @@ class GetCgmData extends StatelessWidget {
             else {
               num foodValue2add = num.parse("${data['cgmData']["$i"]["nutrientValue"]}");
               cgmNutrientValues.add(foodValue2add); // Vi tilføjer mad til arrayet
+              String nutrientNoteToAdd = "${data['nutrientEntries'][j]['nutrientNote']}";
+              cgmNutrientNotes.add(nutrientNoteToAdd);
             }
 
 
