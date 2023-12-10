@@ -63,7 +63,7 @@ class GetCgmData extends StatelessWidget {
 
           int j = 0;
           int h = 0;
-          int? jMax = data['nutrientEntries']!.length;
+          int? nutrientEntriesLength = data['nutrientEntries']!.length;
           int? hMax = data['exerciseEntries']!.length;
 
           for (var i = 0; i < 96; i++) { // Det er åbenbart sådan her man skal lave for-loops i Flutter
@@ -78,10 +78,11 @@ class GetCgmData extends StatelessWidget {
             debugPrint(newTime.toString());
 
             
-            if (jMax! > 0){
-            for (j=0; j<jMax!; j++) {
+            if (nutrientEntriesLength! > 0){
+            for (j=0; j<nutrientEntriesLength!; j++) {
             DateTime? nutrientTime2add = DateTime.parse("${data['nutrientEntries'][j]["nutrientTimeStamp"]}");
               if (nutrientTime2add.isAtSameMomentAs(timeSlots[i])) {
+                String nutrientNoteToAdd = "${data['nutrientEntries'][j]['nutrientNote']}";
 
                 num? foodValue2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}");
                 cgmNutrientValues.add(foodValue2add);
@@ -141,7 +142,7 @@ class GetCgmData extends StatelessWidget {
 
 
           return SizedBox(
-              height: 300, width: double.infinity, child: LiveChartWidget(cgmValues, cgmTimeStamps, cgmNutrientNotes, cgmNutrientValues,cgmExerciseNotes, cgmExerciseValues));
+              height: 300, width: double.infinity, child: LiveChartWidget(cgmValues, cgmTimeStamps, cgmNutrientNotes, cgmNutrientValues,cgmExerciseNotes, cgmExerciseValues, nutrientEntriesLength!));
 
         }
 

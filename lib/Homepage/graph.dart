@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 // ignore: unused_import
 import 'package:p5/Login/register_page.dart';
+import 'package:p5/nutrientLog.dart';
 // ignore: depend_on_referenced_packages, unused_import
 import 'package:path/path.dart';
 // ignore: depend_on_referenced_packages
@@ -20,10 +21,11 @@ class LiveChartWidget extends StatefulWidget {
   final List<dynamic> cgmNutrientValues;
   final List<dynamic> exerciseNotes;
   final List<dynamic> exerciseValues;
+  final int amountOfEntries;
 
   // ignore: use_key_in_widget_constructors
   const LiveChartWidget(this.cgmValues, this.cgmTimeStamps, this.cgmNutrientIntakes,
-      this.cgmNutrientValues, this.exerciseNotes, this.exerciseValues);
+      this.cgmNutrientValues, this.exerciseNotes, this.exerciseValues, this.amountOfEntries);
 
   @override
   // ignore: no_logic_in_create_state
@@ -33,11 +35,13 @@ class LiveChartWidget extends StatefulWidget {
       cgmNutrientIntakes,
       cgmNutrientValues,
       exerciseNotes,
-      exerciseValues);
+      exerciseValues,
+      amountOfEntries);
 }
 
 class _LiveChartWidgetState extends State<LiveChartWidget> {
   late List<LiveData> chartData;
+  late TooltipBehavior _tooltipBehavior;
   late ZoomPanBehavior _zoomPanBehavior;
   final List<dynamic> cgmValues; // Vi laver en masse lister / arrays for at gemme vores værdier fra databasen så de kan indsættes i grafen
   final List<dynamic> cgmTimeStamps;
@@ -45,6 +49,7 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
   final List<dynamic> cgmNutrientValues;
   final List<dynamic> exerciseNotes;
   final List<dynamic> exerciseValues;
+  final int amountOfEntries;
 
   _LiveChartWidgetState( // Constructor (?)
       this.cgmValues,
@@ -52,23 +57,72 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
       this.cgmNutrientIntakes,
       this.cgmNutrientValues,
       this.exerciseNotes,
-      this.exerciseValues);
+      this.exerciseValues, 
+      this.amountOfEntries);
   /*  late ChartSeriesController _chartSeriesController; */
+
 
   @override
   void initState() {
     super.initState();
+    // List<NutrientEntryGraph> nutrientData = getNutrientEntries();
+
     _zoomPanBehavior = ZoomPanBehavior( // Noget med zoom som Seb har lavet?
         enableSelectionZooming: true,
         selectionRectBorderColor: Colors.red,
         selectionRectBorderWidth: 1,
         selectionRectColor: Colors.grey);
     chartData = getChartData();
+    // _tooltipBehavior = TooltipBehavior(enable: true);
+      _tooltipBehavior = TooltipBehavior(
+                enable: true,
+                color: const Color.fromARGB(255, 219, 138, 133),
+                // Templating the tooltip
+                builder: (dynamic data, dynamic point, dynamic series,
+                int pointIndex, int seriesIndex) {
+                  
+                  if(cgmNutrientValues[pointIndex] != null) {
+                  return Container(
+                    child: Text(
+
+                      'Value : ${cgmNutrientValues[pointIndex]}\nTime: ${cgmTimeStamps[pointIndex]}'
+                       
+                    )
+                  );
+                  } else {
+                    return Container(
+                    child: Text(
+
+                      'Value : ${exerciseValues[pointIndex]}\nTime: ${cgmTimeStamps[pointIndex]}'
+                       
+                    )
+                  );
+                  }
+                }
+              );
 
     /* Timer.periodic(const Duration(seconds: 1), updateDataSource); */
   }
 
 // Den behøver ikke opdatere hele tiden, den opdatere hver gang man går på homepage,så hvis den downloader data fra firebase inden opdatere den fint
+
+  // List<NutrientEntryGraph> getNutrientEntries() {
+  //   // Function der returnerer dataen til grafen
+  //   List<NutrientEntryGraph> mapNutrientEntries = [];
+
+  //   for (var i = 0; i < amountOfEntries-1; i++) {
+  //     // Vi indlæser alt data til grafen i en for loop
+  //     // For-loop for at spare tid på at skrive hvad der skal returneres af <LiveData> nedenfor
+  //     mapNutrientEntries.add(
+  //       NutrientEntryGraph(
+  //         nutrientNote: cgmNutrientIntakes[i],
+  //         nutrientSize: "Test"
+  //       ),
+  //     );
+  //   }
+  //   return mapNutrientEntries;
+  // }
+
 
   List<LiveData> getChartData() { // Function der returnerer dataen til grafen
     List<LiveData> mapLiveData = [];
@@ -115,15 +169,19 @@ updateDataSource(Timer timer){
       children: [
         SfCartesianChart(
           zoomPanBehavior: _zoomPanBehavior,
+          tooltipBehavior: _tooltipBehavior,
           title: ChartTitle(text: 'CGM-data'),
           legend: const Legend(isVisible: false),
           series: <ChartSeries>[
             LineSeries<LiveData, DateTime>( // Her plottes linjen på grafen
+              enableTooltip: false,
               dataSource: chartData,
               xValueMapper: (LiveData data, _) => data.time,
               yValueMapper: (LiveData data, _) => data.bloodSugarLevel,
             ),
+            
             ScatterSeries<LiveData, DateTime>( // Her plottes nutrient intake ikonerne
+            name: "Nutrient entry",
             dataSource: chartData,
             xValueMapper: (LiveData data, _) => data.time,
             yValueMapper: (LiveData data, _) => data.nutrientIntakeValue,
@@ -133,6 +191,7 @@ updateDataSource(Timer timer){
                 width: 10,
                 image: AssetImage('images/INTAKE.png'))),
             ScatterSeries<LiveData, DateTime>( // Her plottes exercise ikonerne
+            name: "Exercise entry",
             dataSource: chartData,
             xValueMapper: (LiveData data, _) => data.time,
             yValueMapper: (LiveData data, _) => data.exerciseValue,
@@ -237,4 +296,17 @@ class LiveData { // Her defineres klassen LiveData
       this.nutrientIntakeNote,
       this.exerciseNote,
       this.exerciseValue});
+}
+
+
+
+class NutrientEntryGraph {
+  // Her defineres klassen LiveData
+  final String nutrientNote;
+  final String nutrientSize;
+
+  NutrientEntryGraph({
+    required this.nutrientNote,
+    required this.nutrientSize,
+  });
 }
