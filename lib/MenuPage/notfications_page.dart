@@ -199,7 +199,7 @@ class _NotificationSettingsWidgetState
                 ),
                 child: ListTile(
                   leading: const Icon(Icons.timer),
-                  title: const Text('Notification Interval:'),
+                  title: const Text('Inactivity interval:'),
                   trailing: CupertinoButton(
                     child: Text(
                       '${widget.notificationInterval.inHours}h ${widget.notificationInterval.inMinutes.remainder(60)}min',
