@@ -3,7 +3,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/Homepage/home_page.dart';
+import 'package:p5/Login/register_page.dart';
+import 'package:p5/getExerciseLog.dart';
+import 'package:p5/getNutrientLog.dart';
 import 'package:p5/myEntriesPage.dart';
+import 'package:p5/statistics_page.dart';
 import 'notfications_page.dart';
 
 
@@ -127,7 +131,7 @@ late var currentUser = FirebaseAuth.instance.currentUser;
               ),
             ),
 
-            const SizedBox(height: 10),
+          const SizedBox(height: 10),
 
            Padding(
               padding: const EdgeInsets.all(5.0),
@@ -135,7 +139,9 @@ late var currentUser = FirebaseAuth.instance.currentUser;
                 onPressed: () {
                  Navigator.of(context).push(
                 MaterialPageRoute(builder: (BuildContext context) {
-               return const MyEntriesPage(userId: 'yourUserId');  }),
+               return GetNutrientLog(user.uid, dateYYYY_MM_DD);
+               }
+               ),
               );
                 }, 
                 icon: const Icon(
@@ -144,7 +150,47 @@ late var currentUser = FirebaseAuth.instance.currentUser;
                 label: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [ Text(
-                  'Previous entries',
+                  'Nutrient log',
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.secondary,
+                    fontSize: 25,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+                const Icon(
+                  Icons.arrow_forward_ios,
+                  color: Colors.black,
+                )]
+                ),
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.background,
+                  minimumSize: const Size(600, 70),
+                  side: BorderSide(color: Theme.of(context).colorScheme.primary),
+                  shape: LinearBorder.bottom(),
+                  alignment: Alignment.centerLeft,
+                  )
+              ),
+            ),
+            const SizedBox(height: 10),
+
+           Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: OutlinedButton.icon(               //logout button
+                onPressed: () {
+                 Navigator.of(context).push(
+                MaterialPageRoute(builder: (BuildContext context) {
+               return GetExerciseLog(user.uid, dateYYYY_MM_DD);
+               }
+               ),
+              );
+                }, 
+                icon: const Icon(
+                  Icons.history
+                ),
+                label: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [ Text(
+                  'Exercise log',
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.secondary,
                     fontSize: 25,

@@ -106,13 +106,13 @@ time = nearestQuarter(DateTime(
     if (selectedButtonIndex == -1) {
       // Hvis intet knap til valg af intensitet er valgt
 
-      manglendeFelter.add("Intensity");
+      manglendeFelter.add("exerciseIntensity");
     }
     // tilføj "Intensity" til listen over manglende felter
     if (note.isEmpty) {
       // Hvis feltet til notater er tomt
       // tilføj "Note" til listen over manglende felter
-      manglendeFelter.add("Note");
+      manglendeFelter.add("exerciseNote");
     }
 
     // Definer portionsstørelsen baseret på den valgt knaps indeks
@@ -134,7 +134,7 @@ time = nearestQuarter(DateTime(
    // Format the time in "yyyy-MM-ddTHH:mm:ss" format
   
   Map<String, dynamic> entryData = {
-    'exerciseSize': intensity,
+    'exerciseIntensity': intensity,
     'exerciseNote': note,
     'exerciseDuration': duration, // Store the duration in minutes
     'exerciseTimeStamp': time, // Store the time in ISO 8601 format
