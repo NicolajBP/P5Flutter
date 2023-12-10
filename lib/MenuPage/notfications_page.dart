@@ -162,7 +162,7 @@ class _NotificationSettingsWidgetState
             children: [
               ElevatedButton(
                 onPressed: widget.onSaveInactivityReminder,
-                child: const Text('Save Inactivity Reminder (Time)'),
+                child: const Text('Save recurring notification (Time)'),
               ),
             ],
           ),
@@ -220,7 +220,7 @@ class _NotificationSettingsWidgetState
             children: [
               ElevatedButton(
                 onPressed: widget.onIntervalSavePressed,
-                child: const Text('Save Inactivity Reminder (Interval)'),
+                child: const Text('Save inactivity interval (Interval)'),
               ),
             ],
           ),
