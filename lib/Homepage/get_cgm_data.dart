@@ -64,7 +64,7 @@ class GetCgmData extends StatelessWidget {
           int j = 0;
           int h = 0;
           int? nutrientEntriesLength = data['nutrientEntries']!.length;
-          int? hMax = data['exerciseEntries']!.length;
+          int? exerciseEntriesLength = data['exerciseEntries']!.length;
 
           for (var i = 0; i < 96; i++) { // Det er åbenbart sådan her man skal lave for-loops i Flutter
             num data2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}"); // Konverterer String fra JSON til num da vi skal bruge det til grafen
@@ -79,7 +79,7 @@ class GetCgmData extends StatelessWidget {
 
             
             if (nutrientEntriesLength! > 0){
-            for (j=0; j<nutrientEntriesLength! -1; j++) {
+            for (j=0; j<nutrientEntriesLength!; j++) {
             DateTime? nutrientTime2add = DateTime.parse("${data['nutrientEntries'][j]["nutrientTimeStamp"]}");
               if (nutrientTime2add.isAtSameMomentAs(timeSlots[i])) {
                 String nutrientNoteToAdd = "${data['nutrientEntries'][j]['nutrientNote']}";
@@ -87,17 +87,19 @@ class GetCgmData extends StatelessWidget {
 
                 num? foodValue2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}");
                 cgmNutrientValues.add(foodValue2add);
-                            nutrientValueAdded = true;
+                nutrientValueAdded = true;
 
               } 
             }
             }
 
-            if (hMax! > 0){
-            for (h=0; h<hMax!; h++) {
+            if (exerciseEntriesLength! > 0){
+            for (h=0; h<exerciseEntriesLength!; h++) {
             
             DateTime? exerciseTime2add = DateTime.parse("${data['exerciseEntries'][h]["exerciseTimeStamp"]}");
               if (exerciseTime2add.isAtSameMomentAs(timeSlots[i])) {
+                String exerciseNoteToAdd = "${data['exerciseEntries'][j]['exerciseNote']}";
+                cgmExerciseNotes.add(exerciseNoteToAdd);
 
                 num? exerciseValue2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}");
                 cgmExerciseValues.add(exerciseValue2add);
@@ -119,7 +121,7 @@ class GetCgmData extends StatelessWidget {
             else {
               num foodValue2add = num.parse("${data['cgmData']["$i"]["nutrientValue"]}");
               cgmNutrientValues.add(foodValue2add); // Vi tilføjer mad til arrayet
-              String nutrientNoteToAdd = "${data['nutrientEntries'][j]['nutrientNote']}";
+              String nutrientNoteToAdd = "${data['cgmData']["$i"]['nutrientNote']}";
               cgmNutrientNotes.add(nutrientNoteToAdd);
             }
 
@@ -128,14 +130,18 @@ class GetCgmData extends StatelessWidget {
 
             if (("${data['cgmData']["$i"]["exerciseValue"]}").isEmpty && exerciseValueAdded == false) {
             num? exerciseValue2add;
+            String? exerciseNoteToAdd;
               cgmExerciseValues.add(exerciseValue2add); // Vi tilføjer mad til arrayet
+              cgmExerciseNotes.add(exerciseNoteToAdd);
             } else if(
               ("${data['cgmData']["$i"]["exerciseValue"]}").isEmpty && exerciseValueAdded == true) {
 
             } 
             else {
               num exerciseValue2add = num.parse("${data['cgmData']["$i"]["exerciseValue"]}");
-              cgmExerciseValues.add(exerciseValue2add); // Vi tilføjer mad til arrayet
+              cgmExerciseValues.add(exerciseValue2add); // Vi tilføjer exercise til arrayet
+              String exerciseNoteToAdd = "${data['cgmData']["$i"]['exerciseNote']}";
+              cgmExerciseNotes.add(exerciseNoteToAdd);
             }
 
 
