@@ -86,7 +86,7 @@ class _ExerciseLogWidgetState extends State<ExerciseLogWidget> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Previous Entries"),
+        title: const Text("Previous exercise entries"),
         automaticallyImplyLeading: true,
         leading: IconButton(
           onPressed: () {

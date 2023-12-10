@@ -86,7 +86,7 @@ class _NutrientLogWidgetState extends State<NutrientLogWidget> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Previous Entries"),
+        title: const Text("Previous nutrient entries"),
         automaticallyImplyLeading: true,
         leading: IconButton(
           onPressed: () {
