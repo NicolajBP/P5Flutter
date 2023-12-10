@@ -145,7 +145,7 @@ class _NotificationSettingsWidgetState
                           initialDateTime: widget.dateTime,
                           onDateTimeChanged: widget.onDateTimeChanged,
                           use24hFormat: true,
-                          mode: CupertinoDatePickerMode.dateAndTime,
+                          mode: CupertinoDatePickerMode.time
                         ),
                       ),
                     );
