@@ -86,7 +86,6 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
                     child: Text(
 
                       'Type: ${cgmNutrientIntakes[pointIndex]}\nTime: ${cgmTimeStamps[pointIndex]}'
-                       
                     )
                   );
                   } else {
@@ -94,7 +93,6 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
                     child: Text(
 
                       'Type: ${exerciseNotes[pointIndex]}\nTime: ${cgmTimeStamps[pointIndex]}'
-                       
                     )
                   );
                   }
@@ -124,11 +122,12 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
   // }
 
 
-  List<LiveData> getChartData() { // Function der returnerer dataen til grafen
+  List<LiveData> getChartData() { // Function which return the data for the graph
     List<LiveData> mapLiveData = [];
 
-    for (var i = 0; i < 96; i++) { // Vi indlæser alt data til grafen i en for loop
-      // For-loop for at spare tid på at skrive hvad der skal returneres af <LiveData> nedenfor
+    for (var i = 0; i < 96; i++) { 
+      // Reads all the data for the graph in a for loop
+      // For loop to save time on writing what is supossed to be returend by<LiveData> below
       mapLiveData.add(
         LiveData(
           time: cgmTimeStamps[i],
@@ -137,13 +136,13 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
           exerciseValue: exerciseValues[i],
         ),
       );
-      if (cgmNutrientValues[i] != null) {
+if (cgmNutrientValues[i] != null) {
       debugPrint(cgmNutrientValues[i].toString());
       debugPrint(cgmTimeStamps[i].toString());
       }
       
     }
-    debugPrint("Length is:");
+debugPrint("Length is:");
     debugPrint(cgmNutrientValues.length.toString());
 
     return mapLiveData;

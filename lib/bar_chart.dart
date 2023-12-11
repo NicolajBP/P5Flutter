@@ -113,30 +113,26 @@ class _BarChartWidgetState extends State<BarChartWidget> {
     return chartData;
   }
 
-  // Udregner gennemsnit
+  // Calculates the average
   num fetchAverage() {
     num sum = 0;
-
     for (var i = 0; i < cgmValues.length; i++) {
       sum += cgmValues[i];
     }
     num average = sum / cgmValues.length;
-
     return average;
   }
 
-  // Udregner minimum
+  // Calculates minimum
   num fetchMininum() {
     cgmValues.sort();
-
     return cgmValues[0];
   }
 
-  // Udregner maximum
+  // Calculates maximum
   num fetchMaximum() {
     var length = cgmValues.length;
     cgmValues.sort();
-
     return cgmValues[length - 1];
   }
 

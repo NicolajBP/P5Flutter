@@ -38,7 +38,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
 
   final TextEditingController noteController = TextEditingController();
 
-  // Tids valg metode
+  // Select time funtion
   void _selectTime() async {
     final TimeOfDay? newTime = await showTimePicker(
       context: context,
@@ -50,14 +50,12 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
         );
       },
     );
+    //If a time has been selected,
+    //set the local variable to it and format it to the right string
     if (newTime != null) {
       setState(() {
         _time = newTime;
-
         // Format the time in ISO 8601 format
-
-        // time = nearestQuarter(DateTime.now()).toIso8601String();
-
         time = nearestQuarter(DateTime(
           DateTime.now().year,
           DateTime.now().month,
@@ -65,9 +63,9 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
           newTime.hour,
           newTime.minute,
         )).toIso8601String();
-
         time = time.substring(0, time.length - 4);
-      });
+      }
+    );
     }
   }
 
@@ -89,27 +87,11 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
   int selectedButtonIndex = -1;
 //en værdi til kanppen når den er ikke trukket
 
-  //data gemmes med denne funktion
+
+
   void _saveDataToFirestore() async {
-    // ignore: unused_local_variable
-    var collection = FirebaseFirestore.instance.collection("users");
-
-    // Opret en liste til at gemme navnene på de manglende felter
-    List<String> manglendeFelter = [];
-
-    if (selectedButtonIndex == -1) {
-      // Hvis intet knap til valg af portionsstørrelse er valgt
-
-      manglendeFelter.add("Meal Size");
-    }
-    // tilføj "Meal Size" til listen over manglende felter
-    if (note.isEmpty) {
-      // Hvis feltet til notater er tomt
-      // tilføj "Note" til listen over manglende felter
-      manglendeFelter.add("Note");
-    }
-
-    // Definer portionsstørelsen baseret på den valgt knaps indeks
+    // Defines which string to be saved, upon the local variable
+    //from which mealsize button was pressed
     String mealSize = "";
     if (selectedButtonIndex == 0) {
       mealSize = "Small";
@@ -118,34 +100,20 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
     } else if (selectedButtonIndex == 2) {
       mealSize = "Large";
     }
-
+    // If the time is empty, update it with the current time
+    // If not, the local variable time is put into the list
     if (time.isEmpty) {
-      // If the time is empty, update it with the current time
-      // time = DateTime.now().toIso8601String();
       time = nearestQuarter(DateTime.now()).toIso8601String();
-
       time = time.substring(0, time.length - 4);
-      // time = DateTime(
-      //   DateTime.now().year,
-      //   DateTime.now().month,
-      //   DateTime.now().day,
-      //   newTime.hour,
-      //   newTime.minute,
-      // ).toIso8601String();
-
-      // time = time.substring(0, time.length - 4);
     }
-    // Format the time in "yyyy-MM-ddTHH:mm:ss" format
-
+    // The list sent to the database
     Map<String, dynamic> entryData = {
       'nutrientSize': mealSize,
       'nutrientNote': note,
-      'nutrientTimeStamp': time, // Store the time in ISO 8601 format
+      'nutrientTimeStamp': time,
     };
-
-
     try {
-      // Gem data i Firestore-databasen
+      // Save data in firestore
       await firestore
           .collection('users')
           .doc(user.uid)
@@ -158,6 +126,9 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
           .then((_) => print("Added"))
           // ignore: avoid_print
           .catchError((error) => print("Add failed: $error"));
+
+
+
 
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(

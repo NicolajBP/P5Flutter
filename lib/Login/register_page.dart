@@ -1,11 +1,11 @@
 // import 'dart:ffi';
 
+// ignore: depend_on_referenced_packages
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:p5/components/MyTextField.dart';
 import 'package:p5/main.dart';
-// ignore: depend_on_referenced_packages
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:p5/uploadCgmData.dart';
 
 DateTime now = DateTime.now();
@@ -118,7 +118,7 @@ class _RegisterPageState extends State<RegisterPage> {
               const Padding(
                 padding: EdgeInsets.only(top: 25, bottom: 50),
                 child: Text(
-                  "My Diabuddy",
+                  "GlucoTeach",
                   style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 20,

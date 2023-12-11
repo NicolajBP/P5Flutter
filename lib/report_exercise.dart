@@ -97,24 +97,6 @@ time = nearestQuarter(DateTime(
 
   //data gemmes med denne funktion
   void _saveDataToFirestore() async {
-    // ignore: unused_local_variable
-    var collection = FirebaseFirestore.instance.collection("users");
-
-    // Opret en liste til at gemme navnene på de manglende felter
-    List<String> manglendeFelter = [];
-
-    if (selectedButtonIndex == -1) {
-      // Hvis intet knap til valg af intensitet er valgt
-
-      manglendeFelter.add("exerciseIntensity");
-    }
-    // tilføj "Intensity" til listen over manglende felter
-    if (note.isEmpty) {
-      // Hvis feltet til notater er tomt
-      // tilføj "Note" til listen over manglende felter
-      manglendeFelter.add("exerciseNote");
-    }
-
     // Definer portionsstørelsen baseret på den valgt knaps indeks
     String intensity = "";
     if (selectedButtonIndex == 0) {
@@ -362,26 +344,23 @@ Padding(
               children: [
 //////////////////////////// Slider bar     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
               StatefulBuilder(
-                builder: (context,state)
-                {
-                return Slider(
-                  value: currentSliderValue,
-                  max: 10,
-                  min: 1,
-                  divisions: 9,
-                  label: currentSliderValue.round().toString(),
-                  onChanged: (double value) {
-                      state(() {
-                    currentSliderValue = value;
-                  });
-                  //   setState(() {
-                  //   currentSliderValue = value;
-                  // });
-                  },
-                );
-                },
-                ),
-          
+ builder: (context,state)
+ {
+ return Slider(
+   value: currentSliderValue,
+   max: 10,
+   min: 1,
+   divisions: 9,
+   label: currentSliderValue.round().toString(),
+   onChanged: (double value) {
+       state(() {
+     currentSliderValue = value;
+   });
+   },
+ );
+ },
+              ),
+
               
               // SliderExample(
 
