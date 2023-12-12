@@ -47,12 +47,11 @@ class _ExerciseLogWidgetState extends State<ExerciseLogWidget> {
   @override
   void initState() {
     List<exerciseEntry> exerciseData = getexerciseEntries();
-    super.initState(); 
+    super.initState();
 
-      setState(() {
-        exerciseData = getexerciseEntries();
-      });
-
+    setState(() {
+      exerciseData = getexerciseEntries();
+    });
 
     /* Timer.periodic(const Duration(seconds: 1), updateDataSource); */
   }
@@ -63,7 +62,7 @@ class _ExerciseLogWidgetState extends State<ExerciseLogWidget> {
     // Function der returnerer dataen til grafen
     List<exerciseEntry> mapexerciseEntries = [];
 
-    for (var i = 0; i < amountOfEntries-1; i++) {
+    for (var i = 0; i < amountOfEntries - 1; i++) {
       // Vi indlæser alt data til grafen i en for loop
       // For-loop for at spare tid på at skrive hvad der skal returneres af <LiveData> nedenfor
       mapexerciseEntries.add(
@@ -81,7 +80,7 @@ class _ExerciseLogWidgetState extends State<ExerciseLogWidget> {
   @override
   Widget build(BuildContext context) {
     setState(() {
-        exerciseData = getexerciseEntries();
+      exerciseData = getexerciseEntries();
     });
 
     return Scaffold(
@@ -96,25 +95,20 @@ class _ExerciseLogWidgetState extends State<ExerciseLogWidget> {
         ),
       ),
       body: ListView.builder(
-        itemCount: amountOfEntries-1,
+        itemCount: amountOfEntries - 1,
         itemBuilder: (BuildContext context, int index) {
-          // List<exerciseEntry> entries = exerciseData;
-          exerciseData[index];
 
-          // Hent værdierne for Mealsize, note og tidspunkt fra Firestore-dataene eller skriver ingen data fundet når null-værdier er fundet.
+          // For each entry, assign text variables to display
           String timeText = exerciseData[index].exerciseTimeStamp.toString();
           String noteText = exerciseData[index].exerciseNote;
           String durationText = exerciseData[index].exerciseDuration;
 
-          // Opret en mini liste med titel og undertitel
-          return
-          Card(
-            child:  ListTile(
-            title: Text(noteText!),
+          // Create a list of Card widgets containing information about each nutrient entr
+          return Card(
+              child: ListTile(
+            title: Text(noteText),
             subtitle: Text('Duration: $durationText, Time: $timeText'),
-          )
-          );
-          
+          ));
         },
       ),
     );

@@ -47,12 +47,11 @@ class _NutrientLogWidgetState extends State<NutrientLogWidget> {
   @override
   void initState() {
     List<NutrientEntry> nutrientData = getNutrientEntries();
-    super.initState(); 
+    super.initState();
 
-      setState(() {
-        nutrientData = getNutrientEntries();
-      });
-
+    setState(() {
+      nutrientData = getNutrientEntries();
+    });
 
     /* Timer.periodic(const Duration(seconds: 1), updateDataSource); */
   }
@@ -63,7 +62,7 @@ class _NutrientLogWidgetState extends State<NutrientLogWidget> {
     // Function der returnerer dataen til grafen
     List<NutrientEntry> mapNutrientEntries = [];
 
-    for (var i = 0; i < amountOfEntries-1; i++) {
+    for (var i = 0; i < amountOfEntries - 1; i++) {
       // Vi indlæser alt data til grafen i en for loop
       // For-loop for at spare tid på at skrive hvad der skal returneres af <LiveData> nedenfor
       mapNutrientEntries.add(
@@ -81,7 +80,7 @@ class _NutrientLogWidgetState extends State<NutrientLogWidget> {
   @override
   Widget build(BuildContext context) {
     setState(() {
-        nutrientData = getNutrientEntries();
+      nutrientData = getNutrientEntries();
     });
 
     return Scaffold(
@@ -96,26 +95,20 @@ class _NutrientLogWidgetState extends State<NutrientLogWidget> {
         ),
       ),
       body: ListView.builder(
-        itemCount: amountOfEntries-1,
+        itemCount: amountOfEntries -1,
         itemBuilder: (BuildContext context, int index) {
-          // List<NutrientEntry> entries = nutrientData;
-          nutrientData[index];
-
-          // Hent værdierne for Mealsize, note og tidspunkt fra Firestore-dataene eller skriver ingen data fundet når null-værdier er fundet.
+          
+          // For each entry, assign text variables to display 
           String timeText = nutrientData[index].nutrientTimeStamp.toString();
           String noteText = nutrientData[index].nutrientNote;
           String sizeText = nutrientData[index].nutrientSize;
 
-          // Opret en mini liste med titel og undertitel
-                    return
-          Card(
-            child:  ListTile(
-            title: Text(noteText!),
-            subtitle: Text('Note: $sizeText, Time: $timeText'),
-          )
-          );
-          
-          
+          // Create a list of Card widgets containing information about each nutrient entry
+          return Card(
+              child: ListTile(
+            title: Text(noteText),
+            subtitle: Text('Size: $sizeText, Time: $timeText'),
+          ));
         },
       ),
     );
