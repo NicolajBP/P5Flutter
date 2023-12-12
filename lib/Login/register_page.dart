@@ -118,7 +118,7 @@ class _RegisterPageState extends State<RegisterPage> {
               const Padding(
                 padding: EdgeInsets.only(top: 25, bottom: 50),
                 child: Text(
-                  "GlucoTeach",
+                  "GlucoInsight",
                   style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
                     fontSize: 20,
