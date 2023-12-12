@@ -210,8 +210,8 @@ updateDataSource(Timer timer){
               start: cgmTimeStamps[
                   0], //x-aksen start - går nok galt når vi ændrer dagen
               end: cgmTimeStamps[95],
-              associatedAxisStart: 120, //y-aksen start
-              associatedAxisEnd: 200,
+              associatedAxisStart: 70, //y-aksen start
+              associatedAxisEnd: 180,
               shouldRenderAboveSeries: false,
               color: const Color.fromARGB(5, 197, 239, 197), //farve
               opacity: 0.5, //gennemsigtighed (0-1)
@@ -228,8 +228,8 @@ updateDataSource(Timer timer){
             PlotBand(
               //LOW stiplet linje
               isVisible: true,
-              start: 100,
-              end: 100,
+              start: 69,
+              end: 69,
               borderWidth: 2,
               borderColor: Colors.red,
               dashArray: const <double>[4, 5],
@@ -240,8 +240,8 @@ updateDataSource(Timer timer){
             PlotBand(
               //HIGH stiplet linje
               isVisible: true,
-              start: 220,
-              end: 220,
+              start: 181,
+              end: 181,
               borderWidth: 2,
               borderColor: Colors.red,
               dashArray: const <double>[4, 5],
