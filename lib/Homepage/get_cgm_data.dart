@@ -98,7 +98,7 @@ class GetCgmData extends StatelessWidget {
             
             DateTime? exerciseTime2add = DateTime.parse("${data['exerciseEntries'][h]["exerciseTimeStamp"]}");
               if (exerciseTime2add.isAtSameMomentAs(timeSlots[i])) {
-                String exerciseNoteToAdd = "${data['exerciseEntries'][j]['exerciseNote']}";
+                String exerciseNoteToAdd = "${data['exerciseEntries'][h]['exerciseNote']}";
                 cgmExerciseNotes.add(exerciseNoteToAdd);
 
                 num? exerciseValue2add = num.parse("${data['cgmData']["$i"]["mg/dL"]}");
