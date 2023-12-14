@@ -24,8 +24,14 @@ class LiveChartWidget extends StatefulWidget {
   final int amountOfEntries;
 
   // ignore: use_key_in_widget_constructors
-  const LiveChartWidget(this.cgmValues, this.cgmTimeStamps, this.cgmNutrientIntakes,
-      this.cgmNutrientValues, this.exerciseNotes, this.exerciseValues, this.amountOfEntries);
+  const LiveChartWidget(
+      this.cgmValues,
+      this.cgmTimeStamps,
+      this.cgmNutrientIntakes,
+      this.cgmNutrientValues,
+      this.exerciseNotes,
+      this.exerciseValues,
+      this.amountOfEntries);
 
   @override
   // ignore: no_logic_in_create_state
@@ -43,7 +49,8 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
   late List<LiveData> chartData;
   late TooltipBehavior _tooltipBehavior;
   late ZoomPanBehavior _zoomPanBehavior;
-  final List<dynamic> cgmValues; // Vi laver en masse lister / arrays for at gemme vores værdier fra databasen så de kan indsættes i grafen
+  final List<dynamic>
+      cgmValues; // Vi laver en masse lister / arrays for at gemme vores værdier fra databasen så de kan indsættes i grafen
   final List<dynamic> cgmTimeStamps;
   final List<dynamic> cgmNutrientIntakes;
   final List<dynamic> cgmNutrientValues;
@@ -51,53 +58,46 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
   final List<dynamic> exerciseValues;
   final int amountOfEntries;
 
-  _LiveChartWidgetState( // Constructor (?)
+  _LiveChartWidgetState(
+      // Constructor (?)
       this.cgmValues,
       this.cgmTimeStamps,
       this.cgmNutrientIntakes,
       this.cgmNutrientValues,
       this.exerciseNotes,
-      this.exerciseValues, 
+      this.exerciseValues,
       this.amountOfEntries);
   /*  late ChartSeriesController _chartSeriesController; */
-
 
   @override
   void initState() {
     super.initState();
     // List<NutrientEntryGraph> nutrientData = getNutrientEntries();
 
-    _zoomPanBehavior = ZoomPanBehavior( // Noget med zoom som Seb har lavet?
+    _zoomPanBehavior = ZoomPanBehavior(
+        // Noget med zoom som Seb har lavet?
         enableSelectionZooming: true,
         selectionRectBorderColor: Colors.red,
         selectionRectBorderWidth: 1,
         selectionRectColor: Colors.grey);
     chartData = getChartData();
     // _tooltipBehavior = TooltipBehavior(enable: true);
-      _tooltipBehavior = TooltipBehavior(
-                enable: true,
-                color: const Color.fromARGB(255, 219, 138, 133),
-                // Templating the tooltip
-                builder: (dynamic data, dynamic point, dynamic series,
-                int pointIndex, int seriesIndex) {
-                  
-                  if(cgmNutrientValues[pointIndex] != null) {
-                  return Container(
-                    child: Text(
-
-                      'Type: ${cgmNutrientIntakes[pointIndex]}\nTime: ${cgmTimeStamps[pointIndex]}'
-                    )
-                  );
-                  } else {
-                    return Container(
-                    child: Text(
-
-                      'Type: ${exerciseNotes[pointIndex]}\nTime: ${cgmTimeStamps[pointIndex]}'
-                    )
-                  );
-                  }
-                }
-              );
+    _tooltipBehavior = TooltipBehavior(
+        enable: true,
+        color: const Color.fromARGB(255, 219, 138, 133),
+        // Templating the tooltip
+        builder: (dynamic data, dynamic point, dynamic series, int pointIndex,
+            int seriesIndex) {
+          if (cgmNutrientValues[pointIndex] != null) {
+            return Container(
+                child: Text(
+                    'Type: ${cgmNutrientIntakes[pointIndex]}\nTime: ${cgmTimeStamps[pointIndex]}'));
+          } else {
+            return Container(
+                child: Text(
+                    'Type: ${exerciseNotes[pointIndex]}\nTime: ${cgmTimeStamps[pointIndex]}'));
+          }
+        });
 
     /* Timer.periodic(const Duration(seconds: 1), updateDataSource); */
   }
@@ -121,13 +121,12 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
   //   return mapNutrientEntries;
   // }
 
-
-  List<LiveData> getChartData() { // Function which return the data for the graph
+  List<LiveData> getChartData() {
+    // Function which return the data for the graph
     List<LiveData> mapLiveData = [];
 
-    for (var i = 0; i < 96; i++) { 
-      // Reads all the data for the graph in a for loop
-      // For loop to save time on writing what is supossed to be returend by<LiveData> below
+    for (var i = 0; i < 96; i++) {
+      // Reads all data for the graph in a for loop
       mapLiveData.add(
         LiveData(
           time: cgmTimeStamps[i],
@@ -136,15 +135,7 @@ class _LiveChartWidgetState extends State<LiveChartWidget> {
           exerciseValue: exerciseValues[i],
         ),
       );
-if (cgmNutrientValues[i] != null) {
-      debugPrint(cgmNutrientValues[i].toString());
-      debugPrint(cgmTimeStamps[i].toString());
-      }
-      
     }
-debugPrint("Length is:");
-    debugPrint(cgmNutrientValues.length.toString());
-
     return mapLiveData;
   }
 
@@ -172,84 +163,86 @@ updateDataSource(Timer timer){
           title: ChartTitle(text: 'CGM-data'),
           legend: const Legend(isVisible: false),
           series: <ChartSeries>[
-            LineSeries<LiveData, DateTime>( // Her plottes linjen på grafen
+            LineSeries<LiveData, DateTime>(
+              // Her plottes linjen på grafen
               enableTooltip: false,
               dataSource: chartData,
               xValueMapper: (LiveData data, _) => data.time,
               yValueMapper: (LiveData data, _) => data.bloodSugarLevel,
             ),
-            
-            ScatterSeries<LiveData, DateTime>( // Her plottes nutrient intake ikonerne
-            name: "Nutrient entry",
-            dataSource: chartData,
-            xValueMapper: (LiveData data, _) => data.time,
-            yValueMapper: (LiveData data, _) => data.nutrientIntakeValue,
-            markerSettings: const MarkerSettings(
-                shape: DataMarkerType.image,
-                height: 10,
-                width: 10,
-                image: AssetImage('images/INTAKE.png'))),
-            ScatterSeries<LiveData, DateTime>( // Her plottes exercise ikonerne
-            name: "Exercise entry",
-            dataSource: chartData,
-            xValueMapper: (LiveData data, _) => data.time,
-            yValueMapper: (LiveData data, _) => data.exerciseValue,
-            markerSettings: const MarkerSettings(
-                shape: DataMarkerType.image,
-                height: 12,
-                width: 12,
-                image: AssetImage('images/EXERCISE.png')))
+            ScatterSeries<LiveData, DateTime>(
+                // Her plottes nutrient intake ikonerne
+                name: "Nutrient entry",
+                dataSource: chartData,
+                xValueMapper: (LiveData data, _) => data.time,
+                yValueMapper: (LiveData data, _) => data.nutrientIntakeValue,
+                markerSettings: const MarkerSettings(
+                    shape: DataMarkerType.image,
+                    height: 10,
+                    width: 10,
+                    image: AssetImage('images/INTAKE.png'))),
+            ScatterSeries<LiveData, DateTime>(
+                // Her plottes exercise ikonerne
+                name: "Exercise entry",
+                dataSource: chartData,
+                xValueMapper: (LiveData data, _) => data.time,
+                yValueMapper: (LiveData data, _) => data.exerciseValue,
+                markerSettings: const MarkerSettings(
+                    shape: DataMarkerType.image,
+                    height: 12,
+                    width: 12,
+                    image: AssetImage('images/EXERCISE.png')))
           ],
           primaryXAxis: DateTimeAxis(
               intervalType: DateTimeIntervalType.auto,
               interval: 1,
               plotBands: <PlotBand>[
-            //grøn bånd
-            PlotBand( // Er det her den grønne boks på grafen??
-              isVisible: true,
-              start: cgmTimeStamps[
-                  0], //x-aksen start - går nok galt når vi ændrer dagen
-              end: cgmTimeStamps[95],
-              associatedAxisStart: 70, //y-aksen start
-              associatedAxisEnd: 180,
-              shouldRenderAboveSeries: false,
-              color: const Color.fromARGB(5, 197, 239, 197), //farve
-              opacity: 0.5, //gennemsigtighed (0-1)
-            ),
+                //grøn bånd
+                PlotBand(
+                  // Er det her den grønne boks på grafen??
+                  isVisible: true,
+                  start: cgmTimeStamps[
+                      0], //x-aksen start - går nok galt når vi ændrer dagen
+                  end: cgmTimeStamps[95],
+                  associatedAxisStart: 70, //y-aksen start
+                  associatedAxisEnd: 180,
+                  shouldRenderAboveSeries: false,
+                  color: const Color.fromARGB(5, 197, 239, 197), //farve
+                  opacity: 0.5, //gennemsigtighed (0-1)
+                ),
               ]),
-          primaryYAxis:
-              NumericAxis(/* minimum: 70, maximum: 400, */ 
+          primaryYAxis: NumericAxis(
+              /* minimum: 70, maximum: 400, */
               title: AxisTitle(
-                text: 'Blood glucose [mg/dL]',
-                textStyle: const TextStyle(fontSize: 10),
-                alignment: ChartAlignment.center),
-               
-            plotBands: <PlotBand>[
-            PlotBand(
-              //LOW stiplet linje
-              isVisible: true,
-              start: 69,
-              end: 69,
-              borderWidth: 2,
-              borderColor: Colors.red,
-              dashArray: const <double>[4, 5],
-              text: 'LOW',
-              textStyle: const TextStyle(color: Colors.red),
-              horizontalTextAlignment: TextAnchor.end,
-            ),
-            PlotBand(
-              //HIGH stiplet linje
-              isVisible: true,
-              start: 181,
-              end: 181,
-              borderWidth: 2,
-              borderColor: Colors.red,
-              dashArray: const <double>[4, 5],
-              text: 'HIGH',
-              textStyle: const TextStyle(color: Colors.red),
-              horizontalTextAlignment: TextAnchor.end,
-            )
-          ]),
+                  text: 'Blood glucose [mg/dL]',
+                  textStyle: const TextStyle(fontSize: 10),
+                  alignment: ChartAlignment.center),
+              plotBands: <PlotBand>[
+                PlotBand(
+                  //LOW stiplet linje
+                  isVisible: true,
+                  start: 69,
+                  end: 69,
+                  borderWidth: 2,
+                  borderColor: Colors.red,
+                  dashArray: const <double>[4, 5],
+                  text: 'LOW',
+                  textStyle: const TextStyle(color: Colors.red),
+                  horizontalTextAlignment: TextAnchor.end,
+                ),
+                PlotBand(
+                  //HIGH stiplet linje
+                  isVisible: true,
+                  start: 181,
+                  end: 181,
+                  borderWidth: 2,
+                  borderColor: Colors.red,
+                  dashArray: const <double>[4, 5],
+                  text: 'HIGH',
+                  textStyle: const TextStyle(color: Colors.red),
+                  horizontalTextAlignment: TextAnchor.end,
+                )
+              ]),
         ),
       ],
     )));
@@ -277,7 +270,8 @@ updateDataSource(Timer timer){
   } */
 }
 
-class LiveData { // Her defineres klassen LiveData
+class LiveData {
+  // Her defineres klassen LiveData
   final DateTime? time;
   final num? bloodSugarLevel;
   final num? nutrientIntakeValue;
@@ -296,8 +290,6 @@ class LiveData { // Her defineres klassen LiveData
       this.exerciseNote,
       this.exerciseValue});
 }
-
-
 
 class NutrientEntryGraph {
   // Her defineres klassen LiveData

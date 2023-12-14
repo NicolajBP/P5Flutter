@@ -90,41 +90,31 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
 
 
   void _saveDataToFirestore() async {
-    // Defines which string to be saved, upon the local variable
-    //from which mealsize button was pressed
+    // Defines which Strings to be save based on user input
     String mealSize = "";
-    if (selectedButtonIndex == 0) {
-      mealSize = "Small";
-    } else if (selectedButtonIndex == 1) {
-      mealSize = "Medium";
-    } else if (selectedButtonIndex == 2) {
-      mealSize = "Large";
+    if (selectedButtonIndex == 0) { mealSize = "Small";
+    } else if (selectedButtonIndex == 1) { mealSize = "Medium";
+    } else if (selectedButtonIndex == 2) { mealSize = "Large";
     }
-    // If the time is empty, update it with the current time
-    // If not, the local variable time is put into the list
+    // If time is empty, round current time to nearest quarter 
+    // and format the time in "yyyy-MM-ddTHH:mm:ss" format
     if (time.isEmpty) {
       time = nearestQuarter(DateTime.now()).toIso8601String();
-      time = time.substring(0, time.length - 4);
+      time = time.substring(0, time.length - 4); 
     }
-    // The list sent to the database
+    // Format data to be save to Firebase
     Map<String, dynamic> entryData = {
       'nutrientSize': mealSize,
       'nutrientNote': note,
       'nutrientTimeStamp': time,
     };
-    try {
-      // Save data in firestore
+    try {       // Save data in firestore
       await firestore
-          .collection('users')
-          .doc(user.uid)
-          .collection("patientData")
-          .doc(dateYYYY_MM_DD)
+          .collection('users').doc(user.uid)
+          .collection("patientData").doc(dateYYYY_MM_DD)
           .update({
             "nutrientEntries": FieldValue.arrayUnion([entryData])
-          })
-          // ignore: avoid_print
-          .then((_) => print("Added"))
-          // ignore: avoid_print
+          }).then((_) => print("Added"))
           .catchError((error) => print("Add failed: $error"));
 
 
@@ -154,7 +144,7 @@ class _ReportNutrientIntakePageState extends State<ReportNutrientIntakePage> {
         time = "";
       });
     } catch (e) {
-      debugPrint("Error saving to Firestoe $e");
+      debugPrint("Error saving to Firestore $e");
       // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
