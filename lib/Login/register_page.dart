@@ -121,7 +121,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   "GlucoInsight",
                   style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 20,
+                    fontSize: 40,
+                    
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -193,7 +194,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   GestureDetector(
                     onTap: widget.onTap,
                     child: const Text(
-                      " Login here",
+                      " Log in here",
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),

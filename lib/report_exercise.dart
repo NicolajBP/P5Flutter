@@ -597,7 +597,7 @@ Widget _buildPopupDialog(BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          "Registerring intensity and duratio is optional.\nAn exercise can be everything from a walk, a swim, a ride on your bike or a trip to the gym",
+          "Physical activity can take multiple forms, a walk, a run , a swim , or a gym session.\n Registering intensity and duration is entirely optional.",
         ),
       ],
     ),

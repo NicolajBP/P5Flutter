@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                   "GlucoInsight",
                   style: TextStyle(
                     color: Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 20,
+                    fontSize: 40,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -126,7 +126,7 @@ class _LoginPageState extends State<LoginPage> {
                     signUserIn(context); // Call the sign-in method
                   },
                   child: const Text(
-                    "Login",
+                    "Log in",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
