@@ -290,7 +290,7 @@ Padding(
                 children: [
                   Text(
                     //Overskrift til de tre meal sizes
-                    " When did you exercise?",
+                    " When did you exercise begin?",
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -597,7 +597,7 @@ Widget _buildPopupDialog(BuildContext context) {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          "Physical activity can take multiple forms, a walk, a run , a swim , or a gym session.\n Registering intensity and duration is entirely optional.",
+          "Registering intensity and duration is optional.\n\nType of exercise can be everything from a walk, a swim, a ride on your bike or a trip to the gym.\nIntensity ranges from 1-10. 1 refers to an easy exercise that did not cause any raise in pulse. 10 is a super hard exercise that caused a high raise in pulse.",
         ),
       ],
     ),
